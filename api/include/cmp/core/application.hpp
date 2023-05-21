@@ -29,7 +29,7 @@ public:
 
     static
     application*
-    get_only_instance ()
+    get_instance_ptr ()
     noexcept;
 
     int
@@ -45,8 +45,8 @@ protected:
 
     static
     void
-    set_only_instance (
-        application* application_instance
+    set_instance_ptr (
+        application* instance_ptr
     )
     noexcept;
 
@@ -55,7 +55,7 @@ private:
 
     int m_argc;
     char** m_argv;
-    static application* g_application;
+    static application* g_instance_ptr;
 }; // class -------------------------------------------------------------------
 
 } // namespace ----------------------------------------------------------------

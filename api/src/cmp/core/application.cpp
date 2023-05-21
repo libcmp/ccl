@@ -17,7 +17,7 @@ noexcept
     : m_argc{argc}
     , m_argv{argv}
 {
-    set_only_instance(this);
+    set_instance_ptr(this);
 } // function -----------------------------------------------------------------
 
 // Core -----------------------------------------------------------------------
@@ -32,10 +32,10 @@ noexcept
 // Accessors ------------------------------------------------------------------
 
 application*
-application::get_only_instance ()
+application::get_instance_ptr ()
 noexcept
 {
-    return g_application;
+    return g_instance_ptr;
 } // function -----------------------------------------------------------------
 
 int
@@ -55,16 +55,16 @@ const
 // Protected Functions --------------------------------------------------------
 
 void
-application::set_only_instance (
-    application* application_instance
+application::set_instance_ptr (
+    application* instance_ptr
 )
 noexcept
 {
-    g_application = application_instance;
+    g_instance_ptr = instance_ptr;
 } // function -----------------------------------------------------------------
 
 // Private Data ---------------------------------------------------------------
 
-inline application* application::g_application;
+inline application* application::g_instance_ptr;
 
 } // namespace ----------------------------------------------------------------
