@@ -139,9 +139,13 @@ number_parser::parse_floating_point (
             equivalent_format
         );
     } else {
+        const auto integral_part_start{u32_input.data()};
+        const auto integral_part_size{
+            radix_character_iterator - u32_input.cbegin()
+        };
         const std::u32string_view integral_part{
-            u32_input.cbegin(),
-            radix_character_iterator
+            integral_part_start,
+            static_cast<std::u32string_view::size_type>(integral_part_size)
         };
         Output output{
             static_cast<Output>(
