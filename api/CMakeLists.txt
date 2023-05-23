@@ -19,6 +19,14 @@ set(
         include/cmp/core/type_traits.hpp
 )
 set(
+    CCL_DESKTOP_GUI_HEADERS
+        include/cmp/desktop_gui/general.hpp
+        include/cmp/desktop_gui/desktop_gui_application.hpp
+        include/cmp/desktop_gui/inclusion_assert.hpp
+        include/cmp/desktop_gui/window.hpp
+        include/cmp/desktop_gui/window_native_handle.hpp
+)
+set(
     CCL_IO_HEADERS
         include/cmp/io/impl/common/common_uio.hpp
         include/cmp/io/general.hpp
@@ -66,6 +74,18 @@ set(
         ${CCL_CORE_HEADERS}
         ${CCL_UNICODE_HEADERS}
 )
+
+if (NOT DEFINED CMP_CONFIG_DESKTOP_GUI_PACKAGE_EXCLUDED)
+    set(CMP_CONFIG_DESKTOP_GUI_PACKAGE_EXCLUDED false)
+endif ()
+if (CMP_CONFIG_DESKTOP_GUI_PACKAGE_EXCLUDED MATCHES false)
+    set(
+        CCL_HEADERS
+            ${CCL_HEADERS}
+            ${CCL_DESKTOP_GUI_HEADERS}
+    )
+endif ()
+
 if (NOT DEFINED CMP_CONFIG_IO_PACKAGE_EXCLUDED)
     set(CMP_CONFIG_IO_PACKAGE_EXCLUDED false)
 endif ()
@@ -81,6 +101,7 @@ endif ()
 set(
     CCL_SOURCES
         src/cmp/core/definitions.cpp
+        src/cmp/desktop_gui/definitions.cpp
         src/cmp/io/definitions.cpp
         src/cmp/unicode/definitions.cpp
 )
@@ -181,11 +202,12 @@ generate_export_header(cmp EXPORT_FILE_NAME exports/cmp_export.hpp)
     and if it is then set a compile-time constant on the cmp target
     with the value that the constant was given.
 
-    The CMP_CONFIG_IO_PACKAGE_EXCLUDED, CMP_CONFIG_LTO_REQUESTED and
-    CMP_CONFIG_LTO_ENABLED constants are different from the others
-    in that they are guaranteed to be defined at this point in this
-    CMakeLists.txt file, so it is not necessary to check whether they
-    are defined before passing them onto the cmp target.
+    The CMP_CONFIG_DESKTOP_GUI_PACKAGE_EXCLUDED,
+    CMP_CONFIG_IO_PACKAGE_EXCLUDED, CMP_CONFIG_LTO_REQUESTED
+    and CMP_CONFIG_LTO_ENABLED constants are different from the
+    others in that they are guaranteed to be defined at this point
+    in this CMakeLists.txt file, so it is not necessary to check
+    whether they are defined before passing them onto the cmp target.
 ]]
 
 if (DEFINED CMP_CONFIG_HEADER_ONLY)
@@ -225,10 +247,21 @@ endif ()
 
 target_compile_definitions(
     cmp PUBLIC
+        CMP_CONFIG_DESKTOP_GUI_PACKAGE_EXCLUDED=${CMP_CONFIG_DESKTOP_GUI_PACKAGE_EXCLUDED}
         CMP_CONFIG_IO_PACKAGE_EXCLUDED=${CMP_CONFIG_IO_PACKAGE_EXCLUDED}
         CMP_CONFIG_LTO_REQUESTED=${CMP_CONFIG_LTO_REQUESTED}
         CMP_CONFIG_LTO_ENABLED=${CMP_CONFIG_LTO_ENABLED}
 )
+
+# DEPENDENCIES
+
+if (${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
+    target_link_libraries(
+        cmp
+        "-framework AppKit"
+    )
+    target_compile_options(cmp PUBLIC -x objective-c++)
+endif ()
 
 # DATA
 
