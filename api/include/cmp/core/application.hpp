@@ -35,11 +35,11 @@ public:
     noexcept;
 
     int
-    get_argc()
+    get_argc ()
     const;
 
     char**
-    get_argv()
+    get_argv ()
     const;
 
     std::u8string_view

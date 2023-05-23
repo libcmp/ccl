@@ -39,14 +39,14 @@ noexcept
 } // function -----------------------------------------------------------------
 
 int
-application::get_argc()
+application::get_argc ()
 const
 {
     return m_argc;
 } // function -----------------------------------------------------------------
 
 char**
-application::get_argv()
+application::get_argv ()
 const
 {
     return m_argv;
