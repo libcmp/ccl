@@ -8,7 +8,7 @@ project(ccl CXX)
 
 add_executable(
     test_core_general
-    core/test_core_general.cpp
+        core/test_core_general.cpp
 )
 set_target_properties(
     test_core_general PROPERTIES
@@ -19,11 +19,11 @@ set_target_properties(
 )
 target_link_libraries(
     test_core_general
-    cmp
+        cmp
 )
 add_test(
     core_general_test
-    test_core_general
+        test_core_general
 )
 # test ------------------------------------------------------------------------
 
@@ -31,7 +31,7 @@ add_test(
 
 add_executable(
     test_data_input_stream
-    io/test_data_input_stream.cpp
+        io/test_data_input_stream.cpp
 )
 set_target_properties(
     test_data_input_stream PROPERTIES
@@ -42,17 +42,17 @@ set_target_properties(
 )
 target_link_libraries(
     test_data_input_stream
-    cmp
+        cmp
 )
 add_test(
     data_input_stream_test
-    test_data_input_stream
+        test_data_input_stream
 )
 # test ------------------------------------------------------------------------
 
 add_executable(
     test_data_io_stream
-    io/test_data_io_stream.cpp
+        io/test_data_io_stream.cpp
 )
 set_target_properties(
     test_data_io_stream PROPERTIES
@@ -63,17 +63,17 @@ set_target_properties(
 )
 target_link_libraries(
     test_data_io_stream
-    cmp
+        cmp
 )
 add_test(
     data_io_stream_test
-    test_data_io_stream
+        test_data_io_stream
 )
 # test ------------------------------------------------------------------------
 
 add_executable(
     test_data_output_stream
-    io/test_data_output_stream.cpp
+        io/test_data_output_stream.cpp
 )
 set_target_properties(
     test_data_output_stream PROPERTIES
@@ -84,17 +84,17 @@ set_target_properties(
 )
 target_link_libraries(
     test_data_output_stream
-    cmp
+        cmp
 )
 add_test(
     data_output_stream_test
-    test_data_output_stream
+        test_data_output_stream
 )
 # test ------------------------------------------------------------------------
 
 add_executable(
     test_file
-    io/test_file.cpp
+        io/test_file.cpp
 )
 set_target_properties(
     test_file PROPERTIES
@@ -105,17 +105,17 @@ set_target_properties(
 )
 target_link_libraries(
     test_file
-    cmp
+        cmp
 )
 add_test(
     file_test
-    test_file
+        test_file
 )
 # test ------------------------------------------------------------------------
 
 add_executable(
     test_io_general
-    io/test_io_general.cpp
+        io/test_io_general.cpp
 )
 set_target_properties(
     test_io_general PROPERTIES
@@ -126,17 +126,17 @@ set_target_properties(
 )
 target_link_libraries(
     test_io_general
-    cmp
+        cmp
 )
 add_test(
     io_general_test
-    test_io_general
+        test_io_general
 )
 # test ------------------------------------------------------------------------
 
 add_executable(
     test_string_io_resource
-    io/test_string_io_resource.cpp
+        io/test_string_io_resource.cpp
 )
 set_target_properties(
     test_string_io_resource PROPERTIES
@@ -147,17 +147,17 @@ set_target_properties(
 )
 target_link_libraries(
     test_string_io_resource
-    cmp
+        cmp
 )
 add_test(
     string_io_resource_test
-    test_string_io_resource
+        test_string_io_resource
 )
 # test ------------------------------------------------------------------------
 
 add_executable(
     test_text_input_stream
-    io/test_text_input_stream.cpp
+        io/test_text_input_stream.cpp
 )
 set_target_properties(
     test_text_input_stream PROPERTIES
@@ -168,17 +168,17 @@ set_target_properties(
 )
 target_link_libraries(
     test_text_input_stream
-    cmp
+        cmp
 )
 add_test(
     text_input_stream_test
-    test_text_input_stream
+        test_text_input_stream
 )
 # test ------------------------------------------------------------------------
 
 add_executable(
     test_text_io_stream
-    io/test_text_io_stream.cpp
+        io/test_text_io_stream.cpp
 )
 set_target_properties(
     test_text_io_stream PROPERTIES
@@ -189,17 +189,17 @@ set_target_properties(
 )
 target_link_libraries(
     test_text_io_stream
-    cmp
+        cmp
 )
 add_test(
     text_io_stream_test
-    test_text_io_stream
+        test_text_io_stream
 )
 # test ------------------------------------------------------------------------
 
 add_executable(
     test_text_output_stream
-    io/test_text_output_stream.cpp
+        io/test_text_output_stream.cpp
 )
 set_target_properties(
     test_text_output_stream PROPERTIES
@@ -210,11 +210,11 @@ set_target_properties(
 )
 target_link_libraries(
     test_text_output_stream
-    cmp
+        cmp
 )
 add_test(
     text_output_stream_test
-    test_text_output_stream
+        test_text_output_stream
 )
 # test ------------------------------------------------------------------------
 
@@ -222,7 +222,7 @@ add_test(
 
 add_executable(
     test_algorithms
-    unicode/test_algorithms.cpp
+        unicode/test_algorithms.cpp
 )
 set_target_properties(
     test_algorithms PROPERTIES
@@ -233,17 +233,17 @@ set_target_properties(
 )
 target_link_libraries(
     test_algorithms
-    cmp
+        cmp
 )
 add_test(
     algorithms_test
-    test_algorithms
+        test_algorithms
 )
 # test ------------------------------------------------------------------------
 
 add_executable(
     test_by_code_point
-    unicode/test_by_code_point.cpp
+        unicode/test_by_code_point.cpp
 )
 set_target_properties(
     test_by_code_point PROPERTIES
@@ -254,17 +254,17 @@ set_target_properties(
 )
 target_link_libraries(
     test_by_code_point
-    cmp
+        cmp
 )
 add_test(
     by_code_point_test
-    test_by_code_point
+        test_by_code_point
 )
 # test ------------------------------------------------------------------------
 
 add_executable(
     test_examiners
-    unicode/test_examiners.cpp
+        unicode/test_examiners.cpp
 )
 set_target_properties(
     test_examiners PROPERTIES
@@ -275,17 +275,17 @@ set_target_properties(
 )
 target_link_libraries(
     test_examiners
-    cmp
+        cmp
 )
 add_test(
     examiners_test
-    test_examiners
+        test_examiners
 )
 # test ------------------------------------------------------------------------
 
 add_executable(
     test_formatters
-    unicode/test_formatters.cpp
+        unicode/test_formatters.cpp
 )
 set_target_properties(
     test_formatters PROPERTIES
@@ -296,17 +296,17 @@ set_target_properties(
 )
 target_link_libraries(
     test_formatters
-    cmp
+        cmp
 )
 add_test(
     formatters_test
-    test_formatters
+        test_formatters
 )
 # test ------------------------------------------------------------------------
 
 add_executable(
     test_parsers
-    unicode/test_parsers.cpp
+        unicode/test_parsers.cpp
 )
 set_target_properties(
     test_parsers PROPERTIES
@@ -317,17 +317,17 @@ set_target_properties(
 )
 target_link_libraries(
     test_parsers
-    cmp
+        cmp
 )
 add_test(
     parsers_test
-    test_parsers
+        test_parsers
 )
 # test ------------------------------------------------------------------------
 
 add_executable(
     test_type_traits
-    unicode/test_type_traits.cpp
+        unicode/test_type_traits.cpp
 )
 set_target_properties(
     test_type_traits PROPERTIES
@@ -338,10 +338,10 @@ set_target_properties(
 )
 target_link_libraries(
     test_type_traits
-    cmp
+        cmp
 )
 add_test(
     type_traits_test
-    test_type_traits
+        test_type_traits
 )
 # test ------------------------------------------------------------------------

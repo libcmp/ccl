@@ -10,7 +10,7 @@ endif ()
 
 add_executable(
     unicode_stdio_example
-    src/main.cpp
+        src/main.cpp
 )
 set_target_properties(
     unicode_stdio_example PROPERTIES
@@ -21,5 +21,5 @@ set_target_properties(
 )
 target_link_libraries(
     unicode_stdio_example
-    cmp
+        cmp
 )

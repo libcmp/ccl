@@ -8,7 +8,7 @@ project(ccl CXX)
 
 add_executable(
     test_platform
-    test_platform.cpp
+        test_platform.cpp
 )
 target_compile_definitions(
     test_platform PUBLIC
@@ -23,13 +23,13 @@ set_target_properties(
 )
 target_link_libraries(
     test_platform
-    cmp
+        cmp
 )
 # test ------------------------------------------------------------------------
 
 add_executable(
     test_uio
-    test_uio.cpp
+        test_uio.cpp
 )
 target_compile_definitions(
     test_uio PUBLIC
@@ -44,6 +44,6 @@ set_target_properties(
 )
 target_link_libraries(
     test_uio
-    cmp
+        cmp
 )
 # test ------------------------------------------------------------------------

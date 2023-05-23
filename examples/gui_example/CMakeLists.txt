@@ -10,7 +10,7 @@ endif ()
 
 add_executable(
     gui_example
-    src/main.cpp
+        src/main.cpp
 )
 set_target_properties(
     gui_example PROPERTIES
@@ -21,5 +21,5 @@ set_target_properties(
 )
 target_link_libraries(
     gui_example
-    cmp
+        cmp
 )

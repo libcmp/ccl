@@ -258,7 +258,7 @@ target_compile_definitions(
 if (${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
     target_link_libraries(
         cmp
-        "-framework AppKit"
+            "-framework AppKit"
     )
     target_compile_options(cmp PUBLIC -x objective-c++)
 endif ()
@@ -268,9 +268,9 @@ endif ()
 # Make sure the data files get copied when the library is built.
 add_custom_command(
     TARGET cmp POST_BUILD
-    COMMAND ${CMAKE_COMMAND} -E copy_directory
-        ${CMAKE_CURRENT_SOURCE_DIR}/../tests/data
-        ${PROJECT_BINARY_DIR}/../test_data
+        COMMAND ${CMAKE_COMMAND} -E copy_directory
+            ${CMAKE_CURRENT_SOURCE_DIR}/../tests/data
+            ${PROJECT_BINARY_DIR}/../test_data
 )
 
 #[[
@@ -280,34 +280,34 @@ add_custom_command(
 if (NOT DEFINED CMP_BUILD_STATIC)
     add_custom_command(
         TARGET cmp POST_BUILD
-        COMMAND ${CMAKE_COMMAND} -E copy
-            $<TARGET_FILE:cmp>
-            ${PROJECT_BINARY_DIR}/../tests/automated/$<TARGET_FILE_NAME:cmp>
+            COMMAND ${CMAKE_COMMAND} -E copy
+                $<TARGET_FILE:cmp>
+                ${PROJECT_BINARY_DIR}/../tests/automated/$<TARGET_FILE_NAME:cmp>
     )
     add_custom_command(
         TARGET cmp POST_BUILD
-        COMMAND ${CMAKE_COMMAND} -E copy
-            $<TARGET_FILE:cmp>
-            ${PROJECT_BINARY_DIR}/../tests/manual/$<TARGET_FILE_NAME:cmp>
+            COMMAND ${CMAKE_COMMAND} -E copy
+                $<TARGET_FILE:cmp>
+                ${PROJECT_BINARY_DIR}/../tests/manual/$<TARGET_FILE_NAME:cmp>
     )
     add_custom_command(
         TARGET cmp POST_BUILD
-        COMMAND ${CMAKE_COMMAND} -E copy
-            $<TARGET_FILE:cmp>
-            ${PROJECT_BINARY_DIR}/../$<TARGET_FILE_NAME:cmp>
+            COMMAND ${CMAKE_COMMAND} -E copy
+                $<TARGET_FILE:cmp>
+                ${PROJECT_BINARY_DIR}/../$<TARGET_FILE_NAME:cmp>
     )
     if (DEFINED CMP_DEV)
         add_custom_command(
             TARGET cmp POST_BUILD
-            COMMAND ${CMAKE_COMMAND} -E copy
-                $<TARGET_FILE:cmp>
-                ${PROJECT_BINARY_DIR}/../examples/unicode_stdio_example/$<TARGET_FILE_NAME:cmp>
+                COMMAND ${CMAKE_COMMAND} -E copy
+                    $<TARGET_FILE:cmp>
+                    ${PROJECT_BINARY_DIR}/../examples/unicode_stdio_example/$<TARGET_FILE_NAME:cmp>
         )
         add_custom_command(
             TARGET cmp POST_BUILD
-            COMMAND ${CMAKE_COMMAND} -E copy
-                $<TARGET_FILE:cmp>
-                ${PROJECT_BINARY_DIR}/../../[unreleased]/tools/docgen/$<TARGET_FILE_NAME:cmp>
+                COMMAND ${CMAKE_COMMAND} -E copy
+                    $<TARGET_FILE:cmp>
+                    ${PROJECT_BINARY_DIR}/../../[unreleased]/tools/docgen/$<TARGET_FILE_NAME:cmp>
         )
     endif ()
 endif ()

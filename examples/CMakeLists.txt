@@ -17,5 +17,5 @@ if (CMP_CONFIG_LTO_REQUESTED MATCHES true)
     endif ()
 endif ()
 
-add_subdirectory(unicode_stdio_example)
 add_subdirectory(gui_example)
+add_subdirectory(unicode_stdio_example)
