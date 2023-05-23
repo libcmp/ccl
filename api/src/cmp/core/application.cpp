@@ -79,6 +79,6 @@ noexcept
 
 // Private Data ---------------------------------------------------------------
 
-inline application* application::g_instance_ptr;
+application* application::g_instance_ptr;
 
 } // namespace ----------------------------------------------------------------
