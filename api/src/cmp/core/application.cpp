@@ -52,6 +52,20 @@ const
     return m_argv;
 } // function -----------------------------------------------------------------
 
+std::u8string_view
+application::get_copyright_notice ()
+const
+{
+    return m_copyright_notice;
+} // function -----------------------------------------------------------------
+
+void
+application::set_copyright_notice (
+    std::u8string_view new_copyright_notice
+) {
+    m_copyright_notice = new_copyright_notice;
+} // function -----------------------------------------------------------------
+
 // Protected Functions --------------------------------------------------------
 
 void

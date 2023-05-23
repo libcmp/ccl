@@ -4,6 +4,8 @@
 #ifndef CMP_CORE_APPLICATION_HPP_INCLUDED
 #define CMP_CORE_APPLICATION_HPP_INCLUDED
 
+#include <string_view>
+
 #include <cmp/core/config.hpp>
 
 namespace cmp {
@@ -40,6 +42,15 @@ public:
     get_argv()
     const;
 
+    std::u8string_view
+    get_copyright_notice ()
+    const;
+
+    void
+    set_copyright_notice (
+        std::u8string_view new_copyright_notice
+    );
+
 protected:
     // Protected Functions ----------------------------------------------------
 
@@ -55,6 +66,7 @@ private:
 
     int m_argc;
     char** m_argv;
+    std::u8string_view m_copyright_notice;
     static application* g_instance_ptr;
 }; // class -------------------------------------------------------------------
 
