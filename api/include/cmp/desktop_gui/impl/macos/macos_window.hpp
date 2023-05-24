@@ -13,11 +13,6 @@
 
 namespace cmp {
 
-enum class close_window : bool {
-    no = false,
-    yes = true
-}; // enum --------------------------------------------------------------------
-
 class CMP_LIBRARY_NAME window
 {
 public:

@@ -27,6 +27,11 @@ enum class window_mode {
     minimized
 }; // enum --------------------------------------------------------------------
 
+enum class close_window : bool {
+    no = false,
+    yes = true
+}; // enum --------------------------------------------------------------------
+
 enum class key {
     f1,
     f2,
