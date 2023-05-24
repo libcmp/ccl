@@ -1,8 +1,8 @@
 // Copyright (C) 2023 Daniel T. McGinnis
 // SPDX-License-Identifier: BSL-1.0
 
-#ifndef CMP_GUI_MACOS_WINDOW_HPP_INCLUDED
-#define CMP_GUI_MACOS_WINDOW_HPP_INCLUDED
+#ifndef CMP_DESKTOP_GUI_MACOS_WINDOW_HPP_INCLUDED
+#define CMP_DESKTOP_GUI_MACOS_WINDOW_HPP_INCLUDED
 
 #include <string>
 #include <chrono>
@@ -105,4 +105,4 @@ private:
 
 } // namespace ----------------------------------------------------------------
 
-#endif // CMP_GUI_MACOS_WINDOW_HPP_INCLUDED
+#endif // CMP_DESKTOP_GUI_MACOS_WINDOW_HPP_INCLUDED

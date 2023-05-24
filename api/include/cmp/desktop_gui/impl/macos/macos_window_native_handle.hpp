@@ -1,8 +1,8 @@
 // Copyright (C) 2023 Daniel T. McGinnis
 // SPDX-License-Identifier: BSL-1.0
 
-#ifndef CMP_GUI_MACOS_WINDOW_NATIVE_HANDLE_HPP_INCLUDED
-#define CMP_GUI_MACOS_WINDOW_NATIVE_HANDLE_HPP_INCLUDED
+#ifndef CMP_DESKTOP_GUI_MACOS_WINDOW_NATIVE_HANDLE_HPP_INCLUDED
+#define CMP_DESKTOP_GUI_MACOS_WINDOW_NATIVE_HANDLE_HPP_INCLUDED
 
 #include <cmp/desktop_gui/inclusion_assert.hpp>
 
@@ -17,4 +17,4 @@ public:
 
 } // namespace ----------------------------------------------------------------
 
-#endif // CMP_GUI_MACOS_WINDOW_NATIVE_HANDLE_HPP_INCLUDED
+#endif // CMP_DESKTOP_GUI_MACOS_WINDOW_NATIVE_HANDLE_HPP_INCLUDED
