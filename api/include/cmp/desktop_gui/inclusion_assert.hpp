@@ -11,4 +11,9 @@ static_assert(
     "The Desktop GUI package must be included for this header to be used."
 );
 
+static_assert(
+    CMP_CONFIG_HEADER_ONLY == false,
+    "The Desktop GUI package requires that header-only support be disabled."
+);
+
 #endif // CMP_DESKTOP_GUI_INCLUSION_ASSERT_HPP_INCLUDED
