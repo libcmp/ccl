@@ -107,6 +107,7 @@ enum class key {
     unknown
 }; // enum --------------------------------------------------------------------
 
+CMP_LIBRARY_NAME
 std::u8string
 to_u8string (
     key source
