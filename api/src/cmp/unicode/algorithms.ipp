@@ -140,6 +140,21 @@ to_u32string (
 } // function -----------------------------------------------------------------
 
 template <
+    unicode_string InputString
+>
+std::wstring
+to_wstring (
+    const InputString& s
+) {
+    std::wstring result;
+    result.reserve(string_size(s));
+    for (char32_t current_code_point : by_code_point{s}) {
+        append_code_point(result, current_code_point);
+    }
+    return result;
+} // function -----------------------------------------------------------------
+
+template <
     raii_unicode_string OutputString,
     unicode_string InputString
 >

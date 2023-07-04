@@ -23,7 +23,10 @@ public:
                   :: test_by_code_point_utf16,
 
               &by_code_point_test_module
-                  :: test_by_code_point_utf32
+                  :: test_by_code_point_utf32,
+
+              &by_code_point_test_module
+                  :: test_by_code_point_wchar
           })
     {
     }
@@ -169,6 +172,24 @@ public:
 
         if (!test_by_code_point_generic<char32_t>(U"test\n¯\\_(ツ)_/¯")) {
             std::cout << "test_by_code_point_utf32 has failed."
+                      << std::endl;
+
+            return false;
+        }
+
+        end_stage();
+
+        return true;
+    } // function -------------------------------------------------------------
+
+    bool
+    test_by_code_point_wchar ()
+    noexcept
+    {
+        start_test("test_by_code_point_wchar");
+
+        if (!test_by_code_point_generic<wchar_t>(L"test\n¯\\_(ツ)_/¯")) {
+            std::cout << "test_by_code_point_wchar has failed."
                       << std::endl;
 
             return false;

@@ -56,6 +56,20 @@ constexpr bool is_writable_utf32_string_v{
 
 template <
     typename T,
+    std::size_t Size = sizeof (T) / sizeof (wchar_t)
+>
+constexpr bool is_writable_wide_string_v{
+    std::is_same_v<std::remove_volatile_t<T>, std::wstring>
+        || std::is_same_v<T, wchar_t*>
+        || std::is_same_v<T, wchar_t* const>
+        || std::is_same_v<T, volatile wchar_t*>
+        || std::is_same_v<T, volatile wchar_t* const>
+        || std::is_same_v<T, wchar_t[Size]>
+        || std::is_same_v<T, volatile wchar_t[Size]>
+};
+
+template <
+    typename T,
     std::size_t Size = sizeof (T) / sizeof (char8_t)
 >
 constexpr bool is_utf8_string_v{
@@ -103,12 +117,29 @@ constexpr bool is_utf32_string_v{
 };
 
 template <
+    typename T,
+    std::size_t Size = sizeof (T) / sizeof (wchar_t)
+>
+constexpr bool is_wide_string_v{
+    is_writable_wide_string_v<T>
+        || std::is_same_v<std::remove_cv_t<T>, std::wstring_view>
+        || std::is_same_v<std::remove_volatile_t<T>, const std::wstring>
+        || std::is_same_v<T, const wchar_t*>
+        || std::is_same_v<T, const wchar_t* const>
+        || std::is_same_v<T, const volatile wchar_t*>
+        || std::is_same_v<T, const volatile wchar_t* const>
+        || std::is_same_v<T, const wchar_t[Size]>
+        || std::is_same_v<T, const volatile wchar_t[Size]>
+};
+
+template <
     typename T
 >
 constexpr bool is_writable_unicode_string_v{
     is_writable_utf8_string_v<T>
         || is_writable_utf16_string_v<T>
         || is_writable_utf32_string_v<T>
+        || is_writable_wide_string_v<T>
 };
 
 template <
@@ -118,6 +149,7 @@ constexpr bool is_unicode_string_v{
     is_utf8_string_v<T>
         || is_utf16_string_v<T>
         || is_utf32_string_v<T>
+        || is_wide_string_v<T>
 };
 
 template <
@@ -127,6 +159,7 @@ constexpr bool is_unicode_string_view_v{
     std::is_same_v<std::remove_cv_t<T>, std::u8string_view>
         || std::is_same_v<std::remove_cv_t<T>, std::u16string_view>
         || std::is_same_v<std::remove_cv_t<T>, std::u32string_view>
+        || std::is_same_v<std::remove_cv_t<T>, std::wstring_view>
 };
 
 template <

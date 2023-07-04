@@ -129,6 +129,21 @@ noexcept;
 CMP_LIBRARY_NAME
 std::size_t
 string_size (
+    const std::wstring& s
+)
+noexcept;
+
+/**
+    Description:
+        Returns the number of code units in the given string.
+
+    Parameters:
+        s:
+            The string to get the size of.
+*/
+CMP_LIBRARY_NAME
+std::size_t
+string_size (
     const std::u8string_view& s
 )
 noexcept;
@@ -160,6 +175,21 @@ CMP_LIBRARY_NAME
 std::size_t
 string_size (
     const std::u32string_view& s
+)
+noexcept;
+
+/**
+    Description:
+        Returns the number of code units in the given string.
+
+    Parameters:
+        s:
+            The string to get the size of.
+*/
+CMP_LIBRARY_NAME
+std::size_t
+string_size (
+    const std::wstring_view& s
 )
 noexcept;
 
@@ -225,6 +255,21 @@ noexcept;
 
 /**
     Description:
+        Returns the number of code units in the given string.
+
+    Parameters:
+        s:
+            The string to get the size of.
+*/
+CMP_LIBRARY_NAME
+std::size_t
+string_size (
+    const wchar_t* s
+)
+noexcept;
+
+/**
+    Description:
         Inserts the given code point into the given string at the given index.
 
     Parameters:
@@ -281,6 +326,26 @@ insert_code_point (
     std::u32string& s,
     char32_t code_point,
     std::u32string::size_type index
+);
+
+/**
+    Description:
+        Inserts the given code point into the given string at the given index.
+
+    Parameters:
+        s:
+            The string to insert the code point into.
+        code_point:
+            The code point to insert.
+        index:
+            The index of the string at which to insert the code point.
+*/
+CMP_LIBRARY_NAME
+void
+insert_code_point (
+    std::wstring& s,
+    char32_t code_point,
+    std::wstring::size_type index
 );
 
 /**
@@ -424,6 +489,36 @@ template <
 >
 std::u32string
 to_u32string (
+    const InputString& s
+);
+
+/**
+    Description:
+        Converts the given string to a <#type>std::wstring</#type>.
+
+    Parameters:
+        s:
+            The string to convert to <#type>std::wstring</#type>.
+*/
+CMP_LIBRARY_NAME
+std::wstring
+to_wstring (
+    const std::string& s
+);
+
+/**
+    Description:
+        Converts the given string to a <#type>std::wstring</#type>.
+
+    Parameters:
+        s:
+            The string to convert to <#type>std::wstring</#type>.
+*/
+template <
+    unicode_string InputString
+>
+std::wstring
+to_wstring (
     const InputString& s
 );
 

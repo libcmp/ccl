@@ -43,6 +43,15 @@ noexcept
 
 std::size_t
 string_size (
+    const std::wstring& s
+)
+noexcept
+{
+    return s.size();
+} // function -----------------------------------------------------------------
+
+std::size_t
+string_size (
     const std::u8string_view& s
 )
 noexcept
@@ -62,6 +71,15 @@ noexcept
 std::size_t
 string_size (
     const std::u32string_view& s
+)
+noexcept
+{
+    return s.size();
+} // function -----------------------------------------------------------------
+
+std::size_t
+string_size (
+    const std::wstring_view& s
 )
 noexcept
 {
@@ -110,6 +128,19 @@ string_size (
 noexcept
 {
     const char32_t* current{s};
+    while (*current != '\0') {
+        ++current;
+    }
+    return current - s;
+} // function -----------------------------------------------------------------
+
+std::size_t
+string_size (
+    const wchar_t* s
+)
+noexcept
+{
+    const wchar_t* current{s};
     while (*current != '\0') {
         ++current;
     }
@@ -238,6 +269,42 @@ insert_code_point (
     s.insert(index, 1, code_point);
 } // function -----------------------------------------------------------------
 
+void
+insert_code_point (
+    std::wstring& s,
+    char32_t code_point,
+    std::wstring::size_type index
+) {
+    if constexpr (sizeof (wchar_t) == 2) {
+        if (
+            !is_surrogate(code_point)
+                && code_point <= maximum_bmp_code_point
+        ) {
+            s.insert(index, 1, static_cast<char16_t>(code_point));
+        } else {
+            code_point -= 0x10000;
+            s.insert(
+                index++,
+                1,
+                static_cast<char16_t>(
+                    ((0b1111'1111'1100'0000'0000 & code_point) >> 10)
+                        + leading_surrogate_minimum_value
+                )
+            );
+            s.insert(
+                index,
+                1,
+                static_cast<char16_t>(
+                    (0b0000'0000'0011'1111'1111 & code_point)
+                        + trailing_surrogate_minimum_value
+                )
+            );
+        }
+    } else {
+        s.insert(index, 1, code_point);
+    }
+} // function -----------------------------------------------------------------
+
 std::u8string
 to_u8string (
     const std::string& s
@@ -270,6 +337,18 @@ to_u32string (
     result.reserve(string_size(s));
     for (char current_char : s) {
         append_code_point(result, static_cast<char32_t>(current_char));
+    }
+    return result;
+} // function -----------------------------------------------------------------
+
+std::wstring
+to_wstring (
+    const std::string& s
+) {
+    std::wstring result;
+    result.reserve(string_size(s));
+    for (char current_char : s) {
+        append_code_point(result, static_cast<wchar_t>(current_char));
     }
     return result;
 } // function -----------------------------------------------------------------
