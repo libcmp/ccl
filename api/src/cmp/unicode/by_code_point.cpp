@@ -802,8 +802,8 @@ noexcept
 
 bool
 operator == (
-const by_code_point<char16_t>::const_iterator& iterator1,
-const by_code_point<char16_t>::const_iterator& iterator2
+    const by_code_point<char16_t>::const_iterator& iterator1,
+    const by_code_point<char16_t>::const_iterator& iterator2
 )
 noexcept
 {
