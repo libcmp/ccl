@@ -52,6 +52,15 @@ noexcept
 
 std::size_t
 string_size (
+    const std::string_view& s
+)
+noexcept
+{
+    return s.size();
+} // function -----------------------------------------------------------------
+
+std::size_t
+string_size (
     const std::u8string_view& s
 )
 noexcept

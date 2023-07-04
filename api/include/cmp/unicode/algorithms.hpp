@@ -135,6 +135,21 @@ noexcept;
 
 /**
     Description:
+        Returns the number of characters in the given string.
+
+    Parameters:
+        s:
+            The string to get the size of.
+*/
+CMP_LIBRARY_NAME
+std::size_t
+string_size (
+    const std::string_view& s
+)
+noexcept;
+
+/**
+    Description:
         Returns the number of code units in the given string.
 
     Parameters:
