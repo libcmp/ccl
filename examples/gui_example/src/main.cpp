@@ -82,7 +82,7 @@ public:
     handle_close_event ()
     override
     {
-        cmp::uout << u8"Closing.\n";
+        cmp::uout << "Closing.\n";
         return cmp::close_window::yes;
     } // function -------------------------------------------------------------
 
