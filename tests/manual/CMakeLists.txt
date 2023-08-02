@@ -10,10 +10,6 @@ add_executable(
     test_platform
         test_platform.cpp
 )
-target_compile_definitions(
-    test_platform PUBLIC
-        CMP_CONFIG_TESTS_ENABLED=true
-)
 set_target_properties(
     test_platform PROPERTIES
         LINKER_LANGUAGE CXX
@@ -30,10 +26,6 @@ target_link_libraries(
 add_executable(
     test_uio
         test_uio.cpp
-)
-target_compile_definitions(
-    test_uio PUBLIC
-        CMP_CONFIG_TESTS_ENABLED=true
 )
 set_target_properties(
     test_uio PROPERTIES
