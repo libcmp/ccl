@@ -7,7 +7,9 @@
 #include <cmp/desktop_gui/inclusion_assert.hpp>
 #include <cmp/core/platform.hpp>
 
-#if defined(CMP_OS_MACOS)
+#if defined(CMP_OS_WINDOWS)
+#   include <cmp/desktop_gui/impl/windows/windows_window.hpp>
+#elif defined(CMP_OS_MACOS)
 #   include <cmp/desktop_gui/impl/macos/macos_window.hpp>
 #endif
 

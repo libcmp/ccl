@@ -5,7 +5,10 @@
 #include <cmp/core/operating_system.hpp>
 
 #if CMP_CONFIG_HEADER_ONLY == false && CMP_CONFIG_DESKTOP_GUI_PACKAGE_EXCLUDED == false
-#   if defined(CMP_OS_MACOS)
+#   if defined(CMP_OS_WINDOWS)
+#       include <cmp/desktop_gui/impl/windows/windows_desktop_gui_application.cpp>
+#       include <cmp/desktop_gui/impl/windows/windows_window.cpp>
+#   elif defined(CMP_OS_MACOS)
 #       include <cmp/desktop_gui/impl/macos/macos_desktop_gui_application.mm>
 #       include <cmp/desktop_gui/impl/macos/macos_window.mm>
 #   endif
