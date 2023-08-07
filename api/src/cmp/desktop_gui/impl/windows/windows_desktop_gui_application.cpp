@@ -50,7 +50,7 @@ noexcept
     );
 } // function -----------------------------------------------------------------
 
-typename desktop_gui_application::native_handle&
+desktop_gui_application::native_handle&
 desktop_gui_application::grab_native_handle ()
 noexcept
 {

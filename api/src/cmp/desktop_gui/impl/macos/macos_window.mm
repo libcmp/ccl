@@ -29,7 +29,7 @@ namespace cmp {
 
 namespace impl {
 
-typename desktop_gui_application::native_handle&
+desktop_gui_application::native_handle&
 grab_application_native_handle ()
 noexcept
 {
