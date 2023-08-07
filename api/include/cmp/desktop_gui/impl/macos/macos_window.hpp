@@ -35,6 +35,10 @@ public:
     grab_native_handle ()
     noexcept;
 
+    const window_native_handle&
+    grab_native_handle ()
+    const noexcept;
+
     std::u8string
     get_title ()
     const;

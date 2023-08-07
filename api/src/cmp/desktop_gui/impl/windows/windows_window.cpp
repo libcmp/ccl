@@ -365,6 +365,13 @@ noexcept
     return m_native_handle;
 } // function -----------------------------------------------------------------
 
+const window_native_handle&
+window::grab_native_handle ()
+const noexcept
+{
+    return m_native_handle;
+} // function -----------------------------------------------------------------
+
 std::u8string
 window::get_title ()
 const

@@ -96,6 +96,13 @@ noexcept
     return m_native_handle;
 } // function -----------------------------------------------------------------
 
+const desktop_gui_application::native_handle&
+desktop_gui_application::grab_native_handle ()
+const noexcept
+{
+    return m_native_handle;
+} // function -----------------------------------------------------------------
+
 // Core -----------------------------------------------------------------------
 
 int

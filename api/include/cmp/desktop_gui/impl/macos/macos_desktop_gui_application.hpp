@@ -50,6 +50,10 @@ public:
     grab_native_handle ()
     noexcept;
 
+    const native_handle&
+    grab_native_handle ()
+    const noexcept;
+
     // Core -------------------------------------------------------------------
 
     int
