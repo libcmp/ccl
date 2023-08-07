@@ -154,7 +154,7 @@ private:
     update ();
 
     void
-    update_association ()
+    fix_association ()
     noexcept;
 }; // class -------------------------------------------------------------------
 

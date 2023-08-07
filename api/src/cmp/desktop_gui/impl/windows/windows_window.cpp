@@ -329,7 +329,7 @@ noexcept
     , m_last_time{other.m_last_time}
 {
     if (m_native_handle.window_handle != NULL) {
-        update_association();
+        fix_association();
     }
 
     other.m_native_handle.window_handle = NULL;
@@ -348,7 +348,7 @@ noexcept
     m_last_time = other.m_last_time;
 
     if (m_native_handle.window_handle != NULL) {
-        update_association();
+        fix_association();
     }
 
     other.m_native_handle.window_handle = NULL;
@@ -532,7 +532,7 @@ window::update () {
 } // function -----------------------------------------------------------------
 
 void
-window::update_association ()
+window::fix_association ()
 noexcept
 {
     auto& window_associations{
