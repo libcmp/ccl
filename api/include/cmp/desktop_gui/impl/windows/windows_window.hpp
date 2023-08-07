@@ -6,20 +6,13 @@
 
 #include <string>
 #include <chrono>
-#include <thread>
-#include <condition_variable>
-#include <mutex>
 
 #include <cmp/desktop_gui/inclusion_assert.hpp>
 #include <cmp/desktop_gui/impl/windows/windows_window_native_handle.hpp>
 #include <cmp/desktop_gui/impl/windows/windows_desktop_gui_application.hpp>
 #include <cmp/unicode/algorithms.hpp>
-#include <cmp/io/uio.hpp>
+
 namespace cmp {
-
-namespace impl {
-
-} // namespace ----------------------------------------------------------------
 
 class CMP_LIBRARY_NAME window
 {

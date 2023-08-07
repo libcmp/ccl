@@ -1,8 +1,6 @@
 // Copyright (C) 2023 Daniel T. McGinnis
 // SPDX-License-Identifier: BSL-1.0
 
-#include <Windows.h>
-
 #include <cmp/desktop_gui/impl/windows/windows_desktop_gui_application.hpp>
 
 namespace cmp {
