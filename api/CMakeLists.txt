@@ -174,22 +174,31 @@ if (CMP_CONFIG_LTO_REQUESTED MATCHES true)
     endif ()
 endif ()
 
-# Specify the warnings we'd like to see.
+# Tell Visual C++ to use UTF-8.
 if (CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
     target_compile_options(
         cmp PUBLIC
             /utf-8
-            /W4
-            #/WX
     )
-else ()
-    target_compile_options(
-        cmp PUBLIC
-            -Wall
-            -Wextra
-            -pedantic
-            #-Werror
-    )
+endif ()
+
+# Specify the warnings we'd like to see during development.
+if (DEFINED CMP_DEV)
+    if (CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
+        target_compile_options(
+            cmp PUBLIC
+                /W4
+                #/WX
+        )
+    else ()
+        target_compile_options(
+            cmp PUBLIC
+                -Wall
+                -Wextra
+                -pedantic
+                #-Werror
+        )
+    endif ()
 endif ()
 
 include(GenerateExportHeader)
