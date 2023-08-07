@@ -393,7 +393,7 @@ bool
 window::open (
     int width,
     int height,
-    const std::u8string &title,
+    const std::u8string& title,
     cmp::window_mode mode
 ) {
     if (m_native_handle.window_handle != NULL) {
@@ -449,6 +449,8 @@ window::open (
         m_native_handle.window_handle,
         this
     );
+
+    return true;
 } // function -----------------------------------------------------------------
 
 void
