@@ -39,6 +39,24 @@ desktop_gui_application::desktop_gui_application (
     }
 } // function -----------------------------------------------------------------
 
+// Accessors ------------------------------------------------------------------
+
+desktop_gui_application*
+desktop_gui_application::get_instance_ptr ()
+noexcept
+{
+    return static_cast<desktop_gui_application*>(
+        application::get_instance_ptr()
+    );
+} // function -----------------------------------------------------------------
+
+typename desktop_gui_application::native_handle&
+desktop_gui_application::grab_native_handle ()
+noexcept
+{
+    return m_native_handle;
+} // function -----------------------------------------------------------------
+
 // Core -----------------------------------------------------------------------
 
 int
@@ -61,24 +79,6 @@ noexcept
         }
     }
     return 0;
-} // function -----------------------------------------------------------------
-
-// Accessors ------------------------------------------------------------------
-
-desktop_gui_application*
-desktop_gui_application::get_instance_ptr ()
-noexcept
-{
-    return static_cast<desktop_gui_application*>(
-        application::get_instance_ptr()
-    );
-} // function -----------------------------------------------------------------
-
-typename desktop_gui_application::native_handle&
-desktop_gui_application::grab_native_handle ()
-noexcept
-{
-    return m_native_handle;
 } // function -----------------------------------------------------------------
 
 } // namespace ----------------------------------------------------------------

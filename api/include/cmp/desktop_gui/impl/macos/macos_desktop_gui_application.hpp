@@ -24,6 +24,8 @@ public:
 
     class native_handle {
     public:
+        // Public Data --------------------------------------------------------
+
         std::vector<std::pair<void*, window*>> window_associations;
     }; // class ---------------------------------------------------------------
 
@@ -37,12 +39,6 @@ public:
     ~desktop_gui_application ()
     = default;
 
-    // Core -------------------------------------------------------------------
-
-    int
-    run ()
-    noexcept override;
-
     // Accessors --------------------------------------------------------------
 
     static
@@ -54,10 +50,13 @@ public:
     grab_native_handle ()
     noexcept;
 
+    // Core -------------------------------------------------------------------
+
+    int
+    run ()
+    noexcept override;
+
 private:
-    // Private Types ----------------------------------------------------------
-
-
     // Private Data -----------------------------------------------------------
 
     void* m_shared_application;

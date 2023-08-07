@@ -63,6 +63,21 @@ public:
     )
     noexcept;
 
+    // Accessors --------------------------------------------------------------
+
+    window_native_handle&
+    grab_native_handle ()
+    noexcept;
+
+    std::u8string
+    get_title ()
+    const;
+
+    void
+    set_title (
+        const std::u8string& new_title
+    );
+
     // Core -------------------------------------------------------------------
 
     bool
@@ -108,21 +123,6 @@ public:
     virtual
     close_window
     handle_close_event ();
-
-    // Accessors --------------------------------------------------------------
-
-    window_native_handle&
-    grab_native_handle ()
-    noexcept;
-
-    std::u8string
-    get_title ()
-    const;
-
-    void
-    set_title (
-        const std::u8string& new_title
-    );
 
     // Friends ----------------------------------------------------------------
 

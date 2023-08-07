@@ -5,6 +5,7 @@
 #include <cmp/core/general.hpp>
 
 namespace cmp {
+
 class core_general_test_module
     : public test_module<core_general_test_module>
 {
@@ -22,7 +23,7 @@ public:
                   :: test_count_hexadecimal_digits
           })
     {
-    }
+    } // function -------------------------------------------------------------
 
     // Tests ------------------------------------------------------------------
 
@@ -73,7 +74,7 @@ public:
         end_stage();
 
         return true;
-    }
+    } // function -------------------------------------------------------------
 
     bool
     test_count_decimal_digits ()
@@ -200,4 +201,4 @@ int
 main ()
 {
     return cmp::core_general_test_module{}.run_tests();
-}
+} // function -----------------------------------------------------------------

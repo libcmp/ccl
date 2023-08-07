@@ -78,6 +78,24 @@ desktop_gui_application::desktop_gui_application (
     [impl::as_nsapplication(m_shared_application) finishLaunching];
 } // function -----------------------------------------------------------------
 
+// Accessors ------------------------------------------------------------------
+
+desktop_gui_application*
+desktop_gui_application::get_instance_ptr ()
+noexcept
+{
+    return static_cast<desktop_gui_application*>(
+        application::get_instance_ptr()
+    );
+} // function -----------------------------------------------------------------
+
+typename desktop_gui_application::native_handle&
+desktop_gui_application::grab_native_handle ()
+noexcept
+{
+    return m_native_handle;
+} // function -----------------------------------------------------------------
+
 // Core -----------------------------------------------------------------------
 
 int
@@ -95,30 +113,15 @@ noexcept
         if (event != nil) {
             [impl::as_nsapplication(m_shared_application) sendEvent:event];
         } else {
-            for (auto& current_window : m_native_handle.window_associations) {
-                impl::update_window(current_window.second);
+            for (
+                auto& current_association
+                    : m_native_handle.window_associations
+            ) {
+                impl::update_window(current_association.second);
             }
         }
     }
     return 0;
-} // function -----------------------------------------------------------------
-
-// Accessors ------------------------------------------------------------------
-
-desktop_gui_application*
-desktop_gui_application::get_instance_ptr ()
-noexcept
-{
-    return static_cast<desktop_gui_application*>(
-        application::get_instance_ptr()
-    );
-} // function -----------------------------------------------------------------
-
-typename desktop_gui_application::native_handle&
-desktop_gui_application::grab_native_handle ()
-noexcept
-{
-    return m_native_handle;
 } // function -----------------------------------------------------------------
 
 } // namespace ----------------------------------------------------------------

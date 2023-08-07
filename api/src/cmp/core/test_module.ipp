@@ -34,8 +34,7 @@ noexcept
     m_owning_test_module->push_message(
         owning_test_module_type::message::destructor_called
     );
-}
-// function -------------------------------------------------------------------
+} // function -----------------------------------------------------------------
 
 // Copy Operations ------------------------------------------------------------
 
@@ -122,7 +121,19 @@ noexcept
     m_failed_tests.reserve(m_test_functions.size());
 } // function -----------------------------------------------------------------
 
-// Tests ----------------------------------------------------------------------
+// Accessors ------------------------------------------------------------------
+
+template <
+    typename T
+>
+unsigned int
+test_module<T>::get_message_count ()
+const noexcept
+{
+    return m_message_queue.size();
+} // function -----------------------------------------------------------------
+
+// Core -----------------------------------------------------------------------
 
 template <
     typename T
@@ -272,18 +283,6 @@ const noexcept
 {
     std::cerr << "error: ";
     return std::cerr;
-} // function -----------------------------------------------------------------
-
-// Accessors ------------------------------------------------------------------
-
-template <
-    typename T
->
-unsigned int
-test_module<T>::get_message_count ()
-const noexcept
-{
-    return m_message_queue.size();
 } // function -----------------------------------------------------------------
 
 // Private Functions ----------------------------------------------------------

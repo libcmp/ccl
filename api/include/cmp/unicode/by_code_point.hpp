@@ -46,8 +46,8 @@ public:
         noexcept = default;
 
         const_iterator (
-            std::string_view::const_iterator current_iterator,
-            std::string_view::const_iterator end_iterator
+            std::string_view::const_iterator initial_current_iterator,
+            std::string_view::const_iterator initial_end_iterator
         )
         noexcept;
 
@@ -379,8 +379,8 @@ public:
         noexcept = default;
 
         const_iterator (
-            std::u8string_view::const_iterator current_iterator,
-            std::u8string_view::const_iterator end_iterator
+            std::u8string_view::const_iterator initial_current_iterator,
+            std::u8string_view::const_iterator initial_end_iterator
         )
         noexcept;
 
@@ -746,8 +746,8 @@ public:
         noexcept = default;
 
         const_iterator (
-            std::u16string_view::const_iterator current_iterator,
-            std::u16string_view::const_iterator end_iterator
+            std::u16string_view::const_iterator initial_current_iterator,
+            std::u16string_view::const_iterator initial_end_iterator
         )
         noexcept;
 
@@ -1081,8 +1081,8 @@ public:
         noexcept = default;
 
         const_iterator (
-            std::u32string_view::const_iterator current_iterator,
-            std::u32string_view::const_iterator end_iterator
+            std::u32string_view::const_iterator initial_current_iterator,
+            std::u32string_view::const_iterator initial_end_iterator
         )
         noexcept;
 
@@ -1415,8 +1415,8 @@ public:
         noexcept = default;
 
         const_iterator (
-            std::wstring_view::const_iterator current_iterator,
-            std::wstring_view::const_iterator end_iterator
+            std::wstring_view::const_iterator initial_current_iterator,
+            std::wstring_view::const_iterator initial_end_iterator
         )
         noexcept;
 

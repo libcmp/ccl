@@ -354,6 +354,37 @@ noexcept
     other.m_native_handle.window_handle = NULL;
 } // function -----------------------------------------------------------------
 
+// Accessors ------------------------------------------------------------------
+
+window_native_handle&
+window::grab_native_handle ()
+noexcept
+{
+    return m_native_handle;
+} // function -----------------------------------------------------------------
+
+std::u8string
+window::get_title ()
+const
+{
+    std::wstring title_wstring;
+    title_wstring.resize(GetWindowTextLengthW(m_native_handle.window_handle));
+    GetWindowTextW(
+        m_native_handle.window_handle,
+        title_wstring.data(),
+        title_wstring.size() + 1
+    );
+    return to_u8string(title_wstring);
+} // function -----------------------------------------------------------------
+
+void
+window::set_title (
+    const std::u8string& new_title
+) {
+    std::wstring title_wstring{to_wstring(new_title)};
+    SetWindowTextW(m_native_handle.window_handle, title_wstring.data());
+} // function -----------------------------------------------------------------
+
 // Core -----------------------------------------------------------------------
 
 bool
@@ -473,37 +504,6 @@ close_window
 window::handle_close_event ()
 {
     return close_window::yes;
-} // function -----------------------------------------------------------------
-
-// Accessors ------------------------------------------------------------------
-
-window_native_handle&
-window::grab_native_handle ()
-noexcept
-{
-    return m_native_handle;
-} // function -----------------------------------------------------------------
-
-std::u8string
-window::get_title ()
-const
-{
-    std::wstring title_wstring;
-    title_wstring.resize(GetWindowTextLengthW(m_native_handle.window_handle));
-    GetWindowTextW(
-        m_native_handle.window_handle,
-        title_wstring.data(),
-        title_wstring.size() + 1
-    );
-    return to_u8string(title_wstring);
-} // function -----------------------------------------------------------------
-
-void
-window::set_title (
-    const std::u8string& new_title
-) {
-    std::wstring title_wstring{to_wstring(new_title)};
-    SetWindowTextW(m_native_handle.window_handle, title_wstring.data());
 } // function -----------------------------------------------------------------
 
 // Private Functions ----------------------------------------------------------

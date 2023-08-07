@@ -7,13 +7,15 @@ namespace cmp {
 
 // ---------------------------------- cmp::by_code_point<char>::const_iterator
 
+// Constructors and Destructor ------------------------------------------------
+
 by_code_point<char>::const_iterator::const_iterator (
-    std::string_view::const_iterator current_iterator,
-    std::string_view::const_iterator end_iterator
+    std::string_view::const_iterator initial_current_iterator,
+    std::string_view::const_iterator initial_end_iterator
 )
 noexcept
-    : m_current_iterator{current_iterator}
-    , m_end_iterator{end_iterator}
+    : m_current_iterator{initial_current_iterator}
+    , m_end_iterator{initial_end_iterator}
 {
 } // function -----------------------------------------------------------------
 
@@ -287,13 +289,15 @@ const
 
 // ------------------------------- cmp::by_code_point<char8_t>::const_iterator
 
+// Constructors and Destructor ------------------------------------------------
+
 by_code_point<char8_t>::const_iterator::const_iterator (
-    std::u8string_view::const_iterator current_iterator,
-    std::u8string_view::const_iterator end_iterator
+    std::u8string_view::const_iterator initial_current_iterator,
+    std::u8string_view::const_iterator initial_end_iterator
 )
 noexcept
-    : m_current_iterator{current_iterator}
-    , m_end_iterator{end_iterator}
+    : m_current_iterator{initial_current_iterator}
+    , m_end_iterator{initial_end_iterator}
 {
 } // function -----------------------------------------------------------------
 
@@ -665,13 +669,15 @@ const
 
 // ------------------------------ cmp::by_code_point<char16_t>::const_iterator
 
+// Constructors and Destructor ------------------------------------------------
+
 by_code_point<char16_t>::const_iterator::const_iterator (
-    std::u16string_view::const_iterator current_iterator,
-    std::u16string_view::const_iterator end_iterator
+    std::u16string_view::const_iterator initial_current_iterator,
+    std::u16string_view::const_iterator initial_end_iterator
 )
 noexcept
-    : m_current_iterator{current_iterator}
-    , m_end_iterator{end_iterator}
+    : m_current_iterator{initial_current_iterator}
+    , m_end_iterator{initial_end_iterator}
 {
 } // function -----------------------------------------------------------------
 
@@ -972,13 +978,15 @@ const noexcept
 
 // ------------------------------ cmp::by_code_point<char32_t>::const_iterator
 
+// Constructors and Destructor ------------------------------------------------
+
 by_code_point<char32_t>::const_iterator::const_iterator (
-    std::u32string_view::const_iterator current_iterator,
-    std::u32string_view::const_iterator end_iterator
+    std::u32string_view::const_iterator initial_current_iterator,
+    std::u32string_view::const_iterator initial_end_iterator
 )
 noexcept
-    : m_current_iterator{current_iterator}
-    , m_end_iterator{end_iterator}
+    : m_current_iterator{initial_current_iterator}
+    , m_end_iterator{initial_end_iterator}
 {
 } // function -----------------------------------------------------------------
 
@@ -1251,13 +1259,15 @@ const
 
 // ------------------------------- cmp::by_code_point<wchar_t>::const_iterator
 
+// Constructors and Destructor ------------------------------------------------
+
 by_code_point<wchar_t>::const_iterator::const_iterator (
-    std::wstring_view::const_iterator current_iterator,
-    std::wstring_view::const_iterator end_iterator
+    std::wstring_view::const_iterator initial_current_iterator,
+    std::wstring_view::const_iterator initial_end_iterator
 )
 noexcept
-    : m_current_iterator{current_iterator}
-    , m_end_iterator{end_iterator}
+    : m_current_iterator{initial_current_iterator}
+    , m_end_iterator{initial_end_iterator}
 {
 } // function -----------------------------------------------------------------
 

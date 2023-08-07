@@ -7,6 +7,10 @@ namespace cmp {
 
 namespace impl {
 
+// ----------------------------------------------- cmp::impl::number_formatter
+
+// Core -----------------------------------------------------------------------
+
 template <
     raii_unicode_string Output,
     std::integral Input

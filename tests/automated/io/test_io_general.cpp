@@ -5,6 +5,7 @@
 #include <cmp/io/general.hpp>
 
 namespace cmp {
+
 class io_general_test_module
     : public test_module<io_general_test_module>
 {
@@ -16,7 +17,7 @@ public:
                   :: test_invert_endianness
           })
     {
-    }
+    } // function -------------------------------------------------------------
 
     // Tests ------------------------------------------------------------------
 
@@ -81,4 +82,4 @@ int
 main ()
 {
     return cmp::io_general_test_module{}.run_tests();
-}
+} // function -----------------------------------------------------------------

@@ -51,12 +51,6 @@ public:
         char** argv
     );
 
-    // Core -------------------------------------------------------------------
-
-    int
-    run ()
-    noexcept override;
-
     // Accessors --------------------------------------------------------------
 
     static
@@ -67,6 +61,12 @@ public:
     native_handle&
     grab_native_handle ()
     noexcept;
+
+    // Core -------------------------------------------------------------------
+
+    int
+    run ()
+    noexcept override;
 
 private:
     // Private Data -----------------------------------------------------------

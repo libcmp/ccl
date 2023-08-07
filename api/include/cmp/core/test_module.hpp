@@ -186,7 +186,17 @@ public:
     ~test_module ()
     noexcept = default;
 
-    // Tests ------------------------------------------------------------------
+    // Accessors --------------------------------------------------------------
+
+    /**
+        Description:
+            Returns the number of messages in the message queue.
+    */
+    unsigned int
+    get_message_count ()
+    const noexcept;
+
+    // Core -------------------------------------------------------------------
 
     /**
         Description:
@@ -268,16 +278,6 @@ public:
     */
     std::ostream&
     log_error ()
-    const noexcept;
-
-    // Accessors --------------------------------------------------------------
-
-    /**
-        Description:
-            Returns the number of messages in the message queue.
-    */
-    unsigned int
-    get_message_count ()
     const noexcept;
 
 private:

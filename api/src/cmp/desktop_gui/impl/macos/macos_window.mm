@@ -43,13 +43,6 @@ update_window (
     w->update();
 } // function -----------------------------------------------------------------
 
-cmp_window*
-as_cmp_window (
-    void* window
-) {
-    return static_cast<cmp_window*>(window);
-} // function -----------------------------------------------------------------
-
 key
 translate_key_code (
     unsigned short key_code
@@ -194,17 +187,24 @@ translate_key_code (
     }
 } // function -----------------------------------------------------------------
 
+cmp_window*
+as_cmp_window (
+    void* cmp_window_ptr
+) {
+    return static_cast<cmp_window*>(cmp_window_ptr);
+} // function -----------------------------------------------------------------
+
 void
 forward_key_down_event_to_window (
-    cmp_window* window,
+    cmp_window* cmp_window_ptr,
     NSEvent* event
 ) {
     auto& window_associations{
         grab_application_native_handle().window_associations
     };
-    for (const auto& entry : window_associations) {
-        if (entry.first == window) {
-            entry.second->handle_key_down_event(
+    for (const auto& current_association : window_associations) {
+        if (current_association.first == cmp_window_ptr) {
+            current_association.second->handle_key_down_event(
                 translate_key_code([event keyCode])
             );
             break;
@@ -214,15 +214,15 @@ forward_key_down_event_to_window (
 
 void
 forward_key_up_event_to_window (
-    cmp_window* window,
+    cmp_window* cmp_window_ptr,
     NSEvent* event
 ) {
     auto& window_associations{
         grab_application_native_handle().window_associations
     };
-    for (const auto& entry : window_associations) {
-        if (entry.first == window) {
-            entry.second->handle_key_up_event(
+    for (const auto& current_association : window_associations) {
+        if (current_association.first == cmp_window_ptr) {
+            current_association.second->handle_key_up_event(
                 translate_key_code([event keyCode])
             );
             break;
@@ -232,14 +232,14 @@ forward_key_up_event_to_window (
 
 void
 forward_resize_event_to_window (
-    cmp_window* window
+    cmp_window* cmp_window_ptr
 ) {
     auto& window_associations{
         grab_application_native_handle().window_associations
     };
-    for (const auto& entry : window_associations) {
-        if (entry.first == window) {
-            entry.second->handle_resize_event();
+    for (const auto& current_association : window_associations) {
+        if (current_association.first == cmp_window_ptr) {
+            current_association.second->handle_resize_event();
             break;
         }
     }
@@ -247,22 +247,23 @@ forward_resize_event_to_window (
 
 BOOL
 forward_close_event_to_window (
-    cmp_window* window
+    cmp_window* cmp_window_ptr
 ) {
     auto& window_associations{
         grab_application_native_handle().window_associations
     };
-    for (const auto& current_entry : window_associations) {
-        if (current_entry.first == window) {
+    for (const auto& current_association : window_associations) {
+        if (current_association.first == cmp_window_ptr) {
             if (
-                current_entry.second->handle_close_event() == close_window::yes
+                current_association.second->handle_close_event()
+                    == close_window::yes
             ) {
                 window_associations.erase(
                     std::find_if(
                         std::begin(window_associations),
                         std::end(window_associations),
-                        [window] (const auto& element) {
-                            return element.first == window;
+                        [cmp_window_ptr] (const auto& element) {
+                            return element.first == cmp_window_ptr;
                         }
                     )
                 );
@@ -330,6 +331,45 @@ window::window (
     }
 } // function -----------------------------------------------------------------
 
+// Accessors ------------------------------------------------------------------
+
+window_native_handle&
+window::grab_native_handle ()
+noexcept
+{
+    return m_native_handle;
+} // function -----------------------------------------------------------------
+
+std::u8string
+window::get_title ()
+const
+{
+    std::u8string result;
+    for (
+        const char* current_character{
+            [[impl::as_cmp_window(m_native_handle.cmp_window_handle) title]
+                UTF8String
+            ]
+        };
+        *current_character != '\0';
+        ++current_character
+    ) {
+        result.push_back(*current_character);
+    }
+    return result;
+} // function -----------------------------------------------------------------
+
+void
+window::set_title (
+    const std::u8string& new_title
+) {
+    [impl::as_cmp_window(m_native_handle.cmp_window_handle) setTitle:
+        [NSString stringWithUTF8String:
+            reinterpret_cast<const char*>(new_title.data())
+        ]
+    ];
+} // function -----------------------------------------------------------------
+
 // Core -----------------------------------------------------------------------
 
 void
@@ -392,45 +432,6 @@ close_window
 window::handle_close_event ()
 {
     return close_window::yes;
-} // function -----------------------------------------------------------------
-
-// Accessors ------------------------------------------------------------------
-
-window_native_handle&
-window::grab_native_handle ()
-noexcept
-{
-    return m_native_handle;
-} // function -----------------------------------------------------------------
-
-std::u8string
-window::get_title ()
-const
-{
-    std::u8string result;
-    for (
-        const char* current_character{
-            [[impl::as_cmp_window(m_native_handle.cmp_window_handle) title]
-                UTF8String
-            ]
-        };
-        *current_character != '\0';
-        ++current_character
-    ) {
-        result.push_back(*current_character);
-    }
-    return result;
-} // function -----------------------------------------------------------------
-
-void
-window::set_title (
-    const std::u8string& new_title
-) {
-    [impl::as_cmp_window(m_native_handle.cmp_window_handle) setTitle:
-        [NSString stringWithUTF8String:
-            reinterpret_cast<const char*>(new_title.data())
-        ]
-    ];
 } // function -----------------------------------------------------------------
 
 // Private Functions ----------------------------------------------------------

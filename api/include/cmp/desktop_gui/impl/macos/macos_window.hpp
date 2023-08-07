@@ -29,6 +29,21 @@ public:
     ~window ()
     noexcept = default;
 
+    // Accessors --------------------------------------------------------------
+
+    window_native_handle&
+    grab_native_handle ()
+    noexcept;
+
+    std::u8string
+    get_title ()
+    const;
+
+    void
+    set_title (
+        const std::u8string& new_title
+    );
+
     // Core -------------------------------------------------------------------
 
     void
@@ -67,21 +82,6 @@ public:
     close_window
     handle_close_event ();
 
-    // Accessors --------------------------------------------------------------
-
-    window_native_handle&
-    grab_native_handle ()
-    noexcept;
-
-    std::u8string
-    get_title ()
-    const;
-
-    void
-    set_title (
-        const std::u8string& new_title
-    );
-
     // Friends ----------------------------------------------------------------
 
     friend
@@ -91,16 +91,16 @@ public:
     );
 
 private:
-    // Private Functions ------------------------------------------------------
-
-    void
-    update ();
-
     // Private Data -----------------------------------------------------------
 
     window_native_handle m_native_handle;
     std::chrono::steady_clock::time_point m_start_time;
     std::chrono::steady_clock::time_point m_last_time;
+
+    // Private Functions ------------------------------------------------------
+
+    void
+    update ();
 }; // class -------------------------------------------------------------------
 
 } // namespace ----------------------------------------------------------------

@@ -2,7 +2,7 @@
 // SPDX-License-Identifier: BSL-1.0
 
 #include <cmp/core/config.hpp>
-#include <cmp/core/operating_system.hpp>
+#include <cmp/core/platform.hpp>
 
 #if CMP_CONFIG_HEADER_ONLY == false && CMP_CONFIG_DESKTOP_GUI_PACKAGE_EXCLUDED == false
 #   if defined(CMP_OS_WINDOWS)

@@ -20,13 +20,6 @@ public:
     )
     noexcept;
 
-    // Core -------------------------------------------------------------------
-
-    virtual
-    int
-    run ()
-    noexcept;
-
     // Accessors --------------------------------------------------------------
 
     static
@@ -51,6 +44,13 @@ public:
         std::u8string_view new_copyright_notice
     );
 
+    // Core -------------------------------------------------------------------
+
+    virtual
+    int
+    run ()
+    noexcept;
+
 protected:
     // Protected Functions ----------------------------------------------------
 
@@ -64,10 +64,11 @@ protected:
 private:
     // Private Data -----------------------------------------------------------
 
+    static application* g_instance_ptr;
+
     int m_argc;
     char** m_argv;
     std::u8string_view m_copyright_notice;
-    static application* g_instance_ptr;
 }; // class -------------------------------------------------------------------
 
 } // namespace ----------------------------------------------------------------

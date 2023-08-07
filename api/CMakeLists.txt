@@ -20,8 +20,8 @@ set(
 )
 set(
     CCL_DESKTOP_GUI_HEADERS
-        include/cmp/desktop_gui/general.hpp
         include/cmp/desktop_gui/desktop_gui_application.hpp
+        include/cmp/desktop_gui/general.hpp
         include/cmp/desktop_gui/inclusion_assert.hpp
         include/cmp/desktop_gui/window.hpp
         include/cmp/desktop_gui/window_native_handle.hpp
@@ -29,12 +29,12 @@ set(
 set(
     CCL_IO_HEADERS
         include/cmp/io/impl/common/common_uio.hpp
-        include/cmp/io/general.hpp
         include/cmp/io/data_input_stream.hpp
         include/cmp/io/data_io_stream.hpp
         include/cmp/io/data_output_stream.hpp
         include/cmp/io/exceptions.hpp
         include/cmp/io/file.hpp
+        include/cmp/io/general.hpp
         include/cmp/io/inclusion_assert.hpp
         include/cmp/io/input_resource.hpp
         include/cmp/io/input_stream.hpp
