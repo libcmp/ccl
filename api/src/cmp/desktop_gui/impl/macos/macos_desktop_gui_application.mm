@@ -107,7 +107,6 @@ const noexcept
 
 int
 desktop_gui_application::run ()
-noexcept
 {
     while (!m_native_handle.window_associations.empty()) {
         NSEvent* event = [impl::as_nsapplication(m_shared_application)

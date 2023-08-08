@@ -48,8 +48,7 @@ public:
 
     virtual
     int
-    run ()
-    noexcept;
+    run ();
 
 protected:
     // Protected Functions ----------------------------------------------------

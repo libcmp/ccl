@@ -61,7 +61,6 @@ application::set_copyright_notice (
 
 int
 application::run ()
-noexcept
 {
     return 0;
 } // function -----------------------------------------------------------------

@@ -58,7 +58,7 @@ public:
 
     int
     run ()
-    noexcept override;
+    override;
 
 private:
     // Private Data -----------------------------------------------------------

@@ -66,7 +66,6 @@ const noexcept
 
 int
 desktop_gui_application::run ()
-noexcept
 {
     MSG message;
     ZeroMemory(&message, sizeof (MSG));
