@@ -38,11 +38,10 @@ public:
     >
     bool
     test_by_code_point_generic (
-        std::basic_string_view<CodeUnit> initial_value
+        std::basic_string<CodeUnit> test_value
     )
     noexcept
     {
-        std::basic_string<CodeUnit> test_value{initial_value};
         std::cout << "String length: "
                   << test_value.length()
                   << std::endl;
