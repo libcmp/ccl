@@ -75,9 +75,11 @@ set(
         ${CCL_UNICODE_HEADERS}
 )
 
+# Establish a default value for CMP_CONFIG_DESKTOP_GUI_PACKAGE_EXCLUDED.
 if (NOT DEFINED CMP_CONFIG_DESKTOP_GUI_PACKAGE_EXCLUDED)
     set(CMP_CONFIG_DESKTOP_GUI_PACKAGE_EXCLUDED false)
 endif ()
+
 if (CMP_CONFIG_DESKTOP_GUI_PACKAGE_EXCLUDED MATCHES false)
     set(
         CCL_HEADERS
@@ -86,9 +88,11 @@ if (CMP_CONFIG_DESKTOP_GUI_PACKAGE_EXCLUDED MATCHES false)
     )
 endif ()
 
+# Establish a default value for CMP_CONFIG_IO_PACKAGE_EXCLUDED.
 if (NOT DEFINED CMP_CONFIG_IO_PACKAGE_EXCLUDED)
     set(CMP_CONFIG_IO_PACKAGE_EXCLUDED false)
 endif ()
+
 if (CMP_CONFIG_IO_PACKAGE_EXCLUDED MATCHES false)
     set(
         CCL_HEADERS
@@ -106,8 +110,13 @@ set(
         src/cmp/unicode/definitions.cpp
 )
 
+# Establish a default value for CMP_BUILD_STATIC.
+if (NOT DEFINED CMP_BUILD_STATIC)
+    set(CMP_BUILD_STATIC false)
+endif ()
+
 # Decide how to build the library target.
-if (DEFINED CMP_BUILD_STATIC)
+if (CMP_BUILD_STATIC MATCHES true)
     # Create the cmp target as a statically linked library.
     add_library(
         cmp STATIC
@@ -117,9 +126,6 @@ if (DEFINED CMP_BUILD_STATIC)
     target_compile_definitions(
         cmp PUBLIC
             CMP_CONFIG_IS_STATIC=true
-    )
-    target_compile_definitions(
-        cmp PUBLIC
             CMP_CONFIG_IS_DYNAMIC=false
     )
 else ()
@@ -132,9 +138,6 @@ else ()
     target_compile_definitions(
         cmp PUBLIC
             CMP_CONFIG_IS_STATIC=false
-    )
-    target_compile_definitions(
-        cmp PUBLIC
             CMP_CONFIG_IS_DYNAMIC=true
     )
 endif ()
@@ -158,9 +161,11 @@ set_target_properties(
         VISIBILITY_INLINES_HIDDEN YES
 )
 
+# Establish a default value for CMP_CONFIG_LTO_REQUESTED.
 if (NOT DEFINED CMP_CONFIG_LTO_REQUESTED)
     set(CMP_CONFIG_LTO_REQUESTED true)
 endif ()
+
 set(CMP_CONFIG_LTO_ENABLED false)
 if (CMP_CONFIG_LTO_REQUESTED MATCHES true)
     include(CheckIPOSupported)
@@ -265,28 +270,21 @@ target_compile_definitions(
 # DEPENDENCIES
 
 if (${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
+    # AppKit is always available on macOS, but we need to link to it.
     target_link_libraries(
         cmp
             "-framework AppKit"
     )
+
+    # The native macOS API is in Objective-C, so we must use Objective-C++.
     target_compile_options(cmp PUBLIC -x objective-c++)
 endif ()
-
-# DATA
-
-# Make sure the data files get copied when the library is built.
-add_custom_command(
-    TARGET cmp POST_BUILD
-        COMMAND ${CMAKE_COMMAND} -E copy_directory
-            ${CMAKE_CURRENT_SOURCE_DIR}/../tests/data
-            ${PROJECT_BINARY_DIR}/../test_data
-)
 
 #[[
     It is necessary to copy the library file so that
     executables that depend on it have access to it.
 ]]
-if (NOT DEFINED CMP_BUILD_STATIC)
+if (CMP_BUILD_STATIC MATCHES false)
     add_custom_command(
         TARGET cmp POST_BUILD
             COMMAND ${CMAKE_COMMAND} -E copy
@@ -326,3 +324,13 @@ if (NOT DEFINED CMP_BUILD_STATIC)
         )
     endif ()
 endif ()
+
+# DATA
+
+# Make sure the data files get copied when the library is built.
+add_custom_command(
+    TARGET cmp POST_BUILD
+        COMMAND ${CMAKE_COMMAND} -E copy_directory
+            ${CMAKE_CURRENT_SOURCE_DIR}/../tests/data
+            ${PROJECT_BINARY_DIR}/../test_data
+)
