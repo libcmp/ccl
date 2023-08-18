@@ -10,7 +10,7 @@
 
 namespace cmp {
 
-class application {
+class CMP_LIBRARY_NAME application {
 public:
     // Constructors and Destructor --------------------------------------------
 
