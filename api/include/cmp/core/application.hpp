@@ -72,8 +72,8 @@ private:
 
 } // namespace ----------------------------------------------------------------
 
-#if CMP_HEADER_ONLY == true
+#if CMP_CONFIG_HEADER_ONLY == true
 #   include <cmp/core/application.cpp>
-#endif // CMP_HEADER_ONLY
+#endif // CMP_CONFIG_HEADER_ONLY
 
 #endif // CMP_CORE_APPLICATION_HPP_INCLUDED
