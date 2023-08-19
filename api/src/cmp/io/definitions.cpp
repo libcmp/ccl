@@ -7,13 +7,13 @@
 #if CMP_CONFIG_HEADER_ONLY == false && CMP_CONFIG_IO_PACKAGE_EXCLUDED == false
 #   include <cmp/io/impl/common/common_uio.cpp>
 #   if defined(CMP_OS_WINDOWS)
-#      include <cmp/io/impl/windows/windows_file.cpp>
-#      include <cmp/io/impl/windows/windows_uin.cpp>
-#      include <cmp/io/impl/windows/windows_uout.cpp>
+#       include <cmp/io/impl/windows/windows_file.cpp>
+#       include <cmp/io/impl/windows/windows_uin.cpp>
+#       include <cmp/io/impl/windows/windows_uout.cpp>
 #   elif defined(CMP_OS_UNIX_LIKE)
-#      include <cmp/io/impl/unix_like/unix_like_file.cpp>
-#      include <cmp/io/impl/unix_like/unix_like_uin.cpp>
-#      include <cmp/io/impl/unix_like/unix_like_uout.cpp>
+#       include <cmp/io/impl/unix_like/unix_like_file.cpp>
+#       include <cmp/io/impl/unix_like/unix_like_uin.cpp>
+#       include <cmp/io/impl/unix_like/unix_like_uout.cpp>
 #   endif
 #   include <cmp/io/general.cpp>
 #   include <cmp/io/exceptions.cpp>

@@ -53,8 +53,8 @@
 #define CMP_LIBRARY_NAME
 #if CMP_CONFIG_IS_DYNAMIC == true
 #   if __has_include(<cmp_export.hpp>)
-#      include <cmp_export.hpp>
-#      define CMP_LIBRARY_NAME CMP_EXPORT
+#       include <cmp_export.hpp>
+#       define CMP_LIBRARY_NAME CMP_EXPORT
 #   endif
 #endif
 
