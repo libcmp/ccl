@@ -37,7 +37,6 @@ stdout_resource::write_raw (
     const std::byte* data,
     std::size_t byte_count
 ) {
-    // /*
     DWORD bytes_written{0};
     WriteFile(
         m_handle,
