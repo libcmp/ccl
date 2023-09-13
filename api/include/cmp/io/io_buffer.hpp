@@ -29,11 +29,13 @@ public:
             buffer_capacity:
                 The capacity to use for the I/O buffer.
     */
+    CMP_CONDITIONAL_INLINE
     explicit
     io_buffer (
         std::size_t buffer_capacity = default_buffer_capacity
     );
 
+    CMP_CONDITIONAL_INLINE
     ~io_buffer ()
     noexcept = default;
 
@@ -43,6 +45,7 @@ public:
         Description:
             Returns the capacity of <#this/> I/O buffer.
     */
+    CMP_CONDITIONAL_INLINE
     std::size_t
     get_capacity ()
     const noexcept;
@@ -51,6 +54,7 @@ public:
         Description:
             Returns the size of <#this/> I/O buffer.
     */
+    CMP_CONDITIONAL_INLINE
     std::size_t
     get_size ()
     const noexcept;
@@ -63,6 +67,7 @@ public:
             new_size:
                 The new size of <#this/> I/O buffer.
     */
+    CMP_CONDITIONAL_INLINE
     void
     set_size (
         std::size_t new_size
@@ -73,6 +78,7 @@ public:
         Description:
             Returns the position of <#this/> I/O buffer.
     */
+    CMP_CONDITIONAL_INLINE
     std::size_t
     get_position ()
     const noexcept;
@@ -85,6 +91,7 @@ public:
             new_position:
                 The new position of <#this/> I/O buffer.
     */
+    CMP_CONDITIONAL_INLINE
     void
     set_position (
         std::size_t new_position
@@ -95,6 +102,7 @@ public:
         Description:
             Returns a pointer to the beginning of <#this/> I/O buffer's data.
     */
+    CMP_CONDITIONAL_INLINE
     std::byte*
     get_data ()
     noexcept;
@@ -104,6 +112,7 @@ public:
             Returns true if <#this/> I/O buffer is read-dirty.
             Otherwise, returns false.
     */
+    CMP_CONDITIONAL_INLINE
     bool
     is_read_dirty ()
     const noexcept;
@@ -116,6 +125,7 @@ public:
             new_read_dirty_flag:
                 The new read-dirty flag for <#this/> I/O buffer.
     */
+    CMP_CONDITIONAL_INLINE
     void
     set_read_dirty (
         bool new_read_dirty_flag
@@ -127,6 +137,7 @@ public:
             Returns true if <#this/> I/O buffer is write-dirty.
             Otherwise, returns false.
     */
+    CMP_CONDITIONAL_INLINE
     bool
     is_write_dirty ()
     const noexcept;
@@ -139,6 +150,7 @@ public:
             new_write_dirty_flag:
                 The new write-dirty flag for <#this/> I/O buffer.
     */
+    CMP_CONDITIONAL_INLINE
     void
     set_write_dirty (
         bool new_write_dirty_flag
@@ -159,6 +171,7 @@ public:
             byte_count:
                 The number of bytes to read from <#this/> I/O buffer.
     */
+    CMP_CONDITIONAL_INLINE
     std::size_t
     read (
         std::byte* data,
@@ -177,6 +190,7 @@ public:
             byte_count:
                 The number of bytes to write to <#this/> I/O buffer.
     */
+    CMP_CONDITIONAL_INLINE
     std::size_t
     write (
         const std::byte* data,

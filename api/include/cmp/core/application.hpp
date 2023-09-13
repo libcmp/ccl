@@ -14,6 +14,7 @@ class CMP_LIBRARY_NAME application {
 public:
     // Constructors and Destructor --------------------------------------------
 
+    CMP_CONDITIONAL_INLINE
     application (
         int argc,
         char** argv
@@ -22,23 +23,28 @@ public:
 
     // Accessors --------------------------------------------------------------
 
+    CMP_CONDITIONAL_INLINE
     static
     application*
     get_instance_ptr ()
     noexcept;
 
+    CMP_CONDITIONAL_INLINE
     int
     get_argc ()
     const;
 
+    CMP_CONDITIONAL_INLINE
     char**
     get_argv ()
     const;
 
+    CMP_CONDITIONAL_INLINE
     std::u8string_view
     get_copyright_notice ()
     const;
 
+    CMP_CONDITIONAL_INLINE
     void
     set_copyright_notice (
         std::u8string_view new_copyright_notice
@@ -46,6 +52,7 @@ public:
 
     // Core -------------------------------------------------------------------
 
+    CMP_CONDITIONAL_INLINE
     virtual
     int
     run ();
@@ -53,6 +60,7 @@ public:
 protected:
     // Protected Functions ----------------------------------------------------
 
+    CMP_CONDITIONAL_INLINE
     static
     void
     set_instance_ptr (

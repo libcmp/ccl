@@ -46,6 +46,7 @@ public:
 private:
     // Private Functions ------------------------------------------------------
 
+    CMP_CONDITIONAL_INLINE
     static
     int
     digit_character_to_integer (
@@ -54,10 +55,12 @@ private:
     )
     noexcept;
 
+    CMP_CONDITIONAL_INLINE
     static
     void
     report_non_digit_character ();
 
+    CMP_CONDITIONAL_INLINE
     static
     int
     get_next_digit (
@@ -65,6 +68,7 @@ private:
         unsigned int radix
     );
 
+    CMP_CONDITIONAL_INLINE
     static
     bool
     is_sign_character (
@@ -72,6 +76,7 @@ private:
     )
     noexcept;
 
+    CMP_CONDITIONAL_INLINE
     static
     bool
     check_for_sign (
@@ -81,6 +86,7 @@ private:
         sign_status format_sign_status
     );
 
+    CMP_CONDITIONAL_INLINE
     static
     void
     check_for_thousands_separator (
@@ -152,12 +158,14 @@ public:
             t:
                 The type of failure that was encountered during parsing.
     */
+    CMP_CONDITIONAL_INLINE
     parse_failed (
         const char* message,
         type t
     )
     noexcept;
 
+    CMP_CONDITIONAL_INLINE
     ~parse_failed ()
     noexcept override = default;
 
@@ -167,6 +175,7 @@ public:
         Description:
             Returns the type associated with <#this/> exception.
     */
+    CMP_CONDITIONAL_INLINE
     type
     get_type ()
     const noexcept;

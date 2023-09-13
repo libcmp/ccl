@@ -28,6 +28,7 @@ public:
 
     // Constructors and Destructor --------------------------------------------
 
+    CMP_CONDITIONAL_INLINE
     explicit
     stdout_stream (
         wrapped_resource_type& resource,
@@ -35,6 +36,7 @@ public:
     )
     noexcept;
 
+    CMP_CONDITIONAL_INLINE
     virtual
     ~stdout_stream ()
     = default;

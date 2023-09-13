@@ -18,6 +18,7 @@ class CMP_LIBRARY_NAME stdout_resource
 public:
     // Constructors and Destructor --------------------------------------------
 
+    CMP_CONDITIONAL_INLINE
     explicit
     stdout_resource (
         DWORD handle_identifier,
@@ -25,17 +26,20 @@ public:
     )
     noexcept;
 
+    CMP_CONDITIONAL_INLINE
     ~stdout_resource ()
     noexcept = default;
 
     // Accessors --------------------------------------------------------------
 
+    CMP_CONDITIONAL_INLINE
     bool
     is_at_end ()
     const noexcept override;
 
     // Core -------------------------------------------------------------------
 
+    CMP_CONDITIONAL_INLINE
     std::size_t
     write_raw (
         const std::byte* data,

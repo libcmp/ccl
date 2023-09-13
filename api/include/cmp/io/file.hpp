@@ -35,6 +35,7 @@ public:
             Constructs a <#type>basic_file</#type>
             object not associated with any file.
     */
+    CMP_CONDITIONAL_INLINE
     basic_file ()
     noexcept;
 
@@ -54,6 +55,7 @@ public:
                 The capacity of the I/O buffer to associate
                 with this <#type>basic_file</#type> object.
     */
+    CMP_CONDITIONAL_INLINE
     basic_file (
         const std::filesystem::path& file_path,
         access_mode mode,
@@ -69,6 +71,7 @@ public:
             This functionality is platform-dependent and therefore this
             function must be overridden in a platform-specific subclass.
     */
+    CMP_CONDITIONAL_INLINE
     virtual
     bool
     is_open ()
@@ -78,6 +81,7 @@ public:
         Description:
             Returns the access mode associated with this basic file.
     */
+    CMP_CONDITIONAL_INLINE
     access_mode
     get_access_mode ()
     const noexcept;
@@ -87,6 +91,7 @@ public:
             Returns true if the file is at its EOF (end-of-file) position.
             Otherwise, returns false.
     */
+    CMP_CONDITIONAL_INLINE
     bool
     is_at_end ()
     const noexcept override;
@@ -120,6 +125,7 @@ public:
                 this function to simply return false without taking any
                 action.
     */
+    CMP_CONDITIONAL_INLINE
     virtual
     bool
     open (
@@ -136,6 +142,7 @@ public:
             This functionality is platform-dependent and therefore this
             function must be overridden in a platform-specific subclass.
     */
+    CMP_CONDITIONAL_INLINE
     virtual
     void
     close ()
@@ -153,6 +160,7 @@ public:
             byte_count:
                 The number of bytes to read from <#this/> file.
     */
+    CMP_CONDITIONAL_INLINE
     std::size_t
     read (
         std::byte* data,
@@ -172,6 +180,7 @@ public:
             byte_count:
                 The number of bytes to write to <#this/> file.
     */
+    CMP_CONDITIONAL_INLINE
     std::size_t
     write (
         const std::byte* data,

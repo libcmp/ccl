@@ -20,22 +20,26 @@ class CMP_LIBRARY_NAME stdin_resource
 public:
     // Constructors and Destructor --------------------------------------------
 
+    CMP_CONDITIONAL_INLINE
     stdin_resource (
         std::size_t buffer_capacity = io_buffer::default_buffer_capacity
     )
     noexcept;
 
+    CMP_CONDITIONAL_INLINE
     ~stdin_resource ()
     noexcept = default;
 
     // Accessors --------------------------------------------------------------
 
+    CMP_CONDITIONAL_INLINE
     bool
     is_at_end ()
     const noexcept override;
 
     // Core -------------------------------------------------------------------
 
+    CMP_CONDITIONAL_INLINE
     std::size_t
     read_raw (
         std::byte* data,
@@ -57,12 +61,14 @@ public:
 
     // Constructors and Destructor --------------------------------------------
 
+    CMP_CONDITIONAL_INLINE
     explicit
     stdin_stream (
         wrapped_resource_type& resource
     )
     noexcept;
 
+    CMP_CONDITIONAL_INLINE
     ~stdin_stream ()
     noexcept = default;
 }; // class -------------------------------------------------------------------

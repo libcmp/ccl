@@ -26,9 +26,11 @@ public:
         Description:
             Constructs an <#type>invalid_radix</#type>.
     */
+    CMP_CONDITIONAL_INLINE
     invalid_radix ()
     noexcept;
 
+    CMP_CONDITIONAL_INLINE
     ~invalid_radix ()
     noexcept = default;
 }; // class -------------------------------------------------------------------
@@ -64,6 +66,7 @@ public:
             Construct a default bool format, where the true
             string is u8"1" and the false string is u8"0".
     */
+    CMP_CONDITIONAL_INLINE
     bool_format ()
     noexcept;
 
@@ -78,11 +81,13 @@ public:
             initial_false_string:
                 The string to use when the bool value is false.
     */
+    CMP_CONDITIONAL_INLINE
     bool_format (
         const std::u8string& initial_true_string,
         const std::u8string& initial_false_string
     );
 
+    CMP_CONDITIONAL_INLINE
     ~bool_format ()
     noexcept = default;
 
@@ -97,6 +102,7 @@ public:
             other:
                 The <#type>bool_format</#type> to copy from.
     */
+    CMP_CONDITIONAL_INLINE
     bool_format (
         const bool_format& other
     )
@@ -110,6 +116,7 @@ public:
             other:
                 The <#type>bool_format</#type> to copy from.
     */
+    CMP_CONDITIONAL_INLINE
     bool_format&
     operator = (
         const bool_format& other
@@ -127,6 +134,7 @@ public:
             other:
                 The <#type>bool_format</#type> to move from.
     */
+    CMP_CONDITIONAL_INLINE
     bool_format (
         bool_format&& other
     )
@@ -140,6 +148,7 @@ public:
             other:
                 The <#type>bool_format</#type> to move from.
     */
+    CMP_CONDITIONAL_INLINE
     bool_format&
     operator = (
         bool_format&& other
@@ -152,6 +161,7 @@ public:
         Description:
             Returns the true string of <#this/> bool format.
     */
+    CMP_CONDITIONAL_INLINE
     std::u8string
     get_true_string ()
     const noexcept;
@@ -164,6 +174,7 @@ public:
             new_true_string:
                 The new true string of <#this/> bool format.
     */
+    CMP_CONDITIONAL_INLINE
     void
     set_true_string (
         const std::u8string& new_true_string
@@ -174,6 +185,7 @@ public:
         Description:
             Returns the false string of <#this/> bool format.
     */
+    CMP_CONDITIONAL_INLINE
     std::u8string
     get_false_string ()
     const noexcept;
@@ -186,6 +198,7 @@ public:
             new_false_string:
                 The new false string of <#this/> bool format.
     */
+    CMP_CONDITIONAL_INLINE
     void
     set_false_string (
         const std::u8string& new_false_string
@@ -211,6 +224,7 @@ public:
             and the thousands separator is
             <#enumerator>thousands_separator::none</#enumerator>.
     */
+    CMP_CONDITIONAL_INLINE
     integer_format ()
     noexcept;
 
@@ -227,12 +241,14 @@ public:
             initial_thousands_separator:
                 The thousands separator.
     */
+    CMP_CONDITIONAL_INLINE
     integer_format (
         unsigned int initial_radix,
         sign_status initial_sign_status,
         thousands_separator initial_thousands_separator
     );
 
+    CMP_CONDITIONAL_INLINE
     ~integer_format ()
     noexcept = default;
 
@@ -247,6 +263,7 @@ public:
             other:
                 The <#type>integer_format</#type> to copy from.
     */
+    CMP_CONDITIONAL_INLINE
     integer_format (
         const integer_format& other
     )
@@ -260,6 +277,7 @@ public:
             other:
                 The <#type>integer_format</#type> to copy from.
     */
+    CMP_CONDITIONAL_INLINE
     integer_format&
     operator = (
         const integer_format& other
@@ -277,6 +295,7 @@ public:
             other:
                 The <#type>integer_format</#type> to move from.
     */
+    CMP_CONDITIONAL_INLINE
     integer_format (
         integer_format&& other
     )
@@ -290,6 +309,7 @@ public:
             other:
                 The <#type>integer_format</#type> to move from.
     */
+    CMP_CONDITIONAL_INLINE
     integer_format&
     operator = (
         integer_format&& other
@@ -302,6 +322,7 @@ public:
         Description:
             Returns the radix of <#this/> integer format.
     */
+    CMP_CONDITIONAL_INLINE
     unsigned int
     get_radix ()
     const noexcept;
@@ -314,6 +335,7 @@ public:
             new_radix:
                 The new radix of <#this/> integer format.
     */
+    CMP_CONDITIONAL_INLINE
     void
     set_radix (
         unsigned int new_radix
@@ -324,6 +346,7 @@ public:
         Description:
             Returns the sign status of <#this/> integer format.
     */
+    CMP_CONDITIONAL_INLINE
     sign_status
     get_sign_status ()
     const noexcept;
@@ -336,6 +359,7 @@ public:
             new_sign_status:
                 The new sign status of <#this/> integer format.
     */
+    CMP_CONDITIONAL_INLINE
     void
     set_sign_status (
         sign_status new_sign_status
@@ -346,6 +370,7 @@ public:
         Description:
             Returns the thousands separator of <#this/> integer format.
     */
+    CMP_CONDITIONAL_INLINE
     thousands_separator
     get_thousands_separator ()
     const noexcept;
@@ -358,6 +383,7 @@ public:
             new_thousands_separator:
                 The new thousands separator of <#this/> integer format.
     */
+    CMP_CONDITIONAL_INLINE
     void
     set_thousands_separator (
         thousands_separator new_thousands_separator
@@ -388,6 +414,7 @@ public:
             <#enumerator>radix_place_limit::none</#enumerator> and the radix
             place count is 0.
     */
+    CMP_CONDITIONAL_INLINE
     floating_point_format ()
     noexcept;
 
@@ -411,6 +438,7 @@ public:
             initial_radix_place_count:
                 The radix place count.
     */
+    CMP_CONDITIONAL_INLINE
     floating_point_format (
         unsigned int initial_radix,
         sign_status initial_sign_status,
@@ -420,6 +448,7 @@ public:
         unsigned int initial_radix_place_count
     );
 
+    CMP_CONDITIONAL_INLINE
     ~floating_point_format ()
     noexcept = default;
 
@@ -434,6 +463,7 @@ public:
             other:
                 The <#type>floating_point_format</#type> to copy from.
     */
+    CMP_CONDITIONAL_INLINE
     floating_point_format (
         const floating_point_format& other
     )
@@ -448,6 +478,7 @@ public:
             other:
                 The <#type>floating_point_format</#type> to copy from.
     */
+    CMP_CONDITIONAL_INLINE
     floating_point_format&
     operator = (
         const floating_point_format& other
@@ -465,6 +496,7 @@ public:
             other:
                 The <#type>floating_point_format</#type> to move from.
     */
+    CMP_CONDITIONAL_INLINE
     floating_point_format (
         floating_point_format&& other
     )
@@ -479,6 +511,7 @@ public:
             other:
                 The <#type>floating_point_format</#type> to move from.
     */
+    CMP_CONDITIONAL_INLINE
     floating_point_format&
     operator = (
         floating_point_format&& other
@@ -491,6 +524,7 @@ public:
         Description:
             Returns the radix of <#this/> floating point format.
     */
+    CMP_CONDITIONAL_INLINE
     unsigned int
     get_radix ()
     const noexcept;
@@ -503,6 +537,7 @@ public:
             new_radix:
                 The new radix of <#this/> floating point format.
     */
+    CMP_CONDITIONAL_INLINE
     void
     set_radix (
         unsigned int new_radix
@@ -513,6 +548,7 @@ public:
         Description:
             Returns the sign status of <#this/> floating point format.
     */
+    CMP_CONDITIONAL_INLINE
     sign_status
     get_sign_status ()
     const noexcept;
@@ -525,6 +561,7 @@ public:
             new_sign_status:
                 The new sign status of <#this/> floating point format.
     */
+    CMP_CONDITIONAL_INLINE
     void
     set_sign_status (
         sign_status new_sign_status
@@ -535,6 +572,7 @@ public:
         Description:
             Returns the thousands separator of <#this/> floating point format.
     */
+    CMP_CONDITIONAL_INLINE
     thousands_separator
     get_thousands_separator ()
     const noexcept;
@@ -547,6 +585,7 @@ public:
             new_thousands_separator:
                 The new thousands separator of <#this/> floating point format.
     */
+    CMP_CONDITIONAL_INLINE
     void
     set_thousands_separator (
         thousands_separator new_thousands_separator
@@ -557,6 +596,7 @@ public:
         Description:
             Returns the radix character of <#this/> floating point format.
     */
+    CMP_CONDITIONAL_INLINE
     radix_character
     get_radix_character ()
     const noexcept;
@@ -569,6 +609,7 @@ public:
             new_radix_character:
                 The new radix character of <#this/> floating point format.
     */
+    CMP_CONDITIONAL_INLINE
     void
     set_radix_character (
         radix_character new_radix_character
@@ -579,6 +620,7 @@ public:
         Description:
             Returns the radix place limit of <#this/> floating point format.
     */
+    CMP_CONDITIONAL_INLINE
     radix_place_limit
     get_radix_place_limit ()
     const noexcept;
@@ -591,6 +633,7 @@ public:
             new_radix_place_limit:
                 The new radix place limit of <#this/> floating point format.
     */
+    CMP_CONDITIONAL_INLINE
     void
     set_radix_place_limit (
         radix_place_limit new_radix_place_limit
@@ -601,6 +644,7 @@ public:
         Description:
             Returns the radix place count of <#this/> floating point format.
     */
+    CMP_CONDITIONAL_INLINE
     unsigned int
     get_radix_place_count ()
     const noexcept;
@@ -613,6 +657,7 @@ public:
             new_radix_place_count:
                 The new radix place count of <#this/> floating point format.
     */
+    CMP_CONDITIONAL_INLINE
     void
     set_radix_place_count (
         unsigned int new_radix_place_count

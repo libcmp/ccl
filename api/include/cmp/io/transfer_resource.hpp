@@ -22,11 +22,13 @@ public:
                 The capacity of the I/O buffer. If this is zero,
                 the transfer resource is completely unbuffered.
     */
+    CMP_CONDITIONAL_INLINE
     explicit
     transfer_resource (
         std::size_t buffer_capacity = io_buffer::default_buffer_capacity
     );
 
+    CMP_CONDITIONAL_INLINE
     virtual
     ~transfer_resource ()
     noexcept = default;
@@ -37,6 +39,7 @@ public:
         Description:
             Tells whether this transfer resource is at its end.
     */
+    CMP_CONDITIONAL_INLINE
     virtual
     bool
     is_at_end ()

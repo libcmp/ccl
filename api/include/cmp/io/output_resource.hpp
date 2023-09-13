@@ -26,11 +26,13 @@ public:
                 The capacity of the I/O buffer. If this is zero,
                 the output resource is completely unbuffered.
     */
+    CMP_CONDITIONAL_INLINE
     explicit
     output_resource (
         std::size_t buffer_capacity = io_buffer::default_buffer_capacity
     );
 
+    CMP_CONDITIONAL_INLINE
     virtual
     ~output_resource ()
     noexcept = default;
@@ -50,6 +52,7 @@ public:
             byte_count:
                 The number of bytes to write to <#this/> output resource.
     */
+    CMP_CONDITIONAL_INLINE
     virtual
     std::size_t
     write (
@@ -63,6 +66,7 @@ public:
             has previously been requested to be written out actually
             gets written out.
     */
+    CMP_CONDITIONAL_INLINE
     void
     flush ();
 
@@ -82,6 +86,7 @@ protected:
             byte_count:
                 The number of bytes to write to <#this/> output resource.
     */
+    CMP_CONDITIONAL_INLINE
     virtual
     std::size_t
     write_raw (
@@ -93,6 +98,7 @@ protected:
 private:
     // Private Functions ------------------------------------------------------
 
+    CMP_CONDITIONAL_INLINE
     std::size_t
     write_buffered (
         const std::byte* data,

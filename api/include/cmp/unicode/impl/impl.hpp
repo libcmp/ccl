@@ -12,6 +12,7 @@ namespace cmp {
 
 namespace impl {
 
+CMP_CONDITIONAL_INLINE
 CMP_LIBRARY_NAME
 int
 initialize_utf8_sequence (
@@ -19,6 +20,7 @@ initialize_utf8_sequence (
     char32_t& initial_code_point_value
 );
 
+CMP_CONDITIONAL_INLINE
 CMP_LIBRARY_NAME
 int
 initialize_utf16_sequence (

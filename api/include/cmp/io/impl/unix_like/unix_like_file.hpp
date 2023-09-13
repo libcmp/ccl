@@ -18,9 +18,11 @@ class CMP_LIBRARY_NAME file final
 public:
     // Constructors and Destructor --------------------------------------------
 
+    CMP_CONDITIONAL_INLINE
     file ()
     noexcept;
 
+    CMP_CONDITIONAL_INLINE
     file (
         const std::filesystem::path& file_path,
         access_mode mode,
@@ -28,21 +30,25 @@ public:
         std::size_t buffer_capacity = io_buffer::default_buffer_capacity
     );
 
+    CMP_CONDITIONAL_INLINE
     ~file ()
     noexcept;
 
     // Accessors --------------------------------------------------------------
 
+    CMP_CONDITIONAL_INLINE
     bool
     is_open ()
     const noexcept override;
 
+    CMP_CONDITIONAL_INLINE
     std::int64_t
     get_position ()
     const noexcept override;
 
     // Core -------------------------------------------------------------------
 
+    CMP_CONDITIONAL_INLINE
     bool
     open (
         const std::filesystem::path& file_path,
@@ -51,6 +57,7 @@ public:
     )
     noexcept override;
 
+    CMP_CONDITIONAL_INLINE
     void
     close ()
     noexcept override;
@@ -58,6 +65,7 @@ public:
 protected:
     // Protected Functions ----------------------------------------------------
 
+    CMP_CONDITIONAL_INLINE
     void
     set_position_raw (
         std::int64_t new_position,
@@ -65,6 +73,7 @@ protected:
     )
     noexcept override;
 
+    CMP_CONDITIONAL_INLINE
     std::size_t
     read_raw (
         std::byte* data,
@@ -73,6 +82,7 @@ protected:
     )
     noexcept override;
 
+    CMP_CONDITIONAL_INLINE
     std::size_t
     write_raw (
         const std::byte* data,
@@ -87,6 +97,7 @@ private:
 
     // Private Functions ------------------------------------------------------
 
+    CMP_CONDITIONAL_INLINE
     ssize_t
     read_block (
         std::byte* data,
@@ -94,6 +105,7 @@ private:
     )
     noexcept;
 
+    CMP_CONDITIONAL_INLINE
     ssize_t
     write_block (
         const std::byte* data,

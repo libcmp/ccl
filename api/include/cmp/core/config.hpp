@@ -58,4 +58,10 @@
 #   endif
 #endif
 
+#if CMP_CONFIG_HEADER_ONLY == true
+#   define CMP_CONDITIONAL_INLINE inline
+#else
+#   define CMP_CONDITIONAL_INLINE
+#endif
+
 #endif // CMP_CORE_CONFIG_HPP_INCLUDED

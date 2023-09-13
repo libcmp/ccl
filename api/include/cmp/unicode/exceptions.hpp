@@ -27,6 +27,7 @@ public:
         Description:
             Returns the explanatory string.
     */
+    CMP_CONDITIONAL_INLINE
     const char*
     what ()
     const noexcept override;
@@ -48,6 +49,7 @@ public:
         Description:
             Returns the explanatory string.
     */
+    CMP_CONDITIONAL_INLINE
     const char*
     what ()
     const noexcept override;
@@ -63,6 +65,7 @@ public:
         Description:
             Returns the explanatory string.
     */
+    CMP_CONDITIONAL_INLINE
     const char*
     what ()
     const noexcept override;

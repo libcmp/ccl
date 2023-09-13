@@ -31,11 +31,13 @@ public:
                 The capacity of the I/O buffer. If this is zero,
                 the input resource is completely unbuffered.
     */
+    CMP_CONDITIONAL_INLINE
     explicit
     input_resource (
         std::size_t buffer_capacity = io_buffer::default_buffer_capacity
     );
 
+    CMP_CONDITIONAL_INLINE
     virtual
     ~input_resource ()
     noexcept = default;
@@ -54,6 +56,7 @@ public:
             byte_count:
                 The number of bytes to read from <#this/> input resource.
     */
+    CMP_CONDITIONAL_INLINE
     virtual
     std::size_t
     read (
@@ -67,6 +70,7 @@ public:
             The tied output resource is flushed when <#this/> input
             resource is read from.
     */
+    CMP_CONDITIONAL_INLINE
     void
     tie (
         output_resource& resource
@@ -91,6 +95,7 @@ protected:
                 The kind of read request that is
                 being issued to <#this/> input resource.
     */
+    CMP_CONDITIONAL_INLINE
     virtual
     std::size_t
     read_raw (
@@ -104,6 +109,7 @@ protected:
         Description:
             Fills the buffer and returns the number of bytes read.
     */
+    CMP_CONDITIONAL_INLINE
     std::size_t
     fill ();
 
@@ -114,6 +120,7 @@ private:
 
     // Private Functions ------------------------------------------------------
 
+    CMP_CONDITIONAL_INLINE
     std::size_t
     read_buffered (
         std::byte* data,

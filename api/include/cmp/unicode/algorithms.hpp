@@ -66,6 +66,7 @@ noexcept;
         s:
             The string to get the size of.
 */
+CMP_CONDITIONAL_INLINE
 CMP_LIBRARY_NAME
 std::size_t
 string_size (
@@ -81,6 +82,7 @@ noexcept;
         s:
             The string to get the size of.
 */
+CMP_CONDITIONAL_INLINE
 CMP_LIBRARY_NAME
 std::size_t
 string_size (
@@ -96,6 +98,7 @@ noexcept;
         s:
             The string to get the size of.
 */
+CMP_CONDITIONAL_INLINE
 CMP_LIBRARY_NAME
 std::size_t
 string_size (
@@ -111,6 +114,7 @@ noexcept;
         s:
             The string to get the size of.
 */
+CMP_CONDITIONAL_INLINE
 CMP_LIBRARY_NAME
 std::size_t
 string_size (
@@ -126,6 +130,7 @@ noexcept;
         s:
             The string to get the size of.
 */
+CMP_CONDITIONAL_INLINE
 CMP_LIBRARY_NAME
 std::size_t
 string_size (
@@ -141,6 +146,7 @@ noexcept;
         s:
             The string to get the size of.
 */
+CMP_CONDITIONAL_INLINE
 CMP_LIBRARY_NAME
 std::size_t
 string_size (
@@ -156,6 +162,7 @@ noexcept;
         s:
             The string to get the size of.
 */
+CMP_CONDITIONAL_INLINE
 CMP_LIBRARY_NAME
 std::size_t
 string_size (
@@ -171,6 +178,7 @@ noexcept;
         s:
             The string to get the size of.
 */
+CMP_CONDITIONAL_INLINE
 CMP_LIBRARY_NAME
 std::size_t
 string_size (
@@ -186,6 +194,7 @@ noexcept;
         s:
             The string to get the size of.
 */
+CMP_CONDITIONAL_INLINE
 CMP_LIBRARY_NAME
 std::size_t
 string_size (
@@ -201,6 +210,7 @@ noexcept;
         s:
             The string to get the size of.
 */
+CMP_CONDITIONAL_INLINE
 CMP_LIBRARY_NAME
 std::size_t
 string_size (
@@ -216,6 +226,7 @@ noexcept;
         s:
             The string to get the size of.
 */
+CMP_CONDITIONAL_INLINE
 CMP_LIBRARY_NAME
 std::size_t
 string_size (
@@ -231,6 +242,7 @@ noexcept;
         s:
             The string to get the size of.
 */
+CMP_CONDITIONAL_INLINE
 CMP_LIBRARY_NAME
 std::size_t
 string_size (
@@ -246,6 +258,7 @@ noexcept;
         s:
             The string to get the size of.
 */
+CMP_CONDITIONAL_INLINE
 CMP_LIBRARY_NAME
 std::size_t
 string_size (
@@ -261,6 +274,7 @@ noexcept;
         s:
             The string to get the size of.
 */
+CMP_CONDITIONAL_INLINE
 CMP_LIBRARY_NAME
 std::size_t
 string_size (
@@ -276,6 +290,7 @@ noexcept;
         s:
             The string to get the size of.
 */
+CMP_CONDITIONAL_INLINE
 CMP_LIBRARY_NAME
 std::size_t
 string_size (
@@ -295,6 +310,7 @@ noexcept;
         index:
             The index of the string at which to insert the code point.
 */
+CMP_CONDITIONAL_INLINE
 CMP_LIBRARY_NAME
 void
 insert_code_point (
@@ -315,6 +331,7 @@ insert_code_point (
         index:
             The index of the string at which to insert the code point.
 */
+CMP_CONDITIONAL_INLINE
 CMP_LIBRARY_NAME
 void
 insert_code_point (
@@ -335,6 +352,7 @@ insert_code_point (
         index:
             The index of the string at which to insert the code point.
 */
+CMP_CONDITIONAL_INLINE
 CMP_LIBRARY_NAME
 void
 insert_code_point (
@@ -355,6 +373,7 @@ insert_code_point (
         index:
             The index of the string at which to insert the code point.
 */
+CMP_CONDITIONAL_INLINE
 CMP_LIBRARY_NAME
 void
 insert_code_point (
@@ -425,6 +444,7 @@ to_string (
         s:
             The string to convert to <#type>std::u8string</#type>.
 */
+CMP_CONDITIONAL_INLINE
 CMP_LIBRARY_NAME
 std::u8string
 to_u8string (
@@ -455,6 +475,7 @@ to_u8string (
         s:
             The string to convert to <#type>std::u16string</#type>.
 */
+CMP_CONDITIONAL_INLINE
 CMP_LIBRARY_NAME
 std::u16string
 to_u16string (
@@ -485,6 +506,7 @@ to_u16string (
         s:
             The string to convert to <#type>std::u32string</#type>.
 */
+CMP_CONDITIONAL_INLINE
 CMP_LIBRARY_NAME
 std::u32string
 to_u32string (
@@ -515,6 +537,7 @@ to_u32string (
         s:
             The string to convert to <#type>std::wstring</#type>.
 */
+CMP_CONDITIONAL_INLINE
 CMP_LIBRARY_NAME
 std::wstring
 to_wstring (

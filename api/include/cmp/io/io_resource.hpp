@@ -26,11 +26,13 @@ public:
                 The capacity of the I/O buffer. If this is zero,
                 the I/O resource is completely unbuffered.
     */
+    CMP_CONDITIONAL_INLINE
     explicit
     io_resource (
         std::size_t buffer_capacity
     );
 
+    CMP_CONDITIONAL_INLINE
     virtual
     ~io_resource ()
     noexcept = default;

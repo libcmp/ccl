@@ -55,6 +55,7 @@ enum class if_not_there {
         endianness:
             The endianness to get the opposite of.
 */
+CMP_CONDITIONAL_INLINE
 CMP_LIBRARY_NAME
 constexpr
 std::endian
@@ -74,6 +75,7 @@ noexcept;
         byte_count:
             The number of bytes in the array.
 */
+CMP_CONDITIONAL_INLINE
 CMP_LIBRARY_NAME
 void
 invert_endianness (
@@ -98,6 +100,7 @@ public:
         Description:
             Returns the explanatory string.
     */
+    CMP_CONDITIONAL_INLINE
     const char*
     what ()
     const noexcept override;
