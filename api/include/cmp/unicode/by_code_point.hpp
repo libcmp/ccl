@@ -129,6 +129,8 @@ public:
         )
         noexcept;
 
+        // Friends ------------------------------------------------------------
+
         CMP_CONDITIONAL_INLINE
         CMP_LIBRARY_NAME
         friend
@@ -498,6 +500,8 @@ public:
             difference_type offset
         )
         noexcept;
+
+        // Friends ------------------------------------------------------------
 
         CMP_CONDITIONAL_INLINE
         CMP_LIBRARY_NAME
@@ -909,6 +913,8 @@ public:
         )
         noexcept;
 
+        // Friends ------------------------------------------------------------
+
         CMP_CONDITIONAL_INLINE
         CMP_LIBRARY_NAME
         friend
@@ -1283,6 +1289,8 @@ public:
         )
         noexcept;
 
+        // Friends ------------------------------------------------------------
+
         CMP_CONDITIONAL_INLINE
         CMP_LIBRARY_NAME
         friend
@@ -1653,6 +1661,8 @@ public:
             difference_type offset
         )
         noexcept;
+
+        // Friends ------------------------------------------------------------
 
         CMP_CONDITIONAL_INLINE
         CMP_LIBRARY_NAME
