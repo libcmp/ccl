@@ -207,7 +207,10 @@ if (DEFINED CMP_DEV)
 endif ()
 
 include(GenerateExportHeader)
-generate_export_header(cmp EXPORT_FILE_NAME exports/cmp_export.hpp)
+generate_export_header(
+    cmp
+        EXPORT_FILE_NAME exports/cmp_export.hpp
+)
 
 # CONSTANTS
 
