@@ -272,7 +272,7 @@ target_compile_definitions(
 
 # DEPENDENCIES
 
-if (${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
+if (${CMAKE_SYSTEM_NAME} MATCHES "Darwin" AND CMP_CONFIG_DESKTOP_GUI_PACKAGE_EXCLUDED MATCHES false)
     # AppKit is always available on macOS, but we need to link to it.
     target_link_libraries(
         cmp
