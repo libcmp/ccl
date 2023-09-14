@@ -70,8 +70,6 @@ desktop_gui_application::desktop_gui_application (
     : application{argc, argv}
     , m_shared_application{[NSApplication sharedApplication]}
 {
-    set_instance_ptr(this);
-
     [impl::as_nsapplication(m_shared_application) setDelegate:
         [[cmp_application_delegate alloc] init]
     ];

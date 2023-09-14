@@ -17,7 +17,7 @@ noexcept
     : m_argc{argc}
     , m_argv{argv}
 {
-    set_instance_ptr(this);
+    g_instance_ptr = this;
 } // function -----------------------------------------------------------------
 
 // Accessors ------------------------------------------------------------------
@@ -63,17 +63,6 @@ int
 application::run ()
 {
     return 0;
-} // function -----------------------------------------------------------------
-
-// Protected Functions --------------------------------------------------------
-
-void
-application::set_instance_ptr (
-    application* instance_ptr
-)
-noexcept
-{
-    g_instance_ptr = instance_ptr;
 } // function -----------------------------------------------------------------
 
 // Private Data ---------------------------------------------------------------

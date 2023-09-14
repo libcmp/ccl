@@ -57,17 +57,6 @@ public:
     int
     run ();
 
-protected:
-    // Protected Functions ----------------------------------------------------
-
-    CMP_CONDITIONAL_INLINE
-    static
-    void
-    set_instance_ptr (
-        application* instance_ptr
-    )
-    noexcept;
-
 private:
     // Private Data -----------------------------------------------------------
 
