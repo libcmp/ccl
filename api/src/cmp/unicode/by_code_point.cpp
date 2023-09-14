@@ -1246,7 +1246,7 @@ const
         if (i + 1 == m_end_iterator) {
             throw iterated_past_end{};
         }
-        char16_t code_unit{*(i + 1)};
+        char16_t code_unit{static_cast<char16_t>(*(i + 1))};
         if (!is_trailing_surrogate(code_unit)) {
             throw invalid_unicode_encoding{};
         }
@@ -1434,7 +1434,7 @@ const
         if (i == m_end_iterator) {
             throw iterated_past_end{};
         }
-        char16_t code_unit{*(i + 1)};
+        char16_t code_unit{static_cast<char16_t>(*(i + 1))};
         if (!is_trailing_surrogate(code_unit)) {
             throw invalid_unicode_encoding{};
         }
@@ -1455,7 +1455,7 @@ by_code_point<wchar_t>::const_iterator::finish_sequence (
         if (i == m_end_iterator) {
             throw iterated_past_end{};
         }
-        char16_t code_unit{*(i + 1)};
+        char16_t code_unit{static_cast<char16_t>(*(i + 1))};
         if (!is_trailing_surrogate(code_unit)) {
             throw invalid_unicode_encoding{};
         }
@@ -1471,7 +1471,7 @@ void
 by_code_point<wchar_t>::const_iterator::advance ()
 {
     if constexpr (sizeof (wchar_t) == 2) {
-        char16_t code_unit{*m_current_iterator};
+        char16_t code_unit{static_cast<char16_t>(*m_current_iterator)};
         char32_t code_point;
         auto sequence_length{
             impl::initialize_utf16_sequence(code_unit, code_point)
@@ -1503,7 +1503,7 @@ void
 by_code_point<wchar_t>::const_iterator::retreat ()
 {
     if constexpr (sizeof (wchar_t) == 2) {
-        char16_t code_unit{*(--m_current_iterator)};
+        char16_t code_unit{static_cast<char16_t>(*(--m_current_iterator))};
         if (is_trailing_surrogate(code_unit)) {
             --m_current_iterator;
         }
