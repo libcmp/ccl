@@ -252,21 +252,17 @@ forward_close_event_to_window (
     auto& window_associations{
         grab_application_native_handle().window_associations
     };
-    for (const auto& current_association : window_associations) {
-        if (current_association.first == cmp_window_ptr) {
+    for (
+        auto current_association{std::begin(window_associations)};
+        current_association != std::end(window_associations);
+        ++current_association
+    ) {
+        if (current_association->first == cmp_window_ptr) {
             if (
-                current_association.second->handle_close_event()
+                current_association->second->handle_close_event()
                     == close_window::yes
             ) {
-                window_associations.erase(
-                    std::find_if(
-                        std::begin(window_associations),
-                        std::end(window_associations),
-                        [cmp_window_ptr] (const auto& element) {
-                            return element.first == cmp_window_ptr;
-                        }
-                    )
-                );
+                window_associations.erase(current_association);
                 return YES;
             } else {
                 return NO;
