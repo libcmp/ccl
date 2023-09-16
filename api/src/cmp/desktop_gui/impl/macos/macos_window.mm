@@ -369,21 +369,20 @@ window::open (
             defer: NO
     ];
 
-    [impl::as_cmp_window(m_native_handle.cmp_window_handle) setDelegate:
-        [[cmp_window_delegate alloc] init]
-    ];
+    cmp_window* w{impl::as_cmp_window(m_native_handle.cmp_window_handle)};
 
-    [impl::as_cmp_window(m_native_handle.cmp_window_handle) setTitle:
+    [w setDelegate: [[cmp_window_delegate alloc] init]];
+    [w setTitle:
         [NSString stringWithUTF8String:
             reinterpret_cast<const char*>(title.data())
         ]
     ];
-    [impl::as_cmp_window(m_native_handle.cmp_window_handle) center];
+    [w center];
     if (mode == window_mode::maximized) {
-        [impl::as_cmp_window(m_native_handle.cmp_window_handle) zoom];
+        [w zoom: w];
     }
     else if (mode == window_mode::minimized) {
-        [impl::as_cmp_window(m_native_handle.cmp_window_handle) miniaturize];
+        [w miniaturize: w];
     }
 
     m_start_time = std::chrono::steady_clock::now();
