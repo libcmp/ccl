@@ -79,10 +79,10 @@ public:
 
     bool
     open (
-        int initial_width,
-        int initial_height,
-        const std::u8string& initial_title,
-        window_mode initial_mode
+        int width,
+        int height,
+        const std::u8string& title,
+        window_mode mode
     );
 
     void

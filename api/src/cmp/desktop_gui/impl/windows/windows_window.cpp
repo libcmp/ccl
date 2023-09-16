@@ -401,15 +401,13 @@ window::open (
     int width,
     int height,
     const std::u8string& title,
-    cmp::window_mode mode
+    window_mode mode
 ) {
     if (m_native_handle.window_handle != NULL) {
         return false;
     }
 
-    auto& application_native_handle{
-        impl::grab_application_native_handle()
-    };
+    auto& application_native_handle{impl::grab_application_native_handle()};
 
     std::wstring title_wstring{to_wstring(title)};
 
