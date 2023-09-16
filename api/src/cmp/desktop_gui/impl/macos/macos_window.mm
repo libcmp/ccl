@@ -282,49 +282,9 @@ window::window (
     int initial_height,
     const std::u8string& initial_title,
     window_mode initial_mode
-)
-    : m_start_time{std::chrono::steady_clock::now()}
-    , m_last_time{m_start_time}
-{
-    auto& application_native_handle{impl::grab_application_native_handle()};
-
-    m_native_handle.cmp_window_handle = [[cmp_window alloc]
-        initWithContentRect:
-            NSRect{
-                {
-                    0.0,
-                    0.0
-                },
-                {
-                    static_cast<CGFloat>(initial_width),
-                    static_cast<CGFloat>(initial_height)
-                }
-            }
-            styleMask:
-                NSWindowStyleMaskTitled
-                    | NSWindowStyleMaskClosable
-                    | NSWindowStyleMaskMiniaturizable
-                    | NSWindowStyleMaskResizable
-            backing: NSBackingStoreBuffered
-            defer: NO
-    ];
-
-    [impl::as_cmp_window(m_native_handle.cmp_window_handle) setDelegate:
-        [[cmp_window_delegate alloc] init]
-    ];
-
-    [impl::as_cmp_window(m_native_handle.cmp_window_handle) setTitle:
-        [NSString stringWithUTF8String:
-            reinterpret_cast<const char*>(initial_title.data())
-        ]
-    ];
-    [impl::as_cmp_window(m_native_handle.cmp_window_handle) center];
-    if (initial_mode == window_mode::maximized) {
-        [impl::as_cmp_window(m_native_handle.cmp_window_handle) zoom];
-    }
-    else if (initial_mode == window_mode::minimized) {
-        [impl::as_cmp_window(m_native_handle.cmp_window_handle) miniaturize];
-    }
+) {
+    m_native_handle.cmp_window_handle = nullptr;
+    open(initial_width, initial_height, initial_title, initial_mode);
 } // function -----------------------------------------------------------------
 
 // Accessors ------------------------------------------------------------------
@@ -375,16 +335,75 @@ window::set_title (
 
 // Core -----------------------------------------------------------------------
 
+bool
+window::open (
+    int width,
+    int height,
+    const std::u8string& title,
+    window_mode mode
+) {
+    if (m_native_handle.cmp_window_handle != nullptr) {
+        return false;
+    }
+
+    auto& application_native_handle{impl::grab_application_native_handle()};
+
+    m_native_handle.cmp_window_handle = [[cmp_window alloc]
+        initWithContentRect:
+            NSRect{
+                {
+                    0.0,
+                    0.0
+                },
+                {
+                    static_cast<CGFloat>(width),
+                    static_cast<CGFloat>(height)
+                }
+            }
+            styleMask:
+                NSWindowStyleMaskTitled
+                    | NSWindowStyleMaskClosable
+                    | NSWindowStyleMaskMiniaturizable
+                    | NSWindowStyleMaskResizable
+            backing: NSBackingStoreBuffered
+            defer: NO
+    ];
+
+    [impl::as_cmp_window(m_native_handle.cmp_window_handle) setDelegate:
+        [[cmp_window_delegate alloc] init]
+    ];
+
+    [impl::as_cmp_window(m_native_handle.cmp_window_handle) setTitle:
+        [NSString stringWithUTF8String:
+            reinterpret_cast<const char*>(title.data())
+        ]
+    ];
+    [impl::as_cmp_window(m_native_handle.cmp_window_handle) center];
+    if (mode == window_mode::maximized) {
+        [impl::as_cmp_window(m_native_handle.cmp_window_handle) zoom];
+    }
+    else if (mode == window_mode::minimized) {
+        [impl::as_cmp_window(m_native_handle.cmp_window_handle) miniaturize];
+    }
+
+    m_start_time = std::chrono::steady_clock::now();
+    m_last_time = m_start_time;
+
+    application_native_handle.window_associations.emplace_back(
+        m_native_handle.cmp_window_handle,
+        this
+    );
+
+    return true;
+} // function -----------------------------------------------------------------
+
 void
 window::show ()
 {
     if ([impl::as_cmp_window(m_native_handle.cmp_window_handle) isVisible]) {
         return;
     }
-    impl::grab_application_native_handle().window_associations.emplace_back(
-        m_native_handle.cmp_window_handle,
-        this
-    );
+
     [impl::as_cmp_window(m_native_handle.cmp_window_handle)
         makeKeyAndOrderFront:
             nil

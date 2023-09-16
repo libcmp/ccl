@@ -50,6 +50,14 @@ public:
 
     // Core -------------------------------------------------------------------
 
+    bool
+    open (
+        int width,
+        int height,
+        const std::u8string& title,
+        window_mode mode
+    );
+
     void
     show ();
 
