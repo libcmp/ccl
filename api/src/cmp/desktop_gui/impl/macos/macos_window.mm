@@ -287,6 +287,44 @@ window::window (
     open(initial_width, initial_height, initial_title, initial_mode);
 } // function -----------------------------------------------------------------
 
+// Move Operations ------------------------------------------------------------
+
+window::window (
+    window&& other
+)
+noexcept
+    : m_native_handle{other.m_native_handle}
+    , m_start_time{other.m_start_time}
+    , m_last_time{other.m_last_time}
+{
+    if (m_native_handle.cmp_window_handle != nullptr) {
+        fix_association();
+    }
+
+    other.m_native_handle.cmp_window_handle = nullptr;
+} // function -----------------------------------------------------------------
+
+window&
+window::operator = (
+    window&& other
+)
+noexcept
+{
+    close();
+
+    m_native_handle = other.m_native_handle;
+    m_start_time = other.m_start_time;
+    m_last_time = other.m_last_time;
+
+    if (m_native_handle.cmp_window_handle != nullptr) {
+        fix_association();
+    }
+
+    other.m_native_handle.cmp_window_handle = nullptr;
+
+    return *this;
+} // function -----------------------------------------------------------------
+
 // Accessors ------------------------------------------------------------------
 
 window_native_handle&
@@ -476,6 +514,25 @@ window::update () {
     double total_seconds{difference.count()};
 
     update(delta_seconds, total_seconds);
+} // function -----------------------------------------------------------------
+
+void
+window::fix_association ()
+noexcept
+{
+    auto& window_associations{
+        impl::grab_application_native_handle().window_associations
+    };
+    auto association_iterator{
+        std::find_if(
+            std::begin(window_associations),
+            std::end(window_associations),
+            [this] (const auto& element) {
+                return element.first == m_native_handle.cmp_window_handle;
+            }
+        )
+    };
+    association_iterator->second = this;
 } // function -----------------------------------------------------------------
 
 } // namespace ----------------------------------------------------------------

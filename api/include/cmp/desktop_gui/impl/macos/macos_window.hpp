@@ -29,6 +29,32 @@ public:
     ~window ()
     noexcept = default;
 
+    // Copy Operations --------------------------------------------------------
+
+    window (
+        const window& other
+    )
+    = delete;
+
+    window&
+    operator = (
+        const window& other
+    )
+    = delete;
+
+    // Move Operations --------------------------------------------------------
+
+    window (
+        window&& other
+    )
+    noexcept;
+
+    window&
+    operator = (
+        window&& other
+    )
+    noexcept;
+
     // Accessors --------------------------------------------------------------
 
     window_native_handle&
@@ -113,6 +139,10 @@ private:
 
     void
     update ();
+
+    void
+    fix_association ()
+    noexcept;
 }; // class -------------------------------------------------------------------
 
 } // namespace ----------------------------------------------------------------
