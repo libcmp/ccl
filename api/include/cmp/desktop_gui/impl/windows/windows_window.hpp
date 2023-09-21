@@ -9,7 +9,7 @@
 
 #include <cmp/desktop_gui/inclusion_assert.hpp>
 #include <cmp/desktop_gui/impl/windows/windows_window_native_handle.hpp>
-#include <cmp/desktop_gui/impl/windows/windows_desktop_gui_application.hpp>
+#include <cmp/desktop_gui/impl/common/common_desktop_gui_application.hpp>
 #include <cmp/unicode/algorithms.hpp>
 
 namespace cmp {

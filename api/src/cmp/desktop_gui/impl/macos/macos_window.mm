@@ -29,13 +29,6 @@ namespace cmp {
 
 namespace impl {
 
-desktop_gui_application::native_handle&
-grab_application_native_handle ()
-noexcept
-{
-    return desktop_gui_application::get_instance_ptr()->grab_native_handle();
-} // function -----------------------------------------------------------------
-
 void
 update_window (
     window* w
@@ -200,7 +193,7 @@ forward_key_down_event_to_window (
     NSEvent* event
 ) {
     auto& window_associations{
-        grab_application_native_handle().window_associations
+        dgui_app()->grab_native_handle().window_associations
     };
     for (const auto& current_association : window_associations) {
         if (current_association.first == cmp_window_ptr) {
@@ -218,7 +211,7 @@ forward_key_up_event_to_window (
     NSEvent* event
 ) {
     auto& window_associations{
-        grab_application_native_handle().window_associations
+        dgui_app()->grab_native_handle().window_associations
     };
     for (const auto& current_association : window_associations) {
         if (current_association.first == cmp_window_ptr) {
@@ -235,7 +228,7 @@ forward_resize_event_to_window (
     cmp_window* cmp_window_ptr
 ) {
     auto& window_associations{
-        grab_application_native_handle().window_associations
+        dgui_app()->grab_native_handle().window_associations
     };
     for (const auto& current_association : window_associations) {
         if (current_association.first == cmp_window_ptr) {
@@ -250,7 +243,7 @@ forward_close_event_to_window (
     cmp_window* cmp_window_ptr
 ) {
     auto& window_associations{
-        grab_application_native_handle().window_associations
+        dgui_app()->grab_native_handle().window_associations
     };
     for (
         auto current_association{std::begin(window_associations)};
@@ -384,7 +377,7 @@ window::open (
         return false;
     }
 
-    auto& application_native_handle{impl::grab_application_native_handle()};
+    auto& application_native_handle{dgui_app()->grab_native_handle()};
 
     m_native_handle.cmp_window_handle = [[cmp_window alloc]
         initWithContentRect:
@@ -521,7 +514,7 @@ window::fix_association ()
 noexcept
 {
     auto& window_associations{
-        impl::grab_application_native_handle().window_associations
+        dgui_app()->grab_native_handle().window_associations
     };
     auto association_iterator{
         std::find_if(

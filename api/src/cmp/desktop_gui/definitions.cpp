@@ -5,6 +5,7 @@
 #include <cmp/core/platform.hpp>
 
 #if CMP_CONFIG_HEADER_ONLY == false && CMP_CONFIG_DESKTOP_GUI_PACKAGE_EXCLUDED == false
+#   include <cmp/desktop_gui/impl/common/common_desktop_gui_application.cpp>
 #   if defined(CMP_OS_WINDOWS)
 #       include <cmp/desktop_gui/impl/windows/windows_desktop_gui_application.cpp>
 #       include <cmp/desktop_gui/impl/windows/windows_window.cpp>

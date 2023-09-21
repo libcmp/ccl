@@ -70,4 +70,11 @@ application::run ()
 CMP_CONDITIONAL_INLINE
 application* application::g_instance_ptr;
 
+application*
+app ()
+noexcept
+{
+    return application::get_instance_ptr();
+} // function -----------------------------------------------------------------
+
 } // namespace ----------------------------------------------------------------

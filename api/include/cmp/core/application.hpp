@@ -67,6 +67,11 @@ private:
     std::u8string_view m_copyright_notice;
 }; // class -------------------------------------------------------------------
 
+CMP_CONDITIONAL_INLINE
+application*
+app ()
+noexcept;
+
 } // namespace ----------------------------------------------------------------
 
 #if CMP_CONFIG_HEADER_ONLY == true
