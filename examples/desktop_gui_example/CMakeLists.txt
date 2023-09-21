@@ -9,17 +9,17 @@ if (NOT DEFINED CMP_DEV)
 endif ()
 
 add_executable(
-    gui_example
+    desktop_gui_example
         src/main.cpp
 )
 set_target_properties(
-    gui_example PROPERTIES
+    desktop_gui_example PROPERTIES
         LINKER_LANGUAGE CXX
         CXX_STANDARD 20
         CXX_STANDARD_REQUIRED TRUE
         CXX_EXTENSIONS OFF
 )
 target_link_libraries(
-    gui_example
+    desktop_gui_example
         cmp
 )

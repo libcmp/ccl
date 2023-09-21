@@ -317,7 +317,7 @@ if (CMP_BUILD_STATIC MATCHES false)
             TARGET cmp POST_BUILD
                 COMMAND ${CMAKE_COMMAND} -E copy
                     $<TARGET_FILE:cmp>
-                    ${PROJECT_BINARY_DIR}/../examples/gui_example/$<TARGET_FILE_NAME:cmp>
+                    ${PROJECT_BINARY_DIR}/../examples/desktop_gui_example/$<TARGET_FILE_NAME:cmp>
         )
         add_custom_command(
             TARGET cmp POST_BUILD
