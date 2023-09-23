@@ -1,6 +1,8 @@
 // Copyright (C) 2022 Daniel T. McGinnis
 // SPDX-License-Identifier: BSL-1.0
 
+#include <cstdint>
+
 #include <cmp/core/test_module.hpp>
 #include <cmp/io/general.hpp>
 
