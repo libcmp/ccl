@@ -166,17 +166,6 @@ public:
         char32_t& target
     );
 
-    template <
-        typename InputResource2,
-        writable_unicode_string T
-    >
-    friend
-    text_input_stream<InputResource2>&
-    operator >> (
-        text_input_stream<InputResource2>& stream,
-        T& target
-    );
-
 private:
     // Private Data -----------------------------------------------------------
 

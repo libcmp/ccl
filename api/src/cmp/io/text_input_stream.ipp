@@ -424,7 +424,7 @@ operator >> (
         First we skip all whitespace characters in the stream.
     */
     while (!stream.is_at_end()) {
-        code_point = stream.read_filtered_code_point();
+        stream >> code_point;
         if (!is_whitespace(code_point)) {
             /*
                 As soon as we find a non-whitespace character,
@@ -439,7 +439,7 @@ operator >> (
         Then we consume all remaining non-whitespace characters.
     */
     while (!stream.is_at_end()) {
-        code_point = stream.read_filtered_code_point();
+        stream >> code_point;
         if (is_whitespace(code_point)) {
             /*
                 As soon as we find a whitespace character we break out of
