@@ -16,15 +16,11 @@
 
 namespace cmp {
 
-CMP_CONDITIONAL_INLINE
+CMP_LIBRARY_NAME
 desktop_gui_application*
 dgui_app ()
 noexcept;
 
 } // namespace ----------------------------------------------------------------
-
-#if CMP_CONFIG_HEADER_ONLY == true
-#   include <cmp/desktop_gui/impl/common/common_desktop_gui_application.cpp>
-#endif // CMP_CONFIG_HEADER_ONLY
 
 #endif // CMP_DESKTOP_GUI_COMMON_DESKTOP_GUI_APPLICATION_HPP_INCLUDED
