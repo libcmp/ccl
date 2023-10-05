@@ -10,6 +10,8 @@
 #   include <cmp/desktop_gui/impl/windows/windows_desktop_gui_application.hpp>
 #elif defined(CMP_OS_MACOS)
 #   include <cmp/desktop_gui/impl/macos/macos_desktop_gui_application.hpp>
+#elif defined(CMP_OS_LINUX_BASED)
+#   include <cmp/desktop_gui/impl/gtk/gtk_desktop_gui_application.hpp>
 #endif
 
 namespace cmp {
