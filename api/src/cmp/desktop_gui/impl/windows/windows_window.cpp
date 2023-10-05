@@ -7,13 +7,6 @@ namespace cmp {
 
 namespace impl {
 
-void
-update_window (
-    window* w
-) {
-    w->update();
-} // function -----------------------------------------------------------------
-
 key
 translate_key_code (
     WPARAM key_code
@@ -509,27 +502,6 @@ window::handle_close_event ()
 } // function -----------------------------------------------------------------
 
 // Private Functions ----------------------------------------------------------
-
-void
-window::update () {
-    std::chrono::steady_clock::time_point current_time{
-        std::chrono::steady_clock::now()
-    };
-    std::chrono::duration<double> difference{
-        std::chrono::duration_cast<
-            std::chrono::duration<double>
-        >(current_time - m_last_time)
-    };
-    double delta_seconds{difference.count()};
-
-    m_last_time = current_time;
-    difference = std::chrono::duration_cast<
-        std::chrono::duration<double>
-    >(current_time - m_start_time);
-    double total_seconds{difference.count()};
-
-    update(delta_seconds, total_seconds);
-} // function -----------------------------------------------------------------
 
 void
 window::fix_association ()

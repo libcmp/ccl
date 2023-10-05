@@ -13,8 +13,6 @@
 
 namespace cmp {
 
-class window;
-
 class CMP_LIBRARY_NAME desktop_gui_application
     : public application
 {

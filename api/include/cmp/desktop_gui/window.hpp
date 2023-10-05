@@ -5,14 +5,6 @@
 #define CMP_DESKTOP_GUI_WINDOW_HPP_INCLUDED
 
 #include <cmp/desktop_gui/inclusion_assert.hpp>
-#include <cmp/core/platform.hpp>
-
-#if defined(CMP_OS_WINDOWS)
-#   include <cmp/desktop_gui/impl/windows/windows_window.hpp>
-#elif defined(CMP_OS_MACOS)
-#   include <cmp/desktop_gui/impl/macos/macos_window.hpp>
-#elif defined(CMP_OS_LINUX_BASED)
-#   include <cmp/desktop_gui/impl/gtk/gtk_window.hpp>
-#endif
+#include <cmp/desktop_gui/impl/common/common_window.hpp>
 
 #endif // CMP_DESKTOP_GUI_WINDOW_HPP_INCLUDED
