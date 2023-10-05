@@ -296,17 +296,19 @@ window::operator = (
 )
 noexcept
 {
-    close();
+    if (this != &other) {
+        close();
 
-    m_native_handle = other.m_native_handle;
-    m_start_time = other.m_start_time;
-    m_last_time = other.m_last_time;
+        m_native_handle = other.m_native_handle;
+        m_start_time = other.m_start_time;
+        m_last_time = other.m_last_time;
 
-    if (m_native_handle.cmp_window_handle != nullptr) {
-        fix_association();
+        if (m_native_handle.cmp_window_handle != nullptr) {
+            fix_association();
+        }
+
+        other.m_native_handle.cmp_window_handle = nullptr;
     }
-
-    other.m_native_handle.cmp_window_handle = nullptr;
 
     return *this;
 } // function -----------------------------------------------------------------
