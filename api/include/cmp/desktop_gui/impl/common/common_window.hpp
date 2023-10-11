@@ -10,7 +10,7 @@
 #   include <cmp/desktop_gui/impl/windows/windows_window.hpp>
 #elif defined(CMP_OS_MACOS)
 #   include <cmp/desktop_gui/impl/macos/macos_window.hpp>
-#elif defined(CMP_OS_LINUX_BASED)
+#elif defined(CMP_OS_LINUX_BASED) || defined(CMP_OS_FREEBSD)
 #   include <cmp/desktop_gui/impl/gtk/gtk_window.hpp>
 #endif
 

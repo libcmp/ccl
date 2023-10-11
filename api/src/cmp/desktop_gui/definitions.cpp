@@ -13,7 +13,7 @@
 #   elif defined(CMP_OS_MACOS)
 #       include <cmp/desktop_gui/impl/macos/macos_desktop_gui_application.mm>
 #       include <cmp/desktop_gui/impl/macos/macos_window.mm>
-#   elif defined(CMP_OS_LINUX_BASED)
+#   elif defined(CMP_OS_LINUX_BASED) || defined(CMP_OS_FREEBSD)
 #       include <cmp/desktop_gui/impl/gtk/gtk_desktop_gui_application.cpp>
 #       include <cmp/desktop_gui/impl/gtk/gtk_window.cpp>
 #   endif

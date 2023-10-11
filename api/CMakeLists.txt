@@ -283,16 +283,19 @@ if (${CMAKE_SYSTEM_NAME} MATCHES "Darwin" AND CMP_CONFIG_DESKTOP_GUI_PACKAGE_EXC
     target_compile_options(cmp PUBLIC -x objective-c++)
 endif ()
 
-if (${CMAKE_SYSTEM_NAME} MATCHES "Linux" AND CMP_CONFIG_DESKTOP_GUI_PACKAGE_EXCLUDED MATCHES false)
+if (
+    (${CMAKE_SYSTEM_NAME} MATCHES "Linux"
+        OR ${CMAKE_SYSTEM_NAME} MATCHES "FreeBSD")
+            AND CMP_CONFIG_DESKTOP_GUI_PACKAGE_EXCLUDED MATCHES false
+)
     #[[
-        GTK is often available on graphical Linux
-        distributions, but we need to find it and
-        link to it.
+        GTK is often available on graphical Linux and FreeBSD
+        distributions, but we need to find it and link to it.
     ]]
     find_package(PkgConfig REQUIRED)
     pkg_check_modules(GTK4 REQUIRED IMPORTED_TARGET gtk4)
     target_link_libraries(
-        cmp PUBLIC
+        cmp
             PkgConfig::GTK4
     )
 endif ()
