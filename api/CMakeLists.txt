@@ -340,7 +340,13 @@ if (CMP_BUILD_STATIC MATCHES false)
             TARGET cmp POST_BUILD
                 COMMAND ${CMAKE_COMMAND} -E copy
                     $<TARGET_FILE:cmp>
-                    ${PROJECT_BINARY_DIR}/../../[unreleased]/tools/docgen/$<TARGET_FILE_NAME:cmp>
+                    ${PROJECT_BINARY_DIR}/../../[unreleased]/lib/$<TARGET_FILE_NAME:cmp>
+        )
+        add_custom_command(
+            TARGET cmp POST_BUILD
+                COMMAND ${CMAKE_COMMAND} -E copy
+                    $<TARGET_FILE:cmp>
+                    ${PROJECT_BINARY_DIR}/../../[unreleased]/app/$<TARGET_FILE_NAME:cmp>
         )
     endif ()
 endif ()
