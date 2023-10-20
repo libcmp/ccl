@@ -277,9 +277,6 @@ window_procedure (
         case WM_KEYUP:
             forward_key_up_event_to_window(window_handle, w_param);
             return 0;
-        case WM_PAINT:
-            forward_update_to_window(window_handle);
-            return 0;
         case WM_SIZE:
             forward_resize_event_to_window(window_handle);
             return 0;
