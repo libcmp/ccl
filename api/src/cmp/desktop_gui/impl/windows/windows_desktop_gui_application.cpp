@@ -17,7 +17,7 @@ desktop_gui_application::desktop_gui_application (
 {
     m_native_handle.application_instance_handle = GetModuleHandleW(nullptr);
     m_native_handle.command_line = GetCommandLineW();
-    m_native_handle.thread_id = GetCurrentThreadId();
+    m_native_handle.window_class_name = L"CCLWindow";
 
     WNDCLASSW window_class;
     window_class.style = CS_HREDRAW | CS_VREDRAW;

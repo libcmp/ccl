@@ -37,8 +37,7 @@ public:
 
         HINSTANCE application_instance_handle;
         LPWSTR command_line;
-        DWORD thread_id;
-        LPCWSTR window_class_name{L"CCLWindow"};
+        LPCWSTR window_class_name;
         std::vector<std::pair<HWND, window*>> window_associations;
     }; // class ---------------------------------------------------------------
 
