@@ -82,7 +82,7 @@ add_test(
 # test ------------------------------------------------------------------------
 add_executable(
     ho_test_data_input_stream
-        core/test_core_general.cpp
+        io/test_data_input_stream.cpp
 )
 set_target_properties(
     ho_test_data_input_stream PROPERTIES
@@ -134,7 +134,7 @@ add_test(
 # test ------------------------------------------------------------------------
 add_executable(
     ho_test_data_io_stream
-        core/test_core_general.cpp
+        io/test_data_io_stream.cpp
 )
 set_target_properties(
     ho_test_data_io_stream PROPERTIES
@@ -186,7 +186,7 @@ add_test(
 # test ------------------------------------------------------------------------
 add_executable(
     ho_test_data_output_stream
-        core/test_core_general.cpp
+        io/test_data_output_stream.cpp
 )
 set_target_properties(
     ho_test_data_output_stream PROPERTIES
@@ -238,7 +238,7 @@ add_test(
 # test ------------------------------------------------------------------------
 add_executable(
     ho_test_file
-        core/test_core_general.cpp
+        io/test_file.cpp
 )
 set_target_properties(
     ho_test_file PROPERTIES
@@ -290,7 +290,7 @@ add_test(
 # test ------------------------------------------------------------------------
 add_executable(
     ho_test_io_general
-        core/test_core_general.cpp
+        io/test_io_general.cpp
 )
 set_target_properties(
     ho_test_io_general PROPERTIES
@@ -342,7 +342,7 @@ add_test(
 # test ------------------------------------------------------------------------
 add_executable(
     ho_test_string_io_resource
-        core/test_core_general.cpp
+        io/test_string_io_resource.cpp
 )
 set_target_properties(
     ho_test_string_io_resource PROPERTIES
@@ -394,7 +394,7 @@ add_test(
 # test ------------------------------------------------------------------------
 add_executable(
     ho_test_text_input_stream
-        core/test_core_general.cpp
+        io/test_text_input_stream.cpp
 )
 set_target_properties(
     ho_test_text_input_stream PROPERTIES
@@ -446,7 +446,7 @@ add_test(
 # test ------------------------------------------------------------------------
 add_executable(
     ho_test_text_io_stream
-        core/test_core_general.cpp
+        io/test_text_io_stream.cpp
 )
 set_target_properties(
     ho_test_text_io_stream PROPERTIES
@@ -498,7 +498,7 @@ add_test(
 # test ------------------------------------------------------------------------
 add_executable(
     ho_test_text_output_stream
-        core/test_core_general.cpp
+        io/test_text_output_stream.cpp
 )
 set_target_properties(
     ho_test_text_output_stream PROPERTIES
@@ -552,7 +552,7 @@ add_test(
 # test ------------------------------------------------------------------------
 add_executable(
     ho_test_algorithms
-        core/test_core_general.cpp
+        unicode/test_algorithms.cpp
 )
 set_target_properties(
     ho_test_algorithms PROPERTIES
@@ -604,7 +604,7 @@ add_test(
 # test ------------------------------------------------------------------------
 add_executable(
     ho_test_by_code_point
-        core/test_core_general.cpp
+        unicode/test_by_code_point.cpp
 )
 set_target_properties(
     ho_test_by_code_point PROPERTIES
@@ -656,7 +656,7 @@ add_test(
 # test ------------------------------------------------------------------------
 add_executable(
     ho_test_examiners
-        core/test_core_general.cpp
+        unicode/test_examiners.cpp
 )
 set_target_properties(
     ho_test_examiners PROPERTIES
@@ -708,7 +708,7 @@ add_test(
 # test ------------------------------------------------------------------------
 add_executable(
     ho_test_formatters
-        core/test_core_general.cpp
+        unicode/test_formatters.cpp
 )
 set_target_properties(
     ho_test_formatters PROPERTIES
@@ -760,7 +760,7 @@ add_test(
 # test ------------------------------------------------------------------------
 add_executable(
     ho_test_parsers
-        core/test_core_general.cpp
+        unicode/test_parsers.cpp
 )
 set_target_properties(
     ho_test_parsers PROPERTIES
@@ -812,7 +812,7 @@ add_test(
 # test ------------------------------------------------------------------------
 add_executable(
     ho_test_type_traits
-        core/test_core_general.cpp
+        unicode/test_type_traits.cpp
 )
 set_target_properties(
     ho_test_type_traits PROPERTIES
