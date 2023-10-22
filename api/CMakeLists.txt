@@ -120,7 +120,6 @@ if (CMP_BUILD_STATIC MATCHES true)
     # Create the cmp target as a statically linked library.
     add_library(
         cmp STATIC
-            ${CCL_HEADERS}
             ${CCL_SOURCES}
     )
     target_compile_definitions(
@@ -132,7 +131,6 @@ else ()
     # Create the cmp target as a dynamically linked library.
     add_library(
         cmp SHARED
-            ${CCL_HEADERS}
             ${CCL_SOURCES}
     )
     target_compile_definitions(
