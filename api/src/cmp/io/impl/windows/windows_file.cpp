@@ -97,8 +97,9 @@ noexcept
     security_attributes.nLength = sizeof (security_attributes);
     security_attributes.lpSecurityDescriptor = nullptr;
     security_attributes.bInheritHandle = true;
-    m_handle = CreateFile(
-        file_path.string().c_str(),
+    std::wstring file_path_wstring{file_path.wstring()};
+    m_handle = CreateFileW(
+        file_path_wstring.c_str(),
         desired_access,
         FILE_SHARE_READ | FILE_SHARE_WRITE,
         &security_attributes,

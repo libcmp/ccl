@@ -114,6 +114,24 @@ public:
 
         end_stage();
 
+        file f4{
+            u8"../../test_data/Δunicode_name₤.txt",
+            read_only,
+            if_not_there::fail
+        };
+
+        if (!f4.is_open()) {
+            std::cout << "File with Unicode name could not be opened "
+                         "for reading."
+                      << std::endl;
+
+            return false;
+        }
+
+        f4.close();
+
+        end_stage();
+
         return true;
     } // function -------------------------------------------------------------
 
