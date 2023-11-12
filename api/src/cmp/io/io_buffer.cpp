@@ -66,7 +66,7 @@ std::byte*
 io_buffer::get_data ()
 noexcept
 {
-    return &(m_data[0]);
+    return m_data.data();
 } // function -----------------------------------------------------------------
 
 bool
