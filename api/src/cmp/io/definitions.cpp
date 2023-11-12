@@ -15,9 +15,9 @@
 #       include <cmp/io/impl/unix_like/unix_like_uin.cpp>
 #       include <cmp/io/impl/unix_like/unix_like_uout.cpp>
 #   endif
-#   include <cmp/io/general.cpp>
 #   include <cmp/io/exceptions.cpp>
 #   include <cmp/io/file.cpp>
+#   include <cmp/io/general.cpp>
 #   include <cmp/io/input_resource.cpp>
 #   include <cmp/io/io_buffer.cpp>
 #   include <cmp/io/io_resource.cpp>
