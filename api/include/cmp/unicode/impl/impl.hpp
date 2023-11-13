@@ -4,6 +4,7 @@
 #ifndef CMP_UNICODE_IMPL_HPP_INCLUDED
 #define CMP_UNICODE_IMPL_HPP_INCLUDED
 
+#include <cmp/unicode/inclusion_assert.hpp>
 #include <cmp/core/config.hpp>
 #include <cmp/unicode/examiners.hpp>
 #include <cmp/unicode/exceptions.hpp>

@@ -4,6 +4,8 @@
 #ifndef CMP_UNICODE_CONSTANTS_HPP_INCLUDED
 #define CMP_UNICODE_CONSTANTS_HPP_INCLUDED
 
+#include <cmp/unicode/inclusion_assert.hpp>
+
 namespace cmp {
 
 /**

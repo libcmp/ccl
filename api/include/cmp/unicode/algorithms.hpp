@@ -7,6 +7,7 @@
 #include <string_view>
 #include <cstring>
 
+#include <cmp/unicode/inclusion_assert.hpp>
 #include <cmp/core/config.hpp>
 #include <cmp/unicode/concepts.hpp>
 #include <cmp/unicode/by_code_point.hpp>

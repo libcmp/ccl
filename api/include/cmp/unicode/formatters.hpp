@@ -6,6 +6,7 @@
 
 #include <cmath>
 
+#include <cmp/unicode/inclusion_assert.hpp>
 #include <cmp/core/config.hpp>
 #include <cmp/unicode/formats.hpp>
 #include <cmp/unicode/concepts.hpp>

@@ -4,6 +4,7 @@
 #ifndef CMP_UNICODE_CONCEPTS_HPP_INCLUDED
 #define CMP_UNICODE_CONCEPTS_HPP_INCLUDED
 
+#include <cmp/unicode/inclusion_assert.hpp>
 #include <cmp/unicode/type_traits.hpp>
 
 namespace cmp {
