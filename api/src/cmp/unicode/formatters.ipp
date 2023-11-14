@@ -12,7 +12,7 @@ namespace impl {
 // Core -----------------------------------------------------------------------
 
 template <
-    raii_unicode_string Output,
+    writable_raii_text_object Output,
     std::integral Input
 >
 Output
@@ -70,7 +70,7 @@ number_formatter::format_integer (
 } // function -----------------------------------------------------------------
 
 template <
-    raii_unicode_string Output,
+    writable_raii_text_object Output,
     std::floating_point Input
 >
 Output
@@ -147,7 +147,7 @@ number_formatter::format_floating_point (
 } // namespace ----------------------------------------------------------------
 
 template <
-    raii_unicode_string Output
+    writable_raii_text_object Output
 >
 Output
 format_bool (
@@ -160,7 +160,7 @@ format_bool (
 } // function -----------------------------------------------------------------
 
 template <
-    raii_unicode_string Output,
+    writable_raii_text_object Output,
     std::integral Input
 >
 Output
@@ -172,7 +172,7 @@ format_integer (
 } // function -----------------------------------------------------------------
 
 template <
-    raii_unicode_string Output,
+    writable_raii_text_object Output,
     std::floating_point Input
 >
 Output

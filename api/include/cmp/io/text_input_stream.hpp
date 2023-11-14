@@ -99,7 +99,7 @@ public:
                 The object to append the read line to.
     */
     template <
-        writable_unicode_string TargetString
+        writable_raii_text_object TargetString
     >
     void
     append_line (
@@ -115,7 +115,7 @@ public:
                 The object to assign the read line to.
     */
     template <
-        writable_unicode_string TargetString
+        writable_raii_text_object TargetString
     >
     void
     read_line (
@@ -131,7 +131,7 @@ public:
                 The object to append the read text to.
     */
     template <
-        writable_unicode_string TargetString
+        writable_raii_text_object TargetString
     >
     void
     append_all (
@@ -147,7 +147,7 @@ public:
                 The object to assign the read text to.
     */
     template <
-        writable_unicode_string TargetString
+        writable_raii_text_object TargetString
     >
     void
     read_all (
@@ -255,7 +255,7 @@ operator >> (
 */
 template <
     typename InputResource,
-    writable_unicode_string T
+    writable_raii_text_object T
 >
 text_input_stream<InputResource>&
 operator >> (

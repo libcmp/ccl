@@ -9,25 +9,50 @@
 
 namespace cmp {
 
-template <
-    typename T
->
-concept writable_unicode_string = is_writable_unicode_string_v<T>;
+// Unicode Text Objects -------------------------------------------------------
 
 template <
     typename T
 >
-concept unicode_string = is_unicode_string_v<T>;
+concept writable_unicode_text_object = is_writable_unicode_text_object_v<T>;
 
 template <
     typename T
 >
-concept writable_raii_unicode_string = is_writable_raii_unicode_string_v<T>;
+concept unicode_text_object = is_unicode_text_object_v<T>;
 
 template <
     typename T
 >
-concept raii_unicode_string = is_raii_unicode_string_v<T>;
+concept writable_raii_unicode_text_object
+    = is_writable_raii_unicode_text_object_v<T>;
+
+template <
+    typename T
+>
+concept raii_unicode_text_object = is_raii_unicode_text_object_v<T>;
+
+// Text Objects ---------------------------------------------------------------
+
+template <
+    typename T
+>
+concept writable_text_object = is_writable_text_object_v<T>;
+
+template <
+    typename T
+>
+concept text_object = is_text_object_v<T>;
+
+template <
+    typename T
+>
+concept writable_raii_text_object = is_writable_raii_text_object_v<T>;
+
+template <
+    typename T
+>
+concept raii_text_object = is_raii_text_object_v<T>;
 
 } // namespace ----------------------------------------------------------------
 

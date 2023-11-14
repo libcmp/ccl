@@ -67,7 +67,7 @@ template <
     typename InputResource
 >
 template <
-    writable_unicode_string TargetString
+    writable_raii_text_object TargetString
 >
 void
 text_input_stream<InputResource>::append_line (
@@ -87,7 +87,7 @@ template <
     typename InputResource
 >
 template <
-    writable_unicode_string TargetString
+    writable_raii_text_object TargetString
 >
 void
 text_input_stream<InputResource>::read_line (
@@ -101,7 +101,7 @@ template <
     typename InputResource
 >
 template <
-    writable_unicode_string TargetString
+    writable_raii_text_object TargetString
 >
 void
 text_input_stream<InputResource>::append_all (
@@ -116,7 +116,7 @@ template <
     typename InputResource
 >
 template <
-    writable_unicode_string TargetString
+    writable_raii_text_object TargetString
 >
 void
 text_input_stream<InputResource>::read_all (
@@ -411,7 +411,7 @@ operator >> (
 
 template <
     typename InputResource,
-    writable_unicode_string T
+    writable_raii_text_object T
 >
 text_input_stream<InputResource>&
 operator >> (

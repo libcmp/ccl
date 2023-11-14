@@ -13,7 +13,7 @@ namespace impl {
 
 template <
     std::integral Output,
-    unicode_string Input
+    text_object Input
 >
 Output
 number_parser::parse_integer (
@@ -109,7 +109,7 @@ number_parser::parse_integer (
 
 template <
     std::floating_point Output,
-    unicode_string Input
+    text_object Input
 >
 Output
 number_parser::parse_floating_point (
@@ -234,7 +234,7 @@ noexcept
 } // namespace ----------------------------------------------------------------
 
 template <
-    unicode_string Input
+    text_object Input
 >
 bool
 parse_bool (
@@ -273,7 +273,7 @@ parse_bool (
 
 template <
     std::integral Output,
-    unicode_string Input
+    text_object Input
 >
 Output
 parse_integer (
@@ -285,7 +285,7 @@ parse_integer (
 
 template <
     std::floating_point Output,
-    unicode_string Input
+    text_object Input
 >
 Output
 parse_floating_point (

@@ -27,8 +27,8 @@ namespace cmp {
             The substring to look for.
 */
 template <
-    unicode_string ContentString,
-    unicode_string Substring
+    text_object ContentString,
+    text_object Substring
 >
 bool
 starts_with (
@@ -49,8 +49,8 @@ noexcept;
             The substring to look for.
 */
 template <
-    unicode_string ContentString,
-    unicode_string Substring
+    text_object ContentString,
+    text_object Substring
 >
 bool
 ends_with (
@@ -311,76 +311,14 @@ noexcept;
         index:
             The index of the string at which to insert the code point.
 */
-CMP_CONDITIONAL_INLINE
-CMP_LIBRARY_NAME
+template <
+    writable_raii_text_object TargetString
+>
 void
 insert_code_point (
-    std::u8string& s,
+    TargetString& s,
     char32_t code_point,
-    std::u8string::size_type index
-);
-
-/**
-    Description:
-        Inserts the given code point into the given string at the given index.
-
-    Parameters:
-        s:
-            The string to insert the code point into.
-        code_point:
-            The code point to insert.
-        index:
-            The index of the string at which to insert the code point.
-*/
-CMP_CONDITIONAL_INLINE
-CMP_LIBRARY_NAME
-void
-insert_code_point (
-    std::u16string& s,
-    char32_t code_point,
-    std::u16string::size_type index
-);
-
-/**
-    Description:
-        Inserts the given code point into the given string at the given index.
-
-    Parameters:
-        s:
-            The string to insert the code point into.
-        code_point:
-            The code point to insert.
-        index:
-            The index of the string at which to insert the code point.
-*/
-CMP_CONDITIONAL_INLINE
-CMP_LIBRARY_NAME
-void
-insert_code_point (
-    std::u32string& s,
-    char32_t code_point,
-    std::u32string::size_type index
-);
-
-/**
-    Description:
-        Inserts the given code point into the given string at the given index.
-
-    Parameters:
-        s:
-            The string to insert the code point into.
-        code_point:
-            The code point to insert.
-        index:
-            The index of the string at which to insert the code point.
-*/
-CMP_CONDITIONAL_INLINE
-CMP_LIBRARY_NAME
-void
-insert_code_point (
-    std::wstring& s,
-    char32_t code_point,
-    std::wstring::size_type index
+    typename TargetString::size_type index
 );
 
 /**
@@ -394,11 +332,11 @@ insert_code_point (
             The code point to append.
 */
 template <
-    writable_raii_unicode_string OutputString
+    writable_raii_text_object TargetString
 >
 void
 append_code_point (
-    OutputString& s,
+    TargetString& s,
     char32_t code_point
 );
 
@@ -413,12 +351,29 @@ append_code_point (
             The code point to prepend.
 */
 template <
-    writable_raii_unicode_string OutputString
+    writable_raii_text_object TargetString
 >
 void
 prepend_code_point (
-    OutputString& s,
+    TargetString& s,
     char32_t code_point
+);
+
+/**
+    Description:
+        Converts the given string to the requested string type.
+
+    Parameters:
+        s:
+            The string to convert.
+*/
+template <
+    writable_raii_text_object OutputString,
+    text_object InputString
+>
+OutputString
+convert_string (
+    const InputString& s
 );
 
 /**
@@ -430,7 +385,7 @@ prepend_code_point (
             The string to convert to <#type>std::string</#type>.
 */
 template <
-    unicode_string InputString
+    text_object InputString
 >
 std::string
 to_string (
@@ -445,23 +400,8 @@ to_string (
         s:
             The string to convert to <#type>std::u8string</#type>.
 */
-CMP_CONDITIONAL_INLINE
-CMP_LIBRARY_NAME
-std::u8string
-to_u8string (
-    const std::string& s
-);
-
-/**
-    Description:
-        Converts the given string to a <#type>std::u8string</#type>.
-
-    Parameters:
-        s:
-            The string to convert to <#type>std::u8string</#type>.
-*/
 template <
-    unicode_string InputString
+    text_object InputString
 >
 std::u8string
 to_u8string (
@@ -476,23 +416,8 @@ to_u8string (
         s:
             The string to convert to <#type>std::u16string</#type>.
 */
-CMP_CONDITIONAL_INLINE
-CMP_LIBRARY_NAME
-std::u16string
-to_u16string (
-    const std::string& s
-);
-
-/**
-    Description:
-        Converts the given string to a <#type>std::u16string</#type>.
-
-    Parameters:
-        s:
-            The string to convert to <#type>std::u16string</#type>.
-*/
 template <
-    unicode_string InputString
+    text_object InputString
 >
 std::u16string
 to_u16string (
@@ -507,23 +432,8 @@ to_u16string (
         s:
             The string to convert to <#type>std::u32string</#type>.
 */
-CMP_CONDITIONAL_INLINE
-CMP_LIBRARY_NAME
-std::u32string
-to_u32string (
-    const std::string& s
-);
-
-/**
-    Description:
-        Converts the given string to a <#type>std::u32string</#type>.
-
-    Parameters:
-        s:
-            The string to convert to <#type>std::u32string</#type>.
-*/
 template <
-    unicode_string InputString
+    text_object InputString
 >
 std::u32string
 to_u32string (
@@ -538,43 +448,11 @@ to_u32string (
         s:
             The string to convert to <#type>std::wstring</#type>.
 */
-CMP_CONDITIONAL_INLINE
-CMP_LIBRARY_NAME
-std::wstring
-to_wstring (
-    const std::string& s
-);
-
-/**
-    Description:
-        Converts the given string to a <#type>std::wstring</#type>.
-
-    Parameters:
-        s:
-            The string to convert to <#type>std::wstring</#type>.
-*/
 template <
-    unicode_string InputString
+    text_object InputString
 >
 std::wstring
 to_wstring (
-    const InputString& s
-);
-
-/**
-    Description:
-        Converts the given string to the requested Unicode string type.
-
-    Parameters:
-        s:
-            The string to convert.
-*/
-template <
-    raii_unicode_string OutputString,
-    unicode_string InputString
->
-OutputString
-convert_string (
     const InputString& s
 );
 
@@ -589,7 +467,7 @@ convert_string (
             The string to validate.
 */
 template <
-    unicode_string InputString
+    text_object InputString
 >
 typename by_code_point<value_type_t<InputString>>::const_iterator
 validate_string (

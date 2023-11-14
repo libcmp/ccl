@@ -24,7 +24,7 @@ public:
 
     template <
         std::integral Output,
-        unicode_string Input
+        text_object Input
     >
     static
     Output
@@ -35,7 +35,7 @@ public:
 
     template <
         std::floating_point Output,
-        unicode_string Input
+        text_object Input
     >
     static
     Output
@@ -194,7 +194,7 @@ private:
         it doesn't, a <#type>parse_failed</#type> exception is thrown.
 */
 template <
-    unicode_string Input
+    text_object Input
 >
 bool
 parse_bool (
@@ -210,7 +210,7 @@ parse_bool (
 */
 template <
     std::integral Output,
-    unicode_string Input
+    text_object Input
 >
 Output
 parse_integer (
@@ -227,7 +227,7 @@ parse_integer (
 */
 template <
     std::floating_point Output,
-    unicode_string Input
+    text_object Input
 >
 Output
 parse_floating_point (

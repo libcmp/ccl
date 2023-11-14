@@ -21,7 +21,7 @@ public:
     // Core -------------------------------------------------------------------
 
     template <
-        raii_unicode_string Output,
+        writable_raii_text_object Output,
         std::integral Input
     >
     static
@@ -32,7 +32,7 @@ public:
     );
 
     template <
-        raii_unicode_string Output,
+        writable_raii_text_object Output,
         std::floating_point Input
     >
     static
@@ -51,7 +51,7 @@ public:
         bool format and returns the formatted string.
 */
 template <
-    raii_unicode_string Output
+    writable_raii_text_object Output
 >
 Output
 format_bool (
@@ -65,7 +65,7 @@ format_bool (
         integer format and returns the formatted string.
 */
 template <
-    raii_unicode_string Output,
+    writable_raii_text_object Output,
     std::integral Input
 >
 Output
@@ -80,7 +80,7 @@ format_integer (
         floating point format and returns the formatted string.
 */
 template <
-    raii_unicode_string Output,
+    writable_raii_text_object Output,
     std::floating_point Input
 >
 Output
