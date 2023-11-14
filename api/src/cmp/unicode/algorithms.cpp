@@ -11,7 +11,7 @@ string_size (
 )
 noexcept
 {
-    return s.size();
+    return std::size(s);
 } // function -----------------------------------------------------------------
 
 std::size_t
@@ -20,7 +20,7 @@ string_size (
 )
 noexcept
 {
-    return s.size();
+    return std::size(s);
 } // function -----------------------------------------------------------------
 
 std::size_t
@@ -29,7 +29,7 @@ string_size (
 )
 noexcept
 {
-    return s.size();
+    return std::size(s);
 } // function -----------------------------------------------------------------
 
 std::size_t
@@ -38,7 +38,7 @@ string_size (
 )
 noexcept
 {
-    return s.size();
+    return std::size(s);
 } // function -----------------------------------------------------------------
 
 std::size_t
@@ -47,7 +47,7 @@ string_size (
 )
 noexcept
 {
-    return s.size();
+    return std::size(s);
 } // function -----------------------------------------------------------------
 
 std::size_t
@@ -56,7 +56,7 @@ string_size (
 )
 noexcept
 {
-    return s.size();
+    return std::size(s);
 } // function -----------------------------------------------------------------
 
 std::size_t
@@ -65,7 +65,7 @@ string_size (
 )
 noexcept
 {
-    return s.size();
+    return std::size(s);
 } // function -----------------------------------------------------------------
 
 std::size_t
@@ -74,7 +74,7 @@ string_size (
 )
 noexcept
 {
-    return s.size();
+    return std::size(s);
 } // function -----------------------------------------------------------------
 
 std::size_t
@@ -83,7 +83,7 @@ string_size (
 )
 noexcept
 {
-    return s.size();
+    return std::size(s);
 } // function -----------------------------------------------------------------
 
 std::size_t
@@ -92,7 +92,7 @@ string_size (
 )
 noexcept
 {
-    return s.size();
+    return std::size(s);
 } // function -----------------------------------------------------------------
 
 std::size_t
@@ -111,7 +111,7 @@ string_size (
 noexcept
 {
     const char8_t* current{s};
-    while (*current != '\0') {
+    while (*current != u8'\0') {
         ++current;
     }
     return current - s;
@@ -124,7 +124,7 @@ string_size (
 noexcept
 {
     const char16_t* current{s};
-    while (*current != '\0') {
+    while (*current != u'\0') {
         ++current;
     }
     return current - s;
@@ -137,7 +137,7 @@ string_size (
 noexcept
 {
     const char32_t* current{s};
-    while (*current != '\0') {
+    while (*current != U'\0') {
         ++current;
     }
     return current - s;
@@ -149,11 +149,7 @@ string_size (
 )
 noexcept
 {
-    const wchar_t* current{s};
-    while (*current != '\0') {
-        ++current;
-    }
-    return current - s;
+    return std::wcslen(s);
 } // function -----------------------------------------------------------------
 
 } // namespace ----------------------------------------------------------------
