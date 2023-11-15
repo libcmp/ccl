@@ -31,10 +31,10 @@ public:
     /**
         Description:
             Constructs a text I/O stream from the given I/O resource and
-            with the given encoding form, endianness and flush strategy.
-            The text I/O stream will hold a non-owning reference to the
-            resource, which is expected to stay valid when using the text
-            I/O stream.
+            with the given encoding form and endianness. The text I/O
+            stream will hold a non-owning reference to the resource,
+            which is expected to stay valid when using the text I/O
+            stream.
 
         Parameters:
             resource:
@@ -43,14 +43,11 @@ public:
                 The encoding form that the text is expected to be in.
             endianness:
                 The endianness that the text is expected to be in.
-            fs:
-                The flush strategy to use.
     */
     text_io_stream (
         wrapped_resource_type& resource,
         encoding_form ef,
-        std::endian endianness = std::endian::big,
-        flush_strategy fs = flush_strategy::manual
+        std::endian endianness = std::endian::big
     )
     noexcept;
 

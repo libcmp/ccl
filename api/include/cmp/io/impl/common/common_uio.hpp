@@ -31,8 +31,7 @@ public:
     CMP_CONDITIONAL_INLINE
     explicit
     stdout_stream (
-        wrapped_resource_type& resource,
-        flush_strategy fs = flush_strategy::automatic
+        wrapped_resource_type& resource
     )
     noexcept;
 

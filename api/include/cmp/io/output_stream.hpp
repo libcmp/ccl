@@ -29,22 +29,19 @@ public:
 
     /**
         Description:
-            Constructs an output stream with the given output
-            resource, endianness and flush strategy.
+            Constructs an output stream with the
+            given output resource and endianness.
 
         Parameters:
             resource:
                 The output resource this stream will write to.
             endianness:
                 The endianness to write the data in.
-            fs:
-                The flush strategy to use.
     */
     explicit
     output_stream (
         wrapped_resource_type& resource,
-        std::endian endianness = std::endian::native,
-        flush_strategy fs = flush_strategy::manual
+        std::endian endianness = std::endian::native
     )
     noexcept;
 
@@ -88,28 +85,6 @@ public:
     void
     set_endianness (
         std::endian new_endianness
-    )
-    noexcept;
-
-    /**
-        Description:
-            Returns the flush strategy associated with <#this/> output stream.
-    */
-    flush_strategy
-    get_flush_strategy ()
-    const noexcept;
-
-    /**
-        Description:
-            Sets the flush strategy associated with <#this/> output stream.
-
-        Parameters:
-            new_flush_strategy:
-                The new flush strategy to use with <#this/> output stream.
-    */
-    void
-    set_flush_strategy (
-        flush_strategy new_flush_strategy
     )
     noexcept;
 
@@ -189,7 +164,6 @@ private:
 
     wrapped_resource_type& m_resource;
     std::endian m_endianness;
-    flush_strategy m_flush_strategy;
 }; // class -------------------------------------------------------------------
 
 } // namespace ----------------------------------------------------------------

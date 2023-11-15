@@ -10,15 +10,13 @@ namespace cmp {
 // Constructors and Destructor ------------------------------------------------
 
 stdout_stream::stdout_stream (
-    wrapped_resource_type& resource,
-    flush_strategy fs
+    wrapped_resource_type& resource
 )
 noexcept
     : text_output_stream<stdout_resource>{
           resource,
           utf8,
-          std::endian::native,
-          fs
+          std::endian::native
       }
 {
 } // function -----------------------------------------------------------------

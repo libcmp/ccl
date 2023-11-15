@@ -29,11 +29,6 @@ enum class read_request {
     fill_buffer
 }; // enum --------------------------------------------------------------------
 
-enum class flush_strategy {
-    automatic,
-    manual
-}; // enum --------------------------------------------------------------------
-
 enum class position_reference {
     begin,
     current,

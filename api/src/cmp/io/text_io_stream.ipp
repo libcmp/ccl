@@ -15,12 +15,11 @@ template <
 text_io_stream<IOResource>::text_io_stream (
     wrapped_resource_type& resource,
     encoding_form ef,
-    std::endian endianness,
-    flush_strategy fs
+    std::endian endianness
 )
 noexcept
     : text_input_stream<IOResource>{resource, ef, endianness}
-    , text_output_stream<IOResource>{resource, ef, endianness, fs}
+    , text_output_stream<IOResource>{resource, ef, endianness}
     , m_resource{resource}
 {
 } // function -----------------------------------------------------------------

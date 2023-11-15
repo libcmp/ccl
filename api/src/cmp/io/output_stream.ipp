@@ -14,13 +14,11 @@ template <
 >
 output_stream<OutputResource>::output_stream (
     wrapped_resource_type& resource,
-    std::endian endianness,
-    flush_strategy fs
+    std::endian endianness
 )
 noexcept
     : m_resource{resource}
     , m_endianness{endianness}
-    , m_flush_strategy{fs}
 {
 } // function -----------------------------------------------------------------
 
@@ -79,28 +77,6 @@ noexcept
 template <
     typename OutputResource
 >
-flush_strategy
-output_stream<OutputResource>::get_flush_strategy ()
-const noexcept
-{
-    return m_flush_strategy;
-} // function -----------------------------------------------------------------
-
-template <
-    typename OutputResource
->
-void
-output_stream<OutputResource>::set_flush_strategy (
-    flush_strategy new_flush_strategy
-)
-noexcept
-{
-    m_flush_strategy = new_flush_strategy;
-} // function -----------------------------------------------------------------
-
-template <
-    typename OutputResource
->
 bool
 output_stream<OutputResource>::is_at_end ()
 const noexcept
@@ -119,9 +95,6 @@ output_stream<OutputResource>::write (
     std::size_t byte_count
 ) {
     std::size_t bytes_written{m_resource.write(data, byte_count)};
-    if (m_flush_strategy == flush_strategy::automatic) {
-        m_resource.flush();
-    }
     return bytes_written;
 } // function -----------------------------------------------------------------
 
@@ -135,9 +108,6 @@ output_stream<OutputResource>::reverse_write (
 ) {
     invert_endianness(data, byte_count);
     std::size_t bytes_written{m_resource.write(data, byte_count)};
-    if (m_flush_strategy == flush_strategy::automatic) {
-        m_resource.flush();
-    }
     return bytes_written;
 } // function -----------------------------------------------------------------
 

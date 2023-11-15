@@ -15,11 +15,10 @@ template <
 text_output_stream<OutputResource>::text_output_stream (
     wrapped_resource_type& resource,
     encoding_form target_encoding_form,
-    std::endian endianness,
-    flush_strategy fs
+    std::endian endianness
 )
 noexcept
-    : output_stream<OutputResource>{resource, endianness, fs}
+    : output_stream<OutputResource>{resource, endianness}
     , m_target_encoding_form{target_encoding_form}
 {
 } // function -----------------------------------------------------------------
@@ -144,12 +143,6 @@ text_output_stream<OutputResource>::write_code_point (
         case utf32:
             write_code_point_in_utf32(code_point);
             break;
-    }
-    if (
-        code_point == '\n'
-            && this->get_flush_strategy() == flush_strategy::automatic
-    ) {
-        this->flush();
     }
 } // function -----------------------------------------------------------------
 
