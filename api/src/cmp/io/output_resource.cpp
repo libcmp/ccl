@@ -52,7 +52,7 @@ output_resource::write_buffered (
         it and then write the data to the buffer.
     */
     if (m_buffer.get_position() + byte_count > m_buffer.get_capacity()) {
-        flush();
+        this->flush();
 
         /*
             If the number of bytes to write is greater than

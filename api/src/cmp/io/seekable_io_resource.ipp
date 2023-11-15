@@ -33,7 +33,7 @@ seekable_io_resource<Position>::set_position (
 )
 noexcept
 {
-    flush();
+    this->flush();
     this->set_position_raw(new_position, pr);
     m_buffer.set_read_dirty(true);
 } // function -----------------------------------------------------------------

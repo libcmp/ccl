@@ -33,7 +33,7 @@ seekable_output_resource<Position>::set_position (
 )
 noexcept
 {
-    flush();
+    this->flush();
     set_position_raw(new_position, pr);
 } // function -----------------------------------------------------------------
 

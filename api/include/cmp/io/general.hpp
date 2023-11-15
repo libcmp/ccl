@@ -29,6 +29,9 @@ enum class read_request {
     fill_buffer
 }; // enum --------------------------------------------------------------------
 
+enum class flush_t {
+} inline flush;
+
 enum class position_reference {
     begin,
     current,

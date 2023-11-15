@@ -27,7 +27,7 @@ template <
 >
 output_stream<OutputResource>::~output_stream ()
 {
-    flush();
+    this->flush();
 } // function -----------------------------------------------------------------
 
 // Accessors ------------------------------------------------------------------
@@ -130,6 +130,20 @@ output_stream<OutputResource>::operator -> ()
 const noexcept
 {
     return &m_resource;
+} // function -----------------------------------------------------------------
+
+// Free Functions -------------------------------------------------------------
+
+template <
+    typename OutputResource
+>
+output_stream<OutputResource>&
+operator << (
+    output_stream<OutputResource>& stream,
+    flush_t flush_v
+) {
+    stream.flush();
+    return stream;
 } // function -----------------------------------------------------------------
 
 } // namespace ----------------------------------------------------------------

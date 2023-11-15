@@ -166,6 +166,17 @@ private:
     std::endian m_endianness;
 }; // class -------------------------------------------------------------------
 
+// Free Functions -------------------------------------------------------------
+
+template <
+    typename OutputResource
+>
+output_stream<OutputResource>&
+operator << (
+    output_stream<OutputResource>& stream,
+    flush_t flush_v
+);
+
 } // namespace ----------------------------------------------------------------
 
 #include <cmp/io/output_stream.ipp>

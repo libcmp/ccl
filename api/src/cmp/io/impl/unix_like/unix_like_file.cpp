@@ -96,7 +96,7 @@ void
 file::close ()
 noexcept
 {
-    flush();
+    this->flush();
     ::close(m_file_descriptor);
     m_file_descriptor = -1;
 } // function -----------------------------------------------------------------

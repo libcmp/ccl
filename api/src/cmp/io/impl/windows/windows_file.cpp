@@ -115,7 +115,7 @@ void
 file::close ()
 noexcept
 {
-    flush();
+    this->flush();
     CloseHandle(m_handle);
     m_handle = INVALID_HANDLE_VALUE;
 } // function -----------------------------------------------------------------

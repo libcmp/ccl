@@ -47,8 +47,7 @@ public:
         }
 
         data_output_stream stream{f, std::endian::native};
-        stream << value_to_write1 << value_to_write2;
-        stream.flush();
+        stream << value_to_write1 << value_to_write2 << flush;
 
         int value_to_read1;
         double value_to_read2;
