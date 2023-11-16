@@ -40,17 +40,22 @@ set(
         include/cmp/io/input_stream.hpp
         include/cmp/io/io_buffer.hpp
         include/cmp/io/io_resource.hpp
+        include/cmp/io/opaque_container_input_resource.hpp
+        include/cmp/io/opaque_container_io_resource.hpp
+        include/cmp/io/opaque_container_output_resource.hpp
         include/cmp/io/output_resource.hpp
         include/cmp/io/output_stream.hpp
         include/cmp/io/seekable_input_resource.hpp
         include/cmp/io/seekable_io_resource.hpp
         include/cmp/io/seekable_output_resource.hpp
         include/cmp/io/seekable_transfer_resource.hpp
-        include/cmp/io/string_io_resource.hpp
         include/cmp/io/text_input_stream.hpp
         include/cmp/io/text_io_stream.hpp
         include/cmp/io/text_output_stream.hpp
         include/cmp/io/transfer_resource.hpp
+        include/cmp/io/transparent_container_input_resource.hpp
+        include/cmp/io/transparent_container_io_resource.hpp
+        include/cmp/io/transparent_container_output_resource.hpp
         include/cmp/io/uio.hpp
 )
 set(

@@ -3,7 +3,7 @@
 
 #include <cmp/core/test_module.hpp>
 #include <cmp/io/text_io_stream.hpp>
-#include <cmp/io/string_io_resource.hpp>
+#include <cmp/io/opaque_container_io_resource.hpp>
 #include <cmp/io/file.hpp>
 
 namespace cmp {
@@ -29,7 +29,7 @@ public:
     {
         start_test("test_stream");
 
-        u8string_io_resource string_resource{u8"Hello, world!"};
+        opaque_u8string_io_resource string_resource{u8"Hello, world!"};
         text_io_stream stream1{string_resource, utf8, std::endian::native};
         stream1->set_position(7, position_reference::begin);
         stream1 << u8"there!";
@@ -50,7 +50,7 @@ public:
         file file_resource{
             "../../test_data/test_stream.txt",
             read_and_write,
-            cmp::if_not_there::fail
+            if_not_there::fail
         };
 
         if (!file_resource.is_open()) {

@@ -7,8 +7,8 @@
 #include <cstdint>
 
 #include <cmp/io/inclusion_assert.hpp>
-#include <cmp/io/io_resource.hpp>
-#include <cmp/io/seekable_transfer_resource.hpp>
+#include <cmp/io/seekable_input_resource.hpp>
+#include <cmp/io/seekable_output_resource.hpp>
 
 namespace cmp {
 
@@ -16,8 +16,8 @@ template <
     typename Position
 >
 class seekable_io_resource
-    : public io_resource
-    , public seekable_transfer_resource<Position>
+    : public virtual seekable_input_resource<Position>
+    , public virtual seekable_output_resource<Position>
 {
 public:
     // Types ------------------------------------------------------------------

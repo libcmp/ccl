@@ -16,8 +16,8 @@ template <
     typename Position
 >
 class seekable_input_resource
-    : public input_resource
-    , public seekable_transfer_resource<Position>
+    : public virtual seekable_transfer_resource<Position>
+    , public input_resource
 {
 public:
     // Types ------------------------------------------------------------------

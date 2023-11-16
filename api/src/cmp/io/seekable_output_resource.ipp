@@ -16,8 +16,8 @@ seekable_output_resource<Position>::seekable_output_resource (
     std::size_t buffer_capacity
 )
     : transfer_resource{buffer_capacity}
-    , output_resource{buffer_capacity}
     , seekable_transfer_resource<Position>{buffer_capacity}
+    , output_resource{buffer_capacity}
 {
 } // function -----------------------------------------------------------------
 
@@ -34,7 +34,7 @@ seekable_output_resource<Position>::set_position (
 noexcept
 {
     this->flush();
-    set_position_raw(new_position, pr);
+    this->set_position_raw(new_position, pr);
 } // function -----------------------------------------------------------------
 
 } // namespace ----------------------------------------------------------------

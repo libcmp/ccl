@@ -3,7 +3,7 @@
 
 #include <cmp/core/test_module.hpp>
 #include <cmp/io/data_io_stream.hpp>
-#include <cmp/io/string_io_resource.hpp>
+#include <cmp/io/opaque_container_io_resource.hpp>
 
 namespace cmp {
 
@@ -28,14 +28,13 @@ public:
     {
         start_test("test_read");
 
-        u8string_io_resource resource{u8"Hello, world!"};
+        opaque_u8string_io_resource resource{u8"Hello, world!"};
         data_io_stream stream{resource, std::endian::native};
 
         stream->set_position(5, position_reference::current);
         const char8_t data{';'};
         stream << data;
         stream->flush();
-        std::u8string content{resource.grab_content()};
         if (resource.grab_content() != u8"Hello; world!") {
             std::cout << "The data was not written correctly."
                       << std::endl;

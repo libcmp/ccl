@@ -1,133 +1,133 @@
-// Copyright (C) 2022 Daniel T. McGinnis
+// Copyright (C) 2023 Daniel T. McGinnis
 // SPDX-License-Identifier: BSL-1.0
 
-#include <cmp/io/string_io_resource.hpp>
+#include <cmp/io/impl/ctr_essence.hpp>
 
 namespace cmp {
 
-// --------------------------------------------------- cmp::string_io_resource
+namespace impl {
+
+// ---------------------------------------------------- cmp::impl::ctr_essence
 
 // Constructors and Destructor ------------------------------------------------
 
 template <
-    writable_unicode_string T
+    typename Container
 >
-string_io_resource<T>::string_io_resource (
-    std::size_t buffer_capacity
+ctr_essence<Container>::ctr_essence (
+    const Container* initial_content_ptr
 )
-    : transfer_resource{buffer_capacity}
-    , seekable_io_resource{buffer_capacity}
-    , m_content{}
+    : m_content_ptr{
+          reinterpret_cast<void*>(
+              const_cast<Container*>(
+                  initial_content_ptr
+              )
+          )
+      }
     , m_position{0}
     , m_last_fill_amount{0}
 {
-} // function -----------------------------------------------------------------
-
-template <
-    writable_unicode_string T
->
-string_io_resource<T>::string_io_resource (
-    string_type initial_content,
-    std::size_t buffer_capacity
-)
-    : transfer_resource{buffer_capacity}
-    , seekable_io_resource{buffer_capacity}
-    , m_content{std::move(initial_content)}
-    , m_position{0}
-    , m_last_fill_amount{0}
-{
-} // function -----------------------------------------------------------------
-
-// Accessors ------------------------------------------------------------------
-
-template <
-    writable_unicode_string T
->
-bool
-string_io_resource<T>::is_at_end ()
-const noexcept
-{
-    return get_position() == string_size(m_content) * sizeof (code_unit_type);
-} // function -----------------------------------------------------------------
-
-template <
-    writable_unicode_string T
->
-T&
-string_io_resource<T>::grab_content ()
-noexcept
-{
-    return m_content;
-} // function -----------------------------------------------------------------
-
-template <
-    writable_unicode_string T
->
-const T&
-string_io_resource<T>::grab_content ()
-const noexcept
-{
-    return m_content;
-} // function -----------------------------------------------------------------
-
-// Core -----------------------------------------------------------------------
-
-template <
-    writable_unicode_string T
->
-std::int64_t
-string_io_resource<T>::get_position ()
-const noexcept
-{
-    return m_position + m_buffer.get_position();
 } // function -----------------------------------------------------------------
 
 // Protected Functions --------------------------------------------------------
 
 template <
-    writable_unicode_string T
+    typename Container
+>
+Container*
+ctr_essence<Container>::get_content_ptr ()
+noexcept
+{
+    return reinterpret_cast<Container*>(m_content_ptr);
+} // function -----------------------------------------------------------------
+
+template <
+    typename Container
+>
+const Container*
+ctr_essence<Container>::get_const_content_ptr ()
+const noexcept
+{
+    return reinterpret_cast<const Container*>(m_content_ptr);
+} // function -----------------------------------------------------------------
+
+template <
+    typename Container
+>
+bool
+ctr_essence<Container>::is_at_end (
+    const io_buffer& buffer
+)
+const noexcept
+{
+    using element_type = typename Container::value_type;
+
+    return get_position(buffer) ==
+        std::size(*get_const_content_ptr()) * sizeof (element_type);
+} // function -----------------------------------------------------------------
+
+template <
+    typename Container
+>
+std::int64_t
+ctr_essence<Container>::get_position (
+    const io_buffer& buffer
+)
+const noexcept
+{
+    return m_position + buffer.get_position();
+} // function -----------------------------------------------------------------
+
+template <
+    typename Container
 >
 void
-string_io_resource<T>::set_position_raw (
+ctr_essence<Container>::set_position_raw (
     std::int64_t new_position,
     position_reference pr
 )
 noexcept
 {
+    using element_type = typename Container::value_type;
+
     switch (pr) {
         case position_reference::begin:
-            m_position = new_position * sizeof (code_unit_type);
+            m_position = new_position * sizeof (element_type);
             break;
         case position_reference::current:
-            m_position += new_position * sizeof (code_unit_type);
+            m_position += new_position * sizeof (element_type);
             break;
         case position_reference::end:
-            m_position = (string_size(m_content) - new_position)
-                * sizeof (code_unit_type);
+            m_position = (std::size(*get_const_content_ptr()) - new_position)
+                * sizeof (element_type);
             break;
     }
-
     m_last_fill_amount = 0;
 } // function -----------------------------------------------------------------
 
 template <
-    writable_unicode_string T
+    typename Container
 >
 std::size_t
-string_io_resource<T>::read_raw (
-    std::byte* data,
+ctr_essence<Container>::read_raw (
+    std::byte *data,
     std::size_t byte_count,
-    read_request rr
+    cmp::read_request rr,
+    seekable_input_resource<std::int64_t>& resource
 ) {
+    using element_type = typename Container::value_type;
+
+    const auto& content_ref{*get_const_content_ptr()};
+
     if (rr == read_request::fill_buffer && m_last_fill_amount > 0) {
-        go_forward(m_last_fill_amount);
+        resource.go_forward(m_last_fill_amount);
     }
 
     /*
         We compute the number of bytes stored in the content.
     */
     const std::size_t content_size{
-        string_size(m_content) * sizeof (code_unit_type)
+        std::size(content_ref) * sizeof (element_type)
     };
 
     /*
@@ -148,7 +148,8 @@ string_io_resource<T>::read_raw (
     */
     std::memcpy(
         data,
-        reinterpret_cast<std::byte*>(std::data(m_content)) + m_position,
+        reinterpret_cast<const std::byte*>(std::data(content_ref))
+            + m_position,
         byte_count
     );
 
@@ -162,7 +163,7 @@ string_io_resource<T>::read_raw (
         then we go back by the number of bytes read.
     */
     if (rr == read_request::fill_buffer) {
-        go_back(static_cast<position_type>(byte_count));
+        resource.go_back(static_cast<std::int64_t>(byte_count));
         m_last_fill_amount = byte_count;
     }
 
@@ -170,18 +171,22 @@ string_io_resource<T>::read_raw (
 } // function -----------------------------------------------------------------
 
 template <
-    writable_unicode_string T
+    typename Container
 >
 std::size_t
-string_io_resource<T>::write_raw (
+ctr_essence<Container>::write_raw (
     const std::byte* data,
     std::size_t byte_count
 ) {
+    using element_type = typename Container::value_type;
+
+    auto& content_ref{*get_content_ptr()};
+
     /*
         We compute the number of bytes stored in the content.
     */
     const std::size_t content_size{
-        string_size(m_content) * sizeof (code_unit_type)
+        std::size(content_ref) * sizeof (element_type)
     };
 
     /*
@@ -193,8 +198,9 @@ string_io_resource<T>::write_raw (
             Here we know that the caller is trying to write more bytes
             than there are bytes available. So we just make room.
         */
-        m_content.resize(
-            string_size(m_content) + (byte_count / sizeof (code_unit_type))
+        content_ref.resize(
+            std::size(content_ref)
+                + (byte_count / sizeof (element_type))
         );
     }
 
@@ -202,7 +208,8 @@ string_io_resource<T>::write_raw (
         Here we copy the bytes from the data array to the content.
     */
     std::memcpy(
-        reinterpret_cast<std::byte*>(std::data(m_content)) + m_position,
+        reinterpret_cast<std::byte*>(std::data(content_ref))
+            + m_position,
         data,
         byte_count
     );
@@ -214,5 +221,7 @@ string_io_resource<T>::write_raw (
 
     return byte_count;
 } // function -----------------------------------------------------------------
+
+} // namespace ----------------------------------------------------------------
 
 } // namespace ----------------------------------------------------------------

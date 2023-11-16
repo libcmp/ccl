@@ -61,6 +61,58 @@ add_test(
 # TESTS / CCL IO
 
 add_executable(
+    test_container_transfer_resources
+        io/test_container_transfer_resources.cpp
+)
+set_target_properties(
+    test_container_transfer_resources PROPERTIES
+        LINKER_LANGUAGE CXX
+        CXX_STANDARD 20
+        CXX_STANDARD_REQUIRED TRUE
+        CXX_EXTENSIONS OFF
+)
+target_link_libraries(
+    test_container_transfer_resources
+        cmp
+)
+add_test(
+    container_transfer_resources_test
+        test_container_transfer_resources
+)
+# test ------------------------------------------------------------------------
+add_executable(
+    ho_test_container_transfer_resources
+        io/test_container_transfer_resources.cpp
+)
+set_target_properties(
+    ho_test_container_transfer_resources PROPERTIES
+        LINKER_LANGUAGE CXX
+        CXX_STANDARD 20
+        CXX_STANDARD_REQUIRED TRUE
+        CXX_EXTENSIONS OFF
+)
+target_include_directories(
+    ho_test_container_transfer_resources PUBLIC
+        ../../api/include
+        ../../api/src
+)
+target_compile_definitions(
+    ho_test_container_transfer_resources PUBLIC
+        CMP_CONFIG_HEADER_ONLY=true
+)
+if (CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
+    target_compile_options(
+        ho_test_container_transfer_resources PUBLIC
+            /utf-8
+    )
+endif ()
+add_test(
+    ho_container_transfer_resources_test
+        ho_test_container_transfer_resources
+)
+# test ------------------------------------------------------------------------
+
+add_executable(
     test_data_input_stream
         io/test_data_input_stream.cpp
 )
@@ -317,58 +369,6 @@ endif ()
 add_test(
     ho_io_general_test
         ho_test_io_general
-)
-# test ------------------------------------------------------------------------
-
-add_executable(
-    test_string_io_resource
-        io/test_string_io_resource.cpp
-)
-set_target_properties(
-    test_string_io_resource PROPERTIES
-        LINKER_LANGUAGE CXX
-        CXX_STANDARD 20
-        CXX_STANDARD_REQUIRED TRUE
-        CXX_EXTENSIONS OFF
-)
-target_link_libraries(
-    test_string_io_resource
-        cmp
-)
-add_test(
-    string_io_resource_test
-        test_string_io_resource
-)
-# test ------------------------------------------------------------------------
-add_executable(
-    ho_test_string_io_resource
-        io/test_string_io_resource.cpp
-)
-set_target_properties(
-    ho_test_string_io_resource PROPERTIES
-        LINKER_LANGUAGE CXX
-        CXX_STANDARD 20
-        CXX_STANDARD_REQUIRED TRUE
-        CXX_EXTENSIONS OFF
-)
-target_include_directories(
-    ho_test_string_io_resource PUBLIC
-        ../../api/include
-        ../../api/src
-)
-target_compile_definitions(
-    ho_test_string_io_resource PUBLIC
-        CMP_CONFIG_HEADER_ONLY=true
-)
-if (CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
-    target_compile_options(
-        ho_test_string_io_resource PUBLIC
-            /utf-8
-    )
-endif ()
-add_test(
-    ho_string_io_resource_test
-        ho_test_string_io_resource
 )
 # test ------------------------------------------------------------------------
 

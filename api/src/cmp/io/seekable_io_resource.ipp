@@ -16,8 +16,8 @@ seekable_io_resource<Position>::seekable_io_resource (
     std::size_t buffer_capacity
 )
     : transfer_resource{buffer_capacity}
-    , io_resource{buffer_capacity}
-    , seekable_transfer_resource<Position>{buffer_capacity}
+    , seekable_input_resource<Position>{buffer_capacity}
+    , seekable_output_resource<Position>{buffer_capacity}
 {
 } // function -----------------------------------------------------------------
 
@@ -35,7 +35,7 @@ noexcept
 {
     this->flush();
     this->set_position_raw(new_position, pr);
-    m_buffer.set_read_dirty(true);
+    transfer_resource::m_buffer.set_read_dirty(true);
 } // function -----------------------------------------------------------------
 
 } // namespace ----------------------------------------------------------------

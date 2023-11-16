@@ -16,8 +16,8 @@ seekable_input_resource<Position>::seekable_input_resource (
     std::size_t buffer_capacity
 )
     : transfer_resource{buffer_capacity}
-    , input_resource{buffer_capacity}
     , seekable_transfer_resource<Position>{buffer_capacity}
+    , input_resource{buffer_capacity}
 {
 } // function -----------------------------------------------------------------
 
@@ -33,7 +33,7 @@ seekable_input_resource<Position>::set_position (
 )
 noexcept
 {
-    set_position_raw(new_position, pr);
+    this->set_position_raw(new_position, pr);
     m_buffer.set_read_dirty(true);
 } // function -----------------------------------------------------------------
 
