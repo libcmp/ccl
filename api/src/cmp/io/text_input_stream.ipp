@@ -418,6 +418,19 @@ operator >> (
     text_input_stream<InputResource>& stream,
     T& target
 ) {
+    /*
+        We first clear the target string to make sure that it
+        is empty because we are going to append code points to
+        it later. This prevents the target string's previous
+        content from sticking around. We want to replace the
+        target string's content, not add to it.
+    */
+    target.clear();
+
+    /*
+        This is the variable in which code points
+        read from the stream will be stored.
+    */
     char32_t code_point;
 
     /*

@@ -4,6 +4,7 @@
 #include <cmp/core/test_module.hpp>
 #include <cmp/io/text_input_stream.hpp>
 #include <cmp/io/file.hpp>
+#include <cmp/io/opaque_container_input_resource.hpp>
 
 namespace cmp {
 
@@ -14,6 +15,21 @@ public:
     text_input_stream_test_module ()
     noexcept
         : test_module({
+              &text_input_stream_test_module
+                  :: test_read_strings_from_char,
+
+              &text_input_stream_test_module
+                  :: test_read_strings_from_utf8,
+
+              &text_input_stream_test_module
+                  :: test_read_strings_from_utf16,
+
+              &text_input_stream_test_module
+                  :: test_read_strings_from_utf32,
+
+              &text_input_stream_test_module
+                  :: test_read_strings_from_wide,
+
               &text_input_stream_test_module
                   :: test_read_line_from_utf8,
 
@@ -42,6 +58,112 @@ public:
     } // function -------------------------------------------------------------
 
     // Test Tooling -----------------------------------------------------------
+
+    template <
+        typename CodeUnit,
+        typename InputResource
+    >
+    bool
+    test_read_strings_generic (
+        InputResource& resource,
+        std::endian endianness
+    ) {
+        encoding_form encoding;
+        if constexpr (
+            std::is_same_v<CodeUnit, char8_t>
+                || std::is_same_v<CodeUnit, char>
+        ) {
+            encoding = utf8;
+        } else if constexpr (std::is_same_v<CodeUnit, char16_t>) {
+            encoding = utf16;
+        } else if constexpr (std::is_same_v<CodeUnit, char32_t>) {
+            encoding = utf32;
+        } else if constexpr (std::is_same_v<CodeUnit, wchar_t>) {
+            if constexpr (sizeof (wchar_t) == 2) {
+                encoding = utf16;
+            } else {
+                encoding = utf32;
+            }
+        } else {
+            std::cout << "test_read_strings_generic was called with an "
+                         "invalid code unit type. Please use one of "
+                         "char, char8_t, char16_t, char32_t or wchar_t."
+                      << std::endl;
+
+            return false;
+        }
+
+        text_input_stream stream{resource, encoding, endianness};
+
+        std::basic_string<CodeUnit> string1;
+        std::basic_string<CodeUnit> string2;
+        std::basic_string<CodeUnit> string3;
+
+        std::basic_string<CodeUnit> expected_string1;
+        std::basic_string<CodeUnit> expected_string2;
+        std::basic_string<CodeUnit> expected_string3;
+        if constexpr (std::is_same_v<CodeUnit, char>) {
+            string1 = "Starting value.";
+            string2 = "Starting value.";
+            string3 = "Starting value.";
+            expected_string1 = "Hello";
+            expected_string2 = "yellow";
+            expected_string3 = "world!";
+        } else if constexpr (std::is_same_v<CodeUnit, char8_t>) {
+            string1 = u8"Starting value.";
+            string2 = u8"Starting value.";
+            string3 = u8"Starting value.";
+            expected_string1 = u8"Hello";
+            expected_string2 = u8"yellow";
+            expected_string3 = u8"world!";
+        } else if constexpr (std::is_same_v<CodeUnit, char16_t>) {
+            string1 = u"Starting value.";
+            string2 = u"Starting value.";
+            string3 = u"Starting value.";
+            expected_string1 = u"Hello";
+            expected_string2 = u"yellow";
+            expected_string3 = u"world!";
+        } else if constexpr (std::is_same_v<CodeUnit, char32_t>) {
+            string1 = U"Starting value.";
+            string2 = U"Starting value.";
+            string3 = U"Starting value.";
+            expected_string1 = U"Hello";
+            expected_string2 = U"yellow";
+            expected_string3 = U"world!";
+        } else if constexpr (std::is_same_v<CodeUnit, wchar_t>) {
+            string1 = L"Starting value.";
+            string2 = L"Starting value.";
+            string3 = L"Starting value.";
+            expected_string1 = L"Hello";
+            expected_string2 = L"yellow";
+            expected_string3 = L"world!";
+        }
+
+        stream >> string1 >> string2 >> string3;
+
+        if (string1 != expected_string1) {
+            std::cout << "string1 does not match its expected value."
+                      << std::endl;
+
+            return false;
+        }
+
+        if (string2 != expected_string2) {
+            std::cout << "string2 does not match its expected value."
+                      << std::endl;
+
+            return false;
+        }
+
+        if (string3 != expected_string3) {
+            std::cout << "string3 does not match its expected value."
+                      << std::endl;
+
+            return false;
+        }
+
+        return true;
+    } // function -------------------------------------------------------------
 
     template <
         typename CodeUnit,
@@ -449,6 +571,109 @@ public:
     } // function -------------------------------------------------------------
 
     // Tests ------------------------------------------------------------------
+
+    bool
+    test_read_strings_from_char ()
+    noexcept
+    {
+        start_test("test_read_strings_from_char");
+
+        opaque_string_input_resource resource{"Hello yellow world!"};
+        if (!test_read_strings_generic<char>(resource, std::endian::native)) {
+            std::cout << "test_read_strings_from_char failed."
+                      << std::endl;
+
+            return false;
+        }
+
+        end_stage();
+
+        return true;
+    } // function -------------------------------------------------------------
+
+    bool
+    test_read_strings_from_utf8 ()
+    noexcept
+    {
+        start_test("test_read_strings_from_utf8");
+
+        opaque_u8string_input_resource resource{u8"Hello yellow world!"};
+        if (
+            !test_read_strings_generic<char8_t>(resource, std::endian::native)
+        ) {
+            std::cout << "test_read_strings_from_utf8 failed."
+                      << std::endl;
+
+            return false;
+        }
+
+        end_stage();
+
+        return true;
+    } // function -------------------------------------------------------------
+
+    bool
+    test_read_strings_from_utf16 ()
+    noexcept
+    {
+        start_test("test_read_strings_from_utf16");
+
+        opaque_u16string_input_resource resource{u"Hello yellow world!"};
+        if (
+            !test_read_strings_generic<char16_t>(resource, std::endian::native)
+        ) {
+            std::cout << "test_read_strings_from_utf16 failed."
+                      << std::endl;
+
+            return false;
+        }
+
+        end_stage();
+
+        return true;
+    } // function -------------------------------------------------------------
+
+    bool
+    test_read_strings_from_utf32 ()
+    noexcept
+    {
+        start_test("test_read_strings_from_utf32");
+
+        opaque_u32string_input_resource resource{U"Hello yellow world!"};
+        if (
+            !test_read_strings_generic<char32_t>(resource, std::endian::native)
+        ) {
+            std::cout << "test_read_strings_from_utf32 failed."
+                      << std::endl;
+
+            return false;
+        }
+
+        end_stage();
+
+        return true;
+    } // function -------------------------------------------------------------
+
+    bool
+    test_read_strings_from_wide ()
+    noexcept
+    {
+        start_test("test_read_strings_from_wide");
+
+        opaque_wstring_input_resource resource{L"Hello yellow world!"};
+        if (
+            !test_read_strings_generic<wchar_t>(resource, std::endian::native)
+        ) {
+            std::cout << "test_read_strings_from_wide failed."
+                      << std::endl;
+
+            return false;
+        }
+
+        end_stage();
+
+        return true;
+    } // function -------------------------------------------------------------
 
     bool
     test_read_line_from_utf8 ()
