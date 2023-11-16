@@ -88,18 +88,13 @@ text_output_stream<OutputResource>::write_code_point_in_utf16 (
             data.size() * sizeof (char16_t)
         );
     } else {
-        if (data.size() == 1) {
+        this->reverse_write(
+            reinterpret_cast<std::byte*>(data.data()),
+            sizeof (char16_t)
+        );
+        if (data.size() > 1) {
             this->reverse_write(
-                reinterpret_cast<std::byte*>(data.data()),
-                sizeof (char16_t)
-            );
-        } else {
-            this->reverse_write(
-                reinterpret_cast<std::byte*>(&(data[0])),
-                sizeof (char16_t)
-            );
-            this->reverse_write(
-                reinterpret_cast<std::byte*>(&(data[1])),
+                reinterpret_cast<std::byte*>(data.data() + 1),
                 sizeof (char16_t)
             );
         }
