@@ -4,11 +4,8 @@
 #ifndef CMP_IO_TEXT_OUTPUT_STREAM_HPP_INCLUDED
 #define CMP_IO_TEXT_OUTPUT_STREAM_HPP_INCLUDED
 
-#include <string>
-
 #include <cmp/io/inclusion_assert.hpp>
 #include <cmp/io/output_stream.hpp>
-#include <cmp/unicode/concepts.hpp>
 #include <cmp/unicode/algorithms.hpp>
 #include <cmp/unicode/formatters.hpp>
 
@@ -119,7 +116,7 @@ public:
     text_output_stream<OutputResource2>&
     operator << (
         text_output_stream<OutputResource2>& stream,
-        const char* source
+        const std::string_view& source
     );
 
     template <
@@ -129,7 +126,7 @@ public:
     text_output_stream<OutputResource2>&
     operator << (
         text_output_stream<OutputResource2>& stream,
-        const std::string& source
+        const std::u8string_view& source
     );
 
     template <
@@ -139,7 +136,7 @@ public:
     text_output_stream<OutputResource2>&
     operator << (
         text_output_stream<OutputResource2>& stream,
-        const char8_t* source
+        const std::u16string_view& source
     );
 
     template <
@@ -149,7 +146,7 @@ public:
     text_output_stream<OutputResource2>&
     operator << (
         text_output_stream<OutputResource2>& stream,
-        const std::u8string& source
+        const std::u32string_view& source
     );
 
     template <
@@ -159,37 +156,7 @@ public:
     text_output_stream<OutputResource2>&
     operator << (
         text_output_stream<OutputResource2>& stream,
-        const char16_t* source
-    );
-
-    template <
-        typename OutputResource2
-    >
-    friend
-    text_output_stream<OutputResource2>&
-    operator << (
-        text_output_stream<OutputResource2>& stream,
-        const std::u16string& source
-    );
-
-    template <
-        typename OutputResource2
-    >
-    friend
-    text_output_stream<OutputResource2>&
-    operator << (
-        text_output_stream<OutputResource2>& stream,
-        const char32_t* source
-    );
-
-    template <
-        typename OutputResource2
-    >
-    friend
-    text_output_stream<OutputResource2>&
-    operator << (
-        text_output_stream<OutputResource2>& stream,
-        const std::u32string& source
+        const std::wstring_view& source
     );
 
     friend class stdout_stream_t;
@@ -297,7 +264,7 @@ template <
 text_output_stream<OutputResource>&
 operator << (
     text_output_stream<OutputResource>& stream,
-    const std::string& source
+    const std::string_view& source
 );
 
 /**
@@ -335,7 +302,26 @@ template <
 text_output_stream<OutputResource>&
 operator << (
     text_output_stream<OutputResource>& stream,
-    const std::u8string& source
+    const std::u8string_view& source
+);
+
+/**
+    Description:
+        Writes a UTF-16 code unit with the text output stream.
+
+    Parameters:
+        stream:
+            The text output stream to write with.
+        source:
+            The object to write.
+*/
+template <
+    typename OutputResource
+>
+text_output_stream<OutputResource>&
+operator << (
+    text_output_stream<OutputResource>& stream,
+    const char16_t* source
 );
 
 /**
@@ -354,7 +340,26 @@ template <
 text_output_stream<OutputResource>&
 operator << (
     text_output_stream<OutputResource>& stream,
-    const std::u16string& source
+    const std::u16string_view& source
+);
+
+/**
+    Description:
+        Writes a UTF-32 code unit with the text output stream.
+
+    Parameters:
+        stream:
+            The text output stream to write with.
+        source:
+            The object to write.
+*/
+template <
+    typename OutputResource
+>
+text_output_stream<OutputResource>&
+operator << (
+    text_output_stream<OutputResource>& stream,
+    const char32_t* source
 );
 
 /**
@@ -373,7 +378,45 @@ template <
 text_output_stream<OutputResource>&
 operator << (
     text_output_stream<OutputResource>& stream,
-    const std::u32string& source
+    const std::u32string_view& source
+);
+
+/**
+    Description:
+        Writes a wide code unit with the text output stream.
+
+    Parameters:
+        stream:
+            The text output stream to write with.
+        source:
+            The object to write.
+*/
+template <
+    typename OutputResource
+>
+text_output_stream<OutputResource>&
+operator << (
+    text_output_stream<OutputResource>& stream,
+    const wchar_t* source
+);
+
+/**
+    Description:
+        Writes a wide string with the text output stream.
+
+    Parameters:
+        stream:
+            The text output stream to write with.
+        source:
+            The object to write.
+*/
+template <
+    typename OutputResource
+>
+text_output_stream<OutputResource>&
+operator << (
+    text_output_stream<OutputResource>& stream,
+    const std::wstring_view& source
 );
 
 /**

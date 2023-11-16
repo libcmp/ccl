@@ -175,24 +175,7 @@ operator << (
     text_output_stream<OutputResource>& stream,
     const char* source
 ) {
-    switch (stream.get_encoding_form()) {
-        case utf8:
-            for (char current_code_point : std::string_view{source}) {
-                stream.write_code_point_in_utf8(current_code_point);
-            }
-            break;
-        case utf16:
-            for (char current_code_point : std::string_view{source}) {
-                stream.write_code_point_in_utf16(current_code_point);
-            }
-            break;
-        case utf32:
-            for (char current_code_point : std::string_view{source}) {
-                stream.write_code_point_in_utf32(current_code_point);
-            }
-            break;
-    }
-    return stream;
+    return stream << std::string_view{source};
 } // function -----------------------------------------------------------------
 
 template <
@@ -201,9 +184,27 @@ template <
 text_output_stream<OutputResource>&
 operator << (
     text_output_stream<OutputResource>& stream,
-    const std::string& source
+    const std::string_view& source
 ) {
-    return operator <<(stream, source.data());
+    switch (stream.get_encoding_form()) {
+        case utf8:
+            stream.write(
+                reinterpret_cast<const std::byte*>(std::data(source)),
+                std::size(source)
+            );
+            break;
+        case utf16:
+            for (char current_code_point : source) {
+                stream.write_code_point_in_utf16(current_code_point);
+            }
+            break;
+        case utf32:
+            for (char current_code_point : source) {
+                stream.write_code_point_in_utf32(current_code_point);
+            }
+            break;
+    }
+    return stream;
 } // function -----------------------------------------------------------------
 
 template <
@@ -214,25 +215,7 @@ operator << (
     text_output_stream<OutputResource>& stream,
     const char8_t* source
 ) {
-    switch (stream.get_encoding_form()) {
-        case utf8:
-            stream.write(
-                reinterpret_cast<const std::byte*>(source),
-                string_size(source)
-            );
-            break;
-        case utf16:
-            for (char32_t current_code_point : by_code_point{source}) {
-                stream.write_code_point_in_utf16(current_code_point);
-            }
-            break;
-        case utf32:
-            for (char32_t current_code_point : by_code_point{source}) {
-                stream.write_code_point_in_utf32(current_code_point);
-            }
-            break;
-    }
-    return stream;
+    return stream << std::u8string_view{source};
 } // function -----------------------------------------------------------------
 
 template <
@@ -241,13 +224,13 @@ template <
 text_output_stream<OutputResource>&
 operator << (
     text_output_stream<OutputResource>& stream,
-    const std::u8string& source
+    const std::u8string_view& source
 ) {
     switch (stream.get_encoding_form()) {
         case utf8:
             stream.write(
-                reinterpret_cast<const std::byte*>(source.data()),
-                source.size()
+                reinterpret_cast<const std::byte*>(std::data(source)),
+                std::size(source)
             );
             break;
         case utf16:
@@ -272,31 +255,7 @@ operator << (
     text_output_stream<OutputResource>& stream,
     const char16_t* source
 ) {
-    switch (stream.get_encoding_form()) {
-        case utf8:
-            for (char32_t current_code_point : by_code_point{source}) {
-                stream.write_code_point_in_utf8(current_code_point);
-            }
-            break;
-        case utf16:
-            if (stream.get_endianness() == std::endian::native) {
-                stream.write(
-                    reinterpret_cast<const std::byte*>(source),
-                    string_size(source) * sizeof (char16_t)
-                );
-            } else {
-                for (char32_t current_code_point : by_code_point{source}) {
-                    stream.write_code_point_in_utf16(current_code_point);
-                }
-            }
-            break;
-        case utf32:
-            for (char32_t current_code_point : by_code_point{source}) {
-                stream.write_code_point_in_utf32(current_code_point);
-            }
-            break;
-    }
-    return stream;
+    return stream << std::u16string_view{source};
 } // function -----------------------------------------------------------------
 
 template <
@@ -305,7 +264,7 @@ template <
 text_output_stream<OutputResource>&
 operator << (
     text_output_stream<OutputResource>& stream,
-    const std::u16string& source
+    const std::u16string_view& source
 ) {
     switch (stream.get_encoding_form()) {
         case utf8:
@@ -316,8 +275,8 @@ operator << (
         case utf16:
             if (stream.get_endianness() == std::endian::native) {
                 stream.write(
-                    reinterpret_cast<const std::byte*>(source.data()),
-                    source.size() * sizeof (char16_t)
+                    reinterpret_cast<const std::byte*>(std::data(source)),
+                    std::size(source) * sizeof (char16_t)
                 );
             } else {
                 for (char32_t current_code_point : by_code_point{source}) {
@@ -342,6 +301,17 @@ operator << (
     text_output_stream<OutputResource>& stream,
     const char32_t* source
 ) {
+    return stream << std::u32string_view{source};
+} // function -----------------------------------------------------------------
+
+template <
+    typename OutputResource
+>
+text_output_stream<OutputResource>&
+operator << (
+    text_output_stream<OutputResource>& stream,
+    const std::u32string_view& source
+) {
     switch (stream.get_encoding_form()) {
         case utf8:
             for (char32_t current_code_point : by_code_point{source}) {
@@ -356,8 +326,8 @@ operator << (
         case utf32:
             if (stream.get_endianness() == std::endian::native) {
                 stream.write(
-                    reinterpret_cast<const std::byte*>(source),
-                    string_size(source) * sizeof (char32_t)
+                    reinterpret_cast<const std::byte*>(std::data(source)),
+                    std::size(source) * sizeof (char32_t)
                 );
             } else {
                 for (char32_t current_code_point : by_code_point{source}) {
@@ -375,7 +345,18 @@ template <
 text_output_stream<OutputResource>&
 operator << (
     text_output_stream<OutputResource>& stream,
-    const std::u32string& source
+    const wchar_t* source
+) {
+    return stream << std::wstring_view{source};
+} // function -----------------------------------------------------------------
+
+template <
+    typename OutputResource
+>
+text_output_stream<OutputResource>&
+operator << (
+    text_output_stream<OutputResource>& stream,
+    const std::wstring_view& source
 ) {
     switch (stream.get_encoding_form()) {
         case utf8:
@@ -384,19 +365,38 @@ operator << (
             }
             break;
         case utf16:
-            for (char32_t current_code_point : by_code_point{source}) {
-                stream.write_code_point_in_utf16(current_code_point);
+            if constexpr (sizeof (wchar_t) == 2) {
+                if (stream.get_endianness() == std::endian::native) {
+                    stream.write(
+                        reinterpret_cast<const std::byte*>(std::data(source)),
+                        std::size(source) * sizeof (wchar_t)
+                    );
+                } else {
+                    for (char32_t current_code_point : by_code_point{source}) {
+                        stream.write_code_point_in_utf16(current_code_point);
+                    }
+                }
+            } else {
+                for (char32_t current_code_point : by_code_point{source}) {
+                    stream.write_code_point_in_utf16(current_code_point);
+                }
             }
             break;
         case utf32:
-            if (stream.get_endianness() == std::endian::native) {
-                stream.write(
-                    reinterpret_cast<const std::byte*>(source.data()),
-                    source.size() * sizeof (char32_t)
-                );
-            } else {
+            if constexpr (sizeof (wchar_t) == 2) {
                 for (char32_t current_code_point : by_code_point{source}) {
                     stream.write_code_point_in_utf32(current_code_point);
+                }
+            } else {
+                if (stream.get_endianness() == std::endian::native) {
+                    stream.write(
+                        reinterpret_cast<const std::byte*>(std::data(source)),
+                        std::size(source) * sizeof (wchar_t)
+                    );
+                } else {
+                    for (char32_t current_code_point : by_code_point{source}) {
+                        stream.write_code_point_in_utf32(current_code_point);
+                    }
                 }
             }
             break;
