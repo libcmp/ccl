@@ -24,13 +24,19 @@ public:
                   :: test_read_line_from_utf32,
 
               &text_input_stream_test_module
+                  :: test_read_line_from_wide,
+
+              &text_input_stream_test_module
                   :: test_read_all_from_utf8,
 
               &text_input_stream_test_module
                   :: test_read_all_from_utf16,
 
               &text_input_stream_test_module
-                  :: test_read_all_from_utf32
+                  :: test_read_all_from_utf32,
+
+              &text_input_stream_test_module
+                  :: test_read_all_from_wide
           })
     {
     } // function -------------------------------------------------------------
@@ -55,10 +61,16 @@ public:
             encoding = utf16;
         } else if constexpr (std::is_same_v<CodeUnit, char32_t>) {
             encoding = utf32;
+        } else if constexpr (std::is_same_v<CodeUnit, wchar_t>) {
+            if constexpr (sizeof (wchar_t) == 2) {
+                encoding = utf16;
+            } else {
+                encoding = utf32;
+            }
         } else {
             std::cout << "test_read_line_generic was called with a "
                          "non-Unicode code unit type. Please use one of "
-                         "char8_t, char16_t or char32_t."
+                         "char8_t, char16_t, char32_t or wchar_t."
                       << std::endl;
 
             return false;
@@ -113,9 +125,103 @@ public:
 
             return false;
         }
+        if (stream.is_at_end()) {
+            std::cout << "The end of file was incorrectly reported "
+                         "after reading the third line."
+                      << std::endl;
+
+            return false;
+        }
+
+        std::wstring wide_line;
+        stream.read_line(wide_line);
+        if (wide_line != L"coração\U0001F600¯\\_(ツ)_/¯") {
+            std::cout << "The fourth line read from the file "
+                         "does not have the expected content."
+                      << std::endl;
+
+            return false;
+        }
         if (!stream.is_at_end()) {
             std::cout << "The end of file was not correctly detected "
                          "after reading the last line."
+                      << std::endl;
+
+            return false;
+        }
+
+        return true;
+    } // function -------------------------------------------------------------
+
+    template <
+        typename CodeUnit
+    >
+    bool
+    test_read_line_multibyte (
+        std::endian endianness
+    ) {
+        std::string encoding_spelled_out;
+        if constexpr (std::is_same_v<CodeUnit, char16_t>) {
+            encoding_spelled_out = "utf16";
+        } else if constexpr (std::is_same_v<CodeUnit, char32_t>) {
+            encoding_spelled_out = "utf32";
+        } else if constexpr (std::is_same_v<CodeUnit, wchar_t>) {
+            if constexpr (sizeof (wchar_t) == 2) {
+                encoding_spelled_out = "utf16";
+            } else {
+                encoding_spelled_out = "utf32";
+            }
+        } else {
+            std::cout << "test_read_line_multibyte was called with an "
+                         "invalid code unit type. Please use one of "
+                         "char16_t, char32_t or wchar_t."
+                      << std::endl;
+
+            return false;
+        }
+
+        std::string endianness_spelled_out;
+        if (endianness == std::endian::little) {
+            endianness_spelled_out = "little_endian";
+        } else if (endianness == std::endian::big) {
+            endianness_spelled_out = "big_endian";
+        } else {
+            std::cout << "test_read_line_multibyte was called with an "
+                         "invalid endianness. Please use one of "
+                         "std::endian::little or std::endian::big."
+                      << std::endl;
+
+            return false;
+        }
+
+        file f{
+            "../../test_data/test_read_"
+                + encoding_spelled_out
+                + "_with_"
+                + endianness_spelled_out
+                + "_bom.txt",
+            read_only,
+            if_not_there::fail
+        };
+
+        if (!f.is_open()) {
+            std::cout << "File test_read_"
+                      << encoding_spelled_out
+                      << "_with_"
+                      << endianness_spelled_out
+                      << "_bom.txt could not be opened for reading."
+                      << std::endl;
+
+            return false;
+        }
+
+        if (!test_read_line_generic<CodeUnit>(f, endianness)) {
+            std::cout << "test_read_line_multibyte failed when reading from "
+                         "file test_read_"
+                      << encoding_spelled_out
+                      << "_with_"
+                      << endianness_spelled_out
+                      << "_bom.txt."
                       << std::endl;
 
             return false;
@@ -142,10 +248,16 @@ public:
             encoding = utf16;
         } else if constexpr (std::is_same_v<CodeUnit, char32_t>) {
             encoding = utf32;
+        } else if constexpr (std::is_same_v<CodeUnit, wchar_t>) {
+            if constexpr (sizeof (wchar_t) == 2) {
+                encoding = utf16;
+            } else {
+                encoding = utf32;
+            }
         } else {
             std::cout << "test_read_all_generic was called with a "
                          "non-Unicode code unit type. Please use one of "
-                         "char8_t, char16_t or char32_t."
+                         "char8_t, char16_t, char32_t or wchar_t."
                       << std::endl;
 
             return false;
@@ -156,12 +268,12 @@ public:
         if (encoding != utf8) {
             stream.read_bom();
         }
-
         std::u8string utf8_content;
         stream.read_all(utf8_content);
         if (
             utf8_content
                 != u8"coração\U0001F600¯\\_(ツ)_/¯\n"
+                   "coração\U0001F600¯\\_(ツ)_/¯\n"
                    "coração\U0001F600¯\\_(ツ)_/¯\n"
                    "coração\U0001F600¯\\_(ツ)_/¯"
         ) {
@@ -188,6 +300,7 @@ public:
             utf16_content
                 != u"coração\U0001F600¯\\_(ツ)_/¯\n"
                    "coração\U0001F600¯\\_(ツ)_/¯\n"
+                   "coração\U0001F600¯\\_(ツ)_/¯\n"
                    "coração\U0001F600¯\\_(ツ)_/¯"
         ) {
             std::cout << "The std::u16string read from the file "
@@ -213,6 +326,7 @@ public:
             utf32_content
                 != U"coração\U0001F600¯\\_(ツ)_/¯\n"
                    "coração\U0001F600¯\\_(ツ)_/¯\n"
+                   "coração\U0001F600¯\\_(ツ)_/¯\n"
                    "coração\U0001F600¯\\_(ツ)_/¯"
         ) {
             std::cout << "The std::u32string read from the file "
@@ -223,6 +337,109 @@ public:
         }
         if (!stream.is_at_end()) {
             std::cout << "The end of file was not correctly detected."
+                      << std::endl;
+
+            return false;
+        }
+
+        stream->set_position(0, position_reference::begin);
+        if (encoding != utf8) {
+            stream.read_bom();
+        }
+        std::wstring wide_content;
+        stream.read_all(wide_content);
+        if (
+            wide_content
+                != L"coração\U0001F600¯\\_(ツ)_/¯\n"
+                   "coração\U0001F600¯\\_(ツ)_/¯\n"
+                   "coração\U0001F600¯\\_(ツ)_/¯\n"
+                   "coração\U0001F600¯\\_(ツ)_/¯"
+        ) {
+            std::cout << "The std::wstring read from the file "
+                         "does not have the expected content."
+                      << std::endl;
+
+            return false;
+        }
+        if (!stream.is_at_end()) {
+            std::cout << "The end of file was not correctly detected."
+                      << std::endl;
+
+            return false;
+        }
+
+        return true;
+    } // function -------------------------------------------------------------
+
+    template <
+        typename CodeUnit
+    >
+    bool
+    test_read_all_multibyte (
+        std::endian endianness
+    ) {
+        std::string encoding_spelled_out;
+        if constexpr (std::is_same_v<CodeUnit, char16_t>) {
+            encoding_spelled_out = "utf16";
+        } else if constexpr (std::is_same_v<CodeUnit, char32_t>) {
+            encoding_spelled_out = "utf32";
+        } else if constexpr (std::is_same_v<CodeUnit, wchar_t>) {
+            if constexpr (sizeof (wchar_t) == 2) {
+                encoding_spelled_out = "utf16";
+            } else {
+                encoding_spelled_out = "utf32";
+            }
+        } else {
+            std::cout << "test_read_all_multibyte was called with an "
+                         "invalid code unit type. Please use one of "
+                         "char16_t, char32_t or wchar_t."
+                      << std::endl;
+
+            return false;
+        }
+
+        std::string endianness_spelled_out;
+        if (endianness == std::endian::little) {
+            endianness_spelled_out = "little_endian";
+        } else if (endianness == std::endian::big) {
+            endianness_spelled_out = "big_endian";
+        } else {
+            std::cout << "test_read_all_multibyte was called with an "
+                         "invalid endianness. Please use one of "
+                         "std::endian::little or std::endian::big."
+                      << std::endl;
+
+            return false;
+        }
+
+        file f{
+            "../../test_data/test_read_"
+                + encoding_spelled_out
+                + "_with_"
+                + endianness_spelled_out
+                + "_bom.txt",
+            read_only,
+            if_not_there::fail
+        };
+
+        if (!f.is_open()) {
+            std::cout << "File test_read_"
+                      << encoding_spelled_out
+                      << "_with_"
+                      << endianness_spelled_out
+                      << "_bom.txt could not be opened for reading."
+                      << std::endl;
+
+            return false;
+        }
+
+        if (!test_read_all_generic<CodeUnit>(f, endianness)) {
+            std::cout << "test_read_all_multibyte failed when reading from "
+                         "file test_read_"
+                      << encoding_spelled_out
+                      << "_with_"
+                      << endianness_spelled_out
+                      << "_bom.txt."
                       << std::endl;
 
             return false;
@@ -242,12 +459,12 @@ public:
         file f{
             "../../test_data/test_read_utf8_without_bom.txt",
             read_only,
-            cmp::if_not_there::fail
+            if_not_there::fail
         };
 
         if (!f.is_open()) {
-            std::cout << "File test_read_utf8_without_bom.txt could "
-                         "not be opened for reading."
+            std::cout << "File test_read_utf8_without_bom.txt "
+                         "could not be opened for reading."
                       << std::endl;
 
             return false;
@@ -272,23 +489,19 @@ public:
     {
         start_test("test_read_line_from_utf16");
 
-        file f{
-            "../../test_data/test_read_utf16_with_little_endian_bom.txt",
-            read_only,
-            cmp::if_not_there::fail
-        };
-
-        if (!f.is_open()) {
-            std::cout << "File test_read_utf16_with_little_endian_bom.txt "
-                         "could not be opened for reading."
+        if (!test_read_line_multibyte<char16_t>(std::endian::little)) {
+            std::cout << "test_read_line_from_utf16 failed with "
+                         "little endian."
                       << std::endl;
 
             return false;
         }
 
-        if (!test_read_line_generic<char16_t>(f, std::endian::little)) {
-            std::cout << "test_read_line_from_utf16 failed when reading from "
-                         "file test_read_utf16_with_little_endian_bom.txt."
+        end_stage();
+
+        if (!test_read_line_multibyte<char16_t>(std::endian::big)) {
+            std::cout << "test_read_line_from_utf16 failed with "
+                         "big endian."
                       << std::endl;
 
             return false;
@@ -305,23 +518,48 @@ public:
     {
         start_test("test_read_line_from_utf32");
 
-        file f{
-            "../../test_data/test_read_utf32_with_little_endian_bom.txt",
-            read_only,
-            cmp::if_not_there::fail
-        };
-
-        if (!f.is_open()) {
-            std::cout << "File test_read_utf32_with_little_endian_bom.txt "
-                         "could not be opened for reading."
+        if (!test_read_line_multibyte<char32_t>(std::endian::little)) {
+            std::cout << "test_read_line_from_utf32 failed with "
+                         "little endian."
                       << std::endl;
 
             return false;
         }
 
-        if (!test_read_line_generic<char32_t>(f, std::endian::little)) {
-            std::cout << "test_read_line_from_utf32 failed when reading from "
-                         "file test_read_utf32_with_little_endian_bom.txt."
+        end_stage();
+
+        if (!test_read_line_multibyte<char32_t>(std::endian::big)) {
+            std::cout << "test_read_line_from_utf32 failed with "
+                         "big endian."
+                      << std::endl;
+
+            return false;
+        }
+
+        end_stage();
+
+        return true;
+    } // function -------------------------------------------------------------
+
+    bool
+    test_read_line_from_wide ()
+    noexcept
+    {
+        start_test("test_read_line_from_wide");
+
+        if (!test_read_line_multibyte<wchar_t>(std::endian::little)) {
+            std::cout << "test_read_line_from_wchar_t failed with "
+                         "little endian."
+                      << std::endl;
+
+            return false;
+        }
+
+        end_stage();
+
+        if (!test_read_line_multibyte<wchar_t>(std::endian::big)) {
+            std::cout << "test_read_line_from_wchar_t failed with "
+                         "big endian."
                       << std::endl;
 
             return false;
@@ -341,12 +579,12 @@ public:
         file f{
             "../../test_data/test_read_utf8_without_bom.txt",
             read_only,
-            cmp::if_not_there::fail
+            if_not_there::fail
         };
 
         if (!f.is_open()) {
-            std::cout << "File test_read_utf8_without_bom.txt could "
-                         "not be opened for reading."
+            std::cout << "File test_read_utf8_without_bom.txt "
+                         "could not be opened for reading."
                       << std::endl;
 
             return false;
@@ -371,27 +609,9 @@ public:
     {
         start_test("test_read_all_from_utf16");
 
-        std::u8string utf8_content;
-        std::u16string utf16_content;
-        std::u32string utf32_content;
-
-        file f1{
-            "../../test_data/test_read_utf16_with_little_endian_bom.txt",
-            read_only,
-            cmp::if_not_there::fail
-        };
-
-        if (!f1.is_open()) {
-            std::cout << "File test_read_utf16_with_little_endian_bom.txt "
-                         "could not be opened for reading."
-                      << std::endl;
-
-            return false;
-        }
-
-        if (!test_read_all_generic<char16_t>(f1, std::endian::little)) {
-            std::cout << "test_read_all_from_utf16 failed when reading from "
-                         "file test_read_utf16_with_little_endian_bom.txt."
+        if (!test_read_all_multibyte<char16_t>(std::endian::little)) {
+            std::cout << "test_read_all_from_utf16 failed with "
+                         "little endian."
                       << std::endl;
 
             return false;
@@ -399,27 +619,15 @@ public:
 
         end_stage();
 
-        file f2{
-            "../../test_data/test_read_utf16_with_big_endian_bom.txt",
-            read_only,
-            cmp::if_not_there::fail
-        };
-
-        if (!f2.is_open()) {
-            std::cout << "File test_read_utf16_with_big_endian_bom.txt could "
-                         "not be opened for reading."
+        if (!test_read_all_multibyte<char16_t>(std::endian::big)) {
+            std::cout << "test_read_all_from_utf16 failed with "
+                         "big endian."
                       << std::endl;
 
             return false;
         }
 
-        if (!test_read_all_generic<char16_t>(f2, std::endian::big)) {
-            std::cout << "test_read_all_from_utf16 failed when reading from "
-                         "file test_read_utf16_with_big_endian_bom.txt."
-                      << std::endl;
-
-            return false;
-        }
+        end_stage();
 
         return true;
     } // function -------------------------------------------------------------
@@ -430,27 +638,9 @@ public:
     {
         start_test("test_read_all_from_utf32");
 
-        std::u8string utf8_content;
-        std::u16string utf16_content;
-        std::u32string utf32_content;
-
-        file f1{
-            "../../test_data/test_read_utf32_with_little_endian_bom.txt",
-            read_only,
-            cmp::if_not_there::fail
-        };
-
-        if (!f1.is_open()) {
-            std::cout << "File test_read_utf32_with_little_endian_bom.txt "
-                         "could not be opened for reading."
-                      << std::endl;
-
-            return false;
-        }
-
-        if (!test_read_all_generic<char32_t>(f1, std::endian::little)) {
-            std::cout << "test_read_all_from_utf32 failed when reading from "
-                         "file test_read_utf32_with_little_endian_bom.txt."
+        if (!test_read_all_multibyte<char32_t>(std::endian::little)) {
+            std::cout << "test_read_all_from_utf32 failed with "
+                         "little endian."
                       << std::endl;
 
             return false;
@@ -458,23 +648,38 @@ public:
 
         end_stage();
 
-        file f2{
-            "../../test_data/test_read_utf32_with_big_endian_bom.txt",
-            read_only,
-            cmp::if_not_there::fail
-        };
-
-        if (!f2.is_open()) {
-            std::cout << "File test_read_utf32_with_big_endian_bom.txt could "
-                         "not be opened for reading."
+        if (!test_read_all_multibyte<char32_t>(std::endian::big)) {
+            std::cout << "test_read_all_from_utf32 failed with "
+                         "big endian."
                       << std::endl;
 
             return false;
         }
 
-        if (!test_read_all_generic<char32_t>(f2, std::endian::big)) {
-            std::cout << "test_read_all_from_utf32 failed when reading from "
-                         "file test_read_utf32_with_big_endian_bom.txt."
+        end_stage();
+
+        return true;
+    } // function -------------------------------------------------------------
+
+    bool
+    test_read_all_from_wide ()
+    noexcept
+    {
+        start_test("test_read_all_from_wide");
+
+        if (!test_read_all_multibyte<wchar_t>(std::endian::little)) {
+            std::cout << "test_read_all_from_wide failed with "
+                         "little endian."
+                      << std::endl;
+
+            return false;
+        }
+
+        end_stage();
+
+        if (!test_read_all_multibyte<wchar_t>(std::endian::big)) {
+            std::cout << "test_read_all_from_wide failed with "
+                         "big endian."
                       << std::endl;
 
             return false;
