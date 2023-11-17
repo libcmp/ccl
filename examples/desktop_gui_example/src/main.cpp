@@ -52,7 +52,7 @@ public:
     override
     {
         cmp::key event_key{ev.get_key()};
-        cmp::uout << cmp::to_u8string(event_key) << " down.\n";
+        cmp::uout << cmp::to_u8string(event_key) << " down.\n" << cmp::flush;
         if (event_key == cmp::key::space_bar) {
             if (m_show_counter) {
                 m_show_counter = false;
@@ -69,14 +69,14 @@ public:
     )
     override
     {
-        cmp::uout << cmp::to_u8string(ev.get_key()) << " up.\n";
+        cmp::uout << cmp::to_u8string(ev.get_key()) << " up.\n" << cmp::flush;
     } // function -------------------------------------------------------------
 
     void
     handle_resize_event ()
     override
     {
-        cmp::uout << "Resized.\n";
+        cmp::uout << "Resized.\n" << cmp::flush;
     } // function -------------------------------------------------------------
 
     void
@@ -85,7 +85,7 @@ public:
     )
     override
     {
-        cmp::uout << "Closing.\n";
+        cmp::uout << "Closing.\n" << cmp::flush;
     } // function -------------------------------------------------------------
 
 private:
