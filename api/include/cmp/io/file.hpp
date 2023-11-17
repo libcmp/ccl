@@ -8,6 +8,7 @@
 
 #include <cmp/io/inclusion_assert.hpp>
 #include <cmp/core/platform.hpp>
+#include <cmp/io/exceptions.hpp>
 #include <cmp/io/general.hpp>
 #include <cmp/io/seekable_io_resource.hpp>
 

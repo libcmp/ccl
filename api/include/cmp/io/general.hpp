@@ -82,28 +82,6 @@ invert_endianness (
 )
 noexcept;
 
-/**
-    Description:
-        This exception type indicates that an IO operation was attempted under
-        the wrong access mode. For example, trying to write to a file that was
-        opened as read-only.
-*/
-class CMP_LIBRARY_NAME invalid_access_mode
-    : public std::exception
-{
-public:
-    // Core -------------------------------------------------------------------
-
-    /**
-        Description:
-            Returns the explanatory string.
-    */
-    CMP_CONDITIONAL_INLINE
-    const char*
-    what ()
-    const noexcept override;
-}; // class -------------------------------------------------------------------
-
 } // namespace ----------------------------------------------------------------
 
 #include <cmp/io/general.ipp>
