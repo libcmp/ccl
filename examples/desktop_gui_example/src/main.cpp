@@ -47,10 +47,11 @@ public:
 
     void
     handle_key_down_event (
-        cmp::key event_key
+        cmp::key_event& ev
     )
     override
     {
+        cmp::key event_key{ev.get_key()};
         cmp::uout << cmp::to_u8string(event_key) << " down.\n";
         if (event_key == cmp::key::space_bar) {
             if (m_show_counter) {
@@ -64,11 +65,11 @@ public:
 
     void
     handle_key_up_event (
-        cmp::key event_key
+        cmp::key_event& ev
     )
     override
     {
-        cmp::uout << cmp::to_u8string(event_key) << " up.\n";
+        cmp::uout << cmp::to_u8string(ev.get_key()) << " up.\n";
     } // function -------------------------------------------------------------
 
     void
@@ -78,12 +79,13 @@ public:
         cmp::uout << "Resized.\n";
     } // function -------------------------------------------------------------
 
-    cmp::close_window
-    handle_close_event ()
+    void
+    handle_close_event (
+        cmp::close_event& ev
+    )
     override
     {
         cmp::uout << "Closing.\n";
-        return cmp::close_window::yes;
     } // function -------------------------------------------------------------
 
 private:

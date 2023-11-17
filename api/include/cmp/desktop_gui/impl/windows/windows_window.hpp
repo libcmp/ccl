@@ -10,6 +10,8 @@
 #include <cmp/desktop_gui/inclusion_assert.hpp>
 #include <cmp/desktop_gui/impl/windows/windows_window_native_handle.hpp>
 #include <cmp/desktop_gui/impl/common/common_desktop_gui_application.hpp>
+#include <cmp/desktop_gui/key_event.hpp>
+#include <cmp/desktop_gui/close_event.hpp>
 #include <cmp/unicode/algorithms.hpp>
 
 namespace cmp {
@@ -104,13 +106,13 @@ public:
     virtual
     void
     handle_key_down_event (
-        key event_key
+        key_event& ev
     );
 
     virtual
     void
     handle_key_up_event (
-        key event_key
+        key_event& ev
     );
 
     virtual
@@ -118,8 +120,10 @@ public:
     handle_resize_event ();
 
     virtual
-    close_window
-    handle_close_event ();
+    void
+    handle_close_event (
+        close_event& ev
+    );
 
     // Friends ----------------------------------------------------------------
 

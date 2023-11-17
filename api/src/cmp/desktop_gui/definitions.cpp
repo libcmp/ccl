@@ -17,5 +17,8 @@
 #       include <cmp/desktop_gui/impl/gtk/gtk_desktop_gui_application.cpp>
 #       include <cmp/desktop_gui/impl/gtk/gtk_window.cpp>
 #   endif
+#   include <cmp/desktop_gui/close_event.cpp>
+#   include <cmp/desktop_gui/event.cpp>
 #   include <cmp/desktop_gui/general.cpp>
+#   include <cmp/desktop_gui/key_event.cpp>
 #endif
