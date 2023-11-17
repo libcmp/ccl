@@ -4,7 +4,6 @@
 #ifndef CMP_IO_GENERAL_HPP_INCLUDED
 #define CMP_IO_GENERAL_HPP_INCLUDED
 
-#include <bit>
 #include <exception>
 #include <cstddef>
 

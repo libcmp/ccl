@@ -4,8 +4,6 @@
 #ifndef CMP_IO_INPUT_STREAM_HPP_INCLUDED
 #define CMP_IO_INPUT_STREAM_HPP_INCLUDED
 
-#include <bit>
-
 #include <cmp/io/inclusion_assert.hpp>
 #include <cmp/io/general.hpp>
 #include <cmp/io/input_resource.hpp>
