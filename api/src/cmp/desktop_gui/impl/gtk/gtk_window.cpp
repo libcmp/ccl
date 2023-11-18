@@ -203,9 +203,11 @@ forward_key_down_event_to_window (
     };
     for (const auto& current_association : window_associations) {
         if (current_association.first == gtk_application_window) {
-            current_association.second->handle_key_down_event(
+            key_event ev{
+                key_event_type::key_down,
                 translate_key_code(keyval)
-            );
+            };
+            current_association.second->handle_key_down_event(ev);
             break;
         }
     }
@@ -228,9 +230,11 @@ forward_key_up_event_to_window (
     };
     for (const auto& current_association : window_associations) {
         if (current_association.first == gtk_application_window) {
-            current_association.second->handle_key_up_event(
+            key_event ev{
+                key_event_type::key_up,
                 translate_key_code(keyval)
-            );
+            };
+            current_association.second->handle_key_up_event(ev);
             break;
         }
     }
@@ -267,10 +271,9 @@ forward_close_event_to_window (
         ++current_association
     ) {
         if (current_association->first == window_handle) {
-            if (
-                current_association->second->handle_close_event()
-                    == close_window::yes
-            ) {
+            close_event ev{true};
+            current_association->second->handle_close_event(ev);
+            if (ev.should_close()) {
                 window_associations.erase(current_association);
                 return FALSE;
             } else {
@@ -495,13 +498,13 @@ window::update (
 
 void
 window::handle_key_down_event (
-    key event_key
+    key_event& ev
 ) {
 } // function -----------------------------------------------------------------
 
 void
 window::handle_key_up_event (
-    key event_key
+    key_event& ev
 ) {
 } // function -----------------------------------------------------------------
 
@@ -510,10 +513,10 @@ window::handle_resize_event ()
 {
 } // function -----------------------------------------------------------------
 
-close_window
-window::handle_close_event ()
-{
-    return close_window::yes;
+void
+window::handle_close_event (
+    close_event& ev
+) {
 } // function -----------------------------------------------------------------
 
 // Private Functions ----------------------------------------------------------
