@@ -1,6 +1,7 @@
 // Copyright (C) 2023 Daniel T. McGinnis
 // SPDX-License-Identifier: BSL-1.0
 
+#include <cmp/desktop_gui/main.hpp>
 #include <cmp/desktop_gui/desktop_gui_application.hpp>
 #include <cmp/desktop_gui/window.hpp>
 #include <cmp/io/uio.hpp>
