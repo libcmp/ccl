@@ -67,6 +67,8 @@ private:
     std::u8string_view m_copyright_notice;
 }; // class -------------------------------------------------------------------
 
+// Free Functions -------------------------------------------------------------
+
 CMP_CONDITIONAL_INLINE
 application*
 app ()

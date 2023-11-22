@@ -5,7 +5,7 @@
 
 namespace cmp {
 
-// ------------------------------------ cmp::transparent_container_io_resource
+// ------------------------- cmp::transparent_container_io_resource<Container>
 
 // Constructors and Destructor ------------------------------------------------
 

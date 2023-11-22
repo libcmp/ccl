@@ -50,6 +50,8 @@ namespace cmp {
 
 namespace impl {
 
+// Free Functions -------------------------------------------------------------
+
 NSApplication*
 as_nsapplication (
     void* application

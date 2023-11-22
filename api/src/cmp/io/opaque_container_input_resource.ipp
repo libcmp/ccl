@@ -5,7 +5,7 @@
 
 namespace cmp {
 
-// -------------------------------------- cmp::opaque_container_input_resource
+// --------------------------- cmp::opaque_container_input_resource<Container>
 
 // Constructors and Destructor ------------------------------------------------
 

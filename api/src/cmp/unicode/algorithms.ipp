@@ -5,6 +5,8 @@
 
 namespace cmp {
 
+// Free Functions -------------------------------------------------------------
+
 template <
     text_object ContentString,
     text_object Substring

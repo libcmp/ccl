@@ -13,6 +13,8 @@ namespace cmp {
 
 namespace impl {
 
+// Free Functions -------------------------------------------------------------
+
 CMP_CONDITIONAL_INLINE
 CMP_LIBRARY_NAME
 int

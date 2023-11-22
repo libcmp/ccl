@@ -5,6 +5,8 @@
 
 namespace cmp {
 
+// Free Functions -------------------------------------------------------------
+
 template <
     std::floating_point T1,
     std::floating_point T2

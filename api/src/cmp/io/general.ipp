@@ -5,6 +5,8 @@
 
 namespace cmp {
 
+// Free Functions -------------------------------------------------------------
+
 constexpr
 std::endian
 get_opposite_endianness (

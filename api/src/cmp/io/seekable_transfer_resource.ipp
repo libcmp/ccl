@@ -5,7 +5,7 @@
 
 namespace cmp {
 
-// ------------------------------------------- cmp::seekable_transfer_resource
+// --------------------------------- cmp::seekable_transfer_resource<Position>
 
 // Constructors and Destructor ------------------------------------------------
 

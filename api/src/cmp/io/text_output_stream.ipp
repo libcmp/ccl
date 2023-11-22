@@ -5,7 +5,7 @@
 
 namespace cmp {
 
-// --------------------------------------------------- cmp::text_output_stream
+// ----------------------------------- cmp::text_output_stream<OutputResource>
 
 // Constructors and Destructor ------------------------------------------------
 
@@ -141,7 +141,7 @@ text_output_stream<OutputResource>::write_code_point (
     }
 } // function -----------------------------------------------------------------
 
-// Writers --------------------------------------------------------------------
+// Free Functions -------------------------------------------------------------
 
 template <
     typename OutputResource

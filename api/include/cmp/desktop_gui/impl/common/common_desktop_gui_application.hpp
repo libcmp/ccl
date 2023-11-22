@@ -16,6 +16,8 @@
 
 namespace cmp {
 
+// Free Functions -------------------------------------------------------------
+
 CMP_LIBRARY_NAME
 desktop_gui_application*
 dgui_app ()

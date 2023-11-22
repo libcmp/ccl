@@ -15,6 +15,8 @@
 
 namespace cmp {
 
+// Free Functions -------------------------------------------------------------
+
 /**
     Description:
         Returns true if the <#parameter>content</#parameter> strings

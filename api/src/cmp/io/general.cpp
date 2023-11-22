@@ -5,6 +5,8 @@
 
 namespace cmp {
 
+// Free Functions -------------------------------------------------------------
+
 void
 invert_endianness (
     std::byte* data,

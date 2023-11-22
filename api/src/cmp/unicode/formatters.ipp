@@ -146,6 +146,8 @@ number_formatter::format_floating_point (
 
 } // namespace ----------------------------------------------------------------
 
+// Free Functions -------------------------------------------------------------
+
 template <
     writable_raii_text_object Output
 >

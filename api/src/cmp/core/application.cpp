@@ -70,6 +70,8 @@ application::run ()
 CMP_CONDITIONAL_INLINE
 application* application::g_instance_ptr;
 
+// Free Functions -------------------------------------------------------------
+
 application*
 app ()
 noexcept

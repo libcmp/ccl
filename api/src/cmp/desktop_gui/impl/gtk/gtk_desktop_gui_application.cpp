@@ -7,6 +7,8 @@ namespace cmp {
 
 namespace impl {
 
+// Free Functions -------------------------------------------------------------
+
 void
 activate (
     GApplication* application,

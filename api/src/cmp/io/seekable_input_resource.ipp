@@ -5,7 +5,7 @@
 
 namespace cmp {
 
-// ---------------------------------------------- cmp::seekable_input_resource
+// ------------------------------------ cmp::seekable_input_resource<Position>
 
 // Constructors and Destructor ------------------------------------------------
 

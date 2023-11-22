@@ -7,6 +7,8 @@ namespace cmp {
 
 namespace impl {
 
+// Free Functions -------------------------------------------------------------
+
 int
 initialize_utf8_sequence (
     char8_t leading_code_unit,

@@ -42,6 +42,8 @@ enum class if_not_there {
     create
 }; // enum --------------------------------------------------------------------
 
+// Free Functions -------------------------------------------------------------
+
 /**
     Description:
         Returns the endianness opposite to the endianness provided. For

@@ -7,6 +7,8 @@ namespace cmp {
 
 namespace impl {
 
+// Free Functions -------------------------------------------------------------
+
 void
 update_window (
     window* w

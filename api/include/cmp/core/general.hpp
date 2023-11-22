@@ -9,6 +9,8 @@
 
 namespace cmp {
 
+// Free Functions -------------------------------------------------------------
+
 /**
     Description:
         Returns true if the <#parameter>v1</#parameter> and

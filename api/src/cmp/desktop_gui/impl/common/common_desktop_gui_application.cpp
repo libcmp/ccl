@@ -5,6 +5,8 @@
 
 namespace cmp {
 
+// Free Functions -------------------------------------------------------------
+
 desktop_gui_application*
 dgui_app ()
 noexcept

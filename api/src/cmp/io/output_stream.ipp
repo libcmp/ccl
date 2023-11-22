@@ -5,7 +5,7 @@
 
 namespace cmp {
 
-// -------------------------------------------------------- cmp::output_stream
+// ---------------------------------------- cmp::output_stream<OutputResource>
 
 // Constructors and Destructor ------------------------------------------------
 

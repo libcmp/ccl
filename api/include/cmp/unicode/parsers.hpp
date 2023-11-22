@@ -187,6 +187,8 @@ private:
     type m_type;
 }; // class -------------------------------------------------------------------
 
+// Free Functions -------------------------------------------------------------
+
 /**
     Description:
         Parses the input string and returns the corresponding boolean value.

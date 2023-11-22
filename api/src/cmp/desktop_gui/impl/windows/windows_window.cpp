@@ -7,6 +7,8 @@ namespace cmp {
 
 namespace impl {
 
+// Free Functions -------------------------------------------------------------
+
 key
 translate_key_code (
     WPARAM key_code

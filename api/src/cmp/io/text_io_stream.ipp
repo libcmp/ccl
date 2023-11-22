@@ -5,7 +5,7 @@
 
 namespace cmp {
 
-// ------------------------------------------------------- cmp::text_io_stream
+// ------------------------------------------- cmp::text_io_stream<IOResource>
 
 // Constructors and Destructor ------------------------------------------------
 

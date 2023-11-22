@@ -29,6 +29,8 @@ namespace cmp {
 
 namespace impl {
 
+// Free Functions -------------------------------------------------------------
+
 key
 translate_key_code (
     unsigned short key_code

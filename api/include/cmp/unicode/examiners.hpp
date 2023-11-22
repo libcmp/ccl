@@ -12,6 +12,8 @@
 
 namespace cmp {
 
+// Free Functions -------------------------------------------------------------
+
 /**
     Description:
         Returns true if the given code point fits

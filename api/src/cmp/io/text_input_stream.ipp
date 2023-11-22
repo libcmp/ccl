@@ -5,7 +5,7 @@
 
 namespace cmp {
 
-// ---------------------------------------------------- cmp::text_input_stream
+// ------------------------------------- cmp::text_input_stream<InputResource>
 
 // Constructors and Destructor ------------------------------------------------
 
@@ -395,7 +395,7 @@ text_input_stream<InputResource>::read_utf32_bom ()
     }
 } // function -----------------------------------------------------------------
 
-// Readers --------------------------------------------------------------------
+// Free Functions -------------------------------------------------------------
 
 template <
     typename InputResource

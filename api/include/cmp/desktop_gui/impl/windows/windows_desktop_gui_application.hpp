@@ -15,6 +15,8 @@ namespace cmp {
 
 namespace impl {
 
+// Free Functions -------------------------------------------------------------
+
 LRESULT CALLBACK
 window_procedure (
     HWND window_handle,

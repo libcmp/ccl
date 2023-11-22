@@ -45,6 +45,8 @@ public:
 
 } // namespace ----------------------------------------------------------------
 
+// Free Functions -------------------------------------------------------------
+
 /**
     Description:
         Formats the given bool value with the given
