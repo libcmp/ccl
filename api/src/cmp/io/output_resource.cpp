@@ -34,7 +34,7 @@ void
 output_resource::flush ()
 {
     if (m_buffer.is_write_dirty()) {
-        write_raw(m_buffer.get_data(), m_buffer.get_position());
+        write_raw(m_buffer.get_data_ptr(), m_buffer.get_position());
         m_buffer.set_write_dirty(false);
     }
 } // function -----------------------------------------------------------------

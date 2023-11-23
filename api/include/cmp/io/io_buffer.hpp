@@ -104,7 +104,7 @@ public:
     */
     CMP_CONDITIONAL_INLINE
     std::byte*
-    get_data ()
+    get_data_ptr ()
     noexcept;
 
     /**

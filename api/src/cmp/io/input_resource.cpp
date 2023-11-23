@@ -50,7 +50,7 @@ input_resource::fill ()
 {
     std::size_t bytes_read{
         read_raw(
-            m_buffer.get_data(),
+            m_buffer.get_data_ptr(),
             m_buffer.get_capacity(),
             read_request::fill_buffer
         )

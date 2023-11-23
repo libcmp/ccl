@@ -63,7 +63,7 @@ noexcept
 } // function -----------------------------------------------------------------
 
 std::byte*
-io_buffer::get_data ()
+io_buffer::get_data_ptr ()
 noexcept
 {
     return m_data.data();
