@@ -4,11 +4,11 @@
 #ifndef CMP_IO_COMMON_UIO_HPP_INCLUDED
 #define CMP_IO_COMMON_UIO_HPP_INCLUDED
 
-#include <cmp/core/platform.hpp>
 #include <cmp/io/inclusion_assert.hpp>
-#include <cmp/io/text_output_stream.hpp>
-#include <cmp/io/text_input_stream.hpp>
+#include <cmp/core/platform.hpp>
 #include <cmp/io/output_resource.hpp>
+#include <cmp/io/text_input_stream.hpp>
+#include <cmp/io/text_output_stream.hpp>
 
 #if defined(CMP_OS_WINDOWS)
 #   include <cmp/io/impl/windows/windows_uin.hpp>

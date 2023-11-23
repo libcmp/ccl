@@ -4,8 +4,6 @@
 #ifndef CMP_CORE_COMPILER_HPP_INCLUDED
 #define CMP_CORE_COMPILER_HPP_INCLUDED
 
-#include <cmp/core/config.hpp>
-
 #define CMP_DO_PRAGMA(p) _Pragma(#p)
 
 #if defined(__clang__)

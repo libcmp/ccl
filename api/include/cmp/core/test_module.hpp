@@ -4,13 +4,13 @@
 #ifndef CMP_CORE_TEST_MODULE_HPP_INCLUDED
 #define CMP_CORE_TEST_MODULE_HPP_INCLUDED
 
-#include <iostream>
-#include <initializer_list>
-#include <functional>
-#include <vector>
-#include <tuple>
-#include <queue>
 #include <cstring>
+#include <functional>
+#include <initializer_list>
+#include <iostream>
+#include <queue>
+#include <tuple>
+#include <vector>
 
 namespace cmp {
 

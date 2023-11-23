@@ -6,8 +6,8 @@
 
 #include <unistd.h>
 
-#include <cmp/core/platform.hpp>
 #include <cmp/io/inclusion_assert.hpp>
+#include <cmp/core/platform.hpp>
 #include <cmp/io/output_resource.hpp>
 
 namespace cmp {

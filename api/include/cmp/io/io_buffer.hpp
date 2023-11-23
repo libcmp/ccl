@@ -4,8 +4,8 @@
 #ifndef CMP_IO_IO_BUFFER_HPP_INCLUDED
 #define CMP_IO_IO_BUFFER_HPP_INCLUDED
 
-#include <vector>
 #include <cstring>
+#include <vector>
 
 #include <cmp/io/inclusion_assert.hpp>
 

@@ -4,13 +4,12 @@
 #ifndef CMP_UNICODE_ALGORITHMS_HPP_INCLUDED
 #define CMP_UNICODE_ALGORITHMS_HPP_INCLUDED
 
-#include <string_view>
 #include <cstring>
+#include <string_view>
 
 #include <cmp/unicode/inclusion_assert.hpp>
-#include <cmp/core/config.hpp>
-#include <cmp/unicode/concepts.hpp>
 #include <cmp/unicode/by_code_point.hpp>
+#include <cmp/unicode/concepts.hpp>
 #include <cmp/unicode/exceptions.hpp>
 
 namespace cmp {

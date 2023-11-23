@@ -5,9 +5,9 @@
 #define CMP_IO_DATA_IO_STREAM_HPP_INCLUDED
 
 #include <cmp/io/inclusion_assert.hpp>
-#include <cmp/io/io_resource.hpp>
 #include <cmp/io/data_input_stream.hpp>
 #include <cmp/io/data_output_stream.hpp>
+#include <cmp/io/io_resource.hpp>
 
 namespace cmp {
 

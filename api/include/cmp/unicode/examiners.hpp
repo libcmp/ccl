@@ -7,7 +7,6 @@
 #include <cctype>
 
 #include <cmp/unicode/inclusion_assert.hpp>
-#include <cmp/core/config.hpp>
 #include <cmp/unicode/constants.hpp>
 
 namespace cmp {

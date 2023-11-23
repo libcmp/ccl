@@ -4,7 +4,7 @@
 #ifndef CMP_DESKTOP_GUI_MAIN_HPP_INCLUDED
 #define CMP_DESKTOP_GUI_MAIN_HPP_INCLUDED
 
-#include <cmp/core/operating_system.hpp>
+#include <cmp/core/platform.hpp>
 
 #ifdef CMP_OS_WINDOWS
 #pragma comment(linker, "/ENTRY:mainCRTStartup")

@@ -8,9 +8,9 @@
 
 #include <cmp/io/inclusion_assert.hpp>
 #include <cmp/core/platform.hpp>
+#include <cmp/io/impl/windows/windows_uout.hpp>
 #include <cmp/io/input_resource.hpp>
 #include <cmp/io/text_input_stream.hpp>
-#include <cmp/io/impl/windows/windows_uout.hpp>
 
 namespace cmp {
 

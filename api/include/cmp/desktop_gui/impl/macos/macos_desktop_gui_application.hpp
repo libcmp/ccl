@@ -4,13 +4,13 @@
 #ifndef CMP_DESKTOP_GUI_MACOS_DESKTOP_GUI_APPLICATION_HPP_INCLUDED
 #define CMP_DESKTOP_GUI_MACOS_DESKTOP_GUI_APPLICATION_HPP_INCLUDED
 
-#include <vector>
 #include <type_traits>
+#include <vector>
 
 #include <cmp/desktop_gui/inclusion_assert.hpp>
 #include <cmp/core/application.hpp>
-#include <cmp/desktop_gui/general.hpp>
 #include <cmp/desktop_gui/impl/macos/macos_window_native_handle.hpp>
+#include <cmp/desktop_gui/general.hpp>
 
 namespace cmp {
 

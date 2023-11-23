@@ -4,11 +4,10 @@
 #ifndef CMP_UNICODE_TYPE_TRAITS_HPP_INCLUDED
 #define CMP_UNICODE_TYPE_TRAITS_HPP_INCLUDED
 
-#include <type_traits>
 #include <string>
+#include <type_traits>
 
 #include <cmp/unicode/inclusion_assert.hpp>
-#include <cmp/core/config.hpp>
 #include <cmp/core/type_traits.hpp>
 
 namespace cmp {

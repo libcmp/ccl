@@ -9,7 +9,6 @@
 #include <string>
 
 #include <cmp/unicode/inclusion_assert.hpp>
-#include <cmp/core/config.hpp>
 
 namespace cmp {
 

@@ -4,14 +4,14 @@
 #ifndef CMP_DESKTOP_GUI_MACOS_WINDOW_HPP_INCLUDED
 #define CMP_DESKTOP_GUI_MACOS_WINDOW_HPP_INCLUDED
 
-#include <string>
 #include <chrono>
+#include <string>
 
 #include <cmp/desktop_gui/inclusion_assert.hpp>
-#include <cmp/desktop_gui/impl/macos/macos_window_native_handle.hpp>
 #include <cmp/desktop_gui/impl/common/common_desktop_gui_application.hpp>
-#include <cmp/desktop_gui/key_event.hpp>
+#include <cmp/desktop_gui/impl/macos/macos_window_native_handle.hpp>
 #include <cmp/desktop_gui/close_event.hpp>
+#include <cmp/desktop_gui/key_event.hpp>
 
 namespace cmp {
 

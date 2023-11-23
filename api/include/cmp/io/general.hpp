@@ -4,8 +4,8 @@
 #ifndef CMP_IO_GENERAL_HPP_INCLUDED
 #define CMP_IO_GENERAL_HPP_INCLUDED
 
-#include <exception>
 #include <cstddef>
+#include <exception>
 
 #include <cmp/io/inclusion_assert.hpp>
 

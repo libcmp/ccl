@@ -6,9 +6,9 @@
 
 #include <cmp/io/inclusion_assert.hpp>
 #include <cmp/io/input_stream.hpp>
+#include <cmp/unicode/impl/impl.hpp>
 #include <cmp/unicode/algorithms.hpp>
 #include <cmp/unicode/parsers.hpp>
-#include <cmp/unicode/impl/impl.hpp>
 
 namespace cmp {
 

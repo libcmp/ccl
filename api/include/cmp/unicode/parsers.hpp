@@ -4,15 +4,13 @@
 #ifndef CMP_UNICODE_PARSERS_HPP_INCLUDED
 #define CMP_UNICODE_PARSERS_HPP_INCLUDED
 
-#include <cmath>
 #include <algorithm>
+#include <cmath>
 
 #include <cmp/unicode/inclusion_assert.hpp>
-#include <cmp/core/config.hpp>
-#include <cmp/unicode/formats.hpp>
-#include <cmp/unicode/concepts.hpp>
-#include <cmp/unicode/algorithms.hpp>
 #include <cmp/core/general.hpp>
+#include <cmp/unicode/algorithms.hpp>
+#include <cmp/unicode/formats.hpp>
 
 namespace cmp {
 

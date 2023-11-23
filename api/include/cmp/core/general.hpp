@@ -4,8 +4,8 @@
 #ifndef CMP_CORE_GENERAL_HPP_INCLUDED
 #define CMP_CORE_GENERAL_HPP_INCLUDED
 
-#include <concepts>
 #include <cmath>
+#include <concepts>
 
 namespace cmp {
 

@@ -8,8 +8,8 @@
 
 #include <cmp/io/inclusion_assert.hpp>
 #include <cmp/core/type_traits.hpp>
-#include <cmp/io/seekable_output_resource.hpp>
 #include <cmp/io/impl/ctr_essence.hpp>
+#include <cmp/io/seekable_output_resource.hpp>
 
 namespace cmp {
 

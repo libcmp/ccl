@@ -7,6 +7,7 @@
 #include <string>
 
 #include <cmp/io/inclusion_assert.hpp>
+#include <cmp/io/seekable_input_resource.hpp>
 
 namespace cmp {
 

@@ -7,10 +7,8 @@
 #include <cmath>
 
 #include <cmp/unicode/inclusion_assert.hpp>
-#include <cmp/core/config.hpp>
-#include <cmp/unicode/formats.hpp>
-#include <cmp/unicode/concepts.hpp>
 #include <cmp/unicode/algorithms.hpp>
+#include <cmp/unicode/formats.hpp>
 
 namespace cmp {
 
