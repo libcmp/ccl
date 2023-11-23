@@ -29,7 +29,9 @@ enum class read_request {
 }; // enum --------------------------------------------------------------------
 
 enum class flush_t {
-} inline flush;
+}
+    inline flush
+; // enum ---------------------------------------------------------------------
 
 enum class position_reference {
     begin,

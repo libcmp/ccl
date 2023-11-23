@@ -142,7 +142,7 @@ public:
         digit_character_expected,
         negative_unsigned,
         wrong_place_limit
-    };
+    }; // enum ----------------------------------------------------------------
 
     // Constructors and Destructor --------------------------------------------
 

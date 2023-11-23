@@ -55,7 +55,7 @@ enum class radix_place_limit {
     none,
     exactly_equal,
     up_to
-};
+}; // enum --------------------------------------------------------------------
 
 class CMP_LIBRARY_NAME bool_format {
 public:

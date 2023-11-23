@@ -163,7 +163,7 @@ public:
         copy_constructor_called,
         move_constructor_called,
         destructor_called
-    };
+    }; // enum ----------------------------------------------------------------
 
     // Constructors and Destructor --------------------------------------------
 
