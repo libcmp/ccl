@@ -11,12 +11,13 @@ namespace cmp {
 enum class event_type {
     key_event,
     close_event
-};
+}; // enum --------------------------------------------------------------------
 
 class CMP_LIBRARY_NAME event {
 public:
     // Constructors and Destructor --------------------------------------------
 
+    explicit
     event (
         event_type initial_event_type
     )
@@ -38,9 +39,5 @@ private:
 }; // class -------------------------------------------------------------------
 
 } // namespace ----------------------------------------------------------------
-
-#if CMP_CONFIG_HEADER_ONLY == true
-#   include <cmp/desktop_gui/event.cpp>
-#endif // CMP_CONFIG_HEADER_ONLY
 
 #endif // CMP_DESKTOP_GUI_EVENT_HPP_INCLUDED

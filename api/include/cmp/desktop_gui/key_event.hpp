@@ -49,8 +49,4 @@ private:
 
 } // namespace ----------------------------------------------------------------
 
-#if CMP_CONFIG_HEADER_ONLY == true
-#   include <cmp/desktop_gui/key_event.cpp>
-#endif // CMP_CONFIG_HEADER_ONLY
-
 #endif // CMP_DESKTOP_GUI_KEY_EVENT_HPP_INCLUDED

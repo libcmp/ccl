@@ -15,6 +15,7 @@ class CMP_LIBRARY_NAME close_event
 public:
     // Constructors and Destructor --------------------------------------------
 
+    explicit
     close_event (
         bool initial_should_close
     )
@@ -42,9 +43,5 @@ private:
 }; // class -------------------------------------------------------------------
 
 } // namespace ----------------------------------------------------------------
-
-#if CMP_CONFIG_HEADER_ONLY == true
-#   include <cmp/desktop_gui/close_event.cpp>
-#endif // CMP_CONFIG_HEADER_ONLY
 
 #endif // CMP_DESKTOP_GUI_CLOSE_EVENT_HPP_INCLUDED
