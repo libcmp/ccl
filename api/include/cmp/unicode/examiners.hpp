@@ -23,7 +23,6 @@ namespace cmp {
         code_point:
             The code point to examine.
 */
-CMP_LIBRARY_NAME
 constexpr
 bool
 fits_in_7_bits (
@@ -41,7 +40,6 @@ noexcept;
         code_unit:
             The UTF-8 code unit to examine.
 */
-CMP_LIBRARY_NAME
 constexpr
 bool
 is_standalone_byte (
@@ -59,7 +57,6 @@ noexcept;
         code_unit:
             The UTF-8 code unit to examine.
 */
-CMP_LIBRARY_NAME
 constexpr
 bool
 is_leading_byte (
@@ -76,7 +73,6 @@ noexcept;
         code_unit:
             The UTF-8 code unit to examine.
 */
-CMP_LIBRARY_NAME
 constexpr
 bool
 is_trailing_byte (
@@ -94,7 +90,6 @@ noexcept;
         code_unit:
             The UTF-16 code unit to examine.
 */
-CMP_LIBRARY_NAME
 constexpr
 bool
 is_leading_surrogate (
@@ -112,7 +107,6 @@ noexcept;
         code_unit:
             The UTF-16 code unit to examine.
 */
-CMP_LIBRARY_NAME
 constexpr
 bool
 is_trailing_surrogate (
@@ -129,7 +123,6 @@ noexcept;
         code_unit:
             The UTF-16 code unit to examine.
 */
-CMP_LIBRARY_NAME
 constexpr
 bool
 is_surrogate (
@@ -146,7 +139,6 @@ noexcept;
         code_point:
             The code point to examine.
 */
-CMP_LIBRARY_NAME
 constexpr
 bool
 is_code_point_valid (
@@ -163,7 +155,6 @@ noexcept;
         code_point:
             The code point to examine.
 */
-CMP_LIBRARY_NAME
 constexpr
 bool
 is_whitespace (
@@ -185,7 +176,6 @@ noexcept;
         radix:
             The radix to consider.
 */
-CMP_LIBRARY_NAME
 constexpr
 bool
 is_radix_digit (

@@ -54,8 +54,6 @@ enum class if_not_there {
         endianness:
             The endianness to get the opposite of.
 */
-CMP_CONDITIONAL_INLINE
-CMP_LIBRARY_NAME
 constexpr
 std::endian
 get_opposite_endianness (

@@ -21,25 +21,21 @@ class CMP_LIBRARY_NAME key_event
 public:
     // Constructors and Destructor --------------------------------------------
 
-    CMP_CONDITIONAL_INLINE
     key_event (
         key_event_type initial_key_event_type,
         key initial_key
     )
     noexcept;
 
-    CMP_CONDITIONAL_INLINE
     ~key_event ()
     noexcept = default;
 
     // Accessors --------------------------------------------------------------
 
-    CMP_CONDITIONAL_INLINE
     key_event_type
     get_key_event_type ()
     const noexcept;
 
-    CMP_CONDITIONAL_INLINE
     key
     get_key ()
     const noexcept;

@@ -15,24 +15,20 @@ class CMP_LIBRARY_NAME close_event
 public:
     // Constructors and Destructor --------------------------------------------
 
-    CMP_CONDITIONAL_INLINE
     close_event (
         bool initial_should_close
     )
     noexcept;
 
-    CMP_CONDITIONAL_INLINE
     ~close_event ()
     noexcept = default;
 
     // Accessors --------------------------------------------------------------
 
-    CMP_CONDITIONAL_INLINE
     bool
     should_close ()
     const noexcept;
 
-    CMP_CONDITIONAL_INLINE
     void
     set_should_close (
         bool new_value

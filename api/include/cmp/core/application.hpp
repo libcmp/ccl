@@ -70,6 +70,7 @@ private:
 // Free Functions -------------------------------------------------------------
 
 CMP_CONDITIONAL_INLINE
+CMP_LIBRARY_NAME
 application*
 app ()
 noexcept;
