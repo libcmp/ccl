@@ -283,7 +283,10 @@ if (${CMAKE_SYSTEM_NAME} MATCHES "Darwin" AND CMP_CONFIG_DESKTOP_GUI_PACKAGE_EXC
     )
 
     # The native macOS API is in Objective-C, so we must use Objective-C++.
-    target_compile_options(cmp PUBLIC -x objective-c++)
+    target_compile_options(
+        cmp PUBLIC
+            -ObjC++
+    )
 endif ()
 
 if (
