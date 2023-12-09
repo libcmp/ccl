@@ -21,12 +21,11 @@ class CMP_LIBRARY_NAME window
 public:
     // Constructors and Destructor --------------------------------------------
 
-    explicit
     window (
-        int initial_width = 400,
-        int initial_height = 300,
-        const std::u8string& initial_title = u8"",
-        window_mode initial_mode = window_mode::standard
+        int initial_width,
+        int initial_height,
+        const std::u8string& initial_title,
+        window_mode initial_mode
     );
 
     ~window ()
