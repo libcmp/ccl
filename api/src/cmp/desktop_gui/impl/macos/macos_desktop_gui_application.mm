@@ -70,12 +70,15 @@ desktop_gui_application::desktop_gui_application (
     char** argv
 )
     : application{argc, argv}
-    , m_shared_application{[NSApplication sharedApplication]}
 {
-    [impl::as_nsapplication(m_shared_application) setDelegate:
+    m_native_handle.shared_application = [NSApplication sharedApplication];
+    [impl::as_nsapplication(m_native_handle.shared_application) setDelegate:
         [[cmp_application_delegate alloc] init]
     ];
-    [impl::as_nsapplication(m_shared_application) finishLaunching];
+    [
+        impl::as_nsapplication(m_native_handle.shared_application)
+            finishLaunching
+    ];
 } // function -----------------------------------------------------------------
 
 // Accessors ------------------------------------------------------------------
@@ -109,15 +112,20 @@ int
 desktop_gui_application::run ()
 {
     while (!m_native_handle.window_associations.empty()) {
-        NSEvent* event = [impl::as_nsapplication(m_shared_application)
-            nextEventMatchingMask:
-                NSEventMaskAny
-                untilDate:[NSDate distantPast]
-                inMode:NSDefaultRunLoopMode
-                dequeue:YES
+        NSEvent* event = [
+            impl::as_nsapplication(m_native_handle.shared_application)
+                nextEventMatchingMask:
+                    NSEventMaskAny
+                    untilDate:[NSDate distantPast]
+                    inMode:NSDefaultRunLoopMode
+                    dequeue:YES
         ];
         if (event != nil) {
-            [impl::as_nsapplication(m_shared_application) sendEvent:event];
+            [
+                impl::as_nsapplication(m_native_handle.shared_application)
+                    sendEvent:
+                        event
+            ];
         } else {
             for (
                 auto& current_association

@@ -24,6 +24,7 @@ public:
     public:
         // Public Data --------------------------------------------------------
 
+        void* shared_application;
         std::vector<std::pair<void*, window*>> window_associations;
     }; // class ---------------------------------------------------------------
 
@@ -87,7 +88,6 @@ public:
 private:
     // Private Data -----------------------------------------------------------
 
-    void* m_shared_application;
     native_handle m_native_handle;
 }; // class -------------------------------------------------------------------
 
