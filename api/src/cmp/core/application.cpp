@@ -43,7 +43,7 @@ const
     return m_argv;
 } // function -----------------------------------------------------------------
 
-std::u8string_view
+std::u8string
 application::get_copyright_notice ()
 const
 {

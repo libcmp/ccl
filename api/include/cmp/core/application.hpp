@@ -5,6 +5,7 @@
 #define CMP_CORE_APPLICATION_HPP_INCLUDED
 
 #include <string_view>
+#include <string>
 
 #include <cmp/core/config.hpp>
 
@@ -132,7 +133,7 @@ public:
             Returns the copyright notice held in <#this/> application object.
     */
     CMP_CONDITIONAL_INLINE
-    std::u8string_view
+    std::u8string
     get_copyright_notice ()
     const;
 
@@ -171,7 +172,7 @@ private:
 
     int m_argc;
     char** m_argv;
-    std::u8string_view m_copyright_notice;
+    std::u8string m_copyright_notice;
 }; // class -------------------------------------------------------------------
 
 // Free Functions -------------------------------------------------------------
