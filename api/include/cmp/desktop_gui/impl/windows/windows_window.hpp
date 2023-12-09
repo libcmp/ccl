@@ -30,7 +30,7 @@ public:
     );
 
     ~window ()
-    noexcept = default;
+    = default;
 
     // Copy Operations --------------------------------------------------------
 

@@ -18,7 +18,7 @@ namespace cmp {
 
 /**
     Description:
-        Returns true if the <#parameter>content</#parameter> strings
+        Returns true if the <#parameter>content</#parameter> string
         starts with the contents of <#parameter>substring</#parameter>.
 
     Parameters:
@@ -40,7 +40,7 @@ noexcept;
 
 /**
     Description:
-        Returns true if the <#parameter>content</#parameter> strings
+        Returns true if the <#parameter>content</#parameter> string
         ends with the contents of <#parameter>substring</#parameter>.
 
     Parameters:

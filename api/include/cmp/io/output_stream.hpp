@@ -10,6 +10,17 @@
 
 namespace cmp {
 
+/**
+    Description:
+        An output stream is an object that writes data to an output resource.
+
+        There are two kinds of output streams in CCL: data output streams,
+        which write binary data to its output resource, and text output
+        streams, which write text to its output resource.
+
+        The <#type>output_stream</#type> class template serves as the
+        foundation for both data output streams and text output streams.
+*/
 template <
     typename OutputResource
 >
@@ -19,9 +30,9 @@ public:
 
     /**
         Description:
-            The type of the wrapped output resource.
+            The type of the referenced output resource.
     */
-    using wrapped_resource_type = OutputResource;
+    using referenced_resource_type = OutputResource;
 
     // Constructors and Destructor --------------------------------------------
 
@@ -38,7 +49,7 @@ public:
     */
     explicit
     output_stream (
-        wrapped_resource_type& resource,
+        referenced_resource_type& resource,
         std::endian endianness = std::endian::native
     )
     noexcept;
@@ -46,21 +57,87 @@ public:
     virtual
     ~output_stream ();
 
+    // Copy Operations --------------------------------------------------------
+
+    /**
+        Description:
+            Copy-constructs an <#type>output_stream</#type>
+            from an existing one.
+
+        Parameters:
+            other:
+                The <#type>output_stream</#type>
+                to copy from.
+    */
+    output_stream (
+        const output_stream& other
+    )
+    = default;
+
+    /**
+        Description:
+            Copy-assigns an <#type>output_stream</#type>
+            into <#this/> one.
+
+        Parameters:
+            other:
+                The <#type>output_stream</#type>
+                to copy from.
+    */
+    output_stream&
+    operator = (
+        const output_stream& other
+    )
+    = default;
+
+    // Move Operations --------------------------------------------------------
+
+    /**
+        Description:
+            Move-constructs an <#type>output_stream</#type>
+            from an existing one.
+
+        Parameters:
+            other:
+                The <#type>output_stream</#type>
+                to move from.
+    */
+    output_stream (
+        output_stream&& other
+    )
+    noexcept = default;
+
+    /**
+        Description:
+            Move-assigns an <#type>output_stream</#type>
+            into <#this/> one.
+
+        Parameters:
+            other:
+                The <#type>output_stream</#type>
+                to move from.
+    */
+    output_stream&
+    operator = (
+        output_stream&& other
+    )
+    noexcept = default;
+
     // Accessors --------------------------------------------------------------
 
     /**
         Description:
-            Returns a non-constant reference to the wrapped output resource.
+            Returns a non-constant reference to the referenced output resource.
     */
-    wrapped_resource_type&
+    referenced_resource_type&
     grab_resource ()
     noexcept;
 
     /**
         Description:
-            Returns a constant reference to the wrapped output resource.
+            Returns a constant reference to the referenced output resource.
     */
-    const wrapped_resource_type&
+    const referenced_resource_type&
     grab_resource ()
     const noexcept;
 
@@ -150,22 +227,33 @@ public:
 
     /**
         Description:
-            Returns a pointer to the wrapped output resource,
+            Returns a pointer to the referenced output resource,
             enabling use of the arrow operator.
     */
-    wrapped_resource_type*
+    referenced_resource_type*
     operator -> ()
     const noexcept;
 
 private:
     // Private Data -----------------------------------------------------------
 
-    wrapped_resource_type& m_resource;
+    referenced_resource_type& m_resource;
     std::endian m_endianness;
 }; // class -------------------------------------------------------------------
 
 // Free Functions -------------------------------------------------------------
 
+/**
+    Description:
+        Flushes the output stream.
+
+    Parameters:
+        stream:
+            The output stream to flush.
+        flush_v:
+            This parameter is only used to indicate that a
+            flush is desired, its value is not actually read.
+*/
 template <
     typename OutputResource
 >

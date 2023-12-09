@@ -13,7 +13,7 @@ template <
     typename IOResource
 >
 data_io_stream<IOResource>::data_io_stream (
-    wrapped_resource_type& resource,
+    referenced_resource_type& resource,
     std::endian endianness
 )
 noexcept
@@ -28,7 +28,7 @@ noexcept
 template <
     typename IOResource
 >
-typename data_io_stream<IOResource>::wrapped_resource_type*
+typename data_io_stream<IOResource>::referenced_resource_type*
 data_io_stream<IOResource>::operator -> ()
 const noexcept
 {

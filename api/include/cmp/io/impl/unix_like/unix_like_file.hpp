@@ -32,7 +32,35 @@ public:
 
     CMP_CONDITIONAL_INLINE
     ~file ()
-    noexcept;
+    override;
+
+    // Copy Operations --------------------------------------------------------
+
+    file (
+        const file& other
+    )
+    = delete;
+
+    file&
+    operator = (
+        const file& other
+    )
+    = delete;
+
+    // Move Operations --------------------------------------------------------
+
+    CMP_CONDITIONAL_INLINE
+    file (
+        file&& other
+    )
+    noexcept = default;
+
+    CMP_CONDITIONAL_INLINE
+    file&
+    operator = (
+        file&& other
+    )
+    noexcept = default;
 
     // Accessors --------------------------------------------------------------
 

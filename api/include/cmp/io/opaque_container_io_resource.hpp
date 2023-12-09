@@ -13,6 +13,11 @@
 
 namespace cmp {
 
+/**
+    Description:
+        An opaque container I/O resource is an I/O resource that
+        reads and writes from/to a container that it owns.
+*/
 template <
     typename Container
 >
@@ -97,6 +102,72 @@ public:
     );
 
     ~opaque_container_io_resource ()
+    override = default;
+
+    // Copy Operations --------------------------------------------------------
+
+    /**
+        Description:
+            Copy-constructs an <#type>opaque_container_io_resource</#type>
+            from an existing one.
+
+        Parameters:
+            other:
+                The <#type>opaque_container_io_resource</#type>
+                to copy from.
+    */
+    opaque_container_io_resource (
+        const opaque_container_io_resource& other
+    )
+    = default;
+
+    /**
+        Description:
+            Copy-assigns an <#type>opaque_container_io_resource</#type>
+            into <#this/> one.
+
+        Parameters:
+            other:
+                The <#type>opaque_container_io_resource</#type>
+                to copy from.
+    */
+    opaque_container_io_resource&
+    operator = (
+        const opaque_container_io_resource& other
+    )
+    = default;
+
+    // Move Operations --------------------------------------------------------
+
+    /**
+        Description:
+            Move-constructs an <#type>opaque_container_io_resource</#type>
+            from an existing one.
+
+        Parameters:
+            other:
+                The <#type>opaque_container_io_resource</#type>
+                to move from.
+    */
+    opaque_container_io_resource (
+        opaque_container_io_resource&& other
+    )
+    noexcept = default;
+
+    /**
+        Description:
+            Move-assigns an <#type>opaque_container_io_resource</#type>
+            into <#this/> one.
+
+        Parameters:
+            other:
+                The <#type>opaque_container_io_resource</#type>
+                to move from.
+    */
+    opaque_container_io_resource&
+    operator = (
+        opaque_container_io_resource&& other
+    )
     noexcept = default;
 
     // Accessors --------------------------------------------------------------
@@ -114,8 +185,8 @@ public:
         Description:
             Returns the position <#this/> opaque
             container I/O resource is at, that is,
-            the position at which read operations will
-            take place next.
+            the position at which read and write operations
+            will take place next.
     */
     std::int64_t
     get_position ()

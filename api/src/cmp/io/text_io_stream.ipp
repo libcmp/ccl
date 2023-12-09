@@ -13,7 +13,7 @@ template <
     typename IOResource
 >
 text_io_stream<IOResource>::text_io_stream (
-    wrapped_resource_type& resource,
+    referenced_resource_type& resource,
     encoding_form ef,
     std::endian endianness
 )
@@ -29,7 +29,7 @@ noexcept
 template <
     typename IOResource
 >
-typename text_io_stream<IOResource>::wrapped_resource_type*
+typename text_io_stream<IOResource>::referenced_resource_type*
 text_io_stream<IOResource>::operator -> ()
 const noexcept
 {

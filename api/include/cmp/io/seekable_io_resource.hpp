@@ -12,6 +12,11 @@
 
 namespace cmp {
 
+/**
+    Description:
+        A seekable I/O resource is an I/O resource that can seek,
+        that is, change where read and write operations will take place next.
+*/
 template <
     typename Position
 >
@@ -44,8 +49,73 @@ public:
         std::size_t buffer_capacity = io_buffer::default_buffer_capacity
     );
 
-    virtual
     ~seekable_io_resource ()
+    override = default;
+
+    // Copy Operations --------------------------------------------------------
+
+    /**
+        Description:
+            Copy-constructs a <#type>seekable_io_resource</#type>
+            from an existing one.
+
+        Parameters:
+            other:
+                The <#type>seekable_io_resource</#type>
+                to copy from.
+    */
+    seekable_io_resource (
+        const seekable_io_resource& other
+    )
+    = default;
+
+    /**
+        Description:
+            Copy-assigns a <#type>seekable_io_resource</#type>
+            into <#this/> one.
+
+        Parameters:
+            other:
+                The <#type>seekable_io_resource</#type>
+                to copy from.
+    */
+    seekable_io_resource&
+    operator = (
+        const seekable_io_resource& other
+    )
+    = default;
+
+    // Move Operations --------------------------------------------------------
+
+    /**
+        Description:
+            Move-constructs a <#type>seekable_io_resource</#type>
+            from an existing one.
+
+        Parameters:
+            other:
+                The <#type>seekable_io_resource</#type>
+                to move from.
+    */
+    seekable_io_resource (
+        seekable_io_resource&& other
+    )
+    noexcept = default;
+
+    /**
+        Description:
+            Move-assigns a <#type>seekable_io_resource</#type>
+            into <#this/> one.
+
+        Parameters:
+            other:
+                The <#type>seekable_io_resource</#type>
+                to move from.
+    */
+    seekable_io_resource&
+    operator = (
+        seekable_io_resource&& other
+    )
     noexcept = default;
 
     // Accessors --------------------------------------------------------------

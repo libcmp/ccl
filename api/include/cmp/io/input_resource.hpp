@@ -15,6 +15,7 @@ namespace cmp {
 /**
     Description:
         An input resource is a source of input.
+        It's an object you can read data from.
 */
 class CMP_LIBRARY_NAME input_resource
     : public virtual transfer_resource
@@ -38,8 +39,77 @@ public:
     );
 
     CMP_CONDITIONAL_INLINE
-    virtual
     ~input_resource ()
+    override = default;
+
+    // Copy Operations --------------------------------------------------------
+
+    /**
+        Description:
+            Copy-constructs an <#type>input_resource</#type>
+            from an existing one.
+
+        Parameters:
+            other:
+                The <#type>input_resource</#type>
+                to copy from.
+    */
+    CMP_CONDITIONAL_INLINE
+    input_resource (
+        const input_resource& other
+    )
+    = default;
+
+    /**
+        Description:
+            Copy-assigns an <#type>input_resource</#type>
+            into <#this/> one.
+
+        Parameters:
+            other:
+                The <#type>input_resource</#type>
+                to copy from.
+    */
+    CMP_CONDITIONAL_INLINE
+    input_resource&
+    operator = (
+        const input_resource& other
+    )
+    = default;
+
+    // Move Operations --------------------------------------------------------
+
+    /**
+        Description:
+            Move-constructs an <#type>input_resource</#type>
+            from an existing one.
+
+        Parameters:
+            other:
+                The <#type>input_resource</#type>
+                to move from.
+    */
+    CMP_CONDITIONAL_INLINE
+    input_resource (
+        input_resource&& other
+    )
+    noexcept = default;
+
+    /**
+        Description:
+            Move-assigns an <#type>input_resource</#type>
+            into <#this/> one.
+
+        Parameters:
+            other:
+                The <#type>input_resource</#type>
+                to move from.
+    */
+    CMP_CONDITIONAL_INLINE
+    input_resource&
+    operator = (
+        input_resource&& other
+    )
     noexcept = default;
 
     // Core -------------------------------------------------------------------

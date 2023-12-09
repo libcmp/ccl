@@ -11,6 +11,11 @@
 
 namespace cmp {
 
+/**
+    Description:
+        A data I/O stream is an object that allows you to
+        read and write binary data from/to an I/O resource.
+*/
 template <
     typename IOResource
 >
@@ -23,9 +28,9 @@ public:
 
     /**
         Description:
-            The type of the wrapped I/O resource.
+            The type of the referenced I/O resource.
     */
-    using wrapped_resource_type = IOResource;
+    using referenced_resource_type = IOResource;
 
     // Constructors and Destructor --------------------------------------------
 
@@ -44,29 +49,95 @@ public:
     */
     explicit
     data_io_stream (
-        wrapped_resource_type& resource,
+        referenced_resource_type& resource,
         std::endian endianness = std::endian::big
     )
     noexcept;
 
     ~data_io_stream ()
+    override = default;
+
+    // Copy Operations --------------------------------------------------------
+
+    /**
+        Description:
+            Copy-constructs a <#type>data_io_stream</#type>
+            from an existing one.
+
+        Parameters:
+            other:
+                The <#type>data_io_stream</#type>
+                to copy from.
+    */
+    data_io_stream (
+        const data_io_stream& other
+    )
+    = default;
+
+    /**
+        Description:
+            Copy-assigns a <#type>data_io_stream</#type>
+            into <#this/> one.
+
+        Parameters:
+            other:
+                The <#type>data_io_stream</#type>
+                to copy from.
+    */
+    data_io_stream&
+    operator = (
+        const data_io_stream& other
+    )
+    = default;
+
+    // Move Operations --------------------------------------------------------
+
+    /**
+        Description:
+            Move-constructs a <#type>data_io_stream</#type>
+            from an existing one.
+
+        Parameters:
+            other:
+                The <#type>data_io_stream</#type>
+                to move from.
+    */
+    data_io_stream (
+        data_io_stream&& other
+    )
+    noexcept = default;
+
+    /**
+        Description:
+            Move-assigns a <#type>data_io_stream</#type>
+            into <#this/> one.
+
+        Parameters:
+            other:
+                The <#type>data_io_stream</#type>
+                to move from.
+    */
+    data_io_stream&
+    operator = (
+        data_io_stream&& other
+    )
     noexcept = default;
 
     // Operator Overloads -----------------------------------------------------
 
     /**
         Description:
-            Returns a pointer to the wrapped I/O resource,
+            Returns a pointer to the referenced I/O resource,
             enabling use of the arrow operator.
     */
-    wrapped_resource_type*
+    referenced_resource_type*
     operator -> ()
     const noexcept;
 
 private:
     // Private Data -----------------------------------------------------------
 
-    wrapped_resource_type& m_resource;
+    referenced_resource_type& m_resource;
 }; // class -------------------------------------------------------------------
 
 } // namespace ----------------------------------------------------------------

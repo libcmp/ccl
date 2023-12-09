@@ -13,7 +13,7 @@ template <
     typename InputResource
 >
 text_input_stream<InputResource>::text_input_stream (
-    wrapped_resource_type& resource,
+    referenced_resource_type& resource,
     encoding_form source_encoding_form,
     std::endian endianness
 )

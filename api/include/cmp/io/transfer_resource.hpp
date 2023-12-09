@@ -9,6 +9,12 @@
 
 namespace cmp {
 
+/**
+    Description:
+        This class is the base class for transfer resources. A transfer
+        resource can be an input resource (a source of input), an output
+        resource (a destination for output), or both.
+*/
 class CMP_LIBRARY_NAME transfer_resource {
 public:
     // Constructors and Destructor --------------------------------------------
@@ -31,6 +37,76 @@ public:
     CMP_CONDITIONAL_INLINE
     virtual
     ~transfer_resource ()
+    = default;
+
+    // Copy Operations --------------------------------------------------------
+
+    /**
+        Description:
+            Copy-constructs a <#type>transfer_resource</#type>
+            from an existing one.
+
+        Parameters:
+            other:
+                The <#type>transfer_resource</#type>
+                to copy from.
+    */
+    CMP_CONDITIONAL_INLINE
+    transfer_resource (
+        const transfer_resource& other
+    )
+    = default;
+
+    /**
+        Description:
+            Copy-assigns a <#type>transfer_resource</#type>
+            into <#this/> one.
+
+        Parameters:
+            other:
+                The <#type>transfer_resource</#type>
+                to copy from.
+    */
+    CMP_CONDITIONAL_INLINE
+    transfer_resource&
+    operator = (
+        const transfer_resource& other
+    )
+    = default;
+
+    // Move Operations --------------------------------------------------------
+
+    /**
+        Description:
+            Move-constructs a <#type>transfer_resource</#type>
+            from an existing one.
+
+        Parameters:
+            other:
+                The <#type>transfer_resource</#type>
+                to move from.
+    */
+    CMP_CONDITIONAL_INLINE
+    transfer_resource (
+        transfer_resource&& other
+    )
+    noexcept = default;
+
+    /**
+        Description:
+            Move-assigns a <#type>transfer_resource</#type>
+            into <#this/> one.
+
+        Parameters:
+            other:
+                The <#type>transfer_resource</#type>
+                to move from.
+    */
+    CMP_CONDITIONAL_INLINE
+    transfer_resource&
+    operator = (
+        transfer_resource&& other
+    )
     noexcept = default;
 
     // Accessors --------------------------------------------------------------

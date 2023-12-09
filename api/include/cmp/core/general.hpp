@@ -16,12 +16,15 @@ namespace cmp {
         Returns true if the <#parameter>v1</#parameter> and
         <#parameter>v2</#parameter> floating-point values
         are equal up to the given number of decimal places.
-        For example, 1.123 and 1.124 are equal up to two
-        decimal places because they both end in .12, but
-        they are not equal up to three decimal places
-        because one ends in .123 and the other ends in
+        Otherwise, returns false. For example, 1.123 and 1.124
+        are equal up to two decimal places because they both
+        end in .12, but they are not equal up to three decimal
+        places because one ends in .123 and the other ends in
         .124, where the third decimal digit of each number
         is different.
+
+        Please note that this function is just an approximation,
+        it is still subject to floating-point errors.
 
     Parameters:
         value1:
@@ -48,9 +51,13 @@ noexcept;
         Returns true if the <#parameter>v1</#parameter> and
         <#parameter>v2</#parameter> floating-point values
         are not equal up to the given number of decimal places.
-        This is implemented as the negation of the result of
-        calling <#function>cmp_equal</#function> with the same
-        arguments.
+        Otherwise, returns false. This is implemented as the
+        negation of the result of calling
+        <#function>cmp_equal</#function>
+        with the same arguments.
+
+        Please note that this function is just an approximation,
+        it is still subject to floating-point errors.
 
     Parameters:
         value1:

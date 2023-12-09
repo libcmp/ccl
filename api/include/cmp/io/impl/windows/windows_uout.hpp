@@ -28,7 +28,7 @@ public:
 
     CMP_CONDITIONAL_INLINE
     ~stdout_resource ()
-    noexcept = default;
+    override = default;
 
     // Accessors --------------------------------------------------------------
 

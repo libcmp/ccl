@@ -50,6 +50,35 @@ public:
         char** argv
     );
 
+    ~desktop_gui_application ()
+    override = default;
+
+    // Copy Operations --------------------------------------------------------
+
+    desktop_gui_application (
+        const desktop_gui_application& other
+    )
+    = delete;
+
+    desktop_gui_application&
+    operator = (
+        const desktop_gui_application& other
+    )
+    = delete;
+
+    // Move Operations --------------------------------------------------------
+
+    desktop_gui_application (
+        desktop_gui_application&& other
+    )
+    noexcept = default;
+
+    desktop_gui_application&
+    operator = (
+        desktop_gui_application&& other
+    )
+    noexcept = default;
+
     // Accessors --------------------------------------------------------------
 
     static

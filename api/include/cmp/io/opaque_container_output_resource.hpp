@@ -13,6 +13,11 @@
 
 namespace cmp {
 
+/**
+    Description:
+        An opaque container output resource is an output resource that
+        writes to a container that it owns.
+*/
 template <
     typename Container
 >
@@ -94,6 +99,72 @@ public:
     );
 
     ~opaque_container_output_resource ()
+    override = default;
+
+    // Copy Operations --------------------------------------------------------
+
+    /**
+        Description:
+            Copy-constructs an <#type>opaque_container_output_resource</#type>
+            from an existing one.
+
+        Parameters:
+            other:
+                The <#type>opaque_container_output_resource</#type>
+                to copy from.
+    */
+    opaque_container_output_resource (
+        const opaque_container_output_resource& other
+    )
+    = default;
+
+    /**
+        Description:
+            Copy-assigns an <#type>opaque_container_output_resource</#type>
+            into <#this/> one.
+
+        Parameters:
+            other:
+                The <#type>opaque_container_output_resource</#type>
+                to copy from.
+    */
+    opaque_container_output_resource&
+    operator = (
+        const opaque_container_output_resource& other
+    )
+    = default;
+
+    // Move Operations --------------------------------------------------------
+
+    /**
+        Description:
+            Move-constructs an <#type>opaque_container_output_resource</#type>
+            from an existing one.
+
+        Parameters:
+            other:
+                The <#type>opaque_container_output_resource</#type>
+                to move from.
+    */
+    opaque_container_output_resource (
+        opaque_container_output_resource&& other
+    )
+    noexcept = default;
+
+    /**
+        Description:
+            Move-assigns an <#type>opaque_container_output_resource</#type>
+            into <#this/> one.
+
+        Parameters:
+            other:
+                The <#type>opaque_container_output_resource</#type>
+                to move from.
+    */
+    opaque_container_output_resource&
+    operator = (
+        opaque_container_output_resource&& other
+    )
     noexcept = default;
 
     // Accessors --------------------------------------------------------------

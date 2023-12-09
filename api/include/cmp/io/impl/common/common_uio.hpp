@@ -24,14 +24,14 @@ class CMP_LIBRARY_NAME stdout_stream final
 public:
     // Types ------------------------------------------------------------------
 
-    using wrapped_resource_type = stdout_resource;
+    using referenced_resource_type = stdout_resource;
 
     // Constructors and Destructor --------------------------------------------
 
     CMP_CONDITIONAL_INLINE
     explicit
     stdout_stream (
-        wrapped_resource_type& resource
+        referenced_resource_type& resource
     )
     noexcept;
 

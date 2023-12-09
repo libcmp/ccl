@@ -49,7 +49,6 @@ desktop_gui_application::desktop_gui_application (
 } // function -----------------------------------------------------------------
 
 desktop_gui_application::~desktop_gui_application ()
-noexcept
 {
     g_object_unref(m_native_handle.gtk_application);
 } // function -----------------------------------------------------------------

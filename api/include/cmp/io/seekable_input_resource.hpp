@@ -12,6 +12,11 @@
 
 namespace cmp {
 
+/**
+    Description:
+        A seekable input resource is an input resource that can seek,
+        that is, change where read operations will take place next.
+*/
 template <
     typename Position
 >
@@ -45,8 +50,73 @@ public:
         std::size_t buffer_capacity = io_buffer::default_buffer_capacity
     );
 
-    virtual
     ~seekable_input_resource ()
+    override = default;
+
+    // Copy Operations --------------------------------------------------------
+
+    /**
+        Description:
+            Copy-constructs a <#type>seekable_input_resource</#type>
+            from an existing one.
+
+        Parameters:
+            other:
+                The <#type>seekable_input_resource</#type>
+                to copy from.
+    */
+    seekable_input_resource (
+        const seekable_input_resource& other
+    )
+    = default;
+
+    /**
+        Description:
+            Copy-assigns a <#type>seekable_input_resource</#type>
+            into <#this/> one.
+
+        Parameters:
+            other:
+                The <#type>seekable_input_resource</#type>
+                to copy from.
+    */
+    seekable_input_resource&
+    operator = (
+        const seekable_input_resource& other
+    )
+    = default;
+
+    // Move Operations --------------------------------------------------------
+
+    /**
+        Description:
+            Move-constructs a <#type>seekable_input_resource</#type>
+            from an existing one.
+
+        Parameters:
+            other:
+                The <#type>seekable_input_resource</#type>
+                to move from.
+    */
+    seekable_input_resource (
+        seekable_input_resource&& other
+    )
+    noexcept = default;
+
+    /**
+        Description:
+            Move-assigns a <#type>seekable_input_resource</#type>
+            into <#this/> one.
+
+        Parameters:
+            other:
+                The <#type>seekable_input_resource</#type>
+                to move from.
+    */
+    seekable_input_resource&
+    operator = (
+        seekable_input_resource&& other
+    )
     noexcept = default;
 
     // Accessors --------------------------------------------------------------

@@ -28,7 +28,7 @@ public:
 
     CMP_CONDITIONAL_INLINE
     ~stdin_resource ()
-    noexcept = default;
+    override = default;
 
     // Accessors --------------------------------------------------------------
 
@@ -62,20 +62,20 @@ class CMP_LIBRARY_NAME stdin_stream final
 public:
     // Types ------------------------------------------------------------------
 
-    using wrapped_resource_type = stdin_resource;
+    using referenced_resource_type = stdin_resource;
 
     // Constructors and Destructor --------------------------------------------
 
     CMP_CONDITIONAL_INLINE
     explicit
     stdin_stream (
-        wrapped_resource_type& resource
+        referenced_resource_type& resource
     )
     noexcept;
 
     CMP_CONDITIONAL_INLINE
     ~stdin_stream ()
-    noexcept = default;
+    override = default;
 }; // class -------------------------------------------------------------------
 
 } // namespace ----------------------------------------------------------------

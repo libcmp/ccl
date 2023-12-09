@@ -124,6 +124,10 @@ private:
 
 } // namespace ----------------------------------------------------------------
 
+/**
+    Description:
+        This exception type indicates that a parse attempt failed.
+*/
 class CMP_LIBRARY_NAME parse_failed
     : public std::invalid_argument
 {
@@ -166,7 +170,77 @@ public:
 
     CMP_CONDITIONAL_INLINE
     ~parse_failed ()
-    noexcept override = default;
+    override = default;
+
+    // Copy Operations --------------------------------------------------------
+
+    /**
+        Description:
+            Copy-constructs a <#type>parse_failed</#type>
+            from an existing one.
+
+        Parameters:
+            other:
+                The <#type>parse_failed</#type>
+                to copy from.
+    */
+    CMP_CONDITIONAL_INLINE
+    parse_failed (
+        const parse_failed& other
+    )
+    = default;
+
+    /**
+        Description:
+            Copy-assigns a <#type>parse_failed</#type>
+            into <#this/> one.
+
+        Parameters:
+            other:
+                The <#type>parse_failed</#type>
+                to copy from.
+    */
+    CMP_CONDITIONAL_INLINE
+    parse_failed&
+    operator = (
+        const parse_failed& other
+    )
+    = default;
+
+    // Move Operations --------------------------------------------------------
+
+    /**
+        Description:
+            Move-constructs a <#type>parse_failed</#type>
+            from an existing one.
+
+        Parameters:
+            other:
+                The <#type>parse_failed</#type>
+                to move from.
+    */
+    CMP_CONDITIONAL_INLINE
+    parse_failed (
+        parse_failed&& other
+    )
+    noexcept = default;
+
+    /**
+        Description:
+            Move-assigns a <#type>parse_failed</#type>
+            into <#this/> one.
+
+        Parameters:
+            other:
+                The <#type>parse_failed</#type>
+                to move from.
+    */
+    CMP_CONDITIONAL_INLINE
+    parse_failed&
+    operator = (
+        parse_failed&& other
+    )
+    noexcept = default;
 
     // Accessors --------------------------------------------------------------
 
@@ -189,9 +263,9 @@ private:
 
 /**
     Description:
-        Parses the input string and returns the corresponding boolean value.
-        The input string is expected to conform to the given bool format. If
-        it doesn't, a <#type>parse_failed</#type> exception is thrown.
+        Parses the input string and returns the corresponding bool value.
+        The input string is expected to conform to the given bool format.
+        If it doesn't, a <#type>parse_failed</#type> exception is thrown.
 */
 template <
     text_object Input
@@ -220,10 +294,10 @@ parse_integer (
 
 /**
     Description:
-        Parses the input string and returns the corresponding floating point
-        value. The input string is expected to conform to the given floating
-        point format. If it doesn't, a <#type>parse_failed</#type> exception
-        is thrown.
+        Parses the input string and returns the corresponding
+        floating-point value. The input string is expected to
+        conform to the given floating-point format. If it doesn't,
+        a <#type>parse_failed</#type> exception is thrown.
 */
 template <
     std::floating_point Output,

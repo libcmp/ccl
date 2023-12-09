@@ -12,6 +12,11 @@
 
 namespace cmp {
 
+/**
+    Description:
+        A seekable transfer resource is a transfer resource that can seek,
+        that is, change where read or write operations will take place next.
+*/
 template <
     typename Position
 >
@@ -44,8 +49,73 @@ public:
         std::size_t buffer_capacity = io_buffer::default_buffer_capacity
     );
 
-    virtual
     ~seekable_transfer_resource ()
+    override = default;
+
+    // Copy Operations --------------------------------------------------------
+
+    /**
+        Description:
+            Copy-constructs a <#type>seekable_transfer_resource</#type>
+            from an existing one.
+
+        Parameters:
+            other:
+                The <#type>seekable_transfer_resource</#type>
+                to copy from.
+    */
+    seekable_transfer_resource (
+        const seekable_transfer_resource& other
+    )
+    = default;
+
+    /**
+        Description:
+            Copy-assigns a <#type>seekable_transfer_resource</#type>
+            into <#this/> one.
+
+        Parameters:
+            other:
+                The <#type>seekable_transfer_resource</#type>
+                to copy from.
+    */
+    seekable_transfer_resource&
+    operator = (
+        const seekable_transfer_resource& other
+    )
+    = default;
+
+    // Move Operations --------------------------------------------------------
+
+    /**
+        Description:
+            Move-constructs a <#type>seekable_transfer_resource</#type>
+            from an existing one.
+
+        Parameters:
+            other:
+                The <#type>seekable_transfer_resource</#type>
+                to move from.
+    */
+    seekable_transfer_resource (
+        seekable_transfer_resource&& other
+    )
+    noexcept = default;
+
+    /**
+        Description:
+            Move-assigns a <#type>seekable_transfer_resource</#type>
+            into <#this/> one.
+
+        Parameters:
+            other:
+                The <#type>seekable_transfer_resource</#type>
+                to move from.
+    */
+    seekable_transfer_resource&
+    operator = (
+        seekable_transfer_resource&& other
+    )
     noexcept = default;
 
     // Accessors --------------------------------------------------------------

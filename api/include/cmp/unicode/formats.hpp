@@ -32,6 +32,76 @@ public:
 
     CMP_CONDITIONAL_INLINE
     ~invalid_radix ()
+    override = default;
+
+    // Copy Operations --------------------------------------------------------
+
+    /**
+        Description:
+            Copy-constructs an <#type>invalid_radix</#type>
+            from an existing one.
+
+        Parameters:
+            other:
+                The <#type>invalid_radix</#type>
+                to copy from.
+    */
+    CMP_CONDITIONAL_INLINE
+    invalid_radix (
+        const invalid_radix& other
+    )
+    = default;
+
+    /**
+        Description:
+            Copy-assigns an <#type>invalid_radix</#type>
+            into <#this/> one.
+
+        Parameters:
+            other:
+                The <#type>invalid_radix</#type>
+                to copy from.
+    */
+    CMP_CONDITIONAL_INLINE
+    invalid_radix&
+    operator = (
+        const invalid_radix& other
+    )
+    = default;
+
+    // Move Operations --------------------------------------------------------
+
+    /**
+        Description:
+            Move-constructs an <#type>invalid_radix</#type>
+            from an existing one.
+
+        Parameters:
+            other:
+                The <#type>invalid_radix</#type>
+                to move from.
+    */
+    CMP_CONDITIONAL_INLINE
+    invalid_radix (
+        invalid_radix&& other
+    )
+    noexcept = default;
+
+    /**
+        Description:
+            Move-assigns an <#type>invalid_radix</#type>
+            into <#this/> one.
+
+        Parameters:
+            other:
+                The <#type>invalid_radix</#type>
+                to move from.
+    */
+    CMP_CONDITIONAL_INLINE
+    invalid_radix&
+    operator = (
+        invalid_radix&& other
+    )
     noexcept = default;
 }; // class -------------------------------------------------------------------
 
@@ -57,13 +127,20 @@ enum class radix_place_limit {
     up_to
 }; // enum --------------------------------------------------------------------
 
+/**
+    Description:
+        A bool format is an object that provides the information that
+        a formatter needs to turn a bool value into a string, and the
+        information that a parser needs to turn a string into a bool
+        value.
+*/
 class CMP_LIBRARY_NAME bool_format {
 public:
     // Constructors and Destructor --------------------------------------------
 
     /**
         Description:
-            Construct a default bool format, where the true
+            Constructs a default bool format, where the true
             string is u8"1" and the false string is u8"0".
     */
     CMP_CONDITIONAL_INLINE
@@ -72,7 +149,7 @@ public:
 
     /**
         Description:
-            Construct a bool format with the
+            Constructs a bool format with the
             given true string and false string.
 
         Parameters:
@@ -89,7 +166,7 @@ public:
 
     CMP_CONDITIONAL_INLINE
     ~bool_format ()
-    noexcept = default;
+    = default;
 
     // Copy Operations --------------------------------------------------------
 
@@ -100,7 +177,8 @@ public:
 
         Parameters:
             other:
-                The <#type>bool_format</#type> to copy from.
+                The <#type>bool_format</#type>
+                to copy from.
     */
     CMP_CONDITIONAL_INLINE
     bool_format (
@@ -110,11 +188,13 @@ public:
 
     /**
         Description:
-            Copy-assigns a <#type>bool_format</#type> into <#this/> one.
+            Copy-assigns a <#type>bool_format</#type>
+            into <#this/> one.
 
         Parameters:
             other:
-                The <#type>bool_format</#type> to copy from.
+                The <#type>bool_format</#type>
+                to copy from.
     */
     CMP_CONDITIONAL_INLINE
     bool_format&
@@ -132,7 +212,8 @@ public:
 
         Parameters:
             other:
-                The <#type>bool_format</#type> to move from.
+                The <#type>bool_format</#type>
+                to move from.
     */
     CMP_CONDITIONAL_INLINE
     bool_format (
@@ -142,11 +223,13 @@ public:
 
     /**
         Description:
-            Move-assigns a <#type>bool_format</#type> into <#this/> one.
+            Move-assigns a <#type>bool_format</#type>
+            into <#this/> one.
 
         Parameters:
             other:
-                The <#type>bool_format</#type> to move from.
+                The <#type>bool_format</#type>
+                to move from.
     */
     CMP_CONDITIONAL_INLINE
     bool_format&
@@ -212,6 +295,13 @@ private:
     std::u8string m_false_string;
 }; // class -------------------------------------------------------------------
 
+/**
+    Description:
+        An integer format is an object that provides the information that
+        a formatter needs to turn an integer value into a string, and the
+        information that a parser needs to turn a string into an integer
+        value.
+*/
 class CMP_LIBRARY_NAME integer_format {
 public:
     // Constructors and Destructor --------------------------------------------
@@ -250,7 +340,7 @@ public:
 
     CMP_CONDITIONAL_INLINE
     ~integer_format ()
-    noexcept = default;
+    = default;
 
     // Copy Operations --------------------------------------------------------
 
@@ -261,7 +351,8 @@ public:
 
         Parameters:
             other:
-                The <#type>integer_format</#type> to copy from.
+                The <#type>integer_format</#type>
+                to copy from.
     */
     CMP_CONDITIONAL_INLINE
     integer_format (
@@ -271,11 +362,13 @@ public:
 
     /**
         Description:
-            Copy-assigns an <#type>integer_format</#type> into <#this/> one.
+            Copy-assigns an <#type>integer_format</#type>
+            into <#this/> one.
 
         Parameters:
             other:
-                The <#type>integer_format</#type> to copy from.
+                The <#type>integer_format</#type>
+                to copy from.
     */
     CMP_CONDITIONAL_INLINE
     integer_format&
@@ -293,7 +386,8 @@ public:
 
         Parameters:
             other:
-                The <#type>integer_format</#type> to move from.
+                The <#type>integer_format</#type>
+                to move from.
     */
     CMP_CONDITIONAL_INLINE
     integer_format (
@@ -303,11 +397,13 @@ public:
 
     /**
         Description:
-            Move-assigns an <#type>integer_format</#type> into <#this/> one.
+            Move-assigns an <#type>integer_format</#type>
+            into <#this/> one.
 
         Parameters:
             other:
-                The <#type>integer_format</#type> to move from.
+                The <#type>integer_format</#type>
+                to move from.
     */
     CMP_CONDITIONAL_INLINE
     integer_format&
@@ -398,13 +494,20 @@ private:
     thousands_separator m_thousands_separator;
 }; // class -------------------------------------------------------------------
 
+/**
+    Description:
+        A floating-point format is an object that provides the information
+        that a formatter needs to turn a floating-point value into
+        a string, and the information that a parser needs to turn
+        a string into a floating-point value.
+*/
 class CMP_LIBRARY_NAME floating_point_format {
 public:
     // Constructors and Destructor --------------------------------------------
 
     /**
         Description:
-            Construct a default floating point format, where
+            Construct a default floating-point format, where
             the radix is 10, the sign status is
             <#enumerator>sign_status::only_when_negative</#enumerator>,
             the thousands separator is
@@ -420,7 +523,7 @@ public:
 
     /**
         Description:
-            Construct a floating point format with the given radix,
+            Construct a floating-point format with the given radix,
             sign status, thousands separator, radix character, radix
             place limit and radix place count.
 
@@ -450,7 +553,7 @@ public:
 
     CMP_CONDITIONAL_INLINE
     ~floating_point_format ()
-    noexcept = default;
+    = default;
 
     // Copy Operations --------------------------------------------------------
 
@@ -461,7 +564,8 @@ public:
 
         Parameters:
             other:
-                The <#type>floating_point_format</#type> to copy from.
+                The <#type>floating_point_format</#type>
+                to copy from.
     */
     CMP_CONDITIONAL_INLINE
     floating_point_format (
@@ -471,12 +575,13 @@ public:
 
     /**
         Description:
-            Copy-assigns a <#type>floating_point_format</#type> into <#this/>
-            one.
+            Copy-assigns a <#type>floating_point_format</#type>
+            into <#this/> one.
 
         Parameters:
             other:
-                The <#type>floating_point_format</#type> to copy from.
+                The <#type>floating_point_format</#type>
+                to copy from.
     */
     CMP_CONDITIONAL_INLINE
     floating_point_format&
@@ -494,7 +599,8 @@ public:
 
         Parameters:
             other:
-                The <#type>floating_point_format</#type> to move from.
+                The <#type>floating_point_format</#type>
+                to move from.
     */
     CMP_CONDITIONAL_INLINE
     floating_point_format (
@@ -504,12 +610,13 @@ public:
 
     /**
         Description:
-            Move-assigns a <#type>floating_point_format</#type> into <#this/>
-            one.
+            Move-assigns a <#type>floating_point_format</#type>
+            into <#this/> one.
 
         Parameters:
             other:
-                The <#type>floating_point_format</#type> to move from.
+                The <#type>floating_point_format</#type>
+                to move from.
     */
     CMP_CONDITIONAL_INLINE
     floating_point_format&
@@ -522,7 +629,7 @@ public:
 
     /**
         Description:
-            Returns the radix of <#this/> floating point format.
+            Returns the radix of <#this/> floating-point format.
     */
     CMP_CONDITIONAL_INLINE
     unsigned int
@@ -531,11 +638,11 @@ public:
 
     /**
         Description:
-            Sets the radix of <#this/> floating point format.
+            Sets the radix of <#this/> floating-point format.
 
         Parameters:
             new_radix:
-                The new radix of <#this/> floating point format.
+                The new radix of <#this/> floating-point format.
     */
     CMP_CONDITIONAL_INLINE
     void
@@ -546,7 +653,7 @@ public:
 
     /**
         Description:
-            Returns the sign status of <#this/> floating point format.
+            Returns the sign status of <#this/> floating-point format.
     */
     CMP_CONDITIONAL_INLINE
     sign_status
@@ -555,11 +662,11 @@ public:
 
     /**
         Description:
-            Sets the sign status of <#this/> floating point format.
+            Sets the sign status of <#this/> floating-point format.
 
         Parameters:
             new_sign_status:
-                The new sign status of <#this/> floating point format.
+                The new sign status of <#this/> floating-point format.
     */
     CMP_CONDITIONAL_INLINE
     void
@@ -570,7 +677,7 @@ public:
 
     /**
         Description:
-            Returns the thousands separator of <#this/> floating point format.
+            Returns the thousands separator of <#this/> floating-point format.
     */
     CMP_CONDITIONAL_INLINE
     thousands_separator
@@ -579,11 +686,11 @@ public:
 
     /**
         Description:
-            Sets the thousands separator of <#this/> floating point format.
+            Sets the thousands separator of <#this/> floating-point format.
 
         Parameters:
             new_thousands_separator:
-                The new thousands separator of <#this/> floating point format.
+                The new thousands separator of <#this/> floating-point format.
     */
     CMP_CONDITIONAL_INLINE
     void
@@ -594,7 +701,7 @@ public:
 
     /**
         Description:
-            Returns the radix character of <#this/> floating point format.
+            Returns the radix character of <#this/> floating-point format.
     */
     CMP_CONDITIONAL_INLINE
     radix_character
@@ -603,11 +710,11 @@ public:
 
     /**
         Description:
-            Sets the radix character of <#this/> floating point format.
+            Sets the radix character of <#this/> floating-point format.
 
         Parameters:
             new_radix_character:
-                The new radix character of <#this/> floating point format.
+                The new radix character of <#this/> floating-point format.
     */
     CMP_CONDITIONAL_INLINE
     void
@@ -618,7 +725,7 @@ public:
 
     /**
         Description:
-            Returns the radix place limit of <#this/> floating point format.
+            Returns the radix place limit of <#this/> floating-point format.
     */
     CMP_CONDITIONAL_INLINE
     radix_place_limit
@@ -627,11 +734,11 @@ public:
 
     /**
         Description:
-            Sets the radix place limit of <#this/> floating point format.
+            Sets the radix place limit of <#this/> floating-point format.
 
         Parameters:
             new_radix_place_limit:
-                The new radix place limit of <#this/> floating point format.
+                The new radix place limit of <#this/> floating-point format.
     */
     CMP_CONDITIONAL_INLINE
     void
@@ -642,7 +749,7 @@ public:
 
     /**
         Description:
-            Returns the radix place count of <#this/> floating point format.
+            Returns the radix place count of <#this/> floating-point format.
     */
     CMP_CONDITIONAL_INLINE
     unsigned int
@@ -651,11 +758,11 @@ public:
 
     /**
         Description:
-            Sets the radix place count of <#this/> floating point format.
+            Sets the radix place count of <#this/> floating-point format.
 
         Parameters:
             new_radix_place_count:
-                The new radix place count of <#this/> floating point format.
+                The new radix place count of <#this/> floating-point format.
     */
     CMP_CONDITIONAL_INLINE
     void

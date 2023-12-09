@@ -13,6 +13,11 @@
 
 namespace cmp {
 
+/**
+    Description:
+        A transparent container output resource is an output resource that
+        writes to a container that it does not own.
+*/
 template <
     typename Container
 >
@@ -59,6 +64,74 @@ public:
     );
 
     ~transparent_container_output_resource ()
+    override = default;
+
+    // Copy Operations --------------------------------------------------------
+
+    /**
+        Description:
+            Copy-constructs a
+            <#type>transparent_container_output_resource</#type>
+            from an existing one.
+
+        Parameters:
+            other:
+                The <#type>transparent_container_output_resource</#type>
+                to copy from.
+    */
+    transparent_container_output_resource (
+        const transparent_container_output_resource& other
+    )
+    = default;
+
+    /**
+        Description:
+            Copy-assigns a <#type>transparent_container_output_resource</#type>
+            into <#this/> one.
+
+        Parameters:
+            other:
+                The <#type>transparent_container_output_resource</#type>
+                to copy from.
+    */
+    transparent_container_output_resource&
+    operator = (
+        const transparent_container_output_resource& other
+    )
+    = default;
+
+    // Move Operations --------------------------------------------------------
+
+    /**
+        Description:
+            Move-constructs a
+            <#type>transparent_container_output_resource</#type>
+            from an existing one.
+
+        Parameters:
+            other:
+                The <#type>transparent_container_output_resource</#type>
+                to move from.
+    */
+    transparent_container_output_resource (
+        transparent_container_output_resource&& other
+    )
+    noexcept = default;
+
+    /**
+        Description:
+            Move-assigns a <#type>transparent_container_output_resource</#type>
+            into <#this/> one.
+
+        Parameters:
+            other:
+                The <#type>transparent_container_output_resource</#type>
+                to move from.
+    */
+    transparent_container_output_resource&
+    operator = (
+        transparent_container_output_resource&& other
+    )
     noexcept = default;
 
     // Accessors --------------------------------------------------------------

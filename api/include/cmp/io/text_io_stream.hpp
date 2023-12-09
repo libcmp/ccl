@@ -10,6 +10,11 @@
 
 namespace cmp {
 
+/**
+    Description:
+        A text I/O stream is an object that allows you to
+        read and write text from/to an I/O resource.
+*/
 template <
     typename IOResource
 >
@@ -22,9 +27,9 @@ public:
 
     /**
         Description:
-            The type of the wrapped I/O resource.
+            The type of the referenced I/O resource.
     */
-    using wrapped_resource_type = IOResource;
+    using referenced_resource_type = IOResource;
 
     // Constructors and Destructor --------------------------------------------
 
@@ -45,30 +50,96 @@ public:
                 The endianness that the text is expected to be in.
     */
     text_io_stream (
-        wrapped_resource_type& resource,
+        referenced_resource_type& resource,
         encoding_form ef,
         std::endian endianness = std::endian::big
     )
     noexcept;
 
     ~text_io_stream ()
+    override = default;
+
+    // Copy Operations --------------------------------------------------------
+
+    /**
+        Description:
+            Copy-constructs a <#type>text_io_stream</#type>
+            from an existing one.
+
+        Parameters:
+            other:
+                The <#type>text_io_stream</#type>
+                to copy from.
+    */
+    text_io_stream (
+        const text_io_stream& other
+    )
+    = default;
+
+    /**
+        Description:
+            Copy-assigns a <#type>text_io_stream</#type>
+            into <#this/> one.
+
+        Parameters:
+            other:
+                The <#type>text_io_stream</#type>
+                to copy from.
+    */
+    text_io_stream&
+    operator = (
+        const text_io_stream& other
+    )
+    = default;
+
+    // Move Operations --------------------------------------------------------
+
+    /**
+        Description:
+            Move-constructs a <#type>text_io_stream</#type>
+            from an existing one.
+
+        Parameters:
+            other:
+                The <#type>text_io_stream</#type>
+                to move from.
+    */
+    text_io_stream (
+        text_io_stream&& other
+    )
+    noexcept = default;
+
+    /**
+        Description:
+            Move-assigns a <#type>text_io_stream</#type>
+            into <#this/> one.
+
+        Parameters:
+            other:
+                The <#type>text_io_stream</#type>
+                to move from.
+    */
+    text_io_stream&
+    operator = (
+        text_io_stream&& other
+    )
     noexcept = default;
 
     // Operator Overloads -----------------------------------------------------
 
     /**
         Description:
-            Returns a pointer to the wrapped I/O resource,
+            Returns a pointer to the referenced I/O resource,
             enabling use of the arrow operator.
     */
-    wrapped_resource_type*
+    referenced_resource_type*
     operator -> ()
     const noexcept;
 
 private:
     // Private Data -----------------------------------------------------------
 
-    wrapped_resource_type& m_resource;
+    referenced_resource_type& m_resource;
 }; // class -------------------------------------------------------------------
 
 } // namespace ----------------------------------------------------------------

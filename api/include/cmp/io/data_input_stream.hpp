@@ -11,8 +11,8 @@ namespace cmp {
 
 /**
     Description:
-        A data input stream allows you to read
-        binary data from an input resource.
+        A data input stream is an object that allows
+        you to read binary data from an input resource.
 */
 template <
     typename InputResource
@@ -25,9 +25,9 @@ public:
 
     /**
         Description:
-            The type of the wrapped input resource.
+            The type of the referenced input resource.
     */
-    using wrapped_resource_type = InputResource;
+    using referenced_resource_type = InputResource;
 
     // Constructors and Destructor --------------------------------------------
 
@@ -46,12 +46,78 @@ public:
     */
     explicit
     data_input_stream (
-        wrapped_resource_type& resource,
+        referenced_resource_type& resource,
         std::endian endianness = std::endian::big
     )
     noexcept;
 
     ~data_input_stream ()
+    override = default;
+
+    // Copy Operations --------------------------------------------------------
+
+    /**
+        Description:
+            Copy-constructs a <#type>data_input_stream</#type>
+            from an existing one.
+
+        Parameters:
+            other:
+                The <#type>data_input_stream</#type>
+                to copy from.
+    */
+    data_input_stream (
+        const data_input_stream& other
+    )
+    = default;
+
+    /**
+        Description:
+            Copy-assigns a <#type>data_input_stream</#type>
+            into <#this/> one.
+
+        Parameters:
+            other:
+                The <#type>data_input_stream</#type>
+                to copy from.
+    */
+    data_input_stream&
+    operator = (
+        const data_input_stream& other
+    )
+    = default;
+
+    // Move Operations --------------------------------------------------------
+
+    /**
+        Description:
+            Move-constructs a <#type>data_input_stream</#type>
+            from an existing one.
+
+        Parameters:
+            other:
+                The <#type>data_input_stream</#type>
+                to move from.
+    */
+    data_input_stream (
+        data_input_stream&& other
+    )
+    noexcept = default;
+
+    /**
+        Description:
+            Move-assigns a <#type>data_input_stream</#type>
+            into <#this/> one.
+
+        Parameters:
+            other:
+                The <#type>data_input_stream</#type>
+                to move from.
+    */
+    data_input_stream&
+    operator = (
+        data_input_stream&& other
+    )
     noexcept = default;
 }; // class -------------------------------------------------------------------
 

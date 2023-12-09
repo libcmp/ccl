@@ -44,7 +44,7 @@ stdin_resource::read_raw (
 // Constructors and Destructor ------------------------------------------------
 
 stdin_stream::stdin_stream (
-    wrapped_resource_type& resource
+    referenced_resource_type& resource
 )
 noexcept
     : text_input_stream<stdin_resource>{resource, utf8, std::endian::native}

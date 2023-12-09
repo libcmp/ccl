@@ -13,7 +13,7 @@ template <
     typename OutputResource
 >
 data_output_stream<OutputResource>::data_output_stream (
-    wrapped_resource_type& resource,
+    referenced_resource_type& resource,
     std::endian endianness
 )
 noexcept

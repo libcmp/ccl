@@ -10,7 +10,7 @@ namespace cmp {
 // Constructors and Destructor ------------------------------------------------
 
 stdout_stream::stdout_stream (
-    wrapped_resource_type& resource
+    referenced_resource_type& resource
 )
 noexcept
     : text_output_stream<stdout_resource>{

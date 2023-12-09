@@ -13,7 +13,7 @@ template <
     typename OutputResource
 >
 text_output_stream<OutputResource>::text_output_stream (
-    wrapped_resource_type& resource,
+    referenced_resource_type& resource,
     encoding_form target_encoding_form,
     std::endian endianness
 )

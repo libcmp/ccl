@@ -16,14 +16,14 @@ namespace cmp {
 
 /**
     Description:
-        The <#type>basic_file</#type> class serves as a base class for
-        subclasses that implement the platform-specific code for managing
-        files. All platform-specific subclasses of <#type>basic_file</#type>
-        are called simply <#type>file</#type> so that code that uses them
-        stays the same across all platforms. You generally don't want to
-        use this class directly in application code. Rather, you use the
-        <#type>file</#type> class to read and write files on all supported
-        platforms.
+        This class serves as a base class for classes that implement the
+        platform-specific code for managing files. All platform-specific
+        subclasses of <#type>basic_file</#type> are called simply
+        <#type>file</#type> so that code that uses them stays the
+        same across all platforms. You generally don't want to use
+        this class directly in application code. Rather, you use
+        the <#type>file</#type> class to read and write files on
+        all supported platforms.
 */
 class CMP_LIBRARY_NAME basic_file
     : public seekable_io_resource<std::int64_t>
@@ -63,6 +63,58 @@ public:
         std::size_t buffer_capacity = io_buffer::default_buffer_capacity
     );
 
+    CMP_CONDITIONAL_INLINE
+    ~basic_file ()
+    override = default;
+
+    // Copy Operations --------------------------------------------------------
+
+    basic_file (
+        const basic_file& other
+    )
+    = delete;
+
+    basic_file&
+    operator = (
+        const basic_file& other
+    )
+    = delete;
+
+    // Move Operations --------------------------------------------------------
+
+    /**
+        Description:
+            Move-constructs a <#type>basic_file</#type>
+            from an existing one.
+
+        Parameters:
+            other:
+                The <#type>basic_file</#type>
+                to move from.
+    */
+    CMP_CONDITIONAL_INLINE
+    basic_file (
+        basic_file&& other
+    )
+    noexcept = default;
+
+    /**
+        Description:
+            Move-assigns a <#type>basic_file</#type>
+            into <#this/> one.
+
+        Parameters:
+            other:
+                The <#type>basic_file</#type>
+                to move from.
+    */
+    CMP_CONDITIONAL_INLINE
+    basic_file&
+    operator = (
+        basic_file&& other
+    )
+    noexcept = default;
+
     // Accessors --------------------------------------------------------------
 
     /**
@@ -80,7 +132,7 @@ public:
 
     /**
         Description:
-            Returns the access mode associated with this basic file.
+            Returns the access mode associated with <#this/> basic file.
     */
     CMP_CONDITIONAL_INLINE
     access_mode
@@ -138,7 +190,7 @@ public:
 
     /**
         Description:
-            Flushes the I/O buffer and closes the file.
+            Flushes the I/O buffer and closes <#this/> basic file.
 
             This functionality is platform-dependent and therefore this
             function must be overridden in a platform-specific subclass.
@@ -152,14 +204,14 @@ public:
     /**
         Description:
             Reads <#parameter>byte_count</#parameter> bytes
-            from <#this/> file and places them in the provided
-            <#parameter>data</#parameter> array.
+            from <#this/> basic file and places them in the
+            provided <#parameter>data</#parameter> array.
 
         Parameters:
             data:
                 The array into which the read bytes will be placed.
             byte_count:
-                The number of bytes to read from <#this/> file.
+                The number of bytes to read from <#this/> basic file.
     */
     CMP_CONDITIONAL_INLINE
     std::size_t
@@ -173,13 +225,13 @@ public:
         Description:
             Writes <#parameter>byte_count</#parameter> bytes
             from the <#parameter>data</#parameter> array to
-            <#this/> file.
+            <#this/> basic file.
 
         Parameters:
             data:
-                The array of bytes that will be written to <#this/> file.
+                The array of bytes that will be written to <#this/> basic file.
             byte_count:
-                The number of bytes to write to <#this/> file.
+                The number of bytes to write to <#this/> basic file.
     */
     CMP_CONDITIONAL_INLINE
     std::size_t

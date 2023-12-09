@@ -27,7 +27,7 @@ public:
     );
 
     ~ctr_essence ()
-    noexcept = default;
+    = default;
 
 protected:
     // Protected Data ---------------------------------------------------------

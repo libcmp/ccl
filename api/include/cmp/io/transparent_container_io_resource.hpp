@@ -13,6 +13,11 @@
 
 namespace cmp {
 
+/**
+    Description:
+        A transparent container I/O resource is an I/O resource that
+        reads and writes from/to a container that it does not own.
+*/
 template <
     typename Container
 >
@@ -59,6 +64,74 @@ public:
     );
 
     ~transparent_container_io_resource ()
+    override = default;
+
+    // Copy Operations --------------------------------------------------------
+
+    /**
+        Description:
+            Copy-constructs a
+            <#type>transparent_container_io_resource</#type>
+            from an existing one.
+
+        Parameters:
+            other:
+                The <#type>transparent_container_io_resource</#type>
+                to copy from.
+    */
+    transparent_container_io_resource (
+        const transparent_container_io_resource& other
+    )
+    = default;
+
+    /**
+        Description:
+            Copy-assigns a <#type>transparent_container_io_resource</#type>
+            into <#this/> one.
+
+        Parameters:
+            other:
+                The <#type>transparent_container_io_resource</#type>
+                to copy from.
+    */
+    transparent_container_io_resource&
+    operator = (
+        const transparent_container_io_resource& other
+    )
+    = default;
+
+    // Move Operations --------------------------------------------------------
+
+    /**
+        Description:
+            Move-constructs a
+            <#type>transparent_container_io_resource</#type>
+            from an existing one.
+
+        Parameters:
+            other:
+                The <#type>transparent_container_io_resource</#type>
+                to move from.
+    */
+    transparent_container_io_resource (
+        transparent_container_io_resource&& other
+    )
+    noexcept = default;
+
+    /**
+        Description:
+            Move-assigns a <#type>transparent_container_io_resource</#type>
+            into <#this/> one.
+
+        Parameters:
+            other:
+                The <#type>transparent_container_io_resource</#type>
+                to move from.
+    */
+    transparent_container_io_resource&
+    operator = (
+        transparent_container_io_resource&& other
+    )
     noexcept = default;
 
     // Accessors --------------------------------------------------------------
@@ -76,8 +149,8 @@ public:
         Description:
             Returns the position <#this/> transparent
             container I/O resource is at, that is,
-            the position at which read operations will
-            take place next.
+            the position at which read and write operations
+            will take place next.
     */
     std::int64_t
     get_position ()

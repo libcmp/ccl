@@ -16,10 +16,10 @@ namespace cmp {
 
 /**
     Description:
-        The <#type>test_module</#type> class template represents a test module.
-
-        A test module is an object containing functions that exercise, or
-        <#emphasis>test</#emphasis> some piece of code, most commonly a class.
+        This class template represents a test module. A test module
+        is an object containing functions that exercise, or
+        <#emphasis>test</#emphasis> some piece of code, most
+        commonly a class.
 
         The general approach to testing adopted in CCL is to subclass
         <#type>test_module</#type> and implement one member function per
@@ -28,9 +28,8 @@ namespace cmp {
         function containing a unit test, and then call the
         <#function>run_tests</#function> function to run all the tests. The
         return value of <#function>run_tests</#function> is then returned by
-        the main function of the test program. If the return value is zero,
-        all tests succeeded, otherwise the return value is the number of
-        unit tests that failed.
+        the main function of the test program. The return value is the number
+        of unit tests that failed, which is zero when all tests succeed.
 */
 template <
     typename T
@@ -74,33 +73,35 @@ public:
         )
         noexcept;
 
-        ~dummy ()
-        noexcept;
+        ~dummy ();
 
         // Copy Operations ----------------------------------------------------
 
         /**
             Description:
-                Copy-constructs a <#type>dummy</#type> from an existing one.
+                Copy-constructs a <#type>dummy</#type>
+                from an existing one.
 
             Parameters:
                 other:
-                    The <#type>dummy</#type> to copy from.
+                    The <#type>dummy</#type>
+                    to copy from.
         */
         dummy (
             const dummy& other
-        )
-        noexcept;
+        );
 
         // Move Operations ----------------------------------------------------
 
         /**
             Description:
-                Move-constructs a <#type>dummy</#type> from an existing one.
+                Move-constructs a <#type>dummy</#type>
+                from an existing one.
 
             Parameters:
                 other:
-                    The <#type>dummy</#type> to move from.
+                    The <#type>dummy</#type>
+                    to move from.
         */
         dummy (
             dummy&& other
@@ -135,7 +136,7 @@ public:
     private:
         // Private Data -------------------------------------------------------
 
-        test_module<T>* m_owning_test_module;
+        owning_test_module_type* m_owning_test_module;
         int m_value;
     }; // class ---------------------------------------------------------------
 
@@ -173,7 +174,7 @@ public:
 
         Parameters:
             test_functions:
-                The pointers to the test functions that this
+                The pointers to the test functions that <#this/>
                 <#type>test_module</#type> will run when
                 <#function>run_tests</#function> is called.
     */
@@ -184,6 +185,72 @@ public:
     noexcept;
 
     ~test_module ()
+    = default;
+
+    // Copy Operations --------------------------------------------------------
+
+    /**
+        Description:
+            Copy-constructs a <#type>test_module</#type>
+            from an existing one.
+
+        Parameters:
+            other:
+                The <#type>test_module</#type>
+                to copy from.
+    */
+    test_module (
+        const test_module& other
+    )
+    = default;
+
+    /**
+        Description:
+            Copy-assigns a <#type>test_module</#type>
+            into <#this/> one.
+
+        Parameters:
+            other:
+                The <#type>test_module</#type>
+                to copy from.
+    */
+    test_module&
+    operator = (
+        const test_module& other
+    )
+    = default;
+
+    // Move Operations --------------------------------------------------------
+
+    /**
+        Description:
+            Move-constructs a <#type>test_module</#type>
+            from an existing one.
+
+        Parameters:
+            other:
+                The <#type>test_module</#type>
+                to move from.
+    */
+    test_module (
+        test_module&& other
+    )
+    noexcept = default;
+
+    /**
+        Description:
+            Move-assigns a <#type>test_module</#type>
+            into <#this/> one.
+
+        Parameters:
+            other:
+                The <#type>test_module</#type>
+                to move from.
+    */
+    test_module&
+    operator = (
+        test_module&& other
+    )
     noexcept = default;
 
     // Accessors --------------------------------------------------------------
@@ -223,8 +290,7 @@ public:
 
     /**
         Description:
-            Prints a message to standard output stating
-            that the current stage succeeded.
+            Ends the current stage and counts it as successful.
     */
     void
     end_stage ()

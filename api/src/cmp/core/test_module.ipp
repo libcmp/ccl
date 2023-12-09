@@ -29,7 +29,6 @@ template <
     typename T
 >
 test_module<T>::dummy::~dummy ()
-noexcept
 {
     m_owning_test_module->push_message(
         owning_test_module_type::message::destructor_called
@@ -44,7 +43,6 @@ template <
 test_module<T>::dummy::dummy (
     const dummy& other
 )
-noexcept
     : m_owning_test_module{other.m_owning_test_module}
     , m_value{other.m_value}
 {

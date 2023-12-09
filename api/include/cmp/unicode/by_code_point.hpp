@@ -238,7 +238,8 @@ public:
 
         Parameters:
             other:
-                The <#type>by_code_point</#type> to copy from.
+                The <#type>by_code_point</#type>
+                to copy from.
     */
     CMP_CONDITIONAL_INLINE
     by_code_point (
@@ -248,11 +249,13 @@ public:
 
     /**
         Description:
-            Copy-assigns a <#type>by_code_point</#type> into <#this/> one.
+            Copy-assigns a <#type>by_code_point</#type>
+            into <#this/> one.
 
         Parameters:
             other:
-                The <#type>by_code_point</#type> to copy from.
+                The <#type>by_code_point</#type>
+                to copy from.
     */
     CMP_CONDITIONAL_INLINE
     by_code_point&
@@ -270,7 +273,8 @@ public:
 
         Parameters:
             other:
-                The <#type>by_code_point</#type> to move from.
+                The <#type>by_code_point</#type>
+                to move from.
     */
     CMP_CONDITIONAL_INLINE
     by_code_point (
@@ -280,11 +284,13 @@ public:
 
     /**
         Description:
-            Move-assigns a <#type>by_code_point</#type> into <#this/> one.
+            Move-assigns a <#type>by_code_point</#type>
+            into <#this/> one.
 
         Parameters:
             other:
-                The <#type>by_code_point</#type> to move from.
+                The <#type>by_code_point</#type>
+                to move from.
     */
     CMP_CONDITIONAL_INLINE
     by_code_point&
@@ -382,7 +388,7 @@ public:
 
             CMP_CONDITIONAL_INLINE
             ~reference ()
-            noexcept = default;
+            = default;
 
             // Operator Overloads ---------------------------------------------
 
@@ -649,7 +655,8 @@ public:
 
         Parameters:
             other:
-                The <#type>by_code_point</#type> to copy from.
+                The <#type>by_code_point</#type>
+                to copy from.
     */
     CMP_CONDITIONAL_INLINE
     by_code_point (
@@ -659,11 +666,13 @@ public:
 
     /**
         Description:
-            Copy-assigns a <#type>by_code_point</#type> into <#this/> one.
+            Copy-assigns a <#type>by_code_point</#type>
+            into <#this/> one.
 
         Parameters:
             other:
-                The <#type>by_code_point</#type> to copy from.
+                The <#type>by_code_point</#type>
+                to copy from.
     */
     CMP_CONDITIONAL_INLINE
     by_code_point&
@@ -681,7 +690,8 @@ public:
 
         Parameters:
             other:
-                The <#type>by_code_point</#type> to move from.
+                The <#type>by_code_point</#type>
+                to move from.
     */
     CMP_CONDITIONAL_INLINE
     by_code_point (
@@ -691,11 +701,13 @@ public:
 
     /**
         Description:
-            Move-assigns a <#type>by_code_point</#type> into <#this/> one.
+            Move-assigns a <#type>by_code_point</#type>
+            into <#this/> one.
 
         Parameters:
             other:
-                The <#type>by_code_point</#type> to move from.
+                The <#type>by_code_point</#type>
+                to move from.
     */
     CMP_CONDITIONAL_INLINE
     by_code_point&
@@ -794,7 +806,7 @@ public:
 
             CMP_CONDITIONAL_INLINE
             ~reference ()
-            noexcept = default;
+            = default;
 
             // Operator Overloads ---------------------------------------------
 
@@ -1061,7 +1073,8 @@ public:
 
         Parameters:
             other:
-                The <#type>by_code_point</#type> to copy from.
+                The <#type>by_code_point</#type>
+                to copy from.
     */
     CMP_CONDITIONAL_INLINE
     by_code_point (
@@ -1071,11 +1084,13 @@ public:
 
     /**
         Description:
-            Copy-assigns a <#type>by_code_point</#type> into <#this/> one.
+            Copy-assigns a <#type>by_code_point</#type>
+            into <#this/> one.
 
         Parameters:
             other:
-                The <#type>by_code_point</#type> to copy from.
+                The <#type>by_code_point</#type>
+                to copy from.
     */
     CMP_CONDITIONAL_INLINE
     by_code_point&
@@ -1093,7 +1108,8 @@ public:
 
         Parameters:
             other:
-                The <#type>by_code_point</#type> to move from.
+                The <#type>by_code_point</#type>
+                to move from.
     */
     CMP_CONDITIONAL_INLINE
     by_code_point (
@@ -1103,11 +1119,13 @@ public:
 
     /**
         Description:
-            Move-assigns a <#type>by_code_point</#type> into <#this/> one.
+            Move-assigns a <#type>by_code_point</#type>
+            into <#this/> one.
 
         Parameters:
             other:
-                The <#type>by_code_point</#type> to move from.
+                The <#type>by_code_point</#type>
+                to move from.
     */
     CMP_CONDITIONAL_INLINE
     by_code_point&
@@ -1398,7 +1416,8 @@ public:
 
         Parameters:
             other:
-                The <#type>by_code_point</#type> to copy from.
+                The <#type>by_code_point</#type>
+                to copy from.
     */
     CMP_CONDITIONAL_INLINE
     by_code_point (
@@ -1408,11 +1427,13 @@ public:
 
     /**
         Description:
-            Copy-assigns a <#type>by_code_point</#type> into <#this/> one.
+            Copy-assigns a <#type>by_code_point</#type>
+            into <#this/> one.
 
         Parameters:
             other:
-                The <#type>by_code_point</#type> to copy from.
+                The <#type>by_code_point</#type>
+                to copy from.
     */
     CMP_CONDITIONAL_INLINE
     by_code_point&
@@ -1430,7 +1451,8 @@ public:
 
         Parameters:
             other:
-                The <#type>by_code_point</#type> to move from.
+                The <#type>by_code_point</#type>
+                to move from.
     */
     CMP_CONDITIONAL_INLINE
     by_code_point (
@@ -1440,11 +1462,13 @@ public:
 
     /**
         Description:
-            Move-assigns a <#type>by_code_point</#type> into <#this/> one.
+            Move-assigns a <#type>by_code_point</#type>
+            into <#this/> one.
 
         Parameters:
             other:
-                The <#type>by_code_point</#type> to move from.
+                The <#type>by_code_point</#type>
+                to move from.
     */
     CMP_CONDITIONAL_INLINE
     by_code_point&
@@ -1543,7 +1567,7 @@ public:
 
             CMP_CONDITIONAL_INLINE
             ~reference ()
-            noexcept = default;
+            = default;
 
             // Operator Overloads ---------------------------------------------
 
@@ -1810,7 +1834,8 @@ public:
 
         Parameters:
             other:
-                The <#type>by_code_point</#type> to copy from.
+                The <#type>by_code_point</#type>
+                to copy from.
     */
     CMP_CONDITIONAL_INLINE
     by_code_point (
@@ -1820,11 +1845,13 @@ public:
 
     /**
         Description:
-            Copy-assigns a <#type>by_code_point</#type> into <#this/> one.
+            Copy-assigns a <#type>by_code_point</#type>
+            into <#this/> one.
 
         Parameters:
             other:
-                The <#type>by_code_point</#type> to copy from.
+                The <#type>by_code_point</#type>
+                to copy from.
     */
     CMP_CONDITIONAL_INLINE
     by_code_point&
@@ -1842,7 +1869,8 @@ public:
 
         Parameters:
             other:
-                The <#type>by_code_point</#type> to move from.
+                The <#type>by_code_point</#type>
+                to move from.
     */
     CMP_CONDITIONAL_INLINE
     by_code_point (
@@ -1852,11 +1880,13 @@ public:
 
     /**
         Description:
-            Move-assigns a <#type>by_code_point</#type> into <#this/> one.
+            Move-assigns a <#type>by_code_point</#type>
+            into <#this/> one.
 
         Parameters:
             other:
-                The <#type>by_code_point</#type> to move from.
+                The <#type>by_code_point</#type>
+                to move from.
     */
     CMP_CONDITIONAL_INLINE
     by_code_point&

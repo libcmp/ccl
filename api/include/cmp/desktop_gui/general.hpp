@@ -106,6 +106,14 @@ enum class key {
 
 // Free Functions -------------------------------------------------------------
 
+/**
+    Description:
+        Returns the string representation of the given key.
+
+    Parameters:
+        source:
+            The key to get the string representation of.
+*/
 CMP_LIBRARY_NAME
 std::u8string
 to_u8string (

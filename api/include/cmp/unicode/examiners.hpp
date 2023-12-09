@@ -148,7 +148,7 @@ noexcept;
 /**
     Description:
         Returns true if the given code point represents
-        a whitespace character, and false if it does not.
+        a whitespace character. Otherwise, returns false.
 
     Parameters:
         code_point:

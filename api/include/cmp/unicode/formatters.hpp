@@ -76,8 +76,8 @@ format_integer (
 
 /**
     Description:
-        Formats the given floating point value with the given
-        floating point format and returns the formatted string.
+        Formats the given floating-point value with the given
+        floating-point format and returns the formatted string.
 */
 template <
     writable_raii_text_object Output,

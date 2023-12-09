@@ -12,6 +12,11 @@
 
 namespace cmp {
 
+/**
+    Description:
+        A seekable output resource is an output resource that can seek,
+        that is, change where write operations will take place next.
+*/
 template <
     typename Position
 >
@@ -45,8 +50,73 @@ public:
         std::size_t buffer_capacity = io_buffer::default_buffer_capacity
     );
 
-    virtual
     ~seekable_output_resource ()
+    override = default;
+
+    // Copy Operations --------------------------------------------------------
+
+    /**
+        Description:
+            Copy-constructs a <#type>seekable_output_resource</#type>
+            from an existing one.
+
+        Parameters:
+            other:
+                The <#type>seekable_output_resource</#type>
+                to copy from.
+    */
+    seekable_output_resource (
+        const seekable_output_resource& other
+    )
+    = default;
+
+    /**
+        Description:
+            Copy-assigns a <#type>seekable_output_resource</#type>
+            into <#this/> one.
+
+        Parameters:
+            other:
+                The <#type>seekable_output_resource</#type>
+                to copy from.
+    */
+    seekable_output_resource&
+    operator = (
+        const seekable_output_resource& other
+    )
+    = default;
+
+    // Move Operations --------------------------------------------------------
+
+    /**
+        Description:
+            Move-constructs a <#type>seekable_output_resource</#type>
+            from an existing one.
+
+        Parameters:
+            other:
+                The <#type>seekable_output_resource</#type>
+                to move from.
+    */
+    seekable_output_resource (
+        seekable_output_resource&& other
+    )
+    noexcept = default;
+
+    /**
+        Description:
+            Move-assigns a <#type>seekable_output_resource</#type>
+            into <#this/> one.
+
+        Parameters:
+            other:
+                The <#type>seekable_output_resource</#type>
+                to move from.
+    */
+    seekable_output_resource&
+    operator = (
+        seekable_output_resource&& other
+    )
     noexcept = default;
 
     // Accessors --------------------------------------------------------------

@@ -11,6 +11,11 @@
 
 namespace cmp {
 
+/**
+    Description:
+        An output resource is a destination for output.
+        It's an object you can write data to.
+*/
 class CMP_LIBRARY_NAME output_resource
     : public virtual transfer_resource
 {
@@ -33,8 +38,77 @@ public:
     );
 
     CMP_CONDITIONAL_INLINE
-    virtual
     ~output_resource ()
+    override = default;
+
+    // Copy Operations --------------------------------------------------------
+
+    /**
+        Description:
+            Copy-constructs an <#type>output_resource</#type>
+            from an existing one.
+
+        Parameters:
+            other:
+                The <#type>output_resource</#type>
+                to copy from.
+    */
+    CMP_CONDITIONAL_INLINE
+    output_resource (
+        const output_resource& other
+    )
+    = default;
+
+    /**
+        Description:
+            Copy-assigns an <#type>output_resource</#type>
+            into <#this/> one.
+
+        Parameters:
+            other:
+                The <#type>output_resource</#type>
+                to copy from.
+    */
+    CMP_CONDITIONAL_INLINE
+    output_resource&
+    operator = (
+        const output_resource& other
+    )
+    = default;
+
+    // Move Operations --------------------------------------------------------
+
+    /**
+        Description:
+            Move-constructs an <#type>output_resource</#type>
+            from an existing one.
+
+        Parameters:
+            other:
+                The <#type>output_resource</#type>
+                to move from.
+    */
+    CMP_CONDITIONAL_INLINE
+    output_resource (
+        output_resource&& other
+    )
+    noexcept = default;
+
+    /**
+        Description:
+            Move-assigns an <#type>output_resource</#type>
+            into <#this/> one.
+
+        Parameters:
+            other:
+                The <#type>output_resource</#type>
+                to move from.
+    */
+    CMP_CONDITIONAL_INLINE
+    output_resource&
+    operator = (
+        output_resource&& other
+    )
     noexcept = default;
 
     // Core -------------------------------------------------------------------

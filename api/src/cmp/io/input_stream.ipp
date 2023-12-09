@@ -13,7 +13,7 @@ template <
     typename InputResource
 >
 input_stream<InputResource>::input_stream (
-    wrapped_resource_type& resource,
+    referenced_resource_type& resource,
     std::endian endianness
 )
 noexcept
@@ -27,7 +27,7 @@ noexcept
 template <
     typename InputResource
 >
-typename input_stream<InputResource>::wrapped_resource_type&
+typename input_stream<InputResource>::referenced_resource_type&
 input_stream<InputResource>::grab_resource ()
 noexcept
 {
@@ -37,7 +37,7 @@ noexcept
 template <
     typename InputResource
 >
-const typename input_stream<InputResource>::wrapped_resource_type&
+const typename input_stream<InputResource>::referenced_resource_type&
 input_stream<InputResource>::grab_resource ()
 const noexcept
 {
@@ -98,7 +98,7 @@ input_stream<InputResource>::read (
 template <
     typename InputResource
 >
-typename input_stream<InputResource>::wrapped_resource_type*
+typename input_stream<InputResource>::referenced_resource_type*
 input_stream<InputResource>::operator -> ()
 const noexcept
 {

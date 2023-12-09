@@ -11,6 +11,11 @@
 
 namespace cmp {
 
+/**
+    Description:
+        An I/O buffer stores data temporarily to
+        optimize the operation of transfer resources.
+*/
 class CMP_LIBRARY_NAME io_buffer {
 public:
     // Constants --------------------------------------------------------------
@@ -37,6 +42,76 @@ public:
 
     CMP_CONDITIONAL_INLINE
     ~io_buffer ()
+    = default;
+
+    // Copy Operations --------------------------------------------------------
+
+    /**
+        Description:
+            Copy-constructs an <#type>io_buffer</#type>
+            from an existing one.
+
+        Parameters:
+            other:
+                The <#type>io_buffer</#type>
+                to copy from.
+    */
+    CMP_CONDITIONAL_INLINE
+    io_buffer (
+        const io_buffer& other
+    )
+    = default;
+
+    /**
+        Description:
+            Copy-assigns an <#type>io_buffer</#type>
+            into <#this/> one.
+
+        Parameters:
+            other:
+                The <#type>io_buffer</#type>
+                to copy from.
+    */
+    CMP_CONDITIONAL_INLINE
+    io_buffer&
+    operator = (
+        const io_buffer& other
+    )
+    = default;
+
+    // Move Operations --------------------------------------------------------
+
+    /**
+        Description:
+            Move-constructs an <#type>io_buffer</#type>
+            from an existing one.
+
+        Parameters:
+            other:
+                The <#type>io_buffer</#type>
+                to move from.
+    */
+    CMP_CONDITIONAL_INLINE
+    io_buffer (
+        io_buffer&& other
+    )
+    noexcept = default;
+
+    /**
+        Description:
+            Move-assigns an <#type>io_buffer</#type>
+            into <#this/> one.
+
+        Parameters:
+            other:
+                The <#type>io_buffer</#type>
+                to move from.
+    */
+    CMP_CONDITIONAL_INLINE
+    io_buffer&
+    operator = (
+        io_buffer&& other
+    )
     noexcept = default;
 
     // Accessors --------------------------------------------------------------

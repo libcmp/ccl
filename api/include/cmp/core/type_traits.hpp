@@ -41,6 +41,14 @@ public:
 
 } // namespace ----------------------------------------------------------------
 
+/**
+    Description:
+        Gives you the value type of container <#parameter>T</#parameter>.
+
+    Parameters:
+        T:
+            The type of container to get the value type of.
+*/
 template <
     typename T
 >
@@ -54,6 +62,19 @@ template <
 >
 using constant_max_t = T;
 
+/**
+    Description:
+        Gives you the largest of <#parameter>argument1</#parameter>
+        and <#parameter>argument2</#parameter>.
+
+    Parameters:
+        T:
+            The type of the arguments.
+        argument1:
+            The first value to consider in the comparison.
+        argument2:
+            The second value to consider in the comparison.
+*/
 template <
     typename T,
     T argument1,

@@ -12,6 +12,11 @@
 
 namespace cmp {
 
+/**
+    Description:
+        A text input stream is an object that allows
+        you to read text from an input resource.
+*/
 template <
     typename InputResource
 >
@@ -23,9 +28,9 @@ public:
 
     /**
         Description:
-            The type of the wrapped input resource.
+            The type of the referenced input resource.
     */
-    using wrapped_resource_type = InputResource;
+    using referenced_resource_type = InputResource;
 
     // Constructors and Destructor --------------------------------------------
 
@@ -45,13 +50,79 @@ public:
                 The endianness that the text is expected to be in.
     */
     text_input_stream (
-        wrapped_resource_type& resource,
+        referenced_resource_type& resource,
         encoding_form source_encoding_form,
         std::endian endianness = std::endian::big
     )
     noexcept;
 
     ~text_input_stream ()
+    override = default;
+
+    // Copy Operations --------------------------------------------------------
+
+    /**
+        Description:
+            Copy-constructs a <#type>text_input_stream</#type>
+            from an existing one.
+
+        Parameters:
+            other:
+                The <#type>text_input_stream</#type>
+                to copy from.
+    */
+    text_input_stream (
+        const text_input_stream& other
+    )
+    = default;
+
+    /**
+        Description:
+            Copy-assigns a <#type>text_input_stream</#type>
+            into <#this/> one.
+
+        Parameters:
+            other:
+                The <#type>text_input_stream</#type>
+                to copy from.
+    */
+    text_input_stream&
+    operator = (
+        const text_input_stream& other
+    )
+    = default;
+
+    // Move Operations --------------------------------------------------------
+
+    /**
+        Description:
+            Move-constructs a <#type>text_input_stream</#type>
+            from an existing one.
+
+        Parameters:
+            other:
+                The <#type>text_input_stream</#type>
+                to move from.
+    */
+    text_input_stream (
+        text_input_stream&& other
+    )
+    noexcept = default;
+
+    /**
+        Description:
+            Move-assigns a <#type>text_input_stream</#type>
+            into <#this/> one.
+
+        Parameters:
+            other:
+                The <#type>text_input_stream</#type>
+                to move from.
+    */
+    text_input_stream&
+    operator = (
+        text_input_stream&& other
+    )
     noexcept = default;
 
     // Core -------------------------------------------------------------------
