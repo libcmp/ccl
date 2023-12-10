@@ -18,6 +18,7 @@ public:
               cmp::window_mode::standard
           }
         , m_show_counter{false}
+        , m_last_counter_value{-1}
     {
         set_title(get_title() + u8" ¯\\_(ツ)_/¯");
     } // function -------------------------------------------------------------
@@ -30,19 +31,22 @@ public:
     override
     {
         if (m_show_counter) {
-            set_title(
-                cmp::format_floating_point<std::u8string>(
-                    total_seconds,
-                    cmp::floating_point_format{
-                        10,
-                        cmp::sign_status::only_when_negative,
-                        cmp::thousands_separator::comma,
-                        cmp::radix_character::period,
-                        cmp::radix_place_limit::exactly_equal,
-                        1
-                    }
-                )
-            );
+            auto total_whole_seconds{
+                static_cast<int>(std::floor(total_seconds))
+            };
+            if (total_whole_seconds > m_last_counter_value) {
+                m_last_counter_value = total_whole_seconds;
+                set_title(
+                    cmp::format_integer<std::u8string>(
+                        total_whole_seconds,
+                        cmp::integer_format{
+                            10,
+                            cmp::sign_status::only_when_negative,
+                            cmp::thousands_separator::comma
+                        }
+                    ) + u8's'
+                );
+            }
         }
     } // function -------------------------------------------------------------
 
@@ -93,6 +97,7 @@ private:
     // Private Data -----------------------------------------------------------
 
     bool m_show_counter;
+    int m_last_counter_value;
 }; // class -------------------------------------------------------------------
 
 int
