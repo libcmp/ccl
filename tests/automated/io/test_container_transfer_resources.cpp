@@ -154,8 +154,6 @@ public:
             content = u"Hello!\n";
         } else if constexpr (std::is_same_v<Container, std::u32string>) {
             content = U"Hello!\n";
-        } else if constexpr (std::is_same_v<Container, std::u32string>) {
-            content = U"Hello!\n";
         } else if constexpr (std::is_same_v<Container, std::wstring>) {
             content = L"Hello!\n";
         } else {
