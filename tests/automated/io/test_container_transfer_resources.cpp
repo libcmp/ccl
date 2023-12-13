@@ -733,6 +733,8 @@ public:
             return false;
         }
 
+        end_stage();
+
         return true;
     } // function -------------------------------------------------------------
 
@@ -748,6 +750,8 @@ public:
 
             return false;
         }
+
+        end_stage();
 
         return true;
     } // function -------------------------------------------------------------
@@ -765,6 +769,8 @@ public:
             return false;
         }
 
+        end_stage();
+
         return true;
     } // function -------------------------------------------------------------
 
@@ -780,6 +786,8 @@ public:
 
             return false;
         }
+
+        end_stage();
 
         return true;
     } // function -------------------------------------------------------------
@@ -797,6 +805,8 @@ public:
             return false;
         }
 
+        end_stage();
+
         return true;
     } // function -------------------------------------------------------------
 
@@ -812,6 +822,8 @@ public:
 
             return false;
         }
+
+        end_stage();
 
         return true;
     } // function -------------------------------------------------------------
