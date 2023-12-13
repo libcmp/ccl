@@ -21,6 +21,14 @@ transparent_container_io_resource<Container>
     , impl::ctr_essence<Container>{
           &initial_content
       }
+    , transparent_container_input_resource<Container>{
+          initial_content,
+          buffer_capacity
+      }
+    , transparent_container_output_resource<Container>{
+          initial_content,
+          buffer_capacity
+      }
 {
 } // function -----------------------------------------------------------------
 

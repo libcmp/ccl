@@ -8,8 +8,9 @@
 
 #include <cmp/io/inclusion_assert.hpp>
 #include <cmp/core/type_traits.hpp>
-#include <cmp/io/impl/ctr_essence.hpp>
 #include <cmp/io/seekable_io_resource.hpp>
+#include <cmp/io/transparent_container_input_resource.hpp>
+#include <cmp/io/transparent_container_output_resource.hpp>
 
 namespace cmp {
 
@@ -23,7 +24,8 @@ template <
 >
 class transparent_container_io_resource
     : public seekable_io_resource<std::int64_t>
-    , public impl::ctr_essence<Container>
+    , public transparent_container_input_resource<Container>
+    , public transparent_container_output_resource<Container>
 {
 public:
     // Types ------------------------------------------------------------------

@@ -22,8 +22,8 @@ template <
     typename Container
 >
 class transparent_container_output_resource
-    : public seekable_output_resource<std::int64_t>
-    , public impl::ctr_essence<Container>
+    : public virtual seekable_output_resource<std::int64_t>
+    , public virtual impl::ctr_essence<Container>
 {
 public:
     // Types ------------------------------------------------------------------
