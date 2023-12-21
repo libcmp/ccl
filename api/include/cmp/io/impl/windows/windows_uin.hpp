@@ -52,9 +52,7 @@ private:
     // Private Data -----------------------------------------------------------
 
     HANDLE m_handle;
-}
-    inline uin_resource{CMP_CONFIG_DEFAULT_STDIN_BUFFER_CAPACITY}
-; // class -------------------------------------------------------------------
+}; // class -------------------------------------------------------------------
 
 class CMP_LIBRARY_NAME stdin_stream final
     : public text_input_stream<stdin_resource>
@@ -77,6 +75,16 @@ public:
     ~stdin_stream ()
     override = default;
 }; // class -------------------------------------------------------------------
+
+#if CMP_CONFIG_HEADER_ONLY == true
+
+inline stdin_resource uin_resource{CMP_CONFIG_DEFAULT_STDIN_BUFFER_CAPACITY};
+
+#else
+
+extern CMP_LIBRARY_NAME stdin_resource uin_resource;
+
+#endif
 
 } // namespace ----------------------------------------------------------------
 

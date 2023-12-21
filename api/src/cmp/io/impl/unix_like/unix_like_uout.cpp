@@ -43,4 +43,18 @@ stdout_resource::write_raw (
     return bytes_written;
 } // function -----------------------------------------------------------------
 
+#if CMP_CONFIG_HEADER_ONLY == false
+
+stdout_resource uout_resource{
+    STDOUT_FILENO,
+    CMP_CONFIG_DEFAULT_STDOUT_BUFFER_CAPACITY
+};
+
+stdout_resource uerr_resource{
+    STDERR_FILENO,
+    CMP_CONFIG_DEFAULT_STDERR_BUFFER_CAPACITY
+};
+
+#endif
+
 } // namespace ----------------------------------------------------------------

@@ -60,4 +60,10 @@ noexcept
 {
 } // function -----------------------------------------------------------------
 
+#if CMP_CONFIG_HEADER_ONLY == false
+
+stdin_resource uin_resource{CMP_CONFIG_DEFAULT_STDIN_BUFFER_CAPACITY};
+
+#endif
+
 } // namespace ----------------------------------------------------------------

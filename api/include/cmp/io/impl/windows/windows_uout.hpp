@@ -51,16 +51,26 @@ private:
     // Private Data -----------------------------------------------------------
 
     HANDLE m_handle;
-}
-    inline uout_resource{
-        STD_OUTPUT_HANDLE,
-        CMP_CONFIG_DEFAULT_STDOUT_BUFFER_CAPACITY
-    },
-    uerr_resource{
-        STD_ERROR_HANDLE,
-        CMP_CONFIG_DEFAULT_STDERR_BUFFER_CAPACITY
-    }
-; // class --------------------------------------------------------------------
+}; // class -------------------------------------------------------------------
+
+#if CMP_CONFIG_HEADER_ONLY == true
+
+inline stdout_resource uout_resource{
+    STD_OUTPUT_HANDLE,
+    CMP_CONFIG_DEFAULT_STDOUT_BUFFER_CAPACITY
+};
+
+inline stdout_resource uerr_resource{
+    STD_ERROR_HANDLE,
+    CMP_CONFIG_DEFAULT_STDERR_BUFFER_CAPACITY
+};
+
+#else
+
+extern CMP_LIBRARY_NAME stdout_resource uout_resource;
+extern CMP_LIBRARY_NAME stdout_resource uerr_resource;
+
+#endif
 
 } // namespace ----------------------------------------------------------------
 

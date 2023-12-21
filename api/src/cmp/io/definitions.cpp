@@ -23,4 +23,5 @@
 #   include <cmp/io/io_resource.cpp>
 #   include <cmp/io/output_resource.cpp>
 #   include <cmp/io/transfer_resource.cpp>
+#   include <cmp/io/uio.cpp>
 #endif

@@ -40,13 +40,14 @@ public:
         uout << utf8_string << u8".\n";
         uout << utf16_string << u".\n";
         uout << utf32_string << U".\n";
+        uout << cmp::flush;
 
         end_stage();
 
         uerr << utf8_string << u8".\n";
         uerr << utf16_string << u".\n";
         uerr << utf32_string << U".\n";
-        uerr.flush();
+        uerr << cmp::flush;
 
         end_stage();
 
@@ -62,7 +63,7 @@ public:
         uout << u8"Enter ツ: ";
         std::u8string input;
         uin.read_line(input);
-        uout << "Entered line: " << input << '\n';
+        uout << "Entered line: " << input << '\n' << cmp::flush;
 
         if (input != u8"ツ") {
             std::cout << "The input does not match the expected content."
@@ -87,7 +88,7 @@ public:
 
         uout << u8"Enter 5.5: ";
         uin >> input1;
-        uout << "Entered value: " << input1 << '\n';
+        uout << "Entered value: " << input1 << '\n' << cmp::flush;
 
         if (input1 != 5.5) {
             std::cout << "The parsed input does not match the expected value."
@@ -100,7 +101,7 @@ public:
 
         uout << u8"Enter -75: ";
         uin >> input2;
-        uout << "Entered value: " << input2 << '\n';
+        uout << "Entered value: " << input2 << '\n' << cmp::flush;
 
         if (input2 != -75) {
             std::cout << "The parsed input does not match the expected value."
