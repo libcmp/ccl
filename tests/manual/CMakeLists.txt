@@ -77,11 +77,6 @@ if (CMP_BUILD_HO_TESTS MATCHES true)
                 /utf-8
         )
     endif ()
-    add_test(
-        ho_platform_test
-            ho_test_platform
-    )
-    # test --------------------------------------------------------------------
 
     add_executable(
         ho_test_uio
@@ -109,9 +104,4 @@ if (CMP_BUILD_HO_TESTS MATCHES true)
                 /utf-8
         )
     endif ()
-    add_test(
-        ho_uio_test
-            ho_test_uio
-    )
-    # test --------------------------------------------------------------------
 endif ()
