@@ -40,7 +40,7 @@ public:
             The type of element of the content referenced by
             <#this/> opaque container output resource.
     */
-    using element_type = Container::value_type;
+    using element_type = typename Container::value_type;
 
     // Constructors and Destructor --------------------------------------------
 
