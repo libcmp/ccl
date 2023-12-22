@@ -7,13 +7,13 @@
 int
 main ()
 {
-    std::cout << "How easy does CCL make it to do real Unicode in C++?\n";
+    std::cout << "How easy does CCL make it to do Unicode in C++?\n";
     cmp::uout << u8"I dunno, try it ¯\\_(ツ)_/¯\n";
     cmp::uout << u"Huh, let me see. Say something in Unicode: ";
     std::u8string input;
     cmp::uin >> input;
     cmp::uout << U"You said: " << input << '\n';
-    cmp::uout << "Wow. Just wow.\n";
+    cmp::uout << "Cool.\n";
 
     return 0;
 } // function -----------------------------------------------------------------
