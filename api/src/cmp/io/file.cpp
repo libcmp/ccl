@@ -66,9 +66,8 @@ basic_file::read (
 ) {
     switch (m_access_mode) {
         case read_only:
-        case read_and_write: {
+        case read_and_write:
             return input_resource::read(data, byte_count);
-        }
         case write_only:
             throw invalid_access_mode{};
     }
@@ -93,9 +92,8 @@ basic_file::write (
         case read_only:
             throw invalid_access_mode{};
         case write_only:
-        case read_and_write: {
+        case read_and_write:
             return output_resource::write(data, byte_count);
-        }
     }
 } // function -----------------------------------------------------------------
 CMP_DISABLE_WARNING_POP
