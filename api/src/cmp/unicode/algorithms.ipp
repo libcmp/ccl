@@ -151,7 +151,7 @@ insert_code_point (
                )
     ) {
         if (
-            !is_surrogate(code_point)
+            !is_in_surrogate_range(code_point)
                 && code_point <= maximum_bmp_code_point
         ) {
             s.insert(index, 1, static_cast<char16_t>(code_point));

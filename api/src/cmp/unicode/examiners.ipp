@@ -100,8 +100,14 @@ is_code_point_valid (
 )
 noexcept
 {
+    /*
+        For a code point to be considered valid,
+        it must not exceed the highest valid code
+        point and it must not be in the range of
+        surrogates.
+    */
     return code_point <= maximum_code_point
-        && !is_surrogate(code_point);
+        && !is_in_surrogate_range(code_point);
 } // function -----------------------------------------------------------------
 
 constexpr
