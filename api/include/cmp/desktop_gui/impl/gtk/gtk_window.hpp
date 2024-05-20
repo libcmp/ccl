@@ -28,6 +28,7 @@ public:
         window_mode initial_mode
     );
 
+    virtual
     ~window ()
     = default;
 
