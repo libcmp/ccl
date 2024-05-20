@@ -145,14 +145,6 @@ else ()
     )
 endif ()
 
-# Specify the include directories.
-target_include_directories(
-    cmp PUBLIC
-        include
-        src
-        ${PROJECT_BINARY_DIR}/exports
-)
-
 # Make sure we're using standard C++20.
 set_target_properties(
     cmp PROPERTIES
@@ -162,6 +154,14 @@ set_target_properties(
         CXX_EXTENSIONS OFF
         CXX_VISIBILITY_PREFIX hidden
         VISIBILITY_INLINES_HIDDEN YES
+)
+
+# Specify the include directories.
+target_include_directories(
+    cmp PUBLIC
+        include
+        src
+        ${PROJECT_BINARY_DIR}/exports
 )
 
 # Establish a default value for CMP_CONFIG_LTO_REQUESTED.
