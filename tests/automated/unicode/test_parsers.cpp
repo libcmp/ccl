@@ -54,9 +54,8 @@ public:
     )
     noexcept
     {
-        bool result;
         try {
-            result = parse_bool(text, format);
+            parse_bool(text, format);
         } catch (const parse_failed& ex) {
             return ex.get_type() == expected_error;
         }
@@ -96,9 +95,8 @@ public:
     )
     noexcept
     {
-        T result;
         try {
-            result = parse_integer<T>(text, format);
+            parse_integer<T>(text, format);
         } catch (const parse_failed& ex) {
             return ex.get_type() == expected_error;
         }
@@ -160,9 +158,8 @@ public:
     )
     noexcept
     {
-        T result;
         try {
-            result = parse_floating_point<T>(text, format);
+            parse_floating_point<T>(text, format);
         } catch (const parse_failed& ex) {
             return ex.get_type() == expected_error;
         }
