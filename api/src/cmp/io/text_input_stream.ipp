@@ -47,6 +47,15 @@ noexcept
     m_source_encoding_form = new_source_encoding_form;
 } // function -----------------------------------------------------------------
 
+/*
+    The reason for disabling this warning is that the compiler doesn't
+    realize that the switch statement accounts for all possible values
+    of $m_source_encoding_form, and in each case there is a guaranteed
+    return statement, so control will never reach the end of this
+    non-void function.
+*/
+CMP_DISABLE_WARNING_PUSH
+CMP_DISABLE_WARNING(CMP_WARNING_ID_END_OF_NON_VOID)
 template <
     typename InputResource
 >
@@ -62,6 +71,7 @@ text_input_stream<InputResource>::read_bom ()
             return read_utf32_bom();
     }
 } // function -----------------------------------------------------------------
+CMP_DISABLE_WARNING_POP
 
 template <
     typename InputResource
@@ -263,6 +273,15 @@ text_input_stream<InputResource>::read_utf32_code_point ()
     return code_unit;
 } // function -----------------------------------------------------------------
 
+/*
+    The reason for disabling this warning is that the compiler doesn't
+    realize that the switch statement accounts for all possible values
+    of $m_source_encoding_form, and in each case there is a guaranteed
+    return statement, so control will never reach the end of this
+    non-void function.
+*/
+CMP_DISABLE_WARNING_PUSH
+CMP_DISABLE_WARNING(CMP_WARNING_ID_END_OF_NON_VOID)
 template <
     typename InputResource
 >
@@ -278,6 +297,7 @@ text_input_stream<InputResource>::read_code_point ()
             return read_utf32_code_point();
     }
 } // function -----------------------------------------------------------------
+CMP_DISABLE_WARNING_POP
 
 template <
     typename InputResource

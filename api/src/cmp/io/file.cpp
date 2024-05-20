@@ -50,6 +50,15 @@ const noexcept
 
 // Core -----------------------------------------------------------------------
 
+/*
+    The reason for disabling this warning is that the compiler doesn't
+    realize that the switch statement accounts for all possible values
+    of $m_access_mode, and in each case there is a guaranteed return
+    statement or throw statement, so control will never reach the end
+    of this non-void function.
+*/
+CMP_DISABLE_WARNING_PUSH
+CMP_DISABLE_WARNING(CMP_WARNING_ID_END_OF_NON_VOID)
 std::size_t
 basic_file::read (
     std::byte* data,
@@ -64,7 +73,17 @@ basic_file::read (
             throw invalid_access_mode{};
     }
 } // function -----------------------------------------------------------------
+CMP_DISABLE_WARNING_POP
 
+/*
+    The reason for disabling this warning is that the compiler doesn't
+    realize that the switch statement accounts for all possible values
+    of $m_access_mode, and in each case there is a guaranteed return
+    statement or throw statement, so control will never reach the end
+    of this non-void function.
+*/
+CMP_DISABLE_WARNING_PUSH
+CMP_DISABLE_WARNING(CMP_WARNING_ID_END_OF_NON_VOID)
 std::size_t
 basic_file::write (
     const std::byte* data,
@@ -79,5 +98,6 @@ basic_file::write (
         }
     }
 } // function -----------------------------------------------------------------
+CMP_DISABLE_WARNING_POP
 
 } // namespace ----------------------------------------------------------------

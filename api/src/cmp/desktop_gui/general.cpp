@@ -7,6 +7,14 @@ namespace cmp {
 
 // Free Functions -------------------------------------------------------------
 
+/*
+    The reason for disabling this warning is that the compiler doesn't
+    realize that the switch statement accounts for all possible values
+    of $source, and in each case there is a guaranteed return statement,
+    so control will never reach the end of this non-void function.
+*/
+CMP_DISABLE_WARNING_PUSH
+CMP_DISABLE_WARNING(CMP_WARNING_ID_END_OF_NON_VOID)
 std::u8string
 to_u8string (
     key source
@@ -158,5 +166,6 @@ to_u8string (
             return u8"Unknown";
     }
 } // function -----------------------------------------------------------------
+CMP_DISABLE_WARNING_POP
 
 } // namespace ----------------------------------------------------------------

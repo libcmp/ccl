@@ -16,6 +16,7 @@
 #   define CMP_DISABLE_WARNING(id) CMP_DO_PRAGMA(GCC diagnostic ignored id)
 
 #   define CMP_WARNING_ID_MACRO_REDEFINED "-Wmacro-redefined"
+#   define CMP_WARNING_ID_END_OF_NON_VOID "-Wreturn-type"
 
 #elif defined(__GNUC__)
 
@@ -27,6 +28,7 @@
 #   define CMP_DISABLE_WARNING(id) CMP_DO_PRAGMA(GCC diagnostic ignored id)
 
 #   define CMP_WARNING_ID_MACRO_REDEFINED "-Wbuiltin-macro-redefined"
+#   define CMP_WARNING_ID_END_OF_NON_VOID "-Wreturn-type"
 
 #elif defined(_MSC_VER)
 
@@ -38,6 +40,7 @@
 #   define CMP_DISABLE_WARNING(id) CMP_DO_PRAGMA(warning(disable: id))
 
 #   define CMP_WARNING_ID_MACRO_REDEFINED 4005
+#   define CMP_WARNING_ID_END_OF_NON_VOID
 
 #else
 

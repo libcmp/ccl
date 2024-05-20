@@ -216,6 +216,15 @@ forward_resize_event_to_window (
     }
 } // function -----------------------------------------------------------------
 
+/*
+    The reason for disabling this warning is that the compiler doesn't
+    realize that this function is only called with known window handles,
+    which means that the for loop will always find a match and then return
+    true or false, so control will never reach the end of this non-void
+    function.
+*/
+CMP_DISABLE_WARNING_PUSH
+CMP_DISABLE_WARNING(CMP_WARNING_ID_END_OF_NON_VOID)
 bool
 forward_close_event_to_window (
     HWND window_handle
@@ -240,6 +249,7 @@ forward_close_event_to_window (
         }
     }
 } // function -----------------------------------------------------------------
+CMP_DISABLE_WARNING_POP
 
 void
 forward_update_to_window (
