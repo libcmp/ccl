@@ -319,10 +319,20 @@ noexcept
     };
 
     /*
+        Get the total number of test functions. The type is int because we
+        are going to pass this integer to the count_digits function, which
+        takes an int. An explicit cast is used because the integer returned
+        by std::vector::size is unsigned. Since we know that we will never
+        have more test functions than a simple int can represent, this
+        conversion is safe.
+    */
+    int test_function_count{static_cast<int>(m_test_functions.size())};
+
+    /*
         Get the number of digits in the total number of tests.
     */
     unsigned int total_number_digit_count{
-        count_digits(m_test_functions.size())
+        count_digits(test_function_count)
     };
 
     unsigned int digit_difference{
@@ -392,7 +402,7 @@ noexcept
         m_failed_tests.emplace_back(
             m_current_test_index,
             m_current_test_name,
-            m_current_stage_index + 1
+            static_cast<unsigned short>(m_current_stage_index + 1U)
         );
     }
 

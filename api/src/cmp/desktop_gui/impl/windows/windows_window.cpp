@@ -371,7 +371,7 @@ const
     GetWindowTextW(
         m_native_handle.window_handle,
         title_wstring.data(),
-        title_wstring.size() + 1
+        static_cast<int>(title_wstring.size() + 1U)
     );
     return to_u8string(title_wstring);
 } // function -----------------------------------------------------------------

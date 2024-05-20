@@ -134,9 +134,11 @@ number_parser::parse_floating_point (
         format.get_thousands_separator()
     };
     if (radix_character_iterator == u32_input.cend()) {
-        return number_parser::parse_integer<long long>(
-            u32_input,
-            equivalent_format
+        return static_cast<Output>(
+            number_parser::parse_integer<long long>(
+                u32_input,
+                equivalent_format
+            )
         );
     } else {
         const auto integral_part_start{u32_input.data()};
