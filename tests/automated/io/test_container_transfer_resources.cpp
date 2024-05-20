@@ -2,11 +2,7 @@
 // SPDX-License-Identifier: BSL-1.0
 
 #include <cmp/core/test_module.hpp>
-#include <cmp/io/transparent_container_input_resource.hpp>
-#include <cmp/io/transparent_container_output_resource.hpp>
 #include <cmp/io/transparent_container_io_resource.hpp>
-#include <cmp/io/opaque_container_input_resource.hpp>
-#include <cmp/io/opaque_container_output_resource.hpp>
 #include <cmp/io/opaque_container_io_resource.hpp>
 
 namespace cmp {
