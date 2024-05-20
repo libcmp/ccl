@@ -140,7 +140,7 @@ template <
 output_stream<OutputResource>&
 operator << (
     output_stream<OutputResource>& stream,
-    flush_t flush_v
+    flush_t
 ) {
     stream.flush();
     return stream;
