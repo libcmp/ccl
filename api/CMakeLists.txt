@@ -221,13 +221,6 @@ generate_export_header(
     For each configuration constant, check to see if it is defined,
     and if it is then set a compile-time constant on the cmp target
     with the value that the constant was given.
-
-    The CMP_CONFIG_DESKTOP_GUI_PACKAGE_EXCLUDED,
-    CMP_CONFIG_IO_PACKAGE_EXCLUDED, CMP_CONFIG_LTO_REQUESTED
-    and CMP_CONFIG_LTO_ENABLED constants are different from the
-    others in that they are guaranteed to be defined at this point
-    in this CMakeLists.txt file, so it is not necessary to check
-    whether they are defined before passing them onto the cmp target.
 ]]
 
 if (DEFINED CMP_CONFIG_HEADER_ONLY)
@@ -265,6 +258,12 @@ if (DEFINED CMP_CONFIG_DEFAULT_STDIN_BUFFER_CAPACITY)
     )
 endif ()
 
+#[[
+    These constants are different from the others in that they are
+    guaranteed to be defined at this point in this CMakeLists.txt
+    file, so it is not necessary to check whether they are defined
+    before passing them onto the cmp target.
+]]
 target_compile_definitions(
     cmp PUBLIC
         CMP_CONFIG_DESKTOP_GUI_PACKAGE_EXCLUDED=${CMP_CONFIG_DESKTOP_GUI_PACKAGE_EXCLUDED}
