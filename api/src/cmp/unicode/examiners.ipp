@@ -84,6 +84,17 @@ noexcept
 
 constexpr
 bool
+is_in_surrogate_range (
+    char32_t code_point
+)
+noexcept
+{
+    return code_point >= leading_surrogate_minimum_value
+        && code_point <= trailing_surrogate_maximum_value;
+} // function -----------------------------------------------------------------
+
+constexpr
+bool
 is_code_point_valid (
     char32_t code_point
 )

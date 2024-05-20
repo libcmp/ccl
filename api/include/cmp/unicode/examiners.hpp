@@ -131,6 +131,22 @@ noexcept;
 
 /**
     Description:
+        Returns true if the given code point is in the range of values
+        that represent a surrogate. Otherwise, returns false.
+
+    Parameters:
+        code_point:
+            The code point to examine.
+*/
+constexpr
+bool
+is_in_surrogate_range (
+    char32_t code_point
+)
+noexcept;
+
+/**
+    Description:
         Returns true if the given code point
         is valid. Otherwise, returns false.
 
