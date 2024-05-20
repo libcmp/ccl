@@ -150,6 +150,9 @@ insert_code_point (
                        && sizeof (wchar_t) == 2
                )
     ) {
+        if (code_point > maximum_code_point) {
+            throw invalid_code_point{};
+        }
         if (
             !is_in_surrogate_range(code_point)
                 && code_point <= maximum_bmp_code_point
