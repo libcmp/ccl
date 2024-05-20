@@ -25,9 +25,11 @@ public:
         Description:
             Constructs an <#type>invalid_code_point</#type>.
     */
+    CMP_CONDITIONAL_INLINE
     invalid_code_point ()
     noexcept = default;
 
+    CMP_CONDITIONAL_INLINE
     ~invalid_code_point ()
     override = default;
 
@@ -130,9 +132,11 @@ public:
         Description:
             Constructs an <#type>invalid_unicode_encoding</#type>.
     */
+    CMP_CONDITIONAL_INLINE
     invalid_unicode_encoding ()
     noexcept = default;
 
+    CMP_CONDITIONAL_INLINE
     ~invalid_unicode_encoding ()
     override = default;
 
@@ -236,9 +240,11 @@ public:
         Description:
             Constructs an <#type>iterated_past_end</#type>.
     */
+    CMP_CONDITIONAL_INLINE
     iterated_past_end ()
     noexcept = default;
 
+    CMP_CONDITIONAL_INLINE
     ~iterated_past_end ()
     override = default;
 
