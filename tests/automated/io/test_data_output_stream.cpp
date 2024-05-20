@@ -64,8 +64,14 @@ public:
             return false;
         }
 
-        ifstream.read((char*)(&value_to_read1), sizeof (value_to_read1));
-        ifstream.read((char*)(&value_to_read2), sizeof (value_to_read2));
+        ifstream.read(
+            reinterpret_cast<char*>(&value_to_read1),
+            sizeof (value_to_read1)
+        );
+        ifstream.read(
+            reinterpret_cast<char*>(&value_to_read2),
+            sizeof (value_to_read2)
+        );
 
         if (value_to_read1 != 75) {
             std::cout << "The first value read from the file "

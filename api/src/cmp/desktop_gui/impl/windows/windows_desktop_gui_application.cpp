@@ -28,7 +28,8 @@ desktop_gui_application::desktop_gui_application (
         = m_native_handle.application_instance_handle;
     window_class.hIcon = LoadIcon(0, IDI_APPLICATION);
     window_class.hCursor = LoadCursor(0, IDC_ARROW);
-    window_class.hbrBackground = (HBRUSH)GetStockObject(WHITE_BRUSH);
+    window_class.hbrBackground
+        = static_cast<HBRUSH>(GetStockObject(WHITE_BRUSH));
     window_class.lpszMenuName = 0;
     window_class.lpszClassName = m_native_handle.window_class_name;
 

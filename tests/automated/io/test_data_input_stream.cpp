@@ -44,8 +44,14 @@ public:
             return false;
         }
 
-        ofstream.write((char*)(&value_to_write1), sizeof (value_to_write1));
-        ofstream.write((char*)(&value_to_write2), sizeof (value_to_write2));
+        ofstream.write(
+            reinterpret_cast<char*>(&value_to_write1),
+            sizeof (value_to_write1)
+        );
+        ofstream.write(
+            reinterpret_cast<char*>(&value_to_write2),
+            sizeof (value_to_write2)
+        );
         ofstream.close();
 
         file f{
