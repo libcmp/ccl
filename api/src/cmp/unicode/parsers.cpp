@@ -21,11 +21,12 @@ noexcept
     if (!is_radix_digit(character, radix)) {
         return -1;
     }
+
     if (character >= '0' && character <= '9') {
         return character - '0';
     } else if (character >= 'a' && character <= 'z') {
         return character - 'a' + 10;
-    } else if (character >= 'A' && character <= 'Z') {
+    } else {
         return character - 'A' + 10;
     }
 } // function -----------------------------------------------------------------
