@@ -6,7 +6,7 @@
 
 #include <cmp/core/platform.hpp>
 
-#ifdef CMP_OS_WINDOWS
+#if defined(CMP_OS_WINDOWS) && !defined(CMP_COMPILER_GCC)
 #pragma comment(linker, "/ENTRY:mainCRTStartup")
 #endif // CMP_OS_WINDOWS
 
