@@ -15,7 +15,7 @@ namespace impl {
 // Free Functions -------------------------------------------------------------
 
 CMP_CONDITIONAL_INLINE
-CMP_LIBRARY_NAME
+CMP_CONDITIONAL_EXPORT
 int
 initialize_utf8_sequence (
     char8_t leading_code_unit,
@@ -23,7 +23,7 @@ initialize_utf8_sequence (
 );
 
 CMP_CONDITIONAL_INLINE
-CMP_LIBRARY_NAME
+CMP_CONDITIONAL_EXPORT
 int
 initialize_utf16_sequence (
     char16_t leading_code_unit,

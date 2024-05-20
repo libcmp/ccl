@@ -15,7 +15,7 @@ namespace cmp {
         resource can be an input resource (a source of input), an output
         resource (a destination for output), or both.
 */
-class CMP_LIBRARY_NAME transfer_resource {
+class CMP_CONDITIONAL_EXPORT_CLASS transfer_resource {
 public:
     // Constructors and Destructor --------------------------------------------
 
@@ -29,6 +29,7 @@ public:
                 the transfer resource is completely unbuffered.
     */
     CMP_CONDITIONAL_INLINE
+    CMP_CONDITIONAL_EXPORT
     explicit
     transfer_resource (
         std::size_t buffer_capacity = io_buffer::default_buffer_capacity
@@ -116,6 +117,7 @@ public:
             Tells whether this transfer resource is at its end.
     */
     CMP_CONDITIONAL_INLINE
+    CMP_CONDITIONAL_EXPORT
     virtual
     bool
     is_at_end ()

@@ -16,7 +16,7 @@ namespace cmp {
         An output resource is a destination for output.
         It's an object you can write data to.
 */
-class CMP_LIBRARY_NAME output_resource
+class CMP_CONDITIONAL_EXPORT_CLASS output_resource
     : public virtual transfer_resource
 {
 public:
@@ -127,6 +127,7 @@ public:
                 The number of bytes to write to <#this/> output resource.
     */
     CMP_CONDITIONAL_INLINE
+    CMP_CONDITIONAL_EXPORT
     virtual
     std::size_t
     write (
@@ -141,6 +142,7 @@ public:
             gets written out.
     */
     CMP_CONDITIONAL_INLINE
+    CMP_CONDITIONAL_EXPORT
     void
     flush ();
 
@@ -161,6 +163,7 @@ protected:
                 The number of bytes to write to <#this/> output resource.
     */
     CMP_CONDITIONAL_INLINE
+    CMP_CONDITIONAL_EXPORT
     virtual
     std::size_t
     write_raw (
@@ -173,6 +176,7 @@ private:
     // Private Functions ------------------------------------------------------
 
     CMP_CONDITIONAL_INLINE
+    CMP_CONDITIONAL_EXPORT
     std::size_t
     write_buffered (
         const std::byte* data,

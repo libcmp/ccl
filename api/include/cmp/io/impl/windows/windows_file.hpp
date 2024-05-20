@@ -11,17 +11,19 @@
 
 namespace cmp {
 
-class CMP_LIBRARY_NAME file final
+class CMP_CONDITIONAL_EXPORT_CLASS file final
     : public basic_file
 {
 public:
     // Constructors and Destructor --------------------------------------------
 
     CMP_CONDITIONAL_INLINE
+    CMP_CONDITIONAL_EXPORT
     file ()
     noexcept;
 
     CMP_CONDITIONAL_INLINE
+    CMP_CONDITIONAL_EXPORT
     file (
         const std::filesystem::path& file_path,
         access_mode mode,
@@ -30,6 +32,7 @@ public:
     );
 
     CMP_CONDITIONAL_INLINE
+    CMP_CONDITIONAL_EXPORT
     ~file ()
     override;
 
@@ -64,11 +67,13 @@ public:
     // Accessors --------------------------------------------------------------
 
     CMP_CONDITIONAL_INLINE
+    CMP_CONDITIONAL_EXPORT
     bool
     is_open ()
     const noexcept override;
 
     CMP_CONDITIONAL_INLINE
+    CMP_CONDITIONAL_EXPORT
     std::int64_t
     get_position ()
     const noexcept override;
@@ -76,6 +81,7 @@ public:
     // Core -------------------------------------------------------------------
 
     CMP_CONDITIONAL_INLINE
+    CMP_CONDITIONAL_EXPORT
     bool
     open (
         const std::filesystem::path& file_path,
@@ -85,6 +91,7 @@ public:
     noexcept override;
 
     CMP_CONDITIONAL_INLINE
+    CMP_CONDITIONAL_EXPORT
     void
     close ()
     noexcept override;
@@ -93,6 +100,7 @@ protected:
     // Protected Function -----------------------------------------------------
 
     CMP_CONDITIONAL_INLINE
+    CMP_CONDITIONAL_EXPORT
     void
     set_position_raw (
         std::int64_t new_position,
@@ -101,6 +109,7 @@ protected:
     noexcept override;
 
     CMP_CONDITIONAL_INLINE
+    CMP_CONDITIONAL_EXPORT
     std::size_t
     read_raw (
         std::byte* data,
@@ -110,6 +119,7 @@ protected:
     noexcept override;
 
     CMP_CONDITIONAL_INLINE
+    CMP_CONDITIONAL_EXPORT
     std::size_t
     write_raw (
         const std::byte* data,
@@ -125,6 +135,7 @@ private:
     // Private Functions ------------------------------------------------------
 
     CMP_CONDITIONAL_INLINE
+    CMP_CONDITIONAL_EXPORT
     DWORD
     read_block (
         std::byte* data,
@@ -133,6 +144,7 @@ private:
     noexcept;
 
     CMP_CONDITIONAL_INLINE
+    CMP_CONDITIONAL_EXPORT
     DWORD
     write_block (
         const std::byte* data,

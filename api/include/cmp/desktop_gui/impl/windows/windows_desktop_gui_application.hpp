@@ -27,13 +27,13 @@ window_procedure (
 
 } // namespace ----------------------------------------------------------------
 
-class CMP_LIBRARY_NAME desktop_gui_application
+class CMP_CONDITIONAL_EXPORT_CLASS desktop_gui_application
     : public application
 {
 public:
     // Types ------------------------------------------------------------------
 
-    class native_handle {
+    class CMP_CONDITIONAL_EXPORT_CLASS native_handle {
     public:
         // Public Data --------------------------------------------------------
 
@@ -45,6 +45,7 @@ public:
 
     // Constructors and Destructor --------------------------------------------
 
+    CMP_CONDITIONAL_EXPORT
     desktop_gui_application (
         int argc,
         char** argv
@@ -81,21 +82,25 @@ public:
 
     // Accessors --------------------------------------------------------------
 
+    CMP_CONDITIONAL_EXPORT
     static
     desktop_gui_application*
     get_instance_ptr ()
     noexcept;
 
+    CMP_CONDITIONAL_EXPORT
     native_handle&
     grab_native_handle ()
     noexcept;
 
+    CMP_CONDITIONAL_EXPORT
     const native_handle&
     grab_native_handle ()
     const noexcept;
 
     // Core -------------------------------------------------------------------
 
+    CMP_CONDITIONAL_EXPORT
     int
     run ()
     override;

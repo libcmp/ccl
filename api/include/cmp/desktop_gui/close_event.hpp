@@ -15,7 +15,7 @@ namespace cmp {
         <#isnip>set_should_close(false)</#isnip> on the close event to
         specify that the window should not be closed.
 */
-class CMP_LIBRARY_NAME close_event
+class CMP_CONDITIONAL_EXPORT_CLASS close_event
     : public event
 {
 public:
@@ -31,6 +31,7 @@ public:
                 The value that indicates whether the
                 associated window should be closed.
     */
+    CMP_CONDITIONAL_EXPORT
     explicit
     close_event (
         bool initial_should_close
@@ -114,6 +115,7 @@ public:
             be closed. Otherwise, returns false. This is something you can
             change by calling <#function>set_should_close</#function>.
     */
+    CMP_CONDITIONAL_EXPORT
     bool
     should_close ()
     const noexcept;
@@ -128,6 +130,7 @@ public:
                 The value that indicates whether the
                 associated window should be closed.
     */
+    CMP_CONDITIONAL_EXPORT
     void
     set_should_close (
         bool new_value

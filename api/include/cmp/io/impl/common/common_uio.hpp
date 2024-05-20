@@ -18,7 +18,7 @@
 
 namespace cmp {
 
-class CMP_LIBRARY_NAME stdout_stream final
+class CMP_CONDITIONAL_EXPORT_CLASS stdout_stream final
     : public text_output_stream<stdout_resource>
 {
 public:
@@ -29,6 +29,7 @@ public:
     // Constructors and Destructor --------------------------------------------
 
     CMP_CONDITIONAL_INLINE
+    CMP_CONDITIONAL_EXPORT
     explicit
     stdout_stream (
         referenced_resource_type& resource

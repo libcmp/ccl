@@ -17,7 +17,7 @@ namespace cmp {
         if you read from a file through an input stream and read past
         the file's EOF (end of file) position.
 */
-class CMP_LIBRARY_NAME read_past_end
+class CMP_CONDITIONAL_EXPORT_CLASS read_past_end
     : public std::exception
 {
 public:
@@ -112,6 +112,7 @@ public:
             Returns the explanatory string.
     */
     CMP_CONDITIONAL_INLINE
+    CMP_CONDITIONAL_EXPORT
     const char*
     what ()
     const noexcept override;
@@ -123,7 +124,7 @@ public:
         the wrong access mode. For example, trying to write to a file that was
         opened as read-only.
 */
-class CMP_LIBRARY_NAME invalid_access_mode
+class CMP_CONDITIONAL_EXPORT_CLASS invalid_access_mode
     : public std::exception
 {
 public:
@@ -218,6 +219,7 @@ public:
             Returns the explanatory string.
     */
     CMP_CONDITIONAL_INLINE
+    CMP_CONDITIONAL_EXPORT
     const char*
     what ()
     const noexcept override;

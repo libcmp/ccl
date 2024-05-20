@@ -12,7 +12,7 @@
 
 namespace cmp {
 
-class CMP_LIBRARY_NAME file final
+class CMP_CONDITIONAL_EXPORT_CLASS file final
     : public basic_file
 {
 public:

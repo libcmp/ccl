@@ -17,7 +17,7 @@ namespace cmp {
         It's an object you can read data
         from and write data to.
 */
-class CMP_LIBRARY_NAME io_resource
+class CMP_CONDITIONAL_EXPORT_CLASS io_resource
     : public input_resource
     , public output_resource
 {

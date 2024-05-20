@@ -17,9 +17,9 @@ inline stdout_stream uerr{uerr_resource};
 
 #else
 
-extern CMP_LIBRARY_NAME stdin_stream uin;
-extern CMP_LIBRARY_NAME stdout_stream uout;
-extern CMP_LIBRARY_NAME stdout_stream uerr;
+extern CMP_CONDITIONAL_EXPORT stdin_stream uin;
+extern CMP_CONDITIONAL_EXPORT stdout_stream uout;
+extern CMP_CONDITIONAL_EXPORT stdout_stream uerr;
 
 #endif
 

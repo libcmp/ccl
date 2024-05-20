@@ -25,7 +25,7 @@ enum class key_event_type {
         release. You call <#function>get_key</#function> to get the
         key that was pressed or released.
 */
-class CMP_LIBRARY_NAME key_event
+class CMP_CONDITIONAL_EXPORT_CLASS key_event
     : public event
 {
 public:
@@ -41,6 +41,7 @@ public:
             initial_key:
                 The key associated with the key event.
     */
+    CMP_CONDITIONAL_EXPORT
     key_event (
         key_event_type initial_key_event_type,
         key initial_key
@@ -122,6 +123,7 @@ public:
         Description:
             Returns the key event type of <#this/> <#type>key_event</#type>.
     */
+    CMP_CONDITIONAL_EXPORT
     key_event_type
     get_key_event_type ()
     const noexcept;
@@ -130,6 +132,7 @@ public:
         Description:
             Returns the key that was pressed or released.
     */
+    CMP_CONDITIONAL_EXPORT
     key
     get_key ()
     const noexcept;

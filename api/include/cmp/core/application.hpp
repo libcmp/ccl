@@ -20,7 +20,7 @@ namespace cmp {
         the copyright notice (if any), but subclasses may do more useful
         work.
 */
-class CMP_LIBRARY_NAME application {
+class CMP_CONDITIONAL_EXPORT_CLASS application {
 public:
     // Constructors and Destructor --------------------------------------------
 
@@ -37,6 +37,7 @@ public:
                 given on the command line.
     */
     CMP_CONDITIONAL_INLINE
+    CMP_CONDITIONAL_EXPORT
     application (
         int argc,
         char** argv
@@ -103,6 +104,7 @@ public:
             Returns a pointer to the application object.
     */
     CMP_CONDITIONAL_INLINE
+    CMP_CONDITIONAL_EXPORT
     static
     application*
     get_instance_ptr ()
@@ -114,6 +116,7 @@ public:
             were given on the command line.
     */
     CMP_CONDITIONAL_INLINE
+    CMP_CONDITIONAL_EXPORT
     int
     get_argc ()
     const;
@@ -124,6 +127,7 @@ public:
             that were given on the command line.
     */
     CMP_CONDITIONAL_INLINE
+    CMP_CONDITIONAL_EXPORT
     char**
     get_argv ()
     const;
@@ -133,6 +137,7 @@ public:
             Returns the copyright notice held in <#this/> application object.
     */
     CMP_CONDITIONAL_INLINE
+    CMP_CONDITIONAL_EXPORT
     std::u8string
     get_copyright_notice ()
     const;
@@ -148,6 +153,7 @@ public:
                 in <#this/> application object.
     */
     CMP_CONDITIONAL_INLINE
+    CMP_CONDITIONAL_EXPORT
     void
     set_copyright_notice (
         std::u8string_view new_copyright_notice
@@ -161,6 +167,7 @@ public:
             may provide a more useful implementation.
     */
     CMP_CONDITIONAL_INLINE
+    CMP_CONDITIONAL_EXPORT
     virtual
     int
     run ();
@@ -182,7 +189,7 @@ private:
         Returns a pointer to the application object.
 */
 CMP_CONDITIONAL_INLINE
-CMP_LIBRARY_NAME
+CMP_CONDITIONAL_EXPORT
 application*
 app ()
 noexcept;

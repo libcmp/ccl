@@ -14,13 +14,14 @@
 
 namespace cmp {
 
-class CMP_LIBRARY_NAME stdin_resource
+class CMP_CONDITIONAL_EXPORT_CLASS stdin_resource
     : public input_resource
 {
 public:
     // Constructors and Destructor --------------------------------------------
 
     CMP_CONDITIONAL_INLINE
+    CMP_CONDITIONAL_EXPORT
     stdin_resource (
         std::size_t buffer_capacity = io_buffer::default_buffer_capacity
     )
@@ -33,6 +34,7 @@ public:
     // Accessors --------------------------------------------------------------
 
     CMP_CONDITIONAL_INLINE
+    CMP_CONDITIONAL_EXPORT
     bool
     is_at_end ()
     const noexcept override;
@@ -40,6 +42,7 @@ public:
     // Core -------------------------------------------------------------------
 
     CMP_CONDITIONAL_INLINE
+    CMP_CONDITIONAL_EXPORT
     std::size_t
     read_raw (
         std::byte* data,
@@ -54,7 +57,7 @@ private:
     HANDLE m_handle;
 }; // class -------------------------------------------------------------------
 
-class CMP_LIBRARY_NAME stdin_stream final
+class CMP_CONDITIONAL_EXPORT_CLASS stdin_stream final
     : public text_input_stream<stdin_resource>
 {
 public:
@@ -65,6 +68,7 @@ public:
     // Constructors and Destructor --------------------------------------------
 
     CMP_CONDITIONAL_INLINE
+    CMP_CONDITIONAL_EXPORT
     explicit
     stdin_stream (
         referenced_resource_type& resource
@@ -82,7 +86,7 @@ inline stdin_resource uin_resource{CMP_CONFIG_DEFAULT_STDIN_BUFFER_CAPACITY};
 
 #else
 
-extern CMP_LIBRARY_NAME stdin_resource uin_resource;
+extern CMP_CONDITIONAL_EXPORT stdin_resource uin_resource;
 
 #endif
 

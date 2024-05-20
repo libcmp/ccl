@@ -18,7 +18,7 @@ namespace cmp {
 
 // Free Functions -------------------------------------------------------------
 
-CMP_LIBRARY_NAME
+CMP_CONDITIONAL_EXPORT
 desktop_gui_application*
 dgui_app ()
 noexcept;

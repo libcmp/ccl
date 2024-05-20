@@ -17,7 +17,7 @@ namespace cmp {
         An input resource is a source of input.
         It's an object you can read data from.
 */
-class CMP_LIBRARY_NAME input_resource
+class CMP_CONDITIONAL_EXPORT_CLASS input_resource
     : public virtual transfer_resource
 {
 public:
@@ -33,6 +33,7 @@ public:
                 the input resource is completely unbuffered.
     */
     CMP_CONDITIONAL_INLINE
+    CMP_CONDITIONAL_EXPORT
     explicit
     input_resource (
         std::size_t buffer_capacity = io_buffer::default_buffer_capacity
@@ -127,6 +128,7 @@ public:
                 The number of bytes to read from <#this/> input resource.
     */
     CMP_CONDITIONAL_INLINE
+    CMP_CONDITIONAL_EXPORT
     virtual
     std::size_t
     read (
@@ -141,6 +143,7 @@ public:
             resource is read from.
     */
     CMP_CONDITIONAL_INLINE
+    CMP_CONDITIONAL_EXPORT
     void
     tie (
         output_resource& resource
@@ -166,6 +169,7 @@ protected:
                 being issued to <#this/> input resource.
     */
     CMP_CONDITIONAL_INLINE
+    CMP_CONDITIONAL_EXPORT
     virtual
     std::size_t
     read_raw (
@@ -180,6 +184,7 @@ protected:
             Fills the buffer and returns the number of bytes read.
     */
     CMP_CONDITIONAL_INLINE
+    CMP_CONDITIONAL_EXPORT
     std::size_t
     fill ();
 
@@ -191,6 +196,7 @@ private:
     // Private Functions ------------------------------------------------------
 
     CMP_CONDITIONAL_INLINE
+    CMP_CONDITIONAL_EXPORT
     std::size_t
     read_buffered (
         std::byte* data,

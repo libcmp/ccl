@@ -25,7 +25,7 @@ namespace cmp {
         the <#type>file</#type> class to read and write files on
         all supported platforms.
 */
-class CMP_LIBRARY_NAME basic_file
+class CMP_CONDITIONAL_EXPORT_CLASS basic_file
     : public seekable_io_resource<std::int64_t>
 {
 public:
@@ -37,6 +37,7 @@ public:
             object not associated with any file.
     */
     CMP_CONDITIONAL_INLINE
+    CMP_CONDITIONAL_EXPORT
     basic_file ()
     noexcept;
 
@@ -57,6 +58,7 @@ public:
                 with this <#type>basic_file</#type> object.
     */
     CMP_CONDITIONAL_INLINE
+    CMP_CONDITIONAL_EXPORT
     basic_file (
         const std::filesystem::path& file_path,
         access_mode mode,
@@ -125,6 +127,7 @@ public:
             function must be overridden in a platform-specific subclass.
     */
     CMP_CONDITIONAL_INLINE
+    CMP_CONDITIONAL_EXPORT
     virtual
     bool
     is_open ()
@@ -135,6 +138,7 @@ public:
             Returns the access mode associated with <#this/> basic file.
     */
     CMP_CONDITIONAL_INLINE
+    CMP_CONDITIONAL_EXPORT
     access_mode
     get_access_mode ()
     const noexcept;
@@ -145,6 +149,7 @@ public:
             Otherwise, returns false.
     */
     CMP_CONDITIONAL_INLINE
+    CMP_CONDITIONAL_EXPORT
     bool
     is_at_end ()
     const noexcept override;
@@ -179,6 +184,7 @@ public:
                 action.
     */
     CMP_CONDITIONAL_INLINE
+    CMP_CONDITIONAL_EXPORT
     virtual
     bool
     open (
@@ -196,6 +202,7 @@ public:
             function must be overridden in a platform-specific subclass.
     */
     CMP_CONDITIONAL_INLINE
+    CMP_CONDITIONAL_EXPORT
     virtual
     void
     close ()
@@ -214,6 +221,7 @@ public:
                 The number of bytes to read from <#this/> basic file.
     */
     CMP_CONDITIONAL_INLINE
+    CMP_CONDITIONAL_EXPORT
     std::size_t
     read (
         std::byte* data,
@@ -234,6 +242,7 @@ public:
                 The number of bytes to write to <#this/> basic file.
     */
     CMP_CONDITIONAL_INLINE
+    CMP_CONDITIONAL_EXPORT
     std::size_t
     write (
         const std::byte* data,

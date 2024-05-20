@@ -16,7 +16,7 @@
 
 namespace cmp {
 
-class CMP_LIBRARY_NAME window
+class CMP_CONDITIONAL_EXPORT_CLASS window
 {
 public:
     // Constructors and Destructor --------------------------------------------

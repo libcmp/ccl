@@ -114,7 +114,7 @@ enum class key {
         source:
             The key to get the string representation of.
 */
-CMP_LIBRARY_NAME
+CMP_CONDITIONAL_EXPORT
 std::u8string
 to_u8string (
     key source

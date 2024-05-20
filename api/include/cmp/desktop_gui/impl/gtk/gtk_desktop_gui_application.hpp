@@ -13,13 +13,13 @@
 
 namespace cmp {
 
-class CMP_LIBRARY_NAME desktop_gui_application
+class CMP_CONDITIONAL_EXPORT_CLASS desktop_gui_application
     : public application
 {
 public:
     // Types ------------------------------------------------------------------
 
-    class native_handle {
+    class CMP_CONDITIONAL_EXPORT_CLASS native_handle {
     public:
         // Public Data --------------------------------------------------------
 

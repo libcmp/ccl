@@ -21,7 +21,7 @@ enum class event_type {
     Description:
         This is the base class of all GUI event classes.
 */
-class CMP_LIBRARY_NAME event {
+class CMP_CONDITIONAL_EXPORT_CLASS event {
 public:
     // Constructors and Destructor --------------------------------------------
 
@@ -33,6 +33,7 @@ public:
             initial_event_type:
                 The type of <#this/> event.
     */
+    CMP_CONDITIONAL_EXPORT
     explicit
     event (
         event_type initial_event_type
@@ -114,6 +115,7 @@ public:
         Description:
             Returns the event type of <#this/> <#type>event</#type>.
     */
+    CMP_CONDITIONAL_EXPORT
     event_type
     get_event_type ()
     const noexcept;

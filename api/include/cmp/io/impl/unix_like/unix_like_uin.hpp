@@ -14,7 +14,7 @@
 
 namespace cmp {
 
-class CMP_LIBRARY_NAME stdin_resource
+class CMP_CONDITIONAL_EXPORT_CLASS stdin_resource
     : public input_resource
 {
 public:
@@ -49,7 +49,7 @@ public:
     override;
 }; // class -------------------------------------------------------------------
 
-class CMP_LIBRARY_NAME stdin_stream final
+class CMP_CONDITIONAL_EXPORT_CLASS stdin_stream final
     : public text_input_stream<stdin_resource>
 {
 public:
@@ -77,7 +77,7 @@ inline stdin_resource uin_resource{CMP_CONFIG_DEFAULT_STDIN_BUFFER_CAPACITY};
 
 #else
 
-extern CMP_LIBRARY_NAME stdin_resource uin_resource;
+extern CMP_CONDITIONAL_EXPORT stdin_resource uin_resource;
 
 #endif
 

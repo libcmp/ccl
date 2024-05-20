@@ -16,11 +16,12 @@
 
 namespace cmp {
 
-class CMP_LIBRARY_NAME window
+class CMP_CONDITIONAL_EXPORT_CLASS window
 {
 public:
     // Constructors and Destructor --------------------------------------------
 
+    CMP_CONDITIONAL_EXPORT
     window (
         int initial_width,
         int initial_height,
@@ -46,11 +47,13 @@ public:
 
     // Move Operations --------------------------------------------------------
 
+    CMP_CONDITIONAL_EXPORT
     window (
         window&& other
     )
     noexcept;
 
+    CMP_CONDITIONAL_EXPORT
     window&
     operator = (
         window&& other
@@ -59,18 +62,22 @@ public:
 
     // Accessors --------------------------------------------------------------
 
+    CMP_CONDITIONAL_EXPORT
     window_native_handle&
     grab_native_handle ()
     noexcept;
 
+    CMP_CONDITIONAL_EXPORT
     const window_native_handle&
     grab_native_handle ()
     const noexcept;
 
+    CMP_CONDITIONAL_EXPORT
     std::u8string
     get_title ()
     const;
 
+    CMP_CONDITIONAL_EXPORT
     void
     set_title (
         const std::u8string& new_title
@@ -78,6 +85,7 @@ public:
 
     // Core -------------------------------------------------------------------
 
+    CMP_CONDITIONAL_EXPORT
     bool
     open (
         int width,
@@ -86,15 +94,19 @@ public:
         window_mode mode
     );
 
+    CMP_CONDITIONAL_EXPORT
     void
     show ();
 
+    CMP_CONDITIONAL_EXPORT
     void
     hide ();
 
+    CMP_CONDITIONAL_EXPORT
     void
     close ();
 
+    CMP_CONDITIONAL_EXPORT
     virtual
     void
     update (
@@ -102,22 +114,26 @@ public:
         double total_seconds
     );
 
+    CMP_CONDITIONAL_EXPORT
     virtual
     void
     handle_key_down_event (
         key_event& ev
     );
 
+    CMP_CONDITIONAL_EXPORT
     virtual
     void
     handle_key_up_event (
         key_event& ev
     );
 
+    CMP_CONDITIONAL_EXPORT
     virtual
     void
     handle_resize_event ();
 
+    CMP_CONDITIONAL_EXPORT
     virtual
     void
     handle_close_event (
@@ -150,6 +166,7 @@ private:
 
     // Private Functions ------------------------------------------------------
 
+    CMP_CONDITIONAL_EXPORT
     void
     fix_association ()
     noexcept;

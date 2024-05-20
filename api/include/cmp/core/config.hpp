@@ -4,6 +4,8 @@
 #ifndef CMP_CORE_CONFIG_HPP_INCLUDED
 #define CMP_CORE_CONFIG_HPP_INCLUDED
 
+#include <cmp/core/compiler.hpp>
+
 #ifndef CMP_CONFIG_IS_STATIC
 #   define CMP_CONFIG_IS_STATIC false
 #endif // CMP_CONFIG_IS_STATIC
@@ -50,18 +52,23 @@
 #   define CMP_CONFIG_IO_PACKAGE_EXCLUDED false
 #endif // CMP_CONFIG_IO_PACKAGE_EXCLUDED
 
-#define CMP_LIBRARY_NAME
-#if CMP_CONFIG_IS_DYNAMIC == true
-#   if __has_include(<cmp_export.hpp>)
-#       include <cmp_export.hpp>
-#       define CMP_LIBRARY_NAME CMP_EXPORT
-#   endif
-#endif
-
 #if CMP_CONFIG_HEADER_ONLY == true
 #   define CMP_CONDITIONAL_INLINE inline
 #else
 #   define CMP_CONDITIONAL_INLINE
+#endif
+
+#if CMP_CONFIG_IS_DYNAMIC == true
+#   include <cmp_export.hpp>
+#   define CMP_CONDITIONAL_EXPORT CMP_EXPORT
+#else
+#   define CMP_CONDITIONAL_EXPORT
+#endif
+
+#if defined(CMP_COMPILER_GCC)
+#   define CMP_CONDITIONAL_EXPORT_CLASS CMP_CONDITIONAL_EXPORT
+#else
+#   define CMP_CONDITIONAL_EXPORT_CLASS
 #endif
 
 #endif // CMP_CORE_CONFIG_HPP_INCLUDED

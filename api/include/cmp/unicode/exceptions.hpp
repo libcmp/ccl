@@ -15,7 +15,7 @@ namespace cmp {
         This exception type indicates that a code
         point is not a valid Unicode code point.
 */
-class CMP_LIBRARY_NAME invalid_code_point
+class CMP_CONDITIONAL_EXPORT_CLASS invalid_code_point
     : public std::exception
 {
 public:
@@ -108,6 +108,7 @@ public:
             Returns the explanatory string.
     */
     CMP_CONDITIONAL_INLINE
+    CMP_CONDITIONAL_EXPORT
     const char*
     what ()
     const noexcept override;
@@ -119,7 +120,7 @@ public:
         string is not valid UTF-8 or UTF-16. UTF-32 is not affected because
         it is not a variable length encoding.
 */
-class CMP_LIBRARY_NAME invalid_unicode_encoding
+class CMP_CONDITIONAL_EXPORT_CLASS invalid_unicode_encoding
     : public std::exception
 {
 public:
@@ -212,6 +213,7 @@ public:
             Returns the explanatory string.
     */
     CMP_CONDITIONAL_INLINE
+    CMP_CONDITIONAL_EXPORT
     const char*
     what ()
     const noexcept override;
@@ -224,7 +226,7 @@ public:
         malformed and ends with a code unit that indicates that there is more
         to read when really there isn't.
 */
-class CMP_LIBRARY_NAME iterated_past_end
+class CMP_CONDITIONAL_EXPORT_CLASS iterated_past_end
     : public std::exception
 {
 public:
@@ -317,6 +319,7 @@ public:
             Returns the explanatory string.
     */
     CMP_CONDITIONAL_INLINE
+    CMP_CONDITIONAL_EXPORT
     const char*
     what ()
     const noexcept override;

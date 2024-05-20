@@ -20,11 +20,11 @@ class by_code_point {
 }; // class -------------------------------------------------------------------
 
 template <>
-class CMP_LIBRARY_NAME by_code_point<char> {
+class CMP_CONDITIONAL_EXPORT_CLASS by_code_point<char> {
 public:
     // Types ------------------------------------------------------------------
 
-    class CMP_LIBRARY_NAME const_iterator {
+    class CMP_CONDITIONAL_EXPORT_CLASS const_iterator {
     public:
         // Types --------------------------------------------------------------
 
@@ -47,6 +47,7 @@ public:
         noexcept = default;
 
         CMP_CONDITIONAL_INLINE
+        CMP_CONDITIONAL_EXPORT
         const_iterator (
             std::string_view::const_iterator initial_current_iterator,
             std::string_view::const_iterator initial_end_iterator
@@ -90,32 +91,38 @@ public:
         // Operator Overloads -------------------------------------------------
 
         CMP_CONDITIONAL_INLINE
+        CMP_CONDITIONAL_EXPORT
         reference
         operator * ()
         const;
 
         CMP_CONDITIONAL_INLINE
+        CMP_CONDITIONAL_EXPORT
         const_iterator&
         operator ++ ();
 
         CMP_CONDITIONAL_INLINE
+        CMP_CONDITIONAL_EXPORT
         const_iterator
         operator ++ (
             int
         );
 
         CMP_CONDITIONAL_INLINE
+        CMP_CONDITIONAL_EXPORT
         const const_iterator&
         operator += (
             difference_type offset
         );
 
         CMP_CONDITIONAL_INLINE
+        CMP_CONDITIONAL_EXPORT
         const_iterator&
         operator -- ()
         noexcept;
 
         CMP_CONDITIONAL_INLINE
+        CMP_CONDITIONAL_EXPORT
         const_iterator
         operator -- (
             int
@@ -123,6 +130,7 @@ public:
         noexcept;
 
         CMP_CONDITIONAL_INLINE
+        CMP_CONDITIONAL_EXPORT
         const const_iterator&
         operator -= (
             difference_type offset
@@ -132,7 +140,7 @@ public:
         // Friends ------------------------------------------------------------
 
         CMP_CONDITIONAL_INLINE
-        CMP_LIBRARY_NAME
+        CMP_CONDITIONAL_EXPORT
         friend
         const_iterator
         operator + (
@@ -142,7 +150,7 @@ public:
         noexcept;
 
         CMP_CONDITIONAL_INLINE
-        CMP_LIBRARY_NAME
+        CMP_CONDITIONAL_EXPORT
         friend
         const_iterator
         operator + (
@@ -152,7 +160,7 @@ public:
         noexcept;
 
         CMP_CONDITIONAL_INLINE
-        CMP_LIBRARY_NAME
+        CMP_CONDITIONAL_EXPORT
         friend
         const_iterator
         operator - (
@@ -162,7 +170,7 @@ public:
         noexcept;
 
         CMP_CONDITIONAL_INLINE
-        CMP_LIBRARY_NAME
+        CMP_CONDITIONAL_EXPORT
         friend
         const_iterator
         operator - (
@@ -172,7 +180,7 @@ public:
         noexcept;
 
         CMP_CONDITIONAL_INLINE
-        CMP_LIBRARY_NAME
+        CMP_CONDITIONAL_EXPORT
         friend
         bool
         operator == (
@@ -182,7 +190,7 @@ public:
         noexcept;
 
         CMP_CONDITIONAL_INLINE
-        CMP_LIBRARY_NAME
+        CMP_CONDITIONAL_EXPORT
         friend
         bool
         operator != (
@@ -219,6 +227,7 @@ public:
                 The string to iterate over by code point.
     */
     CMP_CONDITIONAL_INLINE
+    CMP_CONDITIONAL_EXPORT
     explicit
     by_code_point (
         std::string_view string_to_iterate
@@ -306,6 +315,7 @@ public:
             Returns a constant iterator to the beginning.
     */
     CMP_CONDITIONAL_INLINE
+    CMP_CONDITIONAL_EXPORT
     const_iterator
     begin ()
     const noexcept;
@@ -315,6 +325,7 @@ public:
             Returns a constant iterator to the end.
     */
     CMP_CONDITIONAL_INLINE
+    CMP_CONDITIONAL_EXPORT
     const_iterator
     end ()
     const noexcept;
@@ -324,6 +335,7 @@ public:
             Returns a constant iterator to the beginning.
     */
     CMP_CONDITIONAL_INLINE
+    CMP_CONDITIONAL_EXPORT
     const_iterator
     cbegin ()
     const noexcept;
@@ -333,6 +345,7 @@ public:
             Returns a constant iterator to the end.
     */
     CMP_CONDITIONAL_INLINE
+    CMP_CONDITIONAL_EXPORT
     const_iterator
     cend ()
     const noexcept;
@@ -342,6 +355,7 @@ public:
             Returns a constant reverse iterator to the beginning.
     */
     CMP_CONDITIONAL_INLINE
+    CMP_CONDITIONAL_EXPORT
     const_reverse_iterator
     crbegin ()
     const noexcept;
@@ -351,6 +365,7 @@ public:
             Returns a constant reverse iterator to the end.
     */
     CMP_CONDITIONAL_INLINE
+    CMP_CONDITIONAL_EXPORT
     const_reverse_iterator
     crend ()
     const noexcept;
@@ -363,11 +378,11 @@ private:
 }; // class -------------------------------------------------------------------
 
 template <>
-class CMP_LIBRARY_NAME by_code_point<char8_t> {
+class CMP_CONDITIONAL_EXPORT_CLASS by_code_point<char8_t> {
 public:
     // Types ------------------------------------------------------------------
 
-    class CMP_LIBRARY_NAME const_iterator {
+    class CMP_CONDITIONAL_EXPORT_CLASS const_iterator {
     public:
         // Types --------------------------------------------------------------
 
@@ -375,11 +390,12 @@ public:
 
         using value_type = char32_t;
 
-        class CMP_LIBRARY_NAME reference {
+        class CMP_CONDITIONAL_EXPORT_CLASS reference {
         public:
             // Constructors and Destructor ------------------------------------
 
             CMP_CONDITIONAL_INLINE
+            CMP_CONDITIONAL_EXPORT
             reference (
                 std::u8string_view::const_iterator initial_current_iterator,
                 std::u8string_view::const_iterator initial_end_iterator
@@ -393,6 +409,7 @@ public:
             // Operator Overloads ---------------------------------------------
 
             CMP_CONDITIONAL_INLINE
+            CMP_CONDITIONAL_EXPORT
             operator char32_t ()
             const;
 
@@ -405,6 +422,7 @@ public:
             // Private Functions ----------------------------------------------
 
             CMP_CONDITIONAL_INLINE
+            CMP_CONDITIONAL_EXPORT
             char32_t
             finish_sequence (
                 int sequence_length,
@@ -425,6 +443,7 @@ public:
         noexcept = default;
 
         CMP_CONDITIONAL_INLINE
+        CMP_CONDITIONAL_EXPORT
         const_iterator (
             std::u8string_view::const_iterator initial_current_iterator,
             std::u8string_view::const_iterator initial_end_iterator
@@ -468,32 +487,38 @@ public:
         // Operator Overloads -------------------------------------------------
 
         CMP_CONDITIONAL_INLINE
+        CMP_CONDITIONAL_EXPORT
         reference
         operator * ()
         const;
 
         CMP_CONDITIONAL_INLINE
+        CMP_CONDITIONAL_EXPORT
         const_iterator&
         operator ++ ();
 
         CMP_CONDITIONAL_INLINE
+        CMP_CONDITIONAL_EXPORT
         const_iterator
         operator ++ (
             int
         );
 
         CMP_CONDITIONAL_INLINE
+        CMP_CONDITIONAL_EXPORT
         const const_iterator&
         operator += (
             difference_type offset
         );
 
         CMP_CONDITIONAL_INLINE
+        CMP_CONDITIONAL_EXPORT
         const_iterator&
         operator -- ()
         noexcept;
 
         CMP_CONDITIONAL_INLINE
+        CMP_CONDITIONAL_EXPORT
         const_iterator
         operator -- (
             int
@@ -501,6 +526,7 @@ public:
         noexcept;
 
         CMP_CONDITIONAL_INLINE
+        CMP_CONDITIONAL_EXPORT
         const const_iterator&
         operator -= (
             difference_type offset
@@ -510,7 +536,7 @@ public:
         // Friends ------------------------------------------------------------
 
         CMP_CONDITIONAL_INLINE
-        CMP_LIBRARY_NAME
+        CMP_CONDITIONAL_EXPORT
         friend
         const_iterator
         operator + (
@@ -520,7 +546,7 @@ public:
         noexcept;
 
         CMP_CONDITIONAL_INLINE
-        CMP_LIBRARY_NAME
+        CMP_CONDITIONAL_EXPORT
         friend
         const_iterator
         operator + (
@@ -530,7 +556,7 @@ public:
         noexcept;
 
         CMP_CONDITIONAL_INLINE
-        CMP_LIBRARY_NAME
+        CMP_CONDITIONAL_EXPORT
         friend
         const_iterator
         operator - (
@@ -540,7 +566,7 @@ public:
         noexcept;
 
         CMP_CONDITIONAL_INLINE
-        CMP_LIBRARY_NAME
+        CMP_CONDITIONAL_EXPORT
         friend
         const_iterator
         operator - (
@@ -550,7 +576,7 @@ public:
         noexcept;
 
         CMP_CONDITIONAL_INLINE
-        CMP_LIBRARY_NAME
+        CMP_CONDITIONAL_EXPORT
         friend
         bool
         operator == (
@@ -560,7 +586,7 @@ public:
         noexcept;
 
         CMP_CONDITIONAL_INLINE
-        CMP_LIBRARY_NAME
+        CMP_CONDITIONAL_EXPORT
         friend
         bool
         operator != (
@@ -578,6 +604,7 @@ public:
         // Private Functions --------------------------------------------------
 
         CMP_CONDITIONAL_INLINE
+        CMP_CONDITIONAL_EXPORT
         char32_t
         finish_sequence (
             int sequence_length,
@@ -587,6 +614,7 @@ public:
         const;
 
         CMP_CONDITIONAL_INLINE
+        CMP_CONDITIONAL_EXPORT
         char32_t
         finish_sequence (
             int sequence_length,
@@ -595,20 +623,24 @@ public:
         );
 
         CMP_CONDITIONAL_INLINE
+        CMP_CONDITIONAL_EXPORT
         void
         advance ();
 
         CMP_CONDITIONAL_INLINE
+        CMP_CONDITIONAL_EXPORT
         void
         advance (
             difference_type offset
         );
 
         CMP_CONDITIONAL_INLINE
+        CMP_CONDITIONAL_EXPORT
         void
         retreat ();
 
         CMP_CONDITIONAL_INLINE
+        CMP_CONDITIONAL_EXPORT
         void
         retreat (
             difference_type offset
@@ -636,6 +668,7 @@ public:
                 The string to iterate over by code point.
     */
     CMP_CONDITIONAL_INLINE
+    CMP_CONDITIONAL_EXPORT
     explicit
     by_code_point (
         std::u8string_view string_to_iterate
@@ -723,6 +756,7 @@ public:
             Returns a constant iterator to the beginning.
     */
     CMP_CONDITIONAL_INLINE
+    CMP_CONDITIONAL_EXPORT
     const_iterator
     begin ()
     const noexcept;
@@ -732,6 +766,7 @@ public:
             Returns a constant iterator to the end.
     */
     CMP_CONDITIONAL_INLINE
+    CMP_CONDITIONAL_EXPORT
     const_iterator
     end ()
     const noexcept;
@@ -741,6 +776,7 @@ public:
             Returns a constant iterator to the beginning.
     */
     CMP_CONDITIONAL_INLINE
+    CMP_CONDITIONAL_EXPORT
     const_iterator
     cbegin ()
     const noexcept;
@@ -750,6 +786,7 @@ public:
             Returns a constant iterator to the end.
     */
     CMP_CONDITIONAL_INLINE
+    CMP_CONDITIONAL_EXPORT
     const_iterator
     cend ()
     const noexcept;
@@ -759,6 +796,7 @@ public:
             Returns a constant reverse iterator to the beginning.
     */
     CMP_CONDITIONAL_INLINE
+    CMP_CONDITIONAL_EXPORT
     const_reverse_iterator
     crbegin ()
     const noexcept;
@@ -768,6 +806,7 @@ public:
             Returns a constant reverse iterator to the end.
     */
     CMP_CONDITIONAL_INLINE
+    CMP_CONDITIONAL_EXPORT
     const_reverse_iterator
     crend ()
     const noexcept;
@@ -780,11 +819,11 @@ private:
 }; // class -------------------------------------------------------------------
 
 template <>
-class CMP_LIBRARY_NAME by_code_point<char16_t> {
+class CMP_CONDITIONAL_EXPORT_CLASS by_code_point<char16_t> {
 public:
     // Types ------------------------------------------------------------------
 
-    class CMP_LIBRARY_NAME const_iterator {
+    class CMP_CONDITIONAL_EXPORT_CLASS const_iterator {
     public:
         // Types --------------------------------------------------------------
 
@@ -792,11 +831,12 @@ public:
 
         using value_type = char32_t;
 
-        class CMP_LIBRARY_NAME reference {
+        class CMP_CONDITIONAL_EXPORT_CLASS reference {
         public:
             // Constructors and Destructor ------------------------------------
 
             CMP_CONDITIONAL_INLINE
+            CMP_CONDITIONAL_EXPORT
             explicit
             reference (
                 std::u16string_view::const_iterator initial_current_iterator,
@@ -811,6 +851,7 @@ public:
             // Operator Overloads ---------------------------------------------
 
             CMP_CONDITIONAL_INLINE
+            CMP_CONDITIONAL_EXPORT
             operator char32_t ()
             const;
 
@@ -823,6 +864,7 @@ public:
             // Private Functions ----------------------------------------------
 
             CMP_CONDITIONAL_INLINE
+            CMP_CONDITIONAL_EXPORT
             char32_t
             finish_sequence (
                 int sequence_length,
@@ -843,6 +885,7 @@ public:
         noexcept = default;
 
         CMP_CONDITIONAL_INLINE
+        CMP_CONDITIONAL_EXPORT
         const_iterator (
             std::u16string_view::const_iterator initial_current_iterator,
             std::u16string_view::const_iterator initial_end_iterator
@@ -886,32 +929,38 @@ public:
         // Operator Overloads -------------------------------------------------
 
         CMP_CONDITIONAL_INLINE
+        CMP_CONDITIONAL_EXPORT
         reference
         operator * ()
         const;
 
         CMP_CONDITIONAL_INLINE
+        CMP_CONDITIONAL_EXPORT
         const_iterator&
         operator ++ ();
 
         CMP_CONDITIONAL_INLINE
+        CMP_CONDITIONAL_EXPORT
         const_iterator
         operator ++ (
             int
         );
 
         CMP_CONDITIONAL_INLINE
+        CMP_CONDITIONAL_EXPORT
         const const_iterator&
         operator += (
             difference_type offset
         );
 
         CMP_CONDITIONAL_INLINE
+        CMP_CONDITIONAL_EXPORT
         const_iterator&
         operator -- ()
         noexcept;
 
         CMP_CONDITIONAL_INLINE
+        CMP_CONDITIONAL_EXPORT
         const_iterator
         operator -- (
             int
@@ -919,6 +968,7 @@ public:
         noexcept;
 
         CMP_CONDITIONAL_INLINE
+        CMP_CONDITIONAL_EXPORT
         const const_iterator&
         operator -= (
             difference_type offset
@@ -928,7 +978,7 @@ public:
         // Friends ------------------------------------------------------------
 
         CMP_CONDITIONAL_INLINE
-        CMP_LIBRARY_NAME
+        CMP_CONDITIONAL_EXPORT
         friend
         const_iterator
         operator + (
@@ -938,7 +988,7 @@ public:
         noexcept;
 
         CMP_CONDITIONAL_INLINE
-        CMP_LIBRARY_NAME
+        CMP_CONDITIONAL_EXPORT
         friend
         const_iterator
         operator + (
@@ -948,7 +998,7 @@ public:
         noexcept;
 
         CMP_CONDITIONAL_INLINE
-        CMP_LIBRARY_NAME
+        CMP_CONDITIONAL_EXPORT
         friend
         const_iterator
         operator - (
@@ -958,7 +1008,7 @@ public:
         noexcept;
 
         CMP_CONDITIONAL_INLINE
-        CMP_LIBRARY_NAME
+        CMP_CONDITIONAL_EXPORT
         friend
         const_iterator
         operator - (
@@ -968,7 +1018,7 @@ public:
         noexcept;
 
         CMP_CONDITIONAL_INLINE
-        CMP_LIBRARY_NAME
+        CMP_CONDITIONAL_EXPORT
         friend
         bool
         operator == (
@@ -978,7 +1028,7 @@ public:
         noexcept;
 
         CMP_CONDITIONAL_INLINE
-        CMP_LIBRARY_NAME
+        CMP_CONDITIONAL_EXPORT
         friend
         bool
         operator != (
@@ -996,6 +1046,7 @@ public:
         // Private Functions --------------------------------------------------
 
         CMP_CONDITIONAL_INLINE
+        CMP_CONDITIONAL_EXPORT
         char32_t
         finish_sequence (
             int sequence_length,
@@ -1005,6 +1056,7 @@ public:
         const;
 
         CMP_CONDITIONAL_INLINE
+        CMP_CONDITIONAL_EXPORT
         char32_t
         finish_sequence (
             int sequence_length,
@@ -1013,20 +1065,24 @@ public:
         );
 
         CMP_CONDITIONAL_INLINE
+        CMP_CONDITIONAL_EXPORT
         void
         advance ();
 
         CMP_CONDITIONAL_INLINE
+        CMP_CONDITIONAL_EXPORT
         void
         advance (
             difference_type offset
         );
 
         CMP_CONDITIONAL_INLINE
+        CMP_CONDITIONAL_EXPORT
         void
         retreat ();
 
         CMP_CONDITIONAL_INLINE
+        CMP_CONDITIONAL_EXPORT
         void
         retreat (
             difference_type offset
@@ -1054,6 +1110,7 @@ public:
                 The string to iterate over by code point.
     */
     CMP_CONDITIONAL_INLINE
+    CMP_CONDITIONAL_EXPORT
     explicit
     by_code_point (
         std::u16string_view string_to_iterate
@@ -1141,6 +1198,7 @@ public:
             Returns a constant iterator to the beginning.
     */
     CMP_CONDITIONAL_INLINE
+    CMP_CONDITIONAL_EXPORT
     const_iterator
     begin ()
     const noexcept;
@@ -1150,6 +1208,7 @@ public:
             Returns a constant iterator to the end.
     */
     CMP_CONDITIONAL_INLINE
+    CMP_CONDITIONAL_EXPORT
     const_iterator
     end ()
     const noexcept;
@@ -1159,6 +1218,7 @@ public:
             Returns a constant iterator to the beginning.
     */
     CMP_CONDITIONAL_INLINE
+    CMP_CONDITIONAL_EXPORT
     const_iterator
     cbegin ()
     const noexcept;
@@ -1168,6 +1228,7 @@ public:
             Returns a constant iterator to the end.
     */
     CMP_CONDITIONAL_INLINE
+    CMP_CONDITIONAL_EXPORT
     const_iterator
     cend ()
     const noexcept;
@@ -1177,6 +1238,7 @@ public:
             Returns a constant reverse iterator to the beginning.
     */
     CMP_CONDITIONAL_INLINE
+    CMP_CONDITIONAL_EXPORT
     const_reverse_iterator
     crbegin ()
     const noexcept;
@@ -1186,6 +1248,7 @@ public:
             Returns a constant reverse iterator to the end.
     */
     CMP_CONDITIONAL_INLINE
+    CMP_CONDITIONAL_EXPORT
     const_reverse_iterator
     crend ()
     const noexcept;
@@ -1198,11 +1261,11 @@ private:
 }; // class -------------------------------------------------------------------
 
 template <>
-class CMP_LIBRARY_NAME by_code_point<char32_t> {
+class CMP_CONDITIONAL_EXPORT_CLASS by_code_point<char32_t> {
 public:
     // Types ------------------------------------------------------------------
 
-    class CMP_LIBRARY_NAME const_iterator {
+    class CMP_CONDITIONAL_EXPORT_CLASS const_iterator {
     public:
         // Types --------------------------------------------------------------
 
@@ -1225,6 +1288,7 @@ public:
         noexcept = default;
 
         CMP_CONDITIONAL_INLINE
+        CMP_CONDITIONAL_EXPORT
         const_iterator (
             std::u32string_view::const_iterator initial_current_iterator,
             std::u32string_view::const_iterator initial_end_iterator
@@ -1268,32 +1332,38 @@ public:
         // Operator Overloads -------------------------------------------------
 
         CMP_CONDITIONAL_INLINE
+        CMP_CONDITIONAL_EXPORT
         reference
         operator * ()
         const;
 
         CMP_CONDITIONAL_INLINE
+        CMP_CONDITIONAL_EXPORT
         const_iterator&
         operator ++ ();
 
         CMP_CONDITIONAL_INLINE
+        CMP_CONDITIONAL_EXPORT
         const_iterator
         operator ++ (
             int
         );
 
         CMP_CONDITIONAL_INLINE
+        CMP_CONDITIONAL_EXPORT
         const const_iterator&
         operator += (
             difference_type offset
         );
 
         CMP_CONDITIONAL_INLINE
+        CMP_CONDITIONAL_EXPORT
         const_iterator&
         operator -- ()
         noexcept;
 
         CMP_CONDITIONAL_INLINE
+        CMP_CONDITIONAL_EXPORT
         const_iterator
         operator -- (
             int
@@ -1301,6 +1371,7 @@ public:
         noexcept;
 
         CMP_CONDITIONAL_INLINE
+        CMP_CONDITIONAL_EXPORT
         const const_iterator&
         operator -= (
             difference_type offset
@@ -1310,7 +1381,7 @@ public:
         // Friends ------------------------------------------------------------
 
         CMP_CONDITIONAL_INLINE
-        CMP_LIBRARY_NAME
+        CMP_CONDITIONAL_EXPORT
         friend
         const_iterator
         operator + (
@@ -1320,7 +1391,7 @@ public:
         noexcept;
 
         CMP_CONDITIONAL_INLINE
-        CMP_LIBRARY_NAME
+        CMP_CONDITIONAL_EXPORT
         friend
         const_iterator
         operator + (
@@ -1330,7 +1401,7 @@ public:
         noexcept;
 
         CMP_CONDITIONAL_INLINE
-        CMP_LIBRARY_NAME
+        CMP_CONDITIONAL_EXPORT
         friend
         const_iterator
         operator - (
@@ -1340,7 +1411,7 @@ public:
         noexcept;
 
         CMP_CONDITIONAL_INLINE
-        CMP_LIBRARY_NAME
+        CMP_CONDITIONAL_EXPORT
         friend
         const_iterator
         operator - (
@@ -1350,7 +1421,7 @@ public:
         noexcept;
 
         CMP_CONDITIONAL_INLINE
-        CMP_LIBRARY_NAME
+        CMP_CONDITIONAL_EXPORT
         friend
         bool
         operator == (
@@ -1360,7 +1431,7 @@ public:
         noexcept;
 
         CMP_CONDITIONAL_INLINE
-        CMP_LIBRARY_NAME
+        CMP_CONDITIONAL_EXPORT
         friend
         bool
         operator != (
@@ -1397,6 +1468,7 @@ public:
                 The string to iterate over by code point.
     */
     CMP_CONDITIONAL_INLINE
+    CMP_CONDITIONAL_EXPORT
     explicit
     by_code_point (
         std::u32string_view string_to_iterate
@@ -1484,6 +1556,7 @@ public:
             Returns a constant iterator to the beginning.
     */
     CMP_CONDITIONAL_INLINE
+    CMP_CONDITIONAL_EXPORT
     const_iterator
     begin ()
     const noexcept;
@@ -1493,6 +1566,7 @@ public:
             Returns a constant iterator to the end.
     */
     CMP_CONDITIONAL_INLINE
+    CMP_CONDITIONAL_EXPORT
     const_iterator
     end ()
     const noexcept;
@@ -1502,6 +1576,7 @@ public:
             Returns a constant iterator to the beginning.
     */
     CMP_CONDITIONAL_INLINE
+    CMP_CONDITIONAL_EXPORT
     const_iterator
     cbegin ()
     const noexcept;
@@ -1511,6 +1586,7 @@ public:
             Returns a constant iterator to the end.
     */
     CMP_CONDITIONAL_INLINE
+    CMP_CONDITIONAL_EXPORT
     const_iterator
     cend ()
     const noexcept;
@@ -1520,6 +1596,7 @@ public:
             Returns a constant reverse iterator to the beginning.
     */
     CMP_CONDITIONAL_INLINE
+    CMP_CONDITIONAL_EXPORT
     const_reverse_iterator
     crbegin ()
     const noexcept;
@@ -1529,6 +1606,7 @@ public:
             Returns a constant reverse iterator to the end.
     */
     CMP_CONDITIONAL_INLINE
+    CMP_CONDITIONAL_EXPORT
     const_reverse_iterator
     crend ()
     const noexcept;
@@ -1541,11 +1619,11 @@ private:
 }; // class -------------------------------------------------------------------
 
 template <>
-class CMP_LIBRARY_NAME by_code_point<wchar_t> {
+class CMP_CONDITIONAL_EXPORT_CLASS by_code_point<wchar_t> {
 public:
     // Types ------------------------------------------------------------------
 
-    class CMP_LIBRARY_NAME const_iterator {
+    class CMP_CONDITIONAL_EXPORT_CLASS const_iterator {
     public:
         // Types --------------------------------------------------------------
 
@@ -1553,11 +1631,12 @@ public:
 
         using value_type = char32_t;
 
-        class CMP_LIBRARY_NAME reference {
+        class CMP_CONDITIONAL_EXPORT_CLASS reference {
         public:
             // Constructors and Destructor ------------------------------------
 
             CMP_CONDITIONAL_INLINE
+            CMP_CONDITIONAL_EXPORT
             explicit
             reference (
                 std::wstring_view::const_iterator initial_current_iterator,
@@ -1572,6 +1651,7 @@ public:
             // Operator Overloads ---------------------------------------------
 
             CMP_CONDITIONAL_INLINE
+            CMP_CONDITIONAL_EXPORT
             operator char32_t ()
             const;
 
@@ -1584,6 +1664,7 @@ public:
             // Private Functions ----------------------------------------------
 
             CMP_CONDITIONAL_INLINE
+            CMP_CONDITIONAL_EXPORT
             char32_t
             finish_sequence (
                 int sequence_length,
@@ -1604,6 +1685,7 @@ public:
         noexcept = default;
 
         CMP_CONDITIONAL_INLINE
+        CMP_CONDITIONAL_EXPORT
         const_iterator (
             std::wstring_view::const_iterator initial_current_iterator,
             std::wstring_view::const_iterator initial_end_iterator
@@ -1647,32 +1729,38 @@ public:
         // Operator Overloads -------------------------------------------------
 
         CMP_CONDITIONAL_INLINE
+        CMP_CONDITIONAL_EXPORT
         reference
         operator * ()
         const;
 
         CMP_CONDITIONAL_INLINE
+        CMP_CONDITIONAL_EXPORT
         const_iterator&
         operator ++ ();
 
         CMP_CONDITIONAL_INLINE
+        CMP_CONDITIONAL_EXPORT
         const_iterator
         operator ++ (
             int
         );
 
         CMP_CONDITIONAL_INLINE
+        CMP_CONDITIONAL_EXPORT
         const const_iterator&
         operator += (
             difference_type offset
         );
 
         CMP_CONDITIONAL_INLINE
+        CMP_CONDITIONAL_EXPORT
         const_iterator&
         operator -- ()
         noexcept;
 
         CMP_CONDITIONAL_INLINE
+        CMP_CONDITIONAL_EXPORT
         const_iterator
         operator -- (
             int
@@ -1680,6 +1768,7 @@ public:
         noexcept;
 
         CMP_CONDITIONAL_INLINE
+        CMP_CONDITIONAL_EXPORT
         const const_iterator&
         operator -= (
             difference_type offset
@@ -1689,7 +1778,7 @@ public:
         // Friends ------------------------------------------------------------
 
         CMP_CONDITIONAL_INLINE
-        CMP_LIBRARY_NAME
+        CMP_CONDITIONAL_EXPORT
         friend
         const_iterator
         operator + (
@@ -1699,7 +1788,7 @@ public:
         noexcept;
 
         CMP_CONDITIONAL_INLINE
-        CMP_LIBRARY_NAME
+        CMP_CONDITIONAL_EXPORT
         friend
         const_iterator
         operator + (
@@ -1709,7 +1798,7 @@ public:
         noexcept;
 
         CMP_CONDITIONAL_INLINE
-        CMP_LIBRARY_NAME
+        CMP_CONDITIONAL_EXPORT
         friend
         const_iterator
         operator - (
@@ -1719,7 +1808,7 @@ public:
         noexcept;
 
         CMP_CONDITIONAL_INLINE
-        CMP_LIBRARY_NAME
+        CMP_CONDITIONAL_EXPORT
         friend
         const_iterator
         operator - (
@@ -1729,7 +1818,7 @@ public:
         noexcept;
 
         CMP_CONDITIONAL_INLINE
-        CMP_LIBRARY_NAME
+        CMP_CONDITIONAL_EXPORT
         friend
         bool
         operator == (
@@ -1739,7 +1828,7 @@ public:
         noexcept;
 
         CMP_CONDITIONAL_INLINE
-        CMP_LIBRARY_NAME
+        CMP_CONDITIONAL_EXPORT
         friend
         bool
         operator != (
@@ -1757,6 +1846,7 @@ public:
         // Private Functions --------------------------------------------------
 
         CMP_CONDITIONAL_INLINE
+        CMP_CONDITIONAL_EXPORT
         char32_t
         finish_sequence (
             int sequence_length,
@@ -1766,6 +1856,7 @@ public:
         const;
 
         CMP_CONDITIONAL_INLINE
+        CMP_CONDITIONAL_EXPORT
         char32_t
         finish_sequence (
             int sequence_length,
@@ -1774,20 +1865,24 @@ public:
         );
 
         CMP_CONDITIONAL_INLINE
+        CMP_CONDITIONAL_EXPORT
         void
         advance ();
 
         CMP_CONDITIONAL_INLINE
+        CMP_CONDITIONAL_EXPORT
         void
         advance (
             difference_type offset
         );
 
         CMP_CONDITIONAL_INLINE
+        CMP_CONDITIONAL_EXPORT
         void
         retreat ();
 
         CMP_CONDITIONAL_INLINE
+        CMP_CONDITIONAL_EXPORT
         void
         retreat (
             difference_type offset
@@ -1815,6 +1910,7 @@ public:
                 The string to iterate over by code point.
     */
     CMP_CONDITIONAL_INLINE
+    CMP_CONDITIONAL_EXPORT
     explicit
     by_code_point (
         std::wstring_view string_to_iterate
@@ -1902,6 +1998,7 @@ public:
             Returns a constant iterator to the beginning.
     */
     CMP_CONDITIONAL_INLINE
+    CMP_CONDITIONAL_EXPORT
     const_iterator
     begin ()
     const noexcept;
@@ -1911,6 +2008,7 @@ public:
             Returns a constant iterator to the end.
     */
     CMP_CONDITIONAL_INLINE
+    CMP_CONDITIONAL_EXPORT
     const_iterator
     end ()
     const noexcept;
@@ -1920,6 +2018,7 @@ public:
             Returns a constant iterator to the beginning.
     */
     CMP_CONDITIONAL_INLINE
+    CMP_CONDITIONAL_EXPORT
     const_iterator
     cbegin ()
     const noexcept;
@@ -1929,6 +2028,7 @@ public:
             Returns a constant iterator to the end.
     */
     CMP_CONDITIONAL_INLINE
+    CMP_CONDITIONAL_EXPORT
     const_iterator
     cend ()
     const noexcept;
@@ -1938,6 +2038,7 @@ public:
             Returns a constant reverse iterator to the beginning.
     */
     CMP_CONDITIONAL_INLINE
+    CMP_CONDITIONAL_EXPORT
     const_reverse_iterator
     crbegin ()
     const noexcept;
@@ -1947,6 +2048,7 @@ public:
             Returns a constant reverse iterator to the end.
     */
     CMP_CONDITIONAL_INLINE
+    CMP_CONDITIONAL_EXPORT
     const_reverse_iterator
     crend ()
     const noexcept;

@@ -10,7 +10,7 @@
 
 namespace cmp {
 
-class CMP_LIBRARY_NAME window_native_handle {
+class CMP_CONDITIONAL_EXPORT_CLASS window_native_handle {
 public:
     // Public Data ------------------------------------------------------------
 

@@ -16,7 +16,7 @@ namespace cmp {
 
 namespace impl {
 
-class CMP_LIBRARY_NAME number_parser {
+class number_parser {
 public:
     // Core -------------------------------------------------------------------
 
@@ -46,6 +46,7 @@ private:
     // Private Functions ------------------------------------------------------
 
     CMP_CONDITIONAL_INLINE
+    CMP_CONDITIONAL_EXPORT
     static
     int
     digit_character_to_integer (
@@ -55,11 +56,13 @@ private:
     noexcept;
 
     CMP_CONDITIONAL_INLINE
+    CMP_CONDITIONAL_EXPORT
     static
     void
     report_non_digit_character ();
 
     CMP_CONDITIONAL_INLINE
+    CMP_CONDITIONAL_EXPORT
     static
     int
     get_next_digit (
@@ -68,6 +71,7 @@ private:
     );
 
     CMP_CONDITIONAL_INLINE
+    CMP_CONDITIONAL_EXPORT
     static
     bool
     is_sign_character (
@@ -76,6 +80,7 @@ private:
     noexcept;
 
     CMP_CONDITIONAL_INLINE
+    CMP_CONDITIONAL_EXPORT
     static
     bool
     check_for_sign (
@@ -86,6 +91,7 @@ private:
     );
 
     CMP_CONDITIONAL_INLINE
+    CMP_CONDITIONAL_EXPORT
     static
     void
     check_for_thousands_separator (
@@ -128,7 +134,7 @@ private:
     Description:
         This exception type indicates that a parse attempt failed.
 */
-class CMP_LIBRARY_NAME parse_failed
+class CMP_CONDITIONAL_EXPORT_CLASS parse_failed
     : public std::invalid_argument
 {
 public:
@@ -162,6 +168,7 @@ public:
                 The type of failure that was encountered during parsing.
     */
     CMP_CONDITIONAL_INLINE
+    CMP_CONDITIONAL_EXPORT
     parse_failed (
         const char* message,
         type t
@@ -249,6 +256,7 @@ public:
             Returns the type associated with <#this/> exception.
     */
     CMP_CONDITIONAL_INLINE
+    CMP_CONDITIONAL_EXPORT
     type
     get_type ()
     const noexcept;

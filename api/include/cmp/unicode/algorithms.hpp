@@ -69,7 +69,7 @@ noexcept;
             The string to get the size of.
 */
 CMP_CONDITIONAL_INLINE
-CMP_LIBRARY_NAME
+CMP_CONDITIONAL_EXPORT
 std::size_t
 string_size (
     const std::string& s
@@ -85,7 +85,7 @@ noexcept;
             The string to get the size of.
 */
 CMP_CONDITIONAL_INLINE
-CMP_LIBRARY_NAME
+CMP_CONDITIONAL_EXPORT
 std::size_t
 string_size (
     const std::u8string& s
@@ -101,7 +101,7 @@ noexcept;
             The string to get the size of.
 */
 CMP_CONDITIONAL_INLINE
-CMP_LIBRARY_NAME
+CMP_CONDITIONAL_EXPORT
 std::size_t
 string_size (
     const std::u16string& s
@@ -117,7 +117,7 @@ noexcept;
             The string to get the size of.
 */
 CMP_CONDITIONAL_INLINE
-CMP_LIBRARY_NAME
+CMP_CONDITIONAL_EXPORT
 std::size_t
 string_size (
     const std::u32string& s
@@ -133,7 +133,7 @@ noexcept;
             The string to get the size of.
 */
 CMP_CONDITIONAL_INLINE
-CMP_LIBRARY_NAME
+CMP_CONDITIONAL_EXPORT
 std::size_t
 string_size (
     const std::wstring& s
@@ -149,7 +149,7 @@ noexcept;
             The string to get the size of.
 */
 CMP_CONDITIONAL_INLINE
-CMP_LIBRARY_NAME
+CMP_CONDITIONAL_EXPORT
 std::size_t
 string_size (
     const std::string_view& s
@@ -165,7 +165,7 @@ noexcept;
             The string to get the size of.
 */
 CMP_CONDITIONAL_INLINE
-CMP_LIBRARY_NAME
+CMP_CONDITIONAL_EXPORT
 std::size_t
 string_size (
     const std::u8string_view& s
@@ -181,7 +181,7 @@ noexcept;
             The string to get the size of.
 */
 CMP_CONDITIONAL_INLINE
-CMP_LIBRARY_NAME
+CMP_CONDITIONAL_EXPORT
 std::size_t
 string_size (
     const std::u16string_view& s
@@ -197,7 +197,7 @@ noexcept;
             The string to get the size of.
 */
 CMP_CONDITIONAL_INLINE
-CMP_LIBRARY_NAME
+CMP_CONDITIONAL_EXPORT
 std::size_t
 string_size (
     const std::u32string_view& s
@@ -213,7 +213,7 @@ noexcept;
             The string to get the size of.
 */
 CMP_CONDITIONAL_INLINE
-CMP_LIBRARY_NAME
+CMP_CONDITIONAL_EXPORT
 std::size_t
 string_size (
     const std::wstring_view& s
@@ -229,7 +229,7 @@ noexcept;
             The string to get the size of.
 */
 CMP_CONDITIONAL_INLINE
-CMP_LIBRARY_NAME
+CMP_CONDITIONAL_EXPORT
 std::size_t
 string_size (
     const char* s
@@ -245,7 +245,7 @@ noexcept;
             The string to get the size of.
 */
 CMP_CONDITIONAL_INLINE
-CMP_LIBRARY_NAME
+CMP_CONDITIONAL_EXPORT
 std::size_t
 string_size (
     const char8_t* s
@@ -261,7 +261,7 @@ noexcept;
             The string to get the size of.
 */
 CMP_CONDITIONAL_INLINE
-CMP_LIBRARY_NAME
+CMP_CONDITIONAL_EXPORT
 std::size_t
 string_size (
     const char16_t* s
@@ -277,7 +277,7 @@ noexcept;
             The string to get the size of.
 */
 CMP_CONDITIONAL_INLINE
-CMP_LIBRARY_NAME
+CMP_CONDITIONAL_EXPORT
 std::size_t
 string_size (
     const char32_t* s
@@ -293,7 +293,7 @@ noexcept;
             The string to get the size of.
 */
 CMP_CONDITIONAL_INLINE
-CMP_LIBRARY_NAME
+CMP_CONDITIONAL_EXPORT
 std::size_t
 string_size (
     const wchar_t* s

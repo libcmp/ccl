@@ -12,7 +12,7 @@
 
 namespace cmp {
 
-class CMP_LIBRARY_NAME stdout_resource
+class CMP_CONDITIONAL_EXPORT_CLASS stdout_resource
     : public output_resource
 {
 public:
@@ -67,8 +67,8 @@ inline stdout_resource uerr_resource{
 
 #else
 
-extern CMP_LIBRARY_NAME stdout_resource uout_resource;
-extern CMP_LIBRARY_NAME stdout_resource uerr_resource;
+extern CMP_CONDITIONAL_EXPORT stdout_resource uout_resource;
+extern CMP_CONDITIONAL_EXPORT stdout_resource uerr_resource;
 
 #endif
 

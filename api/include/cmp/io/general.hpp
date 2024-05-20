@@ -75,7 +75,7 @@ noexcept;
             The number of bytes in the array.
 */
 CMP_CONDITIONAL_INLINE
-CMP_LIBRARY_NAME
+CMP_CONDITIONAL_EXPORT
 void
 invert_endianness (
     std::byte* data,

@@ -12,13 +12,14 @@
 
 namespace cmp {
 
-class CMP_LIBRARY_NAME stdout_resource
+class CMP_CONDITIONAL_EXPORT_CLASS stdout_resource
     : public output_resource
 {
 public:
     // Constructors and Destructor --------------------------------------------
 
     CMP_CONDITIONAL_INLINE
+    CMP_CONDITIONAL_EXPORT
     explicit
     stdout_resource (
         DWORD handle_identifier,
@@ -33,6 +34,7 @@ public:
     // Accessors --------------------------------------------------------------
 
     CMP_CONDITIONAL_INLINE
+    CMP_CONDITIONAL_EXPORT
     bool
     is_at_end ()
     const noexcept override;
@@ -40,6 +42,7 @@ public:
     // Core -------------------------------------------------------------------
 
     CMP_CONDITIONAL_INLINE
+    CMP_CONDITIONAL_EXPORT
     std::size_t
     write_raw (
         const std::byte* data,
@@ -67,8 +70,8 @@ inline stdout_resource uerr_resource{
 
 #else
 
-extern CMP_LIBRARY_NAME stdout_resource uout_resource;
-extern CMP_LIBRARY_NAME stdout_resource uerr_resource;
+extern CMP_CONDITIONAL_EXPORT stdout_resource uout_resource;
+extern CMP_CONDITIONAL_EXPORT stdout_resource uerr_resource;
 
 #endif
 
