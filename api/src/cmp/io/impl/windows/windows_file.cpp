@@ -251,7 +251,7 @@ noexcept
 {
     DWORD bytes_read_last;
     DWORD bytes_read_total{0};
-    HRESULT result;
+    BOOL result;
     while (true) {
         result = ReadFile(
             m_handle,
