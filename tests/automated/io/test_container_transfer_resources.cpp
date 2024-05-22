@@ -78,7 +78,8 @@ public:
     >
     bool
     test_read_generic (
-        Resource& resource
+        Resource& resource,
+        bool move_resource
     )
     noexcept
     {
@@ -107,6 +108,15 @@ public:
                       << std::endl;
 
             return false;
+        }
+
+        if (move_resource) {
+            typename Resource::content_type dummy_content;
+            Resource dummy_resource{dummy_content};
+            dummy_resource = std::move(resource);
+            resource = std::move(dummy_resource);
+            dummy_resource = std::move(resource);
+            resource = std::move(dummy_resource);
         }
 
         bytes_read = resource.read(data, 3 * sizeof (Element));
@@ -165,7 +175,7 @@ public:
         }
 
         opaque_container_input_resource<Container> opaque_input{content};
-        if (!test_read_generic(opaque_input)) {
+        if (!test_read_generic(opaque_input, false)) {
             std::cout << "test_read failed to read "
                          "from opaque_input."
                       << std::endl;
@@ -173,10 +183,32 @@ public:
             return false;
         }
 
+        opaque_container_input_resource<Container> moved_opaque_input{content};
+        opaque_input = std::move(moved_opaque_input);
+        moved_opaque_input = std::move(opaque_input);
+        if (!test_read_generic(moved_opaque_input, true)) {
+            std::cout << "test_read failed to read "
+                         "from moved_opaque_input."
+                      << std::endl;
+
+            return false;
+        }
+
         opaque_container_io_resource<Container> opaque_io{content};
-        if (!test_read_generic(opaque_io)) {
+        if (!test_read_generic(opaque_io, false)) {
             std::cout << "test_read failed to read "
                          "from opaque_io."
+                      << std::endl;
+
+            return false;
+        }
+
+        opaque_container_io_resource<Container> moved_opaque_io{content};
+        opaque_io = std::move(moved_opaque_io);
+        moved_opaque_io = std::move(opaque_io);
+        if (!test_read_generic(moved_opaque_io, true)) {
+            std::cout << "test_read failed to read "
+                         "from moved_opaque_io."
                       << std::endl;
 
             return false;
@@ -185,7 +217,7 @@ public:
         transparent_container_input_resource<Container> transparent_input{
             content
         };
-        if (!test_read_generic(transparent_input)) {
+        if (!test_read_generic(transparent_input, false)) {
             std::cout << "test_read failed to read "
                          "from transparent_input."
                       << std::endl;
@@ -193,10 +225,35 @@ public:
             return false;
         }
 
+        transparent_container_input_resource<Container>
+        moved_transparent_input{content};
+        transparent_input = std::move(moved_transparent_input);
+        moved_transparent_input = std::move(transparent_input);
+        if (!test_read_generic(moved_transparent_input, true)) {
+            std::cout << "test_read failed to read "
+                         "from moved_transparent_input."
+                      << std::endl;
+
+            return false;
+        }
+
         transparent_container_io_resource<Container> transparent_io{content};
-        if (!test_read_generic(transparent_io)) {
+        if (!test_read_generic(transparent_io, false)) {
             std::cout << "test_read failed to read "
                          "from transparent_io."
+                      << std::endl;
+
+            return false;
+        }
+
+        transparent_container_io_resource<Container> moved_transparent_io{
+            content
+        };
+        transparent_io = std::move(moved_transparent_io);
+        moved_transparent_io = std::move(transparent_io);
+        if (!test_read_generic(moved_transparent_io, true)) {
+            std::cout << "test_read failed to read "
+                         "from moved_transparent_io."
                       << std::endl;
 
             return false;
@@ -210,7 +267,8 @@ public:
     >
     bool
     test_write_generic (
-        Resource& resource
+        Resource& resource,
+        bool move_resource
     )
     noexcept
     {
@@ -225,7 +283,9 @@ public:
             static_cast<Element>('e'),
             static_cast<Element>('l'),
             static_cast<Element>('l'),
-            static_cast<Element>('o')
+            static_cast<Element>('o'),
+            static_cast<Element>('!'),
+            static_cast<Element>('\n')
         };
         auto bytes_written{
             resource.write(
@@ -239,6 +299,15 @@ public:
                       << std::endl;
 
             return false;
+        }
+
+        if (move_resource) {
+            typename Resource::content_type dummy_content;
+            Resource dummy_resource{dummy_content};
+            dummy_resource = std::move(resource);
+            resource = std::move(dummy_resource);
+            dummy_resource = std::move(resource);
+            resource = std::move(dummy_resource);
         }
 
         resource.flush();
@@ -271,7 +340,66 @@ public:
             return false;
         }
         if (resource.grab_content() != expected_content) {
-            std::cout << "The final content does not "
+            std::cout << "The first resulting content does not "
+                         "match the expected content."
+                      << std::endl;
+
+            return false;
+        }
+
+        bytes_written = resource.write(
+            reinterpret_cast<std::byte*>(data) + 5 * sizeof (Element),
+            2 * sizeof (Element)
+        );
+
+        if (bytes_written != 2 * sizeof (Element)) {
+            std::cout << "The data was not fully written."
+                      << std::endl;
+
+            return false;
+        }
+
+        if (move_resource) {
+            typename Resource::content_type dummy_content;
+            Resource dummy_resource{dummy_content};
+            dummy_resource = std::move(resource);
+            resource = std::move(dummy_resource);
+            dummy_resource = std::move(resource);
+            resource = std::move(dummy_resource);
+        }
+
+        resource.flush();
+        if constexpr (std::is_same_v<Element, std::byte>) {
+            expected_content = {
+                static_cast<std::byte>('H'),
+                static_cast<std::byte>('e'),
+                static_cast<std::byte>('l'),
+                static_cast<std::byte>('l'),
+                static_cast<std::byte>('o'),
+                static_cast<std::byte>('!'),
+                static_cast<std::byte>('\n')
+            };
+        } else if constexpr (std::is_same_v<Element, char>) {
+            expected_content = "Hello!\n";
+        } else if constexpr (std::is_same_v<Element, char8_t>) {
+            expected_content = u8"Hello!\n";
+        } else if constexpr (std::is_same_v<Element, char16_t>) {
+            expected_content = u"Hello!\n";
+        } else if constexpr (std::is_same_v<Element, char32_t>) {
+            expected_content = U"Hello!\n";
+        } else if constexpr (std::is_same_v<Element, wchar_t>) {
+            expected_content = L"Hello!\n";
+        } else {
+            std::cout << "test_write_generic was called with an "
+                         "invalid element type. Please use one of "
+                         "std::byte, char, char8_t, char16_t, char32_t or "
+                         "wchar_t."
+                      << std::endl;
+
+            return false;
+        }
+        if (resource.grab_content() != expected_content) {
+            std::cout << "The second resulting content does not "
                          "match the expected content."
                       << std::endl;
 
@@ -288,7 +416,7 @@ public:
     test_write ()
     {
         opaque_container_output_resource<Container> opaque_output;
-        if (!test_write_generic(opaque_output)) {
+        if (!test_write_generic(opaque_output, false)) {
             std::cout << "test_write failed to write "
                          "to opaque_output."
                       << std::endl;
@@ -296,10 +424,32 @@ public:
             return false;
         }
 
+        opaque_container_output_resource<Container> moved_opaque_output;
+        opaque_output = std::move(moved_opaque_output);
+        moved_opaque_output = std::move(opaque_output);
+        if (!test_write_generic(moved_opaque_output, true)) {
+            std::cout << "test_write failed to write "
+                         "to moved_opaque_output."
+                      << std::endl;
+
+            return false;
+        }
+
         opaque_container_io_resource<Container> opaque_io;
-        if (!test_write_generic(opaque_io)) {
+        if (!test_write_generic(opaque_io, false)) {
             std::cout << "test_write failed to write "
                          "to opaque_io."
+                      << std::endl;
+
+            return false;
+        }
+
+        opaque_container_io_resource<Container> moved_opaque_io;
+        opaque_io = std::move(moved_opaque_io);
+        moved_opaque_io = std::move(opaque_io);
+        if (!test_write_generic(moved_opaque_io, true)) {
+            std::cout << "test_write failed to write "
+                         "to moved_opaque_io."
                       << std::endl;
 
             return false;
@@ -309,9 +459,22 @@ public:
         transparent_container_output_resource<Container> transparent_output{
             content_for_output
         };
-        if (!test_write_generic(transparent_output)) {
+        if (!test_write_generic(transparent_output, false)) {
             std::cout << "test_write failed to write "
                          "to transparent_output."
+                      << std::endl;
+
+            return false;
+        }
+
+        content_for_output.clear();
+        transparent_container_output_resource<Container>
+        moved_transparent_output{content_for_output};
+        transparent_output = std::move(moved_transparent_output);
+        moved_transparent_output = std::move(transparent_output);
+        if (!test_write_generic(moved_transparent_output, true)) {
+            std::cout << "test_write failed to write "
+                         "to moved_transparent_output."
                       << std::endl;
 
             return false;
@@ -321,9 +484,23 @@ public:
         transparent_container_io_resource<Container> transparent_io{
             content_for_io
         };
-        if (!test_write_generic(transparent_io)) {
+        if (!test_write_generic(transparent_io, false)) {
             std::cout << "test_write failed to write "
                          "to transparent_io."
+                      << std::endl;
+
+            return false;
+        }
+
+        content_for_io.clear();
+        transparent_container_io_resource<Container> moved_transparent_io{
+            content_for_io
+        };
+        transparent_io = std::move(moved_transparent_io);
+        moved_transparent_io = std::move(transparent_io);
+        if (!test_write_generic(moved_transparent_io, true)) {
+            std::cout << "test_write failed to write "
+                         "to moved_transparent_io."
                       << std::endl;
 
             return false;
