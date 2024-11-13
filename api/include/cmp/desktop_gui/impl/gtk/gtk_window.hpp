@@ -13,8 +13,18 @@
 #include <cmp/desktop_gui/impl/gtk/gtk_window_native_handle.hpp>
 #include <cmp/desktop_gui/close_event.hpp>
 #include <cmp/desktop_gui/key_event.hpp>
+#include <cmp/desktop_gui/layout.hpp>
 
 namespace cmp {
+
+namespace impl {
+
+void
+forward_resize_event_to_window (
+    GtkWidget* gtk_application_window
+);
+
+} // namespace ----------------------------------------------------------------
 
 class CMP_CONDITIONAL_EXPORT_CLASS window
 {
@@ -77,6 +87,17 @@ public:
         const std::u8string& new_title
     );
 
+    layout&
+    grab_root_layout ()
+    noexcept;
+
+    void
+    get_size (
+        pixval& width,
+        pixval& height
+    )
+    const noexcept;
+
     // Core -------------------------------------------------------------------
 
     bool
@@ -133,15 +154,27 @@ public:
         window* w
     );
 
+    friend
+    void
+    impl::forward_resize_event_to_window (
+        GtkWidget* gtk_application_window
+    );
+
 private:
     // Private Data -----------------------------------------------------------
 
     window_native_handle m_native_handle;
     std::chrono::steady_clock::time_point m_start_time;
     std::chrono::steady_clock::time_point m_last_time;
+    layout m_root_layout;
     GtkEventController* m_controller;
+    GtkFixed* m_fixed;
 
     // Private Functions ------------------------------------------------------
+
+    void
+    update_root_layout ()
+    noexcept;
 
     void
     fix_association ()

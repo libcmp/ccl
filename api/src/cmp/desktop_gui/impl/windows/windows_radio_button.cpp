@@ -1,0 +1,122 @@
+// Copyright (C) 2024 Daniel T. McGinnis
+// SPDX-License-Identifier: BSL-1.0
+
+#include <windowsx.h>
+
+#include <cmp/desktop_gui/radio_button.hpp>
+
+namespace cmp {
+
+// --------------------------------------------------------- cmp::radio_button
+
+// Constructors and Destructor ------------------------------------------------
+
+radio_button::radio_button (
+    const window_native_handle& handle
+)
+    : widget{
+          impl::create_widget(
+              handle,
+              impl::native_widget_kind::radio_button
+          )
+      }
+{
+    m_toggle_event_handler = impl::noop<>;
+} // function -----------------------------------------------------------------
+
+// Accessors ------------------------------------------------------------------
+
+pixval
+radio_button::get_preferred_width ()
+const noexcept
+{
+    SIZE ideal_size{0L, 0L};
+    Button_GetIdealSize(grab_native_handle().widget_handle, &ideal_size);
+    return to_pixval(
+        dotval{static_cast<int>(ideal_size.cx)},
+        get_parent_dpi()
+    );
+} // function -----------------------------------------------------------------
+
+pixval
+radio_button::get_preferred_height ()
+const noexcept
+{
+    SIZE ideal_size{0L, 0L};
+    Button_GetIdealSize(grab_native_handle().widget_handle, &ideal_size);
+    return to_pixval(
+        dotval{static_cast<int>(ideal_size.cy)},
+        get_parent_dpi()
+    );
+} // function -----------------------------------------------------------------
+
+void
+radio_button::get_preferred_size (
+    pixval& width,
+    pixval& height
+)
+const noexcept
+{
+    SIZE ideal_size{0L, 0L};
+    Button_GetIdealSize(grab_native_handle().widget_handle, &ideal_size);
+    auto dpi{get_parent_dpi()};
+    width = to_pixval(dotval{static_cast<int>(ideal_size.cx)}, dpi);
+    height = to_pixval(dotval{static_cast<int>(ideal_size.cy)}, dpi);
+} // function -----------------------------------------------------------------
+
+std::u8string
+radio_button::get_text ()
+const
+{
+    std::wstring title_wstring;
+    title_wstring.resize(
+        GetWindowTextLengthW(grab_native_handle().widget_handle)
+    );
+    GetWindowTextW(
+        grab_native_handle().widget_handle,
+        title_wstring.data(),
+        title_wstring.size() + 1
+    );
+    return to_u8string(title_wstring);
+} // function -----------------------------------------------------------------
+
+void
+radio_button::set_text (
+    std::u8string_view new_text
+) {
+    std::wstring title_wstring{to_wstring(new_text)};
+    SetWindowTextW(grab_native_handle().widget_handle, title_wstring.data());
+} // function -----------------------------------------------------------------
+
+bool
+radio_button::is_checked ()
+{
+    return Button_GetCheck(grab_native_handle().widget_handle);
+} // function -----------------------------------------------------------------
+
+void
+radio_button::set_checked (
+    bool new_checked
+) {
+    Button_SetCheck(
+        grab_native_handle().widget_handle,
+        new_checked ? BST_CHECKED : BST_UNCHECKED
+    );
+} // function -----------------------------------------------------------------
+
+void
+radio_button::set_toggle_event_handler (
+    const std::function<void()>& new_toggle_event_handler
+) {
+    m_toggle_event_handler = new_toggle_event_handler;
+} // function -----------------------------------------------------------------
+
+// Core -----------------------------------------------------------------------
+
+void
+radio_button::toggle ()
+{
+    m_toggle_event_handler();
+} // function -----------------------------------------------------------------
+
+} // namespace ----------------------------------------------------------------

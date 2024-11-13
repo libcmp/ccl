@@ -210,6 +210,7 @@ forward_resize_event_to_window (
     };
     for (const auto& current_association : window_associations) {
         if (current_association.first == window_handle) {
+            current_association.second->update_root_layout();
             current_association.second->handle_resize_event();
             break;
         }
@@ -267,11 +268,84 @@ forward_update_to_window (
 } // function -----------------------------------------------------------------
 
 void
+forward_dpi_update_to_window (
+    HWND window_handle,
+    int dpi
+) {
+    auto& window_associations{
+        dgui_app()->grab_native_handle().window_associations
+    };
+    for (const auto& current_association : window_associations) {
+        if (current_association.first == window_handle) {
+            current_association.second->grab_native_handle().dpi = dpi;
+            break;
+        }
+    }
+} // function -----------------------------------------------------------------
+
+void
 close_window (
     HWND window_handle
 ) {
     if (forward_close_event_to_window(window_handle)) {
         DestroyWindow(window_handle);
+    }
+} // function -----------------------------------------------------------------
+
+widget*
+find_widget (
+    HWND widget_handle,
+    const std::vector<std::unique_ptr<window_element>>& window_elements
+) {
+    for (const auto& current_window_element : window_elements) {
+        auto layout_ptr{dynamic_cast<layout*>(current_window_element.get())};
+        if (layout_ptr) {
+            return find_widget(widget_handle, layout_ptr->grab_children());
+        } else {
+            auto widget_ptr{
+                static_cast<widget*>(current_window_element.get())
+            };
+            if (
+                widget_ptr->grab_native_handle().widget_handle == widget_handle
+            ) {
+                return widget_ptr;
+            }
+        }
+    }
+    return nullptr;
+}
+
+void
+forward_command_event_to_widget (
+    HWND widget_handle
+) {
+    auto& window_associations{
+        dgui_app()->grab_native_handle().window_associations
+    };
+    widget* widget_ptr{nullptr};
+    for (const auto& current_association : window_associations) {
+        widget_ptr = find_widget(
+            widget_handle,
+            current_association.second->grab_root_layout().grab_children()
+        );
+        if (widget_ptr) {
+            break;
+        }
+    }
+    auto push_button_ptr{dynamic_cast<push_button*>(widget_ptr)};
+    if (push_button_ptr) {
+        push_button_ptr->trigger();
+        return;
+    }
+    auto check_box_ptr{dynamic_cast<check_box*>(widget_ptr)};
+    if (check_box_ptr) {
+        check_box_ptr->toggle();
+        return;
+    }
+    auto radio_button_ptr{dynamic_cast<radio_button*>(widget_ptr)};
+    if (radio_button_ptr) {
+        radio_button_ptr->toggle();
+        return;
     }
 } // function -----------------------------------------------------------------
 
@@ -295,6 +369,21 @@ window_procedure (
         case WM_SIZE:
             forward_resize_event_to_window(window_handle);
             return 0;
+        case WM_DPICHANGED:
+            forward_dpi_update_to_window(window_handle, HIWORD(w_param));
+            return 0;
+        case WM_CTLCOLORBTN:
+        case WM_CTLCOLORSTATIC:
+            WNDCLASSW window_class;
+            GetClassInfoW(
+                GetModuleHandleW(nullptr),
+                desktop_gui_application::window_class_name,
+                &window_class
+            );
+            return reinterpret_cast<LRESULT>(window_class.hbrBackground);
+        case WM_COMMAND:
+            forward_command_event_to_widget(reinterpret_cast<HWND>(l_param));
+            return 0;
         default:
             return DefWindowProcW(window_handle, message, w_param, l_param);
     }
@@ -307,8 +396,8 @@ window_procedure (
 // Constructors and Destructor ------------------------------------------------
 
 window::window (
-    int initial_width,
-    int initial_height,
+    pixval initial_width,
+    pixval initial_height,
     const std::u8string& initial_title,
     window_mode initial_mode
 ) {
@@ -325,6 +414,7 @@ noexcept
     : m_native_handle{other.m_native_handle}
     , m_start_time{other.m_start_time}
     , m_last_time{other.m_last_time}
+    , m_root_layout{std::move(other.m_root_layout)}
 {
     if (m_native_handle.window_handle != NULL) {
         fix_association();
@@ -345,6 +435,7 @@ noexcept
         m_native_handle = other.m_native_handle;
         m_start_time = other.m_start_time;
         m_last_time = other.m_last_time;
+        m_root_layout = std::move(other.m_root_layout);
 
         if (m_native_handle.window_handle != NULL) {
             fix_association();
@@ -394,12 +485,38 @@ window::set_title (
     SetWindowTextW(m_native_handle.window_handle, title_wstring.data());
 } // function -----------------------------------------------------------------
 
+layout&
+window::grab_root_layout ()
+noexcept
+{
+    return m_root_layout;
+} // function -----------------------------------------------------------------
+
+void
+window::get_size (
+    pixval& width,
+    pixval& height
+)
+const noexcept
+{
+    RECT rect;
+    GetClientRect(m_native_handle.window_handle, &rect);
+    width = to_pixval(
+        dotval{static_cast<int>(rect.right)},
+        m_native_handle.dpi
+    ).get_value();
+    height = to_pixval(
+        dotval{static_cast<int>(rect.bottom)},
+        m_native_handle.dpi
+    ).get_value();
+} // function -----------------------------------------------------------------
+
 // Core -----------------------------------------------------------------------
 
 bool
 window::open (
-    int width,
-    int height,
+    pixval width,
+    pixval height,
     const std::u8string& title,
     window_mode mode
 ) {
@@ -414,8 +531,8 @@ window::open (
     RECT rectangle;
     rectangle.left = 0;
     rectangle.top = 0;
-    rectangle.right = width;
-    rectangle.bottom = height;
+    rectangle.right = width.get_value();
+    rectangle.bottom = height.get_value();
 
     AdjustWindowRect(&rectangle, WS_OVERLAPPEDWINDOW, false);
 
@@ -446,6 +563,14 @@ window::open (
         SW_SHOWMINIMIZED
     };
     m_native_handle.show_command = native_modes[static_cast<int>(mode)];
+
+    m_native_handle.dpi = GetDpiForWindow(m_native_handle.window_handle);
+
+    m_root_layout.m_parent = nullptr;
+    m_root_layout.set_kind(layout::kind::flow);
+    m_root_layout.set_direction(layout::direction::forward);
+    m_root_layout.set_axis(layout::axis::vertical);
+    m_root_layout.grab_enclosing_window_handle() = grab_native_handle();
 
     m_start_time = std::chrono::steady_clock::now();
     m_last_time = m_start_time;
@@ -516,6 +641,18 @@ window::handle_close_event (
 } // function -----------------------------------------------------------------
 
 // Private Functions ----------------------------------------------------------
+
+void
+window::update_root_layout ()
+noexcept
+{
+    if (!m_root_layout.is_empty()) {
+        pixval width;
+        pixval height;
+        get_size(width, height);
+        m_root_layout.set_size(width, height);
+    }
+} // function -----------------------------------------------------------------
 
 void
 window::fix_association ()

@@ -12,8 +12,18 @@
 #include <cmp/desktop_gui/impl/macos/macos_window_native_handle.hpp>
 #include <cmp/desktop_gui/close_event.hpp>
 #include <cmp/desktop_gui/key_event.hpp>
+#include <cmp/desktop_gui/layout.hpp>
 
 namespace cmp {
+
+namespace impl {
+
+void
+forward_resize_event_to_window (
+    void* window_handle
+);
+
+} // namespace ----------------------------------------------------------------
 
 class CMP_CONDITIONAL_EXPORT_CLASS window
 {
@@ -21,8 +31,8 @@ public:
     // Constructors and Destructor --------------------------------------------
 
     window (
-        int initial_width,
-        int initial_height,
+        pixval initial_width,
+        pixval initial_height,
         const std::u8string& initial_title,
         window_mode initial_mode
     );
@@ -76,12 +86,23 @@ public:
         const std::u8string& new_title
     );
 
+    layout&
+    grab_root_layout ()
+    noexcept;
+
+    void
+    get_size (
+        pixval& width,
+        pixval& height
+    )
+    const noexcept;
+
     // Core -------------------------------------------------------------------
 
     bool
     open (
-        int width,
-        int height,
+        pixval width,
+        pixval height,
         const std::u8string& title,
         window_mode mode
     );
@@ -132,14 +153,26 @@ public:
         window* w
     );
 
+    friend
+    void
+    impl::forward_resize_event_to_window (
+        void* window_handle
+    );
+
 private:
     // Private Data -----------------------------------------------------------
 
     window_native_handle m_native_handle;
     std::chrono::steady_clock::time_point m_start_time;
     std::chrono::steady_clock::time_point m_last_time;
+    layout m_root_layout;
+    bool m_has_been_shown;
 
     // Private Functions ------------------------------------------------------
+
+    void
+    update_root_layout ()
+    noexcept;
 
     void
     fix_association ()

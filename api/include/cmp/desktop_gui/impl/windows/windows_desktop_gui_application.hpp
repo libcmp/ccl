@@ -43,6 +43,10 @@ public:
         std::vector<std::pair<HWND, window*>> window_associations;
     }; // class ---------------------------------------------------------------
 
+    // Constants --------------------------------------------------------------
+
+    static constexpr const wchar_t* window_class_name{L"CCLWindow"};
+
     // Constructors and Destructor --------------------------------------------
 
     CMP_CONDITIONAL_EXPORT

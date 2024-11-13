@@ -12,9 +12,24 @@
 #include <cmp/desktop_gui/impl/windows/windows_window_native_handle.hpp>
 #include <cmp/desktop_gui/close_event.hpp>
 #include <cmp/desktop_gui/key_event.hpp>
+#include <cmp/desktop_gui/layout.hpp>
 #include <cmp/unicode/algorithms.hpp>
 
 namespace cmp {
+
+namespace impl {
+
+void
+forward_resize_event_to_window (
+    HWND window_handle
+);
+
+void
+forward_root_layout_update_to_window (
+    HWND window_handle
+);
+
+} // namespace ----------------------------------------------------------------
 
 class CMP_CONDITIONAL_EXPORT_CLASS window
 {
@@ -23,8 +38,8 @@ public:
 
     CMP_CONDITIONAL_EXPORT
     window (
-        int initial_width,
-        int initial_height,
+        pixval initial_width,
+        pixval initial_height,
         const std::u8string& initial_title,
         window_mode initial_mode
     );
@@ -84,13 +99,26 @@ public:
         const std::u8string& new_title
     );
 
+    CMP_CONDITIONAL_EXPORT
+    layout&
+    grab_root_layout ()
+    noexcept;
+
+    CMP_CONDITIONAL_EXPORT
+    void
+    get_size (
+        pixval& width,
+        pixval& height
+    )
+    const noexcept;
+
     // Core -------------------------------------------------------------------
 
     CMP_CONDITIONAL_EXPORT
     bool
     open (
-        int width,
-        int height,
+        pixval width,
+        pixval height,
         const std::u8string& title,
         window_mode mode
     );
@@ -150,6 +178,18 @@ public:
     );
 
     friend
+    void
+    impl::forward_resize_event_to_window (
+        HWND window_handle
+    );
+
+    friend
+    void
+    impl::forward_root_layout_update_to_window (
+        HWND window_handle
+    );
+
+    friend
     LRESULT CALLBACK
     impl::window_procedure (
         HWND window_handle,
@@ -164,8 +204,14 @@ private:
     window_native_handle m_native_handle;
     std::chrono::steady_clock::time_point m_start_time;
     std::chrono::steady_clock::time_point m_last_time;
+    layout m_root_layout;
 
     // Private Functions ------------------------------------------------------
+
+    CMP_CONDITIONAL_EXPORT
+    void
+    update_root_layout ()
+    noexcept;
 
     CMP_CONDITIONAL_EXPORT
     void

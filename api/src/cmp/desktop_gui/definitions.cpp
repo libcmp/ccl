@@ -6,19 +6,42 @@
 
 #if CMP_CONFIG_HEADER_ONLY == false && CMP_CONFIG_DESKTOP_GUI_PACKAGE_EXCLUDED == false
 #   include <cmp/desktop_gui/impl/common/common_desktop_gui_application.cpp>
+#   include <cmp/desktop_gui/impl/common/common_widget.cpp>
 #   include <cmp/desktop_gui/impl/common/common_window.cpp>
+#   include <cmp/desktop_gui/impl/layout.cpp>
 #   if defined(CMP_OS_WINDOWS)
+#       include <cmp/desktop_gui/impl/windows/windows_check_box.cpp>
 #       include <cmp/desktop_gui/impl/windows/windows_desktop_gui_application.cpp>
+#       include <cmp/desktop_gui/impl/windows/windows_dialog.cpp>
+#       include <cmp/desktop_gui/impl/windows/windows_group_box.cpp>
+#       include <cmp/desktop_gui/impl/windows/windows_label.cpp>
+#       include <cmp/desktop_gui/impl/windows/windows_push_button.cpp>
+#       include <cmp/desktop_gui/impl/windows/windows_radio_button.cpp>
+#       include <cmp/desktop_gui/impl/windows/windows_widget.cpp>
 #       include <cmp/desktop_gui/impl/windows/windows_window.cpp>
 #   elif defined(CMP_OS_MACOS)
+#       include <cmp/desktop_gui/impl/macos/macos_check_box.cpp>
 #       include <cmp/desktop_gui/impl/macos/macos_desktop_gui_application.mm>
+#       include <cmp/desktop_gui/impl/macos/macos_dialog.cpp>
+#       include <cmp/desktop_gui/impl/macos/macos_push_button.cpp>
+#       include <cmp/desktop_gui/impl/macos/macos_widget.cpp>
 #       include <cmp/desktop_gui/impl/macos/macos_window.mm>
 #   elif defined(CMP_OS_LINUX_BASED) || defined(CMP_OS_FREEBSD)
-#       include <cmp/desktop_gui/impl/gtk/gtk_desktop_gui_application.cpp>
-#       include <cmp/desktop_gui/impl/gtk/gtk_window.cpp>
+#       include <cmp/desktop_gui/impl/qt/qt_check_box.cpp>
+#       include <cmp/desktop_gui/impl/qt/qt_desktop_gui_application.cpp>
+#       include <cmp/desktop_gui/impl/qt/qt_dialog.cpp>
+#       include <cmp/desktop_gui/impl/qt/qt_group_box.cpp>
+#       include <cmp/desktop_gui/impl/qt/qt_label.cpp>
+#       include <cmp/desktop_gui/impl/qt/qt_push_button.cpp>
+#       include <cmp/desktop_gui/impl/qt/qt_radio_button.cpp>
+#       include <cmp/desktop_gui/impl/qt/qt_widget.cpp>
+#       include <cmp/desktop_gui/impl/qt/qt_window.cpp>
+#       include <cmp/desktop_gui/impl/qt/qt_window_native_handle.cpp>
 #   endif
 #   include <cmp/desktop_gui/close_event.cpp>
+#   include <cmp/desktop_gui/dotval.cpp>
 #   include <cmp/desktop_gui/event.cpp>
 #   include <cmp/desktop_gui/general.cpp>
 #   include <cmp/desktop_gui/key_event.cpp>
+#   include <cmp/desktop_gui/pixval.cpp>
 #endif

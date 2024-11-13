@@ -15,9 +15,11 @@ desktop_gui_application::desktop_gui_application (
 )
     : application{argc, argv}
 {
+    SetProcessDpiAwarenessContext(DPI_AWARENESS_CONTEXT_PER_MONITOR_AWARE_V2);
+
     m_native_handle.application_instance_handle = GetModuleHandleW(nullptr);
     m_native_handle.command_line = GetCommandLineW();
-    m_native_handle.window_class_name = L"CCLWindow";
+    m_native_handle.window_class_name = window_class_name;
 
     WNDCLASSW window_class;
     window_class.style = CS_HREDRAW | CS_VREDRAW;

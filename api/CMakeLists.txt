@@ -16,13 +16,28 @@ set(
         include/cmp/core/operating_system.hpp
         include/cmp/core/platform.hpp
         include/cmp/core/test_module.hpp
+        include/cmp/core/trusted_ptr.hpp
         include/cmp/core/type_traits.hpp
 )
 set(
     CCL_DESKTOP_GUI_HEADERS
+        include/cmp/desktop_gui/check_box.hpp
+        include/cmp/desktop_gui/close_event.hpp
         include/cmp/desktop_gui/desktop_gui_application.hpp
+        include/cmp/desktop_gui/dialog.hpp
+        include/cmp/desktop_gui/dotval.hpp
+        include/cmp/desktop_gui/event.hpp
+        include/cmp/desktop_gui/form_element.hpp
         include/cmp/desktop_gui/general.hpp
         include/cmp/desktop_gui/inclusion_assert.hpp
+        include/cmp/desktop_gui/key_event.hpp
+        include/cmp/desktop_gui/layout.hpp
+        include/cmp/desktop_gui/main.hpp
+        include/cmp/desktop_gui/pixval.hpp
+        include/cmp/desktop_gui/push_button.hpp
+        include/cmp/desktop_gui/radio_button.hpp
+        include/cmp/desktop_gui/widget.hpp
+        include/cmp/desktop_gui/widget_native_handle.hpp
         include/cmp/desktop_gui/window.hpp
         include/cmp/desktop_gui/window_native_handle.hpp
 )
@@ -56,6 +71,7 @@ set(
         include/cmp/io/transparent_container_input_resource.hpp
         include/cmp/io/transparent_container_io_resource.hpp
         include/cmp/io/transparent_container_output_resource.hpp
+        include/cmp/io/type_traits.hpp
         include/cmp/io/uio.hpp
 )
 set(
@@ -69,6 +85,7 @@ set(
         include/cmp/unicode/exceptions.hpp
         include/cmp/unicode/formats.hpp
         include/cmp/unicode/formatters.hpp
+        include/cmp/unicode/inclusion_assert.hpp
         include/cmp/unicode/parsers.hpp
         include/cmp/unicode/type_traits.hpp
 )
@@ -274,6 +291,13 @@ target_compile_definitions(
 
 # DEPENDENCIES
 
+if (${CMAKE_SYSTEM_NAME} MATCHES "Windows")
+    target_link_libraries(
+        cmp
+            UxTheme
+    )
+endif ()
+
 if (${CMAKE_SYSTEM_NAME} MATCHES "Darwin" AND CMP_CONFIG_DESKTOP_GUI_PACKAGE_EXCLUDED MATCHES false)
     # AppKit is always available on macOS, but we need to link to it.
     target_link_libraries(
@@ -297,11 +321,20 @@ if (
         GTK is often available on graphical Linux and FreeBSD
         distributions, but we need to find it and link to it.
     ]]
+    #[[
     find_package(PkgConfig REQUIRED)
     pkg_check_modules(GTK4 REQUIRED IMPORTED_TARGET gtk4)
     target_link_libraries(
         cmp
             PkgConfig::GTK4
+    )
+    #]]
+    find_package(Qt6 REQUIRED COMPONENTS Core Gui Widgets)
+    target_link_libraries(
+        cmp
+            Qt6::Core
+            Qt6::Gui
+            Qt6::Widgets
     )
 endif ()
 
@@ -340,6 +373,12 @@ if (CMP_BUILD_STATIC MATCHES false)
                 COMMAND ${CMAKE_COMMAND} -E copy
                     $<TARGET_FILE:cmp>
                     ${PROJECT_BINARY_DIR}/../examples/desktop_gui_example/$<TARGET_FILE_NAME:cmp>
+        )
+        add_custom_command(
+            TARGET cmp POST_BUILD
+                COMMAND ${CMAKE_COMMAND} -E copy
+                    $<TARGET_FILE:cmp>
+                    ${PROJECT_BINARY_DIR}/../examples/widget_gallery_example/$<TARGET_FILE_NAME:cmp>
         )
         add_custom_command(
             TARGET cmp POST_BUILD

@@ -252,6 +252,7 @@ forward_resize_event_to_window (
     };
     for (const auto& current_association : window_associations) {
         if (current_association.first == gtk_application_window) {
+            current_association.second->update_root_layout();
             current_association.second->handle_resize_event();
             break;
         }
@@ -388,6 +389,32 @@ window::set_title (
     );
 } // function -----------------------------------------------------------------
 
+layout&
+window::grab_root_layout ()
+noexcept
+{
+    return m_root_layout;
+} // function -----------------------------------------------------------------
+
+void
+window::get_size (
+    pixval& width,
+    pixval& height
+)
+const noexcept
+{
+    int current_width;
+    int current_height;
+    gtk_window_get_default_size(
+        GTK_WINDOW(m_native_handle.gtk_application_window),
+        &current_width,
+        &current_height
+    );
+    //std::cout << current_width << 'x' << current_height << std::endl;
+    width.set_value(current_width - 20);
+    height.set_value(current_height - 20);
+} // function -----------------------------------------------------------------
+
 // Core -----------------------------------------------------------------------
 
 bool
@@ -458,6 +485,18 @@ window::open (
         NULL
     );
 
+    m_fixed = GTK_FIXED(gtk_fixed_new());
+    gtk_window_set_child(
+        GTK_WINDOW(m_native_handle.gtk_application_window),
+        GTK_WIDGET(m_fixed)
+    );
+
+    m_root_layout.m_parent = nullptr;
+    m_root_layout.set_kind(layout::kind::flow);
+    m_root_layout.set_direction(layout::direction::forward);
+    m_root_layout.set_axis(layout::axis::vertical);
+    m_root_layout.grab_enclosing_window_handle() = grab_native_handle();
+
     m_start_time = std::chrono::steady_clock::now();
     m_last_time = m_start_time;
 
@@ -522,6 +561,18 @@ window::handle_close_event (
 } // function -----------------------------------------------------------------
 
 // Private Functions ----------------------------------------------------------
+
+void
+window::update_root_layout ()
+noexcept
+{
+    if (!m_root_layout.is_empty()) {
+        pixval width;
+        pixval height;
+        get_size(width, height);
+        m_root_layout.set_size(width, height);
+    }
+} // function -----------------------------------------------------------------
 
 void
 window::fix_association ()

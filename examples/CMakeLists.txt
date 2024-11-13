@@ -19,3 +19,4 @@ endif ()
 
 add_subdirectory(desktop_gui_example)
 add_subdirectory(unicode_stdio_example)
+add_subdirectory(widget_gallery_example)

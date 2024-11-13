@@ -168,4 +168,24 @@ to_u8string (
 } // function -----------------------------------------------------------------
 CMP_DISABLE_WARNING_POP
 
+dotval
+to_dotval (
+    pixval source,
+    int dpi
+)
+noexcept
+{
+    return dotval{source.grab_value() * dpi / 96};
+} // function -----------------------------------------------------------------
+
+pixval
+to_pixval (
+    dotval source,
+    int dpi
+)
+noexcept
+{
+    return pixval{source.grab_value() * 96 / dpi};
+} // function -----------------------------------------------------------------
+
 } // namespace ----------------------------------------------------------------

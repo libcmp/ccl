@@ -1,0 +1,100 @@
+// Copyright (C) 2024 Daniel T. McGinnis
+// SPDX-License-Identifier: BSL-1.0
+
+#ifndef CMP_DESKTOP_GUI_QT_DESKTOP_GUI_APPLICATION_HPP_INCLUDED
+#define CMP_DESKTOP_GUI_QT_DESKTOP_GUI_APPLICATION_HPP_INCLUDED
+
+#include <QApplication>
+
+#include <memory>
+#include <vector>
+
+#include <cmp/desktop_gui/inclusion_assert.hpp>
+#include <cmp/core/application.hpp>
+#include <cmp/desktop_gui/impl/qt/qt_window_native_handle.hpp>
+#include <cmp/desktop_gui/general.hpp>
+
+namespace cmp {
+
+class CMP_CONDITIONAL_EXPORT_CLASS desktop_gui_application
+    : public application
+{
+public:
+    // Types ------------------------------------------------------------------
+
+    class CMP_CONDITIONAL_EXPORT_CLASS native_handle {
+    public:
+        // Public Data --------------------------------------------------------
+
+        std::unique_ptr<QApplication> qt_application;
+        std::vector<
+            std::pair<impl::cmp_main_window*, window*>
+        > window_associations;
+    }; // class ---------------------------------------------------------------
+
+    // Constructors and Destructor --------------------------------------------
+
+    desktop_gui_application (
+        int argc,
+        char** argv
+    );
+
+    ~desktop_gui_application ()
+    = default;
+
+    // Copy Operations --------------------------------------------------------
+
+    desktop_gui_application (
+        const desktop_gui_application& other
+    )
+    = delete;
+
+    desktop_gui_application&
+    operator = (
+        const desktop_gui_application& other
+    )
+    = delete;
+
+    // Move Operations --------------------------------------------------------
+
+    desktop_gui_application (
+        desktop_gui_application&& other
+    )
+    noexcept = default;
+
+    desktop_gui_application&
+    operator = (
+        desktop_gui_application&& other
+    )
+    noexcept = default;
+
+    // Accessors --------------------------------------------------------------
+
+    static
+    desktop_gui_application*
+    get_instance_ptr ()
+    noexcept;
+
+    native_handle&
+    grab_native_handle ()
+    noexcept;
+
+    const native_handle&
+    grab_native_handle ()
+    const noexcept;
+
+    // Core -------------------------------------------------------------------
+
+    int
+    run ()
+    override;
+
+private:
+    // Private Data -----------------------------------------------------------
+
+    native_handle m_native_handle;
+}; // class -------------------------------------------------------------------
+
+} // namespace ----------------------------------------------------------------
+
+#endif // CMP_DESKTOP_GUI_QT_DESKTOP_GUI_APPLICATION_HPP_INCLUDED

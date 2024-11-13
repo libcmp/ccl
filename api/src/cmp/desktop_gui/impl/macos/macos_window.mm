@@ -25,6 +25,11 @@ windowShouldClose:
 (NSWindow*) sender;
 @end // interface -------------------------------------------------------------
 
+@interface cmp_view : NSView
+- (BOOL)
+isFlipped;
+@end // interface -------------------------------------------------------------
+
 namespace cmp {
 
 namespace impl {
@@ -224,13 +229,14 @@ forward_key_up_event_to_window (
 
 void
 forward_resize_event_to_window (
-    cmp_window* cmp_window_ptr
+    void* cmp_window_ptr
 ) {
     auto& window_associations{
         dgui_app()->grab_native_handle().window_associations
     };
     for (const auto& current_association : window_associations) {
-        if (current_association.first == cmp_window_ptr) {
+        if (current_association.first == as_cmp_window(cmp_window_ptr)) {
+            current_association.second->update_root_layout();
             current_association.second->handle_resize_event();
             break;
         }
@@ -269,8 +275,8 @@ forward_close_event_to_window (
 // Constructors and Destructor ------------------------------------------------
 
 window::window (
-    int initial_width,
-    int initial_height,
+    pixval initial_width,
+    pixval initial_height,
     const std::u8string& initial_title,
     window_mode initial_mode
 ) {
@@ -364,12 +370,34 @@ window::set_title (
     ];
 } // function -----------------------------------------------------------------
 
+layout&
+window::grab_root_layout ()
+noexcept
+{
+    return m_root_layout;
+} // function -----------------------------------------------------------------
+
+void
+window::get_size (
+    pixval& width,
+    pixval& height
+)
+const noexcept
+{
+    auto size{
+        [[impl::as_cmp_window(m_native_handle.cmp_window_handle) contentView]
+            frame].size
+    };
+    width = size.width;
+    height = size.height;
+} // function -----------------------------------------------------------------
+
 // Core -----------------------------------------------------------------------
 
 bool
 window::open (
-    int width,
-    int height,
+    pixval width,
+    pixval height,
     const std::u8string& title,
     window_mode mode
 ) {
@@ -387,8 +415,8 @@ window::open (
                     0.0
                 },
                 {
-                    static_cast<CGFloat>(width),
-                    static_cast<CGFloat>(height)
+                    static_cast<CGFloat>(width.get_value()),
+                    static_cast<CGFloat>(height.get_value())
                 }
             }
             styleMask:
@@ -403,6 +431,7 @@ window::open (
     cmp_window* w{impl::as_cmp_window(m_native_handle.cmp_window_handle)};
 
     [w setDelegate: [[cmp_window_delegate alloc] init]];
+    [w setContentView: [[cmp_view alloc] init]];
     [w setTitle:
         [NSString stringWithUTF8String:
             reinterpret_cast<const char*>(title.data())
@@ -415,6 +444,14 @@ window::open (
     else if (mode == window_mode::minimized) {
         [w miniaturize: w];
     }
+
+    m_root_layout.m_parent = nullptr;
+    m_root_layout.set_kind(layout::kind::flow);
+    m_root_layout.set_direction(layout::direction::forward);
+    m_root_layout.set_axis(layout::axis::vertical);
+    m_root_layout.grab_enclosing_window_handle() = grab_native_handle();
+
+    m_has_been_shown = false;
 
     m_start_time = std::chrono::steady_clock::now();
     m_last_time = m_start_time;
@@ -432,6 +469,13 @@ window::show ()
 {
     if ([impl::as_cmp_window(m_native_handle.cmp_window_handle) isVisible]) {
         return;
+    }
+
+    if (!m_has_been_shown) {
+        impl::forward_resize_event_to_window(
+            m_native_handle.cmp_window_handle
+        );
+        m_has_been_shown = true;
     }
 
     [impl::as_cmp_window(m_native_handle.cmp_window_handle)
@@ -484,6 +528,20 @@ void
 window::handle_close_event (
     close_event& ev
 ) {
+} // function -----------------------------------------------------------------
+
+// Private Functions ----------------------------------------------------------
+
+void
+window::update_root_layout ()
+noexcept
+{
+    if (!m_root_layout.is_empty()) {
+        pixval width;
+        pixval height;
+        get_size(width, height);
+        m_root_layout.set_size(width, height);
+    }
 } // function -----------------------------------------------------------------
 
 // Private Functions ----------------------------------------------------------
@@ -544,5 +602,13 @@ windowShouldClose:
     return cmp::impl::forward_close_event_to_window(
         cmp::impl::as_cmp_window(sender)
     );
+} // function -----------------------------------------------------------------
+@end // implementation --------------------------------------------------------
+
+@implementation cmp_view
+- (BOOL)
+isFlipped
+{
+    return YES;
 } // function -----------------------------------------------------------------
 @end // implementation --------------------------------------------------------

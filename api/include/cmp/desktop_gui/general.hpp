@@ -7,6 +7,8 @@
 #include <string>
 
 #include <cmp/desktop_gui/inclusion_assert.hpp>
+#include <cmp/desktop_gui/dotval.hpp>
+#include <cmp/desktop_gui/pixval.hpp>
 
 namespace cmp {
 
@@ -119,6 +121,44 @@ std::u8string
 to_u8string (
     key source
 );
+
+/**
+    Description:
+        Returns the dotval that maps to the
+        given pixval at the given DPI rating.
+
+    Parameters:
+        source:
+            The pixval to map from.
+        dpi:
+            The DPI rating to map from.
+*/
+CMP_CONDITIONAL_EXPORT
+dotval
+to_dotval (
+    pixval source,
+    int dpi
+)
+noexcept;
+
+/**
+    Description:
+        Returns the pixval that maps to the
+        given dotval at the given DPI rating.
+
+    Parameters:
+        source:
+            The dotval to map from.
+        dpi:
+            The DPI rating to map from.
+*/
+CMP_CONDITIONAL_EXPORT
+pixval
+to_pixval (
+    dotval source,
+    int dpi
+)
+noexcept;
 
 } // namespace ----------------------------------------------------------------
 
