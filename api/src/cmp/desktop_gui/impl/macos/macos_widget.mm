@@ -14,8 +14,13 @@ create_widget (
 )
 noexcept
 {
-    NSButton* result{
-        [
+    NSView* result;
+    if (kind == native_widget_kind::label) {
+        result = [NSTextField labelWithString: @""];
+    } else if (kind == native_widget_kind::group_box) {
+        result = [[NSBox alloc] init];
+    } else {
+        result = [
             [NSButton alloc] initWithFrame:
                 NSRect{
                     {
@@ -27,17 +32,28 @@ noexcept
                         25.0
                     }
                 }
-        ]
-    };
+        ];
+    }
     switch (kind) {
+        case native_widget_kind::label:
+            break;
         case native_widget_kind::push_button:
             [result setBezelStyle: NSBezelStyleFlexiblePush];
             break;
         case native_widget_kind::check_box:
             [result setButtonType: NSButtonTypeSwitch];
             break;
+        case native_widget_kind::radio_button:
+            [result setButtonType: NSButtonTypeRadio];
+            break;
+        case native_widget_kind::group_box:
+            break;
     }
     [result setHidden: YES];
+    if (kind != native_widget_kind::group_box) {
+        [result setTarget: reinterpret_cast<NSWindow*>(parent_window.cmp_window_handle)];
+        [result setAction: @selector(handleAction:)];
+    }
     [
         reinterpret_cast<NSWindow*>(
             parent_window.cmp_window_handle
@@ -212,20 +228,6 @@ noexcept
             static_cast<CGFloat>(new_height.get_value())
         }
     ];
-} // function -----------------------------------------------------------------
-
-pixval
-widget::get_preferred_width ()
-const noexcept
-{
-    return 100;
-} // function -----------------------------------------------------------------
-
-pixval
-widget::get_preferred_height ()
-const noexcept
-{
-    return 25;
 } // function -----------------------------------------------------------------
 
 // Core -----------------------------------------------------------------------

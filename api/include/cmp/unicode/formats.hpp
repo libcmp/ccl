@@ -67,7 +67,7 @@ public:
     invalid_radix&
     operator = (
         const invalid_radix& other
-    )
+    ) &
     = default;
 
     // Move Operations --------------------------------------------------------
@@ -102,7 +102,7 @@ public:
     invalid_radix&
     operator = (
         invalid_radix&& other
-    )
+    ) &
     noexcept = default;
 }; // class -------------------------------------------------------------------
 
@@ -203,7 +203,7 @@ public:
     bool_format&
     operator = (
         const bool_format& other
-    )
+    ) &
     = default;
 
     // Move Operations --------------------------------------------------------
@@ -238,7 +238,7 @@ public:
     bool_format&
     operator = (
         bool_format&& other
-    )
+    ) &
     noexcept = default;
 
     // Accessors --------------------------------------------------------------
@@ -247,6 +247,7 @@ public:
         Description:
             Returns the true string of <#this/> bool format.
     */
+    [[nodiscard]]
     CMP_CONDITIONAL_INLINE
     CMP_CONDITIONAL_EXPORT
     std::u8string
@@ -273,6 +274,7 @@ public:
         Description:
             Returns the false string of <#this/> bool format.
     */
+    [[nodiscard]]
     CMP_CONDITIONAL_INLINE
     CMP_CONDITIONAL_EXPORT
     std::u8string
@@ -383,7 +385,7 @@ public:
     integer_format&
     operator = (
         const integer_format& other
-    )
+    ) &
     = default;
 
     // Move Operations --------------------------------------------------------
@@ -418,7 +420,7 @@ public:
     integer_format&
     operator = (
         integer_format&& other
-    )
+    ) &
     noexcept = default;
 
     // Accessors --------------------------------------------------------------
@@ -427,6 +429,7 @@ public:
         Description:
             Returns the radix of <#this/> integer format.
     */
+    [[nodiscard]]
     CMP_CONDITIONAL_INLINE
     CMP_CONDITIONAL_EXPORT
     unsigned int
@@ -453,6 +456,7 @@ public:
         Description:
             Returns the sign status of <#this/> integer format.
     */
+    [[nodiscard]]
     CMP_CONDITIONAL_INLINE
     CMP_CONDITIONAL_EXPORT
     sign_status
@@ -479,6 +483,7 @@ public:
         Description:
             Returns the thousands separator of <#this/> integer format.
     */
+    [[nodiscard]]
     CMP_CONDITIONAL_INLINE
     CMP_CONDITIONAL_EXPORT
     thousands_separator
@@ -604,7 +609,7 @@ public:
     floating_point_format&
     operator = (
         const floating_point_format& other
-    )
+    ) &
     = default;
 
     // Move Operations --------------------------------------------------------
@@ -639,7 +644,7 @@ public:
     floating_point_format&
     operator = (
         floating_point_format&& other
-    )
+    ) &
     noexcept = default;
 
     // Accessors --------------------------------------------------------------
@@ -648,6 +653,7 @@ public:
         Description:
             Returns the radix of <#this/> floating-point format.
     */
+    [[nodiscard]]
     CMP_CONDITIONAL_INLINE
     CMP_CONDITIONAL_EXPORT
     unsigned int
@@ -674,6 +680,7 @@ public:
         Description:
             Returns the sign status of <#this/> floating-point format.
     */
+    [[nodiscard]]
     CMP_CONDITIONAL_INLINE
     CMP_CONDITIONAL_EXPORT
     sign_status
@@ -700,6 +707,7 @@ public:
         Description:
             Returns the thousands separator of <#this/> floating-point format.
     */
+    [[nodiscard]]
     CMP_CONDITIONAL_INLINE
     CMP_CONDITIONAL_EXPORT
     thousands_separator
@@ -726,6 +734,7 @@ public:
         Description:
             Returns the radix character of <#this/> floating-point format.
     */
+    [[nodiscard]]
     CMP_CONDITIONAL_INLINE
     CMP_CONDITIONAL_EXPORT
     radix_character
@@ -752,6 +761,7 @@ public:
         Description:
             Returns the radix place limit of <#this/> floating-point format.
     */
+    [[nodiscard]]
     CMP_CONDITIONAL_INLINE
     CMP_CONDITIONAL_EXPORT
     radix_place_limit
@@ -778,6 +788,7 @@ public:
         Description:
             Returns the radix place count of <#this/> floating-point format.
     */
+    [[nodiscard]]
     CMP_CONDITIONAL_INLINE
     CMP_CONDITIONAL_EXPORT
     unsigned int

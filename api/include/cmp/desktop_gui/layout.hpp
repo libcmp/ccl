@@ -54,7 +54,7 @@ public:
     noexcept;
 
     ~layout ()
-    noexcept = default;
+    override = default;
 
     // Copy Operations --------------------------------------------------------
 
@@ -66,7 +66,7 @@ public:
     layout&
     operator = (
         const layout& other
-    )
+    ) &
     = default;
 
     // Move Operations --------------------------------------------------------
@@ -79,41 +79,48 @@ public:
     layout&
     operator = (
         layout&& other
-    )
+    ) &
     noexcept = default;
 
     // Accessors --------------------------------------------------------------
 
+    [[nodiscard]]
     CMP_CONDITIONAL_EXPORT
     layout&
     grab_parent ()
     noexcept;
 
+    [[nodiscard]]
     CMP_CONDITIONAL_EXPORT
     const layout&
     grab_parent ()
     const noexcept;
 
+    [[nodiscard]]
     CMP_CONDITIONAL_EXPORT
     window_native_handle&
     grab_enclosing_window_handle ()
     noexcept;
 
+    [[nodiscard]]
     CMP_CONDITIONAL_EXPORT
     const window_native_handle&
     grab_enclosing_window_handle ()
     const noexcept;
 
+    [[nodiscard]]
     CMP_CONDITIONAL_EXPORT
     std::vector<std::unique_ptr<window_element>>&
     grab_children ()
     noexcept;
 
+    [[nodiscard]]
     CMP_CONDITIONAL_EXPORT
     const std::vector<std::unique_ptr<window_element>>&
     grab_children ()
     const noexcept;
 
+    [[nodiscard]]
     CMP_CONDITIONAL_EXPORT
     kind
     get_kind ()
@@ -126,6 +133,7 @@ public:
     )
     noexcept;
 
+    [[nodiscard]]
     CMP_CONDITIONAL_EXPORT
     axis
     get_axis ()
@@ -138,6 +146,7 @@ public:
     )
     noexcept;
 
+    [[nodiscard]]
     CMP_CONDITIONAL_EXPORT
     direction
     get_direction ()
@@ -150,6 +159,7 @@ public:
     )
     noexcept;
 
+    [[nodiscard]]
     CMP_CONDITIONAL_EXPORT
     pixval
     get_x ()
@@ -162,6 +172,7 @@ public:
     )
     noexcept override;
 
+    [[nodiscard]]
     CMP_CONDITIONAL_EXPORT
     pixval
     get_y ()
@@ -190,6 +201,7 @@ public:
     )
     noexcept override;
 
+    [[nodiscard]]
     CMP_CONDITIONAL_EXPORT
     pixval
     get_width ()
@@ -202,6 +214,7 @@ public:
     )
     noexcept override;
 
+    [[nodiscard]]
     CMP_CONDITIONAL_EXPORT
     pixval
     get_height ()
@@ -230,11 +243,13 @@ public:
     )
     noexcept override;
 
+    [[nodiscard]]
     CMP_CONDITIONAL_EXPORT
     pixval
     get_preferred_width ()
     const noexcept override;
 
+    [[nodiscard]]
     CMP_CONDITIONAL_EXPORT
     pixval
     get_preferred_height ()
@@ -248,6 +263,7 @@ public:
     )
     const noexcept override;
 
+    [[nodiscard]]
     CMP_CONDITIONAL_EXPORT
     bool
     is_empty ()

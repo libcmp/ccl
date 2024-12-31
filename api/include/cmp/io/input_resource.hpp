@@ -75,7 +75,7 @@ public:
     input_resource&
     operator = (
         const input_resource& other
-    )
+    ) &
     = default;
 
     // Move Operations --------------------------------------------------------
@@ -110,7 +110,7 @@ public:
     input_resource&
     operator = (
         input_resource&& other
-    )
+    ) &
     noexcept = default;
 
     // Core -------------------------------------------------------------------

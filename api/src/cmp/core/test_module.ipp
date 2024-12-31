@@ -109,7 +109,7 @@ noexcept
     , m_current_test_index{0}
     , m_current_stage_index{0}
     , m_successful_tests{0}
-    , m_test_functions{test_functions}
+    , m_test_functions{std::move(test_functions)}
 {
     /*
         Allocate enough space for all tests in the m_failed_tests

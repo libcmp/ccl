@@ -65,19 +65,22 @@ public:
     window&
     operator = (
         window&& other
-    )
+    ) &
     noexcept;
 
     // Accessors --------------------------------------------------------------
 
+    [[nodiscard]]
     window_native_handle&
     grab_native_handle ()
     noexcept;
 
+    [[nodiscard]]
     const window_native_handle&
     grab_native_handle ()
     const noexcept;
 
+    [[nodiscard]]
     std::u8string
     get_title ()
     const;
@@ -87,6 +90,7 @@ public:
         const std::u8string& new_title
     );
 
+    [[nodiscard]]
     layout&
     grab_root_layout ()
     noexcept;

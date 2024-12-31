@@ -94,7 +94,7 @@ public:
     application&
     operator = (
         application&& other
-    )
+    ) &
     noexcept = default;
 
     // Accessors --------------------------------------------------------------
@@ -115,6 +115,7 @@ public:
             Returns the number of arguments that
             were given on the command line.
     */
+    [[nodiscard]]
     CMP_CONDITIONAL_INLINE
     CMP_CONDITIONAL_EXPORT
     int
@@ -126,6 +127,7 @@ public:
             Returns the array of pointers to the arguments
             that were given on the command line.
     */
+    [[nodiscard]]
     CMP_CONDITIONAL_INLINE
     CMP_CONDITIONAL_EXPORT
     char**
@@ -136,6 +138,7 @@ public:
         Description:
             Returns the copyright notice held in <#this/> application object.
     */
+    [[nodiscard]]
     CMP_CONDITIONAL_INLINE
     CMP_CONDITIONAL_EXPORT
     std::u8string

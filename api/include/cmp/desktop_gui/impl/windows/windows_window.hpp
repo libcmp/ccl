@@ -73,21 +73,24 @@ public:
     window&
     operator = (
         window&& other
-    )
+    ) &
     noexcept;
 
     // Accessors --------------------------------------------------------------
 
+    [[nodiscard]]
     CMP_CONDITIONAL_EXPORT
     window_native_handle&
     grab_native_handle ()
     noexcept;
 
+    [[nodiscard]]
     CMP_CONDITIONAL_EXPORT
     const window_native_handle&
     grab_native_handle ()
     const noexcept;
 
+    [[nodiscard]]
     CMP_CONDITIONAL_EXPORT
     std::u8string
     get_title ()
@@ -99,6 +102,7 @@ public:
         const std::u8string& new_title
     );
 
+    [[nodiscard]]
     CMP_CONDITIONAL_EXPORT
     layout&
     grab_root_layout ()

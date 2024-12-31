@@ -23,6 +23,7 @@ class cmp_main_window
 public:
     // Constructors and Destructor --------------------------------------------
 
+    explicit
     cmp_main_window (
         QWidget* parent = nullptr,
         Qt::WindowFlags flags = Qt::WindowFlags()

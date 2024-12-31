@@ -21,6 +21,7 @@ public:
     // Constructors and Destructor --------------------------------------------
 
     CMP_CONDITIONAL_INLINE
+    explicit
     stdin_resource (
         std::size_t buffer_capacity = io_buffer::default_buffer_capacity
     )
@@ -32,6 +33,7 @@ public:
 
     // Accessors --------------------------------------------------------------
 
+    [[nodiscard]]
     CMP_CONDITIONAL_INLINE
     bool
     is_at_end ()

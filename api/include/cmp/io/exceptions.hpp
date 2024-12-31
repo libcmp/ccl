@@ -67,7 +67,7 @@ public:
     read_past_end&
     operator = (
         const read_past_end& other
-    )
+    ) &
     = default;
 
     // Move Operations --------------------------------------------------------
@@ -102,7 +102,7 @@ public:
     read_past_end&
     operator = (
         read_past_end&& other
-    )
+    ) &
     noexcept = default;
 
     // Core -------------------------------------------------------------------
@@ -111,6 +111,7 @@ public:
         Description:
             Returns the explanatory string.
     */
+    [[nodiscard]]
     CMP_CONDITIONAL_INLINE
     CMP_CONDITIONAL_EXPORT
     const char*
@@ -174,7 +175,7 @@ public:
     invalid_access_mode&
     operator = (
         const invalid_access_mode& other
-    )
+    ) &
     = default;
 
     // Move Operations --------------------------------------------------------
@@ -209,7 +210,7 @@ public:
     invalid_access_mode&
     operator = (
         invalid_access_mode&& other
-    )
+    ) &
     noexcept = default;
 
     // Core -------------------------------------------------------------------
@@ -218,6 +219,7 @@ public:
         Description:
             Returns the explanatory string.
     */
+    [[nodiscard]]
     CMP_CONDITIONAL_INLINE
     CMP_CONDITIONAL_EXPORT
     const char*

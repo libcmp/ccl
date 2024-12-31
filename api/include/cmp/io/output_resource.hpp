@@ -73,7 +73,7 @@ public:
     output_resource&
     operator = (
         const output_resource& other
-    )
+    ) &
     = default;
 
     // Move Operations --------------------------------------------------------
@@ -108,7 +108,7 @@ public:
     output_resource&
     operator = (
         output_resource&& other
-    )
+    ) &
     noexcept = default;
 
     // Core -------------------------------------------------------------------

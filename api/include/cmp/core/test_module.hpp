@@ -114,6 +114,7 @@ public:
             Description:
                 Returns <#this/> <#type>dummy</#type>'s value.
         */
+        [[nodiscard]]
         int
         get_value ()
         const noexcept;
@@ -217,7 +218,7 @@ public:
     test_module&
     operator = (
         const test_module& other
-    )
+    ) &
     = default;
 
     // Move Operations --------------------------------------------------------
@@ -250,7 +251,7 @@ public:
     test_module&
     operator = (
         test_module&& other
-    )
+    ) &
     noexcept = default;
 
     // Accessors --------------------------------------------------------------
@@ -259,6 +260,7 @@ public:
         Description:
             Returns the number of messages in the message queue.
     */
+    [[nodiscard]]
     unsigned int
     get_message_count ()
     const noexcept;
@@ -332,6 +334,7 @@ public:
             Returns an output stream that can be
             used to log informational messages.
     */
+    [[nodiscard]]
     std::ostream&
     log_info ()
     const noexcept;
@@ -342,6 +345,7 @@ public:
             Returns an output stream that can
             be used to log error messages.
     */
+    [[nodiscard]]
     std::ostream&
     log_error ()
     const noexcept;

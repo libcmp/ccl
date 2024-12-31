@@ -11,7 +11,7 @@ namespace cmp {
 class CMP_CONDITIONAL_EXPORT_CLASS widget_native_handle {
 public:
     void* parent_handle;
-    NSControl* widget_handle;
+    NSView* widget_handle;
 }; // class -------------------------------------------------------------------
 
 } // namespace ----------------------------------------------------------------

@@ -61,7 +61,7 @@ public:
     file&
     operator = (
         file&& other
-    )
+    ) &
     noexcept = default;
 
     // Accessors --------------------------------------------------------------

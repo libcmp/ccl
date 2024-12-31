@@ -313,7 +313,7 @@ find_widget (
         }
     }
     return nullptr;
-}
+} // function -----------------------------------------------------------------
 
 void
 forward_command_event_to_widget (
@@ -426,7 +426,7 @@ noexcept
 window&
 window::operator = (
     window&& other
-)
+) &
 noexcept
 {
     if (this != &other) {

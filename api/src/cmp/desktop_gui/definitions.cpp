@@ -20,11 +20,14 @@
 #       include <cmp/desktop_gui/impl/windows/windows_widget.cpp>
 #       include <cmp/desktop_gui/impl/windows/windows_window.cpp>
 #   elif defined(CMP_OS_MACOS)
-#       include <cmp/desktop_gui/impl/macos/macos_check_box.cpp>
+#       include <cmp/desktop_gui/impl/macos/macos_check_box.mm>
 #       include <cmp/desktop_gui/impl/macos/macos_desktop_gui_application.mm>
-#       include <cmp/desktop_gui/impl/macos/macos_dialog.cpp>
-#       include <cmp/desktop_gui/impl/macos/macos_push_button.cpp>
-#       include <cmp/desktop_gui/impl/macos/macos_widget.cpp>
+#       include <cmp/desktop_gui/impl/macos/macos_dialog.mm>
+#       include <cmp/desktop_gui/impl/macos/macos_group_box.mm>
+#       include <cmp/desktop_gui/impl/macos/macos_label.mm>
+#       include <cmp/desktop_gui/impl/macos/macos_push_button.mm>
+#       include <cmp/desktop_gui/impl/macos/macos_radio_button.mm>
+#       include <cmp/desktop_gui/impl/macos/macos_widget.mm>
 #       include <cmp/desktop_gui/impl/macos/macos_window.mm>
 #   elif defined(CMP_OS_LINUX_BASED) || defined(CMP_OS_FREEBSD)
 #       include <cmp/desktop_gui/impl/qt/qt_check_box.cpp>

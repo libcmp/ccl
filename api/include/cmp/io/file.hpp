@@ -114,7 +114,7 @@ public:
     basic_file&
     operator = (
         basic_file&& other
-    )
+    ) &
     noexcept = default;
 
     // Accessors --------------------------------------------------------------
@@ -126,6 +126,7 @@ public:
             This functionality is platform-dependent and therefore this
             function must be overridden in a platform-specific subclass.
     */
+    [[nodiscard]]
     CMP_CONDITIONAL_INLINE
     CMP_CONDITIONAL_EXPORT
     virtual
@@ -137,6 +138,7 @@ public:
         Description:
             Returns the access mode associated with <#this/> basic file.
     */
+    [[nodiscard]]
     CMP_CONDITIONAL_INLINE
     CMP_CONDITIONAL_EXPORT
     access_mode
@@ -148,6 +150,7 @@ public:
             Returns true if the file is at its EOF (end-of-file) position.
             Otherwise, returns false.
     */
+    [[nodiscard]]
     CMP_CONDITIONAL_INLINE
     CMP_CONDITIONAL_EXPORT
     bool

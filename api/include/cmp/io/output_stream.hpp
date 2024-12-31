@@ -87,7 +87,7 @@ public:
     output_stream&
     operator = (
         const output_stream& other
-    )
+    ) &
     = default;
 
     // Move Operations --------------------------------------------------------
@@ -120,7 +120,7 @@ public:
     output_stream&
     operator = (
         output_stream&& other
-    )
+    ) &
     noexcept = default;
 
     // Accessors --------------------------------------------------------------
@@ -129,6 +129,7 @@ public:
         Description:
             Returns a non-constant reference to the referenced output resource.
     */
+    [[nodiscard]]
     referenced_resource_type&
     grab_resource ()
     noexcept;
@@ -137,6 +138,7 @@ public:
         Description:
             Returns a constant reference to the referenced output resource.
     */
+    [[nodiscard]]
     const referenced_resource_type&
     grab_resource ()
     const noexcept;
@@ -145,6 +147,7 @@ public:
         Description:
             Returns the endianness associated with <#this/> output stream.
     */
+    [[nodiscard]]
     std::endian
     get_endianness ()
     const noexcept;
@@ -167,6 +170,7 @@ public:
         Description:
             Tells whether this stream's output resource is at its end.
     */
+    [[nodiscard]]
     bool
     is_at_end ()
     const noexcept;

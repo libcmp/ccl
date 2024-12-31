@@ -37,9 +37,8 @@ public:
     noexcept;
 
     CMP_CONDITIONAL_INLINE
-    virtual
     ~stdout_stream ()
-    = default;
+    override = default;
 }; // class -------------------------------------------------------------------
 
 } // namespace ----------------------------------------------------------------

@@ -61,7 +61,7 @@ public:
     desktop_gui_application&
     operator = (
         desktop_gui_application&& other
-    )
+    ) &
     noexcept = default;
 
     // Accessors --------------------------------------------------------------
@@ -71,10 +71,12 @@ public:
     get_instance_ptr ()
     noexcept;
 
+    [[nodiscard]]
     native_handle&
     grab_native_handle ()
     noexcept;
 
+    [[nodiscard]]
     const native_handle&
     grab_native_handle ()
     const noexcept;

@@ -20,6 +20,7 @@ public:
     // Constructors and Destructor --------------------------------------------
 
     CMP_CONDITIONAL_EXPORT
+    explicit
     label (
         const window_native_handle& handle
     );

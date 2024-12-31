@@ -21,6 +21,7 @@ public:
     // Constructors and Destructor --------------------------------------------
 
     CMP_CONDITIONAL_EXPORT
+    explicit
     check_box (
         const window_native_handle& handle
     );

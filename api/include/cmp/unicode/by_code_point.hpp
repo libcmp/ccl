@@ -70,7 +70,7 @@ public:
         const_iterator&
         operator = (
             const const_iterator& other
-        )
+        ) &
         = default;
 
         // Move Operations ----------------------------------------------------
@@ -85,7 +85,7 @@ public:
         const_iterator&
         operator = (
             const_iterator&& other
-        )
+        ) &
         noexcept = default;
 
         // Operator Overloads -------------------------------------------------
@@ -270,7 +270,7 @@ public:
     by_code_point&
     operator = (
         const by_code_point& other
-    )
+    ) &
     = default;
 
     // Move Operations --------------------------------------------------------
@@ -305,7 +305,7 @@ public:
     by_code_point&
     operator = (
         by_code_point&& other
-    )
+    ) &
     noexcept = default;
 
     // Core -------------------------------------------------------------------
@@ -314,6 +314,7 @@ public:
         Description:
             Returns a constant iterator to the beginning.
     */
+    [[nodiscard]]
     CMP_CONDITIONAL_INLINE
     CMP_CONDITIONAL_EXPORT
     const_iterator
@@ -324,6 +325,7 @@ public:
         Description:
             Returns a constant iterator to the end.
     */
+    [[nodiscard]]
     CMP_CONDITIONAL_INLINE
     CMP_CONDITIONAL_EXPORT
     const_iterator
@@ -334,6 +336,7 @@ public:
         Description:
             Returns a constant iterator to the beginning.
     */
+    [[nodiscard]]
     CMP_CONDITIONAL_INLINE
     CMP_CONDITIONAL_EXPORT
     const_iterator
@@ -344,6 +347,7 @@ public:
         Description:
             Returns a constant iterator to the end.
     */
+    [[nodiscard]]
     CMP_CONDITIONAL_INLINE
     CMP_CONDITIONAL_EXPORT
     const_iterator
@@ -354,6 +358,7 @@ public:
         Description:
             Returns a constant reverse iterator to the beginning.
     */
+    [[nodiscard]]
     CMP_CONDITIONAL_INLINE
     CMP_CONDITIONAL_EXPORT
     const_reverse_iterator
@@ -364,6 +369,7 @@ public:
         Description:
             Returns a constant reverse iterator to the end.
     */
+    [[nodiscard]]
     CMP_CONDITIONAL_INLINE
     CMP_CONDITIONAL_EXPORT
     const_reverse_iterator
@@ -410,6 +416,7 @@ public:
 
             CMP_CONDITIONAL_INLINE
             CMP_CONDITIONAL_EXPORT
+            explicit(false)
             operator char32_t ()
             const;
 
@@ -466,7 +473,7 @@ public:
         const_iterator&
         operator = (
             const const_iterator& other
-        )
+        ) &
         = default;
 
         // Move Operations ----------------------------------------------------
@@ -481,7 +488,7 @@ public:
         const_iterator&
         operator = (
             const_iterator&& other
-        )
+        ) &
         noexcept = default;
 
         // Operator Overloads -------------------------------------------------
@@ -711,7 +718,7 @@ public:
     by_code_point&
     operator = (
         const by_code_point& other
-    )
+    ) &
     = default;
 
     // Move Operations --------------------------------------------------------
@@ -746,7 +753,7 @@ public:
     by_code_point&
     operator = (
         by_code_point&& other
-    )
+    ) &
     noexcept = default;
 
     // Core -------------------------------------------------------------------
@@ -755,6 +762,7 @@ public:
         Description:
             Returns a constant iterator to the beginning.
     */
+    [[nodiscard]]
     CMP_CONDITIONAL_INLINE
     CMP_CONDITIONAL_EXPORT
     const_iterator
@@ -765,6 +773,7 @@ public:
         Description:
             Returns a constant iterator to the end.
     */
+    [[nodiscard]]
     CMP_CONDITIONAL_INLINE
     CMP_CONDITIONAL_EXPORT
     const_iterator
@@ -775,6 +784,7 @@ public:
         Description:
             Returns a constant iterator to the beginning.
     */
+    [[nodiscard]]
     CMP_CONDITIONAL_INLINE
     CMP_CONDITIONAL_EXPORT
     const_iterator
@@ -785,6 +795,7 @@ public:
         Description:
             Returns a constant iterator to the end.
     */
+    [[nodiscard]]
     CMP_CONDITIONAL_INLINE
     CMP_CONDITIONAL_EXPORT
     const_iterator
@@ -795,6 +806,7 @@ public:
         Description:
             Returns a constant reverse iterator to the beginning.
     */
+    [[nodiscard]]
     CMP_CONDITIONAL_INLINE
     CMP_CONDITIONAL_EXPORT
     const_reverse_iterator
@@ -805,6 +817,7 @@ public:
         Description:
             Returns a constant reverse iterator to the end.
     */
+    [[nodiscard]]
     CMP_CONDITIONAL_INLINE
     CMP_CONDITIONAL_EXPORT
     const_reverse_iterator
@@ -852,6 +865,7 @@ public:
 
             CMP_CONDITIONAL_INLINE
             CMP_CONDITIONAL_EXPORT
+            explicit(false)
             operator char32_t ()
             const;
 
@@ -908,7 +922,7 @@ public:
         const_iterator&
         operator = (
             const const_iterator& other
-        )
+        ) &
         = default;
 
         // Move Operations ----------------------------------------------------
@@ -923,7 +937,7 @@ public:
         const_iterator&
         operator = (
             const_iterator&& other
-        )
+        ) &
         noexcept = default;
 
         // Operator Overloads -------------------------------------------------
@@ -1153,7 +1167,7 @@ public:
     by_code_point&
     operator = (
         const by_code_point& other
-    )
+    ) &
     = default;
 
     // Move Operations --------------------------------------------------------
@@ -1188,7 +1202,7 @@ public:
     by_code_point&
     operator = (
         by_code_point&& other
-    )
+    ) &
     noexcept = default;
 
     // Core -------------------------------------------------------------------
@@ -1197,6 +1211,7 @@ public:
         Description:
             Returns a constant iterator to the beginning.
     */
+    [[nodiscard]]
     CMP_CONDITIONAL_INLINE
     CMP_CONDITIONAL_EXPORT
     const_iterator
@@ -1207,6 +1222,7 @@ public:
         Description:
             Returns a constant iterator to the end.
     */
+    [[nodiscard]]
     CMP_CONDITIONAL_INLINE
     CMP_CONDITIONAL_EXPORT
     const_iterator
@@ -1217,6 +1233,7 @@ public:
         Description:
             Returns a constant iterator to the beginning.
     */
+    [[nodiscard]]
     CMP_CONDITIONAL_INLINE
     CMP_CONDITIONAL_EXPORT
     const_iterator
@@ -1227,6 +1244,7 @@ public:
         Description:
             Returns a constant iterator to the end.
     */
+    [[nodiscard]]
     CMP_CONDITIONAL_INLINE
     CMP_CONDITIONAL_EXPORT
     const_iterator
@@ -1237,6 +1255,7 @@ public:
         Description:
             Returns a constant reverse iterator to the beginning.
     */
+    [[nodiscard]]
     CMP_CONDITIONAL_INLINE
     CMP_CONDITIONAL_EXPORT
     const_reverse_iterator
@@ -1247,6 +1266,7 @@ public:
         Description:
             Returns a constant reverse iterator to the end.
     */
+    [[nodiscard]]
     CMP_CONDITIONAL_INLINE
     CMP_CONDITIONAL_EXPORT
     const_reverse_iterator
@@ -1311,7 +1331,7 @@ public:
         const_iterator&
         operator = (
             const const_iterator& other
-        )
+        ) &
         = default;
 
         // Move Operations ----------------------------------------------------
@@ -1326,7 +1346,7 @@ public:
         const_iterator&
         operator = (
             const_iterator&& other
-        )
+        ) &
         noexcept = default;
 
         // Operator Overloads -------------------------------------------------
@@ -1511,7 +1531,7 @@ public:
     by_code_point&
     operator = (
         const by_code_point& other
-    )
+    ) &
     = default;
 
     // Move Operations --------------------------------------------------------
@@ -1546,7 +1566,7 @@ public:
     by_code_point&
     operator = (
         by_code_point&& other
-    )
+    ) &
     noexcept = default;
 
     // Core -------------------------------------------------------------------
@@ -1555,6 +1575,7 @@ public:
         Description:
             Returns a constant iterator to the beginning.
     */
+    [[nodiscard]]
     CMP_CONDITIONAL_INLINE
     CMP_CONDITIONAL_EXPORT
     const_iterator
@@ -1565,6 +1586,7 @@ public:
         Description:
             Returns a constant iterator to the end.
     */
+    [[nodiscard]]
     CMP_CONDITIONAL_INLINE
     CMP_CONDITIONAL_EXPORT
     const_iterator
@@ -1575,6 +1597,7 @@ public:
         Description:
             Returns a constant iterator to the beginning.
     */
+    [[nodiscard]]
     CMP_CONDITIONAL_INLINE
     CMP_CONDITIONAL_EXPORT
     const_iterator
@@ -1585,6 +1608,7 @@ public:
         Description:
             Returns a constant iterator to the end.
     */
+    [[nodiscard]]
     CMP_CONDITIONAL_INLINE
     CMP_CONDITIONAL_EXPORT
     const_iterator
@@ -1595,6 +1619,7 @@ public:
         Description:
             Returns a constant reverse iterator to the beginning.
     */
+    [[nodiscard]]
     CMP_CONDITIONAL_INLINE
     CMP_CONDITIONAL_EXPORT
     const_reverse_iterator
@@ -1605,6 +1630,7 @@ public:
         Description:
             Returns a constant reverse iterator to the end.
     */
+    [[nodiscard]]
     CMP_CONDITIONAL_INLINE
     CMP_CONDITIONAL_EXPORT
     const_reverse_iterator
@@ -1652,6 +1678,7 @@ public:
 
             CMP_CONDITIONAL_INLINE
             CMP_CONDITIONAL_EXPORT
+            explicit(false)
             operator char32_t ()
             const;
 
@@ -1708,7 +1735,7 @@ public:
         const_iterator&
         operator = (
             const const_iterator& other
-        )
+        ) &
         = default;
 
         // Move Operations ----------------------------------------------------
@@ -1723,7 +1750,7 @@ public:
         const_iterator&
         operator = (
             const_iterator&& other
-        )
+        ) &
         noexcept = default;
 
         // Operator Overloads -------------------------------------------------
@@ -1953,7 +1980,7 @@ public:
     by_code_point&
     operator = (
         const by_code_point& other
-    )
+    ) &
     = default;
 
     // Move Operations --------------------------------------------------------
@@ -1988,7 +2015,7 @@ public:
     by_code_point&
     operator = (
         by_code_point&& other
-    )
+    ) &
     noexcept = default;
 
     // Core -------------------------------------------------------------------
@@ -1997,6 +2024,7 @@ public:
         Description:
             Returns a constant iterator to the beginning.
     */
+    [[nodiscard]]
     CMP_CONDITIONAL_INLINE
     CMP_CONDITIONAL_EXPORT
     const_iterator
@@ -2007,6 +2035,7 @@ public:
         Description:
             Returns a constant iterator to the end.
     */
+    [[nodiscard]]
     CMP_CONDITIONAL_INLINE
     CMP_CONDITIONAL_EXPORT
     const_iterator
@@ -2017,6 +2046,7 @@ public:
         Description:
             Returns a constant iterator to the beginning.
     */
+    [[nodiscard]]
     CMP_CONDITIONAL_INLINE
     CMP_CONDITIONAL_EXPORT
     const_iterator
@@ -2027,6 +2057,7 @@ public:
         Description:
             Returns a constant iterator to the end.
     */
+    [[nodiscard]]
     CMP_CONDITIONAL_INLINE
     CMP_CONDITIONAL_EXPORT
     const_iterator
@@ -2037,6 +2068,7 @@ public:
         Description:
             Returns a constant reverse iterator to the beginning.
     */
+    [[nodiscard]]
     CMP_CONDITIONAL_INLINE
     CMP_CONDITIONAL_EXPORT
     const_reverse_iterator
@@ -2047,6 +2079,7 @@ public:
         Description:
             Returns a constant reverse iterator to the end.
     */
+    [[nodiscard]]
     CMP_CONDITIONAL_INLINE
     CMP_CONDITIONAL_EXPORT
     const_reverse_iterator

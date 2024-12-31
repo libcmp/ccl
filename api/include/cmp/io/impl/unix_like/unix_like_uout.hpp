@@ -32,6 +32,7 @@ public:
 
     // Accessors --------------------------------------------------------------
 
+    [[nodiscard]]
     CMP_CONDITIONAL_INLINE
     bool
     is_at_end ()

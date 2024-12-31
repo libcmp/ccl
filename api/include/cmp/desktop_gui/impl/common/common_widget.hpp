@@ -25,6 +25,7 @@ enum class native_widget_kind {
     group_box
 }; // enum --------------------------------------------------------------------
 
+[[nodiscard]]
 widget_native_handle
 create_widget (
     const window_native_handle& parent_window,
@@ -50,6 +51,7 @@ public:
     // Constructors and Destructor --------------------------------------------
 
     CMP_CONDITIONAL_EXPORT
+    explicit
     widget (
         const window_native_handle& handle
     );
@@ -59,16 +61,19 @@ public:
 
     // Accessors --------------------------------------------------------------
 
+    [[nodiscard]]
     CMP_CONDITIONAL_EXPORT
     widget_native_handle&
     grab_native_handle ()
     noexcept;
 
+    [[nodiscard]]
     CMP_CONDITIONAL_EXPORT
     const widget_native_handle&
     grab_native_handle ()
     const noexcept;
 
+    [[nodiscard]]
     CMP_CONDITIONAL_EXPORT
     pixval
     get_x ()
@@ -81,6 +86,7 @@ public:
     )
     noexcept override;
 
+    [[nodiscard]]
     CMP_CONDITIONAL_EXPORT
     pixval
     get_y ()
@@ -109,6 +115,7 @@ public:
     )
     noexcept override;
 
+    [[nodiscard]]
     CMP_CONDITIONAL_EXPORT
     pixval
     get_width ()
@@ -121,6 +128,7 @@ public:
     )
     noexcept override;
 
+    [[nodiscard]]
     CMP_CONDITIONAL_EXPORT
     pixval
     get_height ()
@@ -149,11 +157,13 @@ public:
     )
     noexcept override;
 
+    [[nodiscard]]
     CMP_CONDITIONAL_EXPORT
     pixval
     get_preferred_width ()
     const noexcept override;
 
+    [[nodiscard]]
     CMP_CONDITIONAL_EXPORT
     pixval
     get_preferred_height ()
@@ -194,6 +204,7 @@ protected:
     );
 
 #if defined(CMP_OS_WINDOWS)
+    [[nodiscard]]
     int
     get_parent_dpi ()
     const noexcept;

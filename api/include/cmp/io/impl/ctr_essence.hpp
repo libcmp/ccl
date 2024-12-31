@@ -46,12 +46,14 @@ protected:
     get_const_content_ptr ()
     const noexcept;
 
+    [[nodiscard]]
     bool
     is_at_end (
         const io_buffer& buffer
     )
     const noexcept;
 
+    [[nodiscard]]
     std::int64_t
     get_position (
         const io_buffer& m_buffer

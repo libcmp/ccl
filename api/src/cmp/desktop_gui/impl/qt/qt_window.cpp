@@ -265,7 +265,7 @@ noexcept
 window&
 window::operator = (
     window&& other
-)
+) &
 noexcept
 {
     if (this != &other) {

@@ -84,7 +84,7 @@ public:
     data_input_stream&
     operator = (
         const data_input_stream& other
-    )
+    ) &
     = default;
 
     // Move Operations --------------------------------------------------------
@@ -117,7 +117,7 @@ public:
     data_input_stream&
     operator = (
         data_input_stream&& other
-    )
+    ) &
     noexcept = default;
 }; // class -------------------------------------------------------------------
 

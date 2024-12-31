@@ -72,7 +72,7 @@ public:
     transfer_resource&
     operator = (
         const transfer_resource& other
-    )
+    ) &
     = default;
 
     // Move Operations --------------------------------------------------------
@@ -107,7 +107,7 @@ public:
     transfer_resource&
     operator = (
         transfer_resource&& other
-    )
+    ) &
     noexcept = default;
 
     // Accessors --------------------------------------------------------------
@@ -116,6 +116,7 @@ public:
         Description:
             Tells whether this transfer resource is at its end.
     */
+    [[nodiscard]]
     CMP_CONDITIONAL_INLINE
     CMP_CONDITIONAL_EXPORT
     virtual

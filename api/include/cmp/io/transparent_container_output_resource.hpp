@@ -97,7 +97,7 @@ public:
     transparent_container_output_resource&
     operator = (
         const transparent_container_output_resource& other
-    )
+    ) &
     = default;
 
     // Move Operations --------------------------------------------------------
@@ -131,7 +131,7 @@ public:
     transparent_container_output_resource&
     operator = (
         transparent_container_output_resource&& other
-    )
+    ) &
     noexcept = default;
 
     // Accessors --------------------------------------------------------------
@@ -141,6 +141,7 @@ public:
             Returns true if <#this/> transparent container output resource is
             at the end of its referenced content. Otherwise, returns false.
     */
+    [[nodiscard]]
     bool
     is_at_end ()
     const noexcept override;
@@ -152,6 +153,7 @@ public:
             the position at which write operations will
             take place next.
     */
+    [[nodiscard]]
     std::int64_t
     get_position ()
     const noexcept override;
@@ -160,6 +162,7 @@ public:
         Description:
             Returns a non-constant reference to the referenced content.
     */
+    [[nodiscard]]
     content_type&
     grab_content ()
     noexcept;
@@ -168,6 +171,7 @@ public:
         Description:
             Returns a constant reference to the referenced content.
     */
+    [[nodiscard]]
     const content_type&
     grab_content ()
     const noexcept;

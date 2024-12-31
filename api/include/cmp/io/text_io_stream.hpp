@@ -89,7 +89,7 @@ public:
     text_io_stream&
     operator = (
         const text_io_stream& other
-    )
+    ) &
     = default;
 
     // Move Operations --------------------------------------------------------
@@ -122,7 +122,7 @@ public:
     text_io_stream&
     operator = (
         text_io_stream&& other
-    )
+    ) &
     noexcept = default;
 
     // Operator Overloads -----------------------------------------------------

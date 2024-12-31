@@ -22,6 +22,7 @@ public:
 
     CMP_CONDITIONAL_INLINE
     CMP_CONDITIONAL_EXPORT
+    explicit
     stdin_resource (
         std::size_t buffer_capacity = io_buffer::default_buffer_capacity
     )

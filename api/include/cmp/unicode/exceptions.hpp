@@ -65,7 +65,7 @@ public:
     invalid_code_point&
     operator = (
         const invalid_code_point& other
-    )
+    ) &
     = default;
 
     // Move Operations --------------------------------------------------------
@@ -100,7 +100,7 @@ public:
     invalid_code_point&
     operator = (
         invalid_code_point&& other
-    )
+    ) &
     noexcept = default;
 
     // Core -------------------------------------------------------------------
@@ -109,6 +109,7 @@ public:
         Description:
             Returns the explanatory string.
     */
+    [[nodiscard]]
     CMP_CONDITIONAL_INLINE
     CMP_CONDITIONAL_EXPORT
     const char*
@@ -172,7 +173,7 @@ public:
     invalid_unicode_encoding&
     operator = (
         const invalid_unicode_encoding& other
-    )
+    ) &
     = default;
 
     // Move Operations --------------------------------------------------------
@@ -207,7 +208,7 @@ public:
     invalid_unicode_encoding&
     operator = (
         invalid_unicode_encoding&& other
-    )
+    ) &
     noexcept = default;
 
     // Core -------------------------------------------------------------------
@@ -216,6 +217,7 @@ public:
         Description:
             Returns the explanatory string.
     */
+    [[nodiscard]]
     CMP_CONDITIONAL_INLINE
     CMP_CONDITIONAL_EXPORT
     const char*
@@ -280,7 +282,7 @@ public:
     iterated_past_end&
     operator = (
         const iterated_past_end& other
-    )
+    ) &
     = default;
 
     // Move Operations --------------------------------------------------------
@@ -315,7 +317,7 @@ public:
     iterated_past_end&
     operator = (
         iterated_past_end&& other
-    )
+    ) &
     noexcept = default;
 
     // Core -------------------------------------------------------------------
@@ -324,6 +326,7 @@ public:
         Description:
             Returns the explanatory string.
     */
+    [[nodiscard]]
     CMP_CONDITIONAL_INLINE
     CMP_CONDITIONAL_EXPORT
     const char*

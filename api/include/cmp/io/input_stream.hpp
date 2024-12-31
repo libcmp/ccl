@@ -89,7 +89,7 @@ public:
     input_stream&
     operator = (
         const input_stream& other
-    )
+    ) &
     = default;
 
     // Move Operations --------------------------------------------------------
@@ -122,7 +122,7 @@ public:
     input_stream&
     operator = (
         input_stream&& other
-    )
+    ) &
     noexcept = default;
 
     // Accessors --------------------------------------------------------------
@@ -131,6 +131,7 @@ public:
         Description:
             Returns a non-constant reference to the referenced input resource.
     */
+    [[nodiscard]]
     referenced_resource_type&
     grab_resource ()
     noexcept;
@@ -139,6 +140,7 @@ public:
         Description:
             Returns a constant reference to the referenced input resource.
     */
+    [[nodiscard]]
     const referenced_resource_type&
     grab_resource ()
     const noexcept;
@@ -147,6 +149,7 @@ public:
         Description:
             Returns the endianness associated with <#this/> input stream.
     */
+    [[nodiscard]]
     std::endian
     get_endianness ()
     const noexcept;
@@ -169,6 +172,7 @@ public:
         Description:
             Tells whether this stream's input resource is at its end.
     */
+    [[nodiscard]]
     bool
     is_at_end ()
     const noexcept;

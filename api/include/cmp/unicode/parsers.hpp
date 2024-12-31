@@ -211,7 +211,7 @@ public:
     parse_failed&
     operator = (
         const parse_failed& other
-    )
+    ) &
     = default;
 
     // Move Operations --------------------------------------------------------
@@ -246,7 +246,7 @@ public:
     parse_failed&
     operator = (
         parse_failed&& other
-    )
+    ) &
     noexcept = default;
 
     // Accessors --------------------------------------------------------------
@@ -255,6 +255,7 @@ public:
         Description:
             Returns the type associated with <#this/> exception.
     */
+    [[nodiscard]]
     CMP_CONDITIONAL_INLINE
     CMP_CONDITIONAL_EXPORT
     type

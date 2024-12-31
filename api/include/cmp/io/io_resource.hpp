@@ -75,7 +75,7 @@ public:
     io_resource&
     operator = (
         const io_resource& other
-    )
+    ) &
     = default;
 
     // Move Operations --------------------------------------------------------
@@ -110,7 +110,7 @@ public:
     io_resource&
     operator = (
         io_resource&& other
-    )
+    ) &
     noexcept = default;
 }; // class -------------------------------------------------------------------
 

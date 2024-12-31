@@ -20,12 +20,14 @@ public:
     // Constructors and Destructor --------------------------------------------
 
     CMP_CONDITIONAL_EXPORT
+    explicit
     push_button (
         const window_native_handle& handle
     );
 
     // Accessors --------------------------------------------------------------
 
+    [[nodiscard]]
     CMP_CONDITIONAL_EXPORT
     std::u8string
     get_text ()

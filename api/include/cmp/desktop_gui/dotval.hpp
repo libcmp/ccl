@@ -39,7 +39,7 @@ public:
     dotval&
     operator = (
         const dotval& other
-    )
+    ) &
     = default;
 
     // Move Operations --------------------------------------------------------
@@ -52,11 +52,12 @@ public:
     dotval&
     operator = (
         dotval&& other
-    )
+    ) &
     noexcept = default;
 
     // Accessors --------------------------------------------------------------
 
+    [[nodiscard]]
     CMP_CONDITIONAL_EXPORT
     value_type
     get_value ()
@@ -69,11 +70,13 @@ public:
     )
     noexcept;
 
+    [[nodiscard]]
     CMP_CONDITIONAL_EXPORT
     const value_type&
     grab_value ()
     const noexcept;
 
+    [[nodiscard]]
     CMP_CONDITIONAL_EXPORT
     value_type&
     grab_value ()

@@ -83,7 +83,7 @@ public:
     seekable_output_resource&
     operator = (
         const seekable_output_resource& other
-    )
+    ) &
     = default;
 
     // Move Operations --------------------------------------------------------
@@ -116,7 +116,7 @@ public:
     seekable_output_resource&
     operator = (
         seekable_output_resource&& other
-    )
+    ) &
     noexcept = default;
 
     // Accessors --------------------------------------------------------------

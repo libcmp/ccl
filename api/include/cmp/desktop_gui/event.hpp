@@ -73,7 +73,7 @@ public:
     event&
     operator = (
         const event& other
-    )
+    ) &
     = default;
 
     // Move Operations --------------------------------------------------------
@@ -106,7 +106,7 @@ public:
     event&
     operator = (
         event&& other
-    )
+    ) &
     noexcept = default;
 
     // Accessors --------------------------------------------------------------
@@ -115,6 +115,7 @@ public:
         Description:
             Returns the event type of <#this/> <#type>event</#type>.
     */
+    [[nodiscard]]
     CMP_CONDITIONAL_EXPORT
     event_type
     get_event_type ()

@@ -4,7 +4,7 @@
 #include <AppKit/NSWindow.h>
 
 #include <cmp/desktop_gui/impl/macos/macos_window.hpp>
-
+#include <iostream>
 @interface cmp_window : NSWindow
 - (void)
 keyDown:
@@ -13,6 +13,10 @@ keyDown:
 - (void)
 keyUp:
 (NSEvent*) event;
+
+- (void)
+handleAction:
+(NSView*) sender;
 @end // interface -------------------------------------------------------------
 
 @interface cmp_window_delegate : NSObject<NSWindowDelegate>
@@ -268,6 +272,63 @@ forward_close_event_to_window (
     }
 } // function -----------------------------------------------------------------
 
+widget*
+find_widget (
+    NSView* widget_handle,
+    const std::vector<std::unique_ptr<window_element>>& window_elements
+) {
+    for (const auto& current_window_element : window_elements) {
+        auto layout_ptr{dynamic_cast<layout*>(current_window_element.get())};
+        if (layout_ptr) {
+            return find_widget(widget_handle, layout_ptr->grab_children());
+        } else {
+            auto widget_ptr{
+                static_cast<widget*>(current_window_element.get())
+            };
+            if (
+                widget_ptr->grab_native_handle().widget_handle == widget_handle
+            ) {
+                return widget_ptr;
+            }
+        }
+    }
+    return nullptr;
+} // function -----------------------------------------------------------------
+
+void
+forward_action_to_widget (
+    NSView* widget_handle
+) {
+    auto& window_associations{
+        dgui_app()->grab_native_handle().window_associations
+    };
+    widget* widget_ptr{nullptr};
+    for (const auto& current_association : window_associations) {
+        widget_ptr = find_widget(
+            widget_handle,
+            current_association.second->grab_root_layout().grab_children()
+        );
+        if (widget_ptr) {
+            break;
+        }
+    }
+    auto push_button_ptr{dynamic_cast<push_button*>(widget_ptr)};
+    if (push_button_ptr) {
+        push_button_ptr->trigger();
+        return;
+    }
+    auto check_box_ptr{dynamic_cast<check_box*>(widget_ptr)};
+    if (check_box_ptr) {
+        check_box_ptr->toggle();
+        return;
+    }
+    auto radio_button_ptr{dynamic_cast<radio_button*>(widget_ptr)};
+    if (radio_button_ptr) {
+        radio_button_ptr->toggle();
+        return;
+    }
+} // function -----------------------------------------------------------------
+
 } // namespace ----------------------------------------------------------------
 
 // --------------------------------------------------------------- cmp::window
@@ -304,7 +365,7 @@ noexcept
 window&
 window::operator = (
     window&& other
-)
+) &
 noexcept
 {
     if (this != &other) {
@@ -582,6 +643,13 @@ keyUp:
 (NSEvent*) event
 {
     cmp::impl::forward_key_up_event_to_window(self, event);
+} // function -----------------------------------------------------------------
+
+- (void)
+handleAction:
+(NSView*) sender
+{
+    cmp::impl::forward_action_to_widget(sender);
 } // function -----------------------------------------------------------------
 @end // implementation --------------------------------------------------------
 

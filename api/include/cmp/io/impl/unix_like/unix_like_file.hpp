@@ -59,16 +59,18 @@ public:
     file&
     operator = (
         file&& other
-    )
+    ) &
     noexcept = default;
 
     // Accessors --------------------------------------------------------------
 
+    [[nodiscard]]
     CMP_CONDITIONAL_INLINE
     bool
     is_open ()
     const noexcept override;
 
+    [[nodiscard]]
     CMP_CONDITIONAL_INLINE
     std::int64_t
     get_position ()

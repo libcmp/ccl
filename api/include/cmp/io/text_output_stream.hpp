@@ -88,7 +88,7 @@ public:
     text_output_stream&
     operator = (
         const text_output_stream& other
-    )
+    ) &
     = default;
 
     // Move Operations --------------------------------------------------------
@@ -121,7 +121,7 @@ public:
     text_output_stream&
     operator = (
         text_output_stream&& other
-    )
+    ) &
     noexcept = default;
 
     // Core -------------------------------------------------------------------
@@ -131,6 +131,7 @@ public:
             Returns the encoding form associated
             with <#this/> text output stream.
     */
+    [[nodiscard]]
     encoding_form
     get_encoding_form ()
     const noexcept;

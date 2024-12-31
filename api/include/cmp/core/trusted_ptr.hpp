@@ -37,6 +37,15 @@ public:
     trusted_ptr ()
     noexcept;
 
+    template <
+        typename U
+    >
+    requires (std::is_base_of_v<T, U>)
+    explicit(false)
+    trusted_ptr (
+        const trusted_ptr<U>& other
+    );
+
     ~trusted_ptr ()
     = default;
 
@@ -50,7 +59,7 @@ public:
     trusted_ptr&
     operator = (
         const trusted_ptr& rhs
-    )
+    ) &
     = default;
 
     // Move Operations --------------------------------------------------------
@@ -58,13 +67,19 @@ public:
     trusted_ptr (
         trusted_ptr&& rhs
     )
-    = default;
+    noexcept = default;
 
     trusted_ptr&
     operator = (
         trusted_ptr&& rhs
-    )
-    = default;
+    ) &
+    noexcept = default;
+
+    // Accessors --------------------------------------------------------------
+
+    pointer
+    get_underlying_pointer ()
+    const noexcept;
 
     // Core -------------------------------------------------------------------
 
@@ -85,6 +100,13 @@ public:
     )
     noexcept;
 
+    template <
+        typename U
+    >
+    trusted_ptr<U>
+    as_pointer_of ()
+    const noexcept;
+
     // Operator Overloads -----------------------------------------------------
 
     /**
@@ -95,6 +117,14 @@ public:
     pointer
     operator -> ()
     const noexcept;
+
+    template <
+        typename U
+    >
+    requires (std::is_base_of_v<T, U>)
+    explicit(false)
+    operator trusted_ptr<U> ()
+    noexcept;
 
 private:
     // Private Data -----------------------------------------------------------

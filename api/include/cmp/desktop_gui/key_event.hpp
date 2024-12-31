@@ -81,7 +81,7 @@ public:
     key_event&
     operator = (
         const key_event& other
-    )
+    ) &
     = default;
 
     // Move Operations --------------------------------------------------------
@@ -114,7 +114,7 @@ public:
     key_event&
     operator = (
         key_event&& other
-    )
+    ) &
     noexcept = default;
 
     // Accessors --------------------------------------------------------------
@@ -123,6 +123,7 @@ public:
         Description:
             Returns the key event type of <#this/> <#type>key_event</#type>.
     */
+    [[nodiscard]]
     CMP_CONDITIONAL_EXPORT
     key_event_type
     get_key_event_type ()
@@ -132,6 +133,7 @@ public:
         Description:
             Returns the key that was pressed or released.
     */
+    [[nodiscard]]
     CMP_CONDITIONAL_EXPORT
     key
     get_key ()

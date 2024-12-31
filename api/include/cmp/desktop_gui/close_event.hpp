@@ -71,7 +71,7 @@ public:
     close_event&
     operator = (
         const close_event& other
-    )
+    ) &
     = default;
 
     // Move Operations --------------------------------------------------------
@@ -104,7 +104,7 @@ public:
     close_event&
     operator = (
         close_event&& other
-    )
+    ) &
     noexcept = default;
 
     // Accessors --------------------------------------------------------------
@@ -115,6 +115,7 @@ public:
             be closed. Otherwise, returns false. This is something you can
             change by calling <#function>set_should_close</#function>.
     */
+    [[nodiscard]]
     CMP_CONDITIONAL_EXPORT
     bool
     should_close ()

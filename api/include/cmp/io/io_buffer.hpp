@@ -77,7 +77,7 @@ public:
     io_buffer&
     operator = (
         const io_buffer& other
-    )
+    ) &
     = default;
 
     // Move Operations --------------------------------------------------------
@@ -112,7 +112,7 @@ public:
     io_buffer&
     operator = (
         io_buffer&& other
-    )
+    ) &
     noexcept = default;
 
     // Accessors --------------------------------------------------------------
@@ -121,6 +121,7 @@ public:
         Description:
             Returns the capacity of <#this/> I/O buffer.
     */
+    [[nodiscard]]
     CMP_CONDITIONAL_INLINE
     CMP_CONDITIONAL_EXPORT
     std::size_t
@@ -131,6 +132,7 @@ public:
         Description:
             Returns the size of <#this/> I/O buffer.
     */
+    [[nodiscard]]
     CMP_CONDITIONAL_INLINE
     CMP_CONDITIONAL_EXPORT
     std::size_t
@@ -157,6 +159,7 @@ public:
         Description:
             Returns the position of <#this/> I/O buffer.
     */
+    [[nodiscard]]
     CMP_CONDITIONAL_INLINE
     CMP_CONDITIONAL_EXPORT
     std::size_t
@@ -194,6 +197,7 @@ public:
             Returns true if <#this/> I/O buffer is read-dirty.
             Otherwise, returns false.
     */
+    [[nodiscard]]
     CMP_CONDITIONAL_INLINE
     CMP_CONDITIONAL_EXPORT
     bool
@@ -221,6 +225,7 @@ public:
             Returns true if <#this/> I/O buffer is write-dirty.
             Otherwise, returns false.
     */
+    [[nodiscard]]
     CMP_CONDITIONAL_INLINE
     CMP_CONDITIONAL_EXPORT
     bool

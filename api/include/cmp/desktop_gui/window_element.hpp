@@ -19,6 +19,7 @@ public:
 
     // Accessors --------------------------------------------------------------
 
+    [[nodiscard]]
     virtual
     pixval
     get_x ()
@@ -31,6 +32,7 @@ public:
     )
     noexcept = 0;
 
+    [[nodiscard]]
     virtual
     pixval
     get_y ()
@@ -59,6 +61,7 @@ public:
     )
     noexcept = 0;
 
+    [[nodiscard]]
     virtual
     pixval
     get_width ()
@@ -71,6 +74,7 @@ public:
     )
     noexcept = 0;
 
+    [[nodiscard]]
     virtual
     pixval
     get_height ()
@@ -99,11 +103,13 @@ public:
     )
     noexcept = 0;
 
+    [[nodiscard]]
     virtual
     pixval
     get_preferred_width ()
     const noexcept = 0;
 
+    [[nodiscard]]
     virtual
     pixval
     get_preferred_height ()

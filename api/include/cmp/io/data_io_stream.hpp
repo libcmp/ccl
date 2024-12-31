@@ -87,7 +87,7 @@ public:
     data_io_stream&
     operator = (
         const data_io_stream& other
-    )
+    ) &
     = default;
 
     // Move Operations --------------------------------------------------------
@@ -120,7 +120,7 @@ public:
     data_io_stream&
     operator = (
         data_io_stream&& other
-    )
+    ) &
     noexcept = default;
 
     // Operator Overloads -----------------------------------------------------

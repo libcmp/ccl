@@ -82,7 +82,7 @@ public:
     seekable_transfer_resource&
     operator = (
         const seekable_transfer_resource& other
-    )
+    ) &
     = default;
 
     // Move Operations --------------------------------------------------------
@@ -115,7 +115,7 @@ public:
     seekable_transfer_resource&
     operator = (
         seekable_transfer_resource&& other
-    )
+    ) &
     noexcept = default;
 
     // Accessors --------------------------------------------------------------
@@ -125,6 +125,7 @@ public:
             This function must be overridden, and it is supposed to return
             the position that this seekable transfer resource is at.
     */
+    [[nodiscard]]
     virtual
     position_type
     get_position ()

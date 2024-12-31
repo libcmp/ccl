@@ -18,6 +18,7 @@ namespace cmp {
 
 // Free Functions -------------------------------------------------------------
 
+[[nodiscard]]
 CMP_CONDITIONAL_EXPORT
 desktop_gui_application*
 dgui_app ()
