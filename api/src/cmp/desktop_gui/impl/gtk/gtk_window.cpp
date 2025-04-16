@@ -298,7 +298,7 @@ window::window (
     const std::u8string& initial_title,
     window_mode initial_mode
 ) {
-    m_native_handle.gtk_application_window = NULL;
+    m_native_handle.gtk_application_window = nullptr;
     open(initial_width, initial_height, initial_title, initial_mode);
 } // function -----------------------------------------------------------------
 
@@ -312,11 +312,11 @@ noexcept
     , m_start_time{other.m_start_time}
     , m_last_time{other.m_last_time}
 {
-    if (m_native_handle.gtk_application_window != NULL) {
+    if (m_native_handle.gtk_application_window != nullptr) {
         fix_association();
     }
 
-    other.m_native_handle.gtk_application_window = NULL;
+    other.m_native_handle.gtk_application_window = nullptr;
 } // function -----------------------------------------------------------------
 
 window&
@@ -332,11 +332,11 @@ noexcept
         m_start_time = other.m_start_time;
         m_last_time = other.m_last_time;
 
-        if (m_native_handle.gtk_application_window != NULL) {
+        if (m_native_handle.gtk_application_window != nullptr) {
             fix_association();
         }
 
-        other.m_native_handle.gtk_application_window = NULL;
+        other.m_native_handle.gtk_application_window = nullptr;
     }
 
     return *this;
@@ -368,7 +368,7 @@ const
         )
     };
     std::u8string title;
-    if (title_ptr == NULL) {
+    if (title_ptr == nullptr) {
         return title;
     }
     gchar current_code_unit;
@@ -424,7 +424,7 @@ window::open (
     const std::u8string& title,
     window_mode mode
 ) {
-    if (m_native_handle.gtk_application_window != NULL) {
+    if (m_native_handle.gtk_application_window != nullptr) {
         return false;
     }
 
@@ -452,19 +452,19 @@ window::open (
         GTK_WIDGET(m_native_handle.gtk_application_window),
         "notify::default-width",
         G_CALLBACK(impl::forward_resize_event_to_window),
-        NULL
+        nullptr
     );
     g_signal_connect(
         GTK_WIDGET(m_native_handle.gtk_application_window),
         "notify::default-height",
         G_CALLBACK(impl::forward_resize_event_to_window),
-        NULL
+        nullptr
     );
     g_signal_connect(
         GTK_WIDGET(m_native_handle.gtk_application_window),
         "close-request",
         G_CALLBACK(impl::forward_close_event_to_window),
-        NULL
+        nullptr
     );
 
     m_controller = gtk_event_controller_key_new();
@@ -476,13 +476,14 @@ window::open (
         m_controller,
         "key-released",
         G_CALLBACK(impl::forward_key_up_event_to_window),
-        NULL
+        nullptr
     );
     g_signal_connect(
         m_controller,
         "key-pressed",
         G_CALLBACK(impl::forward_key_down_event_to_window),
         NULL
+        nullptr
     );
 
     m_fixed = GTK_FIXED(gtk_fixed_new());

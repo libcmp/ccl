@@ -31,19 +31,19 @@ desktop_gui_application::desktop_gui_application (
     : application{argc, argv}
 {
     m_native_handle.gtk_application = gtk_application_new(
-        NULL,
+        nullptr,
         G_APPLICATION_DEFAULT_FLAGS
     );
     g_signal_connect(
         m_native_handle.gtk_application,
         "activate",
         G_CALLBACK(impl::activate),
-        NULL
+        nullptr
     );
     g_application_register(
         G_APPLICATION(m_native_handle.gtk_application),
-        NULL,
-        NULL
+        nullptr,
+        nullptr
     );
     g_application_activate(G_APPLICATION(m_native_handle.gtk_application));
 } // function -----------------------------------------------------------------

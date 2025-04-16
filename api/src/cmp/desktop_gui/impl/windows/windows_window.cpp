@@ -401,7 +401,7 @@ window::window (
     const std::u8string& initial_title,
     window_mode initial_mode
 ) {
-    m_native_handle.window_handle = NULL;
+    m_native_handle.window_handle = nullptr;
     open(initial_width, initial_height, initial_title, initial_mode);
 } // function -----------------------------------------------------------------
 
@@ -416,11 +416,11 @@ noexcept
     , m_last_time{other.m_last_time}
     , m_root_layout{std::move(other.m_root_layout)}
 {
-    if (m_native_handle.window_handle != NULL) {
+    if (m_native_handle.window_handle != nullptr) {
         fix_association();
     }
 
-    other.m_native_handle.window_handle = NULL;
+    other.m_native_handle.window_handle = nullptr;
 } // function -----------------------------------------------------------------
 
 window&
@@ -437,11 +437,11 @@ noexcept
         m_last_time = other.m_last_time;
         m_root_layout = std::move(other.m_root_layout);
 
-        if (m_native_handle.window_handle != NULL) {
+        if (m_native_handle.window_handle != nullptr) {
             fix_association();
         }
 
-        other.m_native_handle.window_handle = NULL;
+        other.m_native_handle.window_handle = nullptr;
     }
 
     return *this;
@@ -520,7 +520,7 @@ window::open (
     const std::u8string& title,
     window_mode mode
 ) {
-    if (m_native_handle.window_handle != NULL) {
+    if (m_native_handle.window_handle != nullptr) {
         return false;
     }
 

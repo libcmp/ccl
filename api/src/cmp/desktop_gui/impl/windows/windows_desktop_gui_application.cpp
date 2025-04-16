@@ -73,7 +73,7 @@ desktop_gui_application::run ()
     MSG message;
     ZeroMemory(&message, sizeof (MSG));
     while (!m_native_handle.window_associations.empty()) {
-        if (PeekMessageW(&message, NULL, 0, 0, PM_REMOVE)) {
+        if (PeekMessageW(&message, nullptr, 0, 0, PM_REMOVE)) {
             TranslateMessage(&message);
             DispatchMessageW(&message);
         } else {

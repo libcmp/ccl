@@ -20,27 +20,27 @@ hook_procedure (
         HWND button_handle;
 
         button_handle = GetDlgItem(dialog_window, IDOK);
-        if (button_handle != NULL) {
+        if (button_handle != nullptr) {
             SetDlgItemTextW(dialog_window, IDOK, L"OK");
         }
 
         button_handle = GetDlgItem(dialog_window, IDCANCEL);
-        if (button_handle != NULL) {
+        if (button_handle != nullptr) {
             SetDlgItemTextW(dialog_window, IDCANCEL, L"Cancel");
         }
 
         button_handle = GetDlgItem(dialog_window, IDYES);
-        if (button_handle != NULL) {
+        if (button_handle != nullptr) {
             SetDlgItemTextW(dialog_window, IDYES, L"Yes");
         }
 
         button_handle = GetDlgItem(dialog_window, IDNO);
-        if (button_handle != NULL) {
+        if (button_handle != nullptr) {
             SetDlgItemTextW(dialog_window, IDNO, L"No");
         }
 
         button_handle = GetDlgItem(dialog_window, IDHELP);
-        if (button_handle != NULL) {
+        if (button_handle != nullptr) {
             SetDlgItemTextW(dialog_window, IDHELP, L"Help");
         }
 
@@ -167,14 +167,14 @@ noexcept
     g_hook_procedure_handle = SetWindowsHookExW(
         WH_CBT,
         &impl::hook_procedure,
-        NULL,
+        nullptr,
         GetCurrentThreadId()
     );
     std::wstring title_wstring{to_wstring(title)};
     std::wstring message_wstring{to_wstring(message)};
     return get_standard_button(
         MessageBoxW(
-            parent ? parent->grab_native_handle().window_handle : NULL,
+            parent ? parent->grab_native_handle().window_handle : nullptr,
             message_wstring.data(),
             title_wstring.data(),
             type
