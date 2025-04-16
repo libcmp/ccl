@@ -49,7 +49,7 @@ public:
     invalid_code_point (
         const invalid_code_point& other
     )
-    = default;
+    noexcept = default;
 
     /**
         Description:
@@ -66,7 +66,7 @@ public:
     operator = (
         const invalid_code_point& other
     ) &
-    = default;
+    noexcept = default;
 
     // Move Operations --------------------------------------------------------
 
@@ -157,7 +157,7 @@ public:
     invalid_unicode_encoding (
         const invalid_unicode_encoding& other
     )
-    = default;
+    noexcept = default;
 
     /**
         Description:
@@ -174,7 +174,7 @@ public:
     operator = (
         const invalid_unicode_encoding& other
     ) &
-    = default;
+    noexcept = default;
 
     // Move Operations --------------------------------------------------------
 
@@ -266,7 +266,7 @@ public:
     iterated_past_end (
         const iterated_past_end& other
     )
-    = default;
+    noexcept = default;
 
     /**
         Description:
@@ -283,7 +283,7 @@ public:
     operator = (
         const iterated_past_end& other
     ) &
-    = default;
+    noexcept = default;
 
     // Move Operations --------------------------------------------------------
 

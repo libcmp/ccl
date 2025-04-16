@@ -51,7 +51,7 @@ public:
     read_past_end (
         const read_past_end& other
     )
-    = default;
+    noexcept = default;
 
     /**
         Description:
@@ -68,7 +68,7 @@ public:
     operator = (
         const read_past_end& other
     ) &
-    = default;
+    noexcept = default;
 
     // Move Operations --------------------------------------------------------
 
@@ -159,7 +159,7 @@ public:
     invalid_access_mode (
         const invalid_access_mode& other
     )
-    = default;
+    noexcept = default;
 
     /**
         Description:
@@ -176,7 +176,7 @@ public:
     operator = (
         const invalid_access_mode& other
     ) &
-    = default;
+    noexcept = default;
 
     // Move Operations --------------------------------------------------------
 

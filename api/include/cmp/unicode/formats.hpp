@@ -51,7 +51,7 @@ public:
     invalid_radix (
         const invalid_radix& other
     )
-    = default;
+    noexcept = default;
 
     /**
         Description:
@@ -68,7 +68,7 @@ public:
     operator = (
         const invalid_radix& other
     ) &
-    = default;
+    noexcept = default;
 
     // Move Operations --------------------------------------------------------
 

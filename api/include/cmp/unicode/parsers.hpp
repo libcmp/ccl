@@ -195,7 +195,7 @@ public:
     parse_failed (
         const parse_failed& other
     )
-    = default;
+    noexcept = default;
 
     /**
         Description:
@@ -212,7 +212,7 @@ public:
     operator = (
         const parse_failed& other
     ) &
-    = default;
+    noexcept = default;
 
     // Move Operations --------------------------------------------------------
 
