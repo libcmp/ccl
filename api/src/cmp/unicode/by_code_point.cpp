@@ -267,11 +267,11 @@ by_code_point<char8_t>::const_iterator::reference::finish_sequence (
 )
 const
 {
-    char8_t code_unit;
     char32_t result{initial_code_point_value};
     if (sequence_length == 1) {
         return result;
     }
+    char8_t code_unit;
     while (--sequence_length > 0) {
         if (i + 1 == m_end_iterator) {
             throw iterated_past_end{};
@@ -460,11 +460,11 @@ by_code_point<char8_t>::const_iterator::finish_sequence (
 )
 const
 {
-    char8_t code_unit;
     char32_t result{initial_code_point_value};
     if (sequence_length == 1) {
         return result;
     }
+    char8_t code_unit;
     while (--sequence_length > 0) {
         if (i == m_end_iterator) {
             throw iterated_past_end{};
@@ -486,12 +486,12 @@ by_code_point<char8_t>::const_iterator::finish_sequence (
     char32_t initial_code_point_value,
     std::u8string_view::const_iterator& i
 ) {
-    char8_t code_unit;
     char32_t result{initial_code_point_value};
     if (sequence_length == 1) {
         ++i;
         return result;
     }
+    char8_t code_unit;
     while (--sequence_length > 0) {
         if (i == m_end_iterator) {
             throw iterated_past_end{};
