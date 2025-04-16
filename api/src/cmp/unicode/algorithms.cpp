@@ -103,7 +103,11 @@ string_size (
 )
 noexcept
 {
-    return std::strlen(s);
+    const char* current{s};
+    while (*current != '\0') {
+        ++current;
+    }
+    return current - s;
 } // function -----------------------------------------------------------------
 
 std::size_t
