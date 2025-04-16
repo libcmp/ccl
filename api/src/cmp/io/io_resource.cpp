@@ -9,10 +9,7 @@ namespace cmp {
 
 // Constructors and Destructor ------------------------------------------------
 
-io_resource::io_resource (
-    std::size_t buffer_capacity
-)
-    : transfer_resource{buffer_capacity}
+io_resource::io_resource ()
 {
 } // function -----------------------------------------------------------------
 

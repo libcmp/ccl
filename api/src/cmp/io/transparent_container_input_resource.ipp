@@ -18,7 +18,6 @@ transparent_container_input_resource<Container>
     std::size_t buffer_capacity
 )
     : transfer_resource{buffer_capacity}
-    , seekable_input_resource<std::int64_t>{buffer_capacity}
     , impl::ctr_essence<Container>{
           &initial_content
       }

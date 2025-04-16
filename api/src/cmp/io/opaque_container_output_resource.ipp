@@ -16,7 +16,6 @@ opaque_container_output_resource<Container>::opaque_container_output_resource (
     std::size_t buffer_capacity
 )
     : transfer_resource{buffer_capacity}
-    , seekable_output_resource<std::int64_t>{buffer_capacity}
     , impl::ctr_essence<Container>{
           &m_content
       }
@@ -32,7 +31,6 @@ opaque_container_output_resource<Container>::opaque_container_output_resource (
     std::size_t buffer_capacity
 )
     : transfer_resource{buffer_capacity}
-    , seekable_output_resource<std::int64_t>{buffer_capacity}
     , impl::ctr_essence<Container>{
           &m_content
       }
@@ -48,7 +46,6 @@ opaque_container_output_resource<Container>::opaque_container_output_resource (
     std::size_t buffer_capacity
 )
     : transfer_resource{buffer_capacity}
-    , seekable_output_resource<std::int64_t>{buffer_capacity}
     , impl::ctr_essence<Container>{
           &m_content
       }

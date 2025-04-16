@@ -14,7 +14,6 @@ stdin_resource::stdin_resource (
 )
 noexcept
     : transfer_resource{buffer_capacity}
-    , input_resource{buffer_capacity}
     , m_handle{GetStdHandle(STD_INPUT_HANDLE)}
 {
     tie(uout_resource);

@@ -35,9 +35,7 @@ public:
     CMP_CONDITIONAL_INLINE
     CMP_CONDITIONAL_EXPORT
     explicit
-    input_resource (
-        std::size_t buffer_capacity = io_buffer::default_buffer_capacity
-    );
+    input_resource ();
 
     CMP_CONDITIONAL_INLINE
     ~input_resource ()

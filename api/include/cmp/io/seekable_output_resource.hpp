@@ -46,9 +46,7 @@ public:
                 seekable output resource is completely unbuffered.
     */
     explicit
-    seekable_output_resource (
-        std::size_t buffer_capacity = io_buffer::default_buffer_capacity
-    );
+    seekable_output_resource ();
 
     ~seekable_output_resource ()
     override = default;

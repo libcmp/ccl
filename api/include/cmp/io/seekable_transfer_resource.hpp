@@ -45,9 +45,7 @@ public:
                 seekable transfer resource is completely unbuffered.
     */
     explicit
-    seekable_transfer_resource (
-        std::size_t buffer_capacity = io_buffer::default_buffer_capacity
-    );
+    seekable_transfer_resource ();
 
     ~seekable_transfer_resource ()
     override = default;

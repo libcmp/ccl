@@ -12,12 +12,7 @@ namespace cmp {
 template <
     typename Position
 >
-seekable_output_resource<Position>::seekable_output_resource (
-    std::size_t buffer_capacity
-)
-    : transfer_resource{buffer_capacity}
-    , seekable_transfer_resource<Position>{buffer_capacity}
-    , output_resource{buffer_capacity}
+seekable_output_resource<Position>::seekable_output_resource ()
 {
 } // function -----------------------------------------------------------------
 

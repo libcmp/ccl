@@ -9,11 +9,8 @@ namespace cmp {
 
 // Constructors and Destructor ------------------------------------------------
 
-input_resource::input_resource (
-    std::size_t buffer_capacity
-)
-    : transfer_resource{buffer_capacity}
-    , m_tied_resource{nullptr}
+input_resource::input_resource ()
+    : m_tied_resource{nullptr}
 {
 } // function -----------------------------------------------------------------
 

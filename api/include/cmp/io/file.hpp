@@ -61,8 +61,7 @@ public:
     CMP_CONDITIONAL_EXPORT
     basic_file (
         const std::filesystem::path& file_path,
-        access_mode mode,
-        std::size_t buffer_capacity = io_buffer::default_buffer_capacity
+        access_mode mode
     );
 
     CMP_CONDITIONAL_INLINE

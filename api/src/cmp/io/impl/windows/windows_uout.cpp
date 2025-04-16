@@ -15,7 +15,6 @@ stdout_resource::stdout_resource (
 )
 noexcept
     : transfer_resource{buffer_capacity}
-    , output_resource{buffer_capacity}
     , m_handle{GetStdHandle(handle_identifier)}
 {
     SetConsoleOutputCP(CP_UTF8);

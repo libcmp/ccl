@@ -45,9 +45,7 @@ public:
                 the seekable I/O resource is completely unbuffered.
     */
     explicit
-    seekable_io_resource (
-        std::size_t buffer_capacity = io_buffer::default_buffer_capacity
-    );
+    seekable_io_resource ();
 
     ~seekable_io_resource ()
     override = default;

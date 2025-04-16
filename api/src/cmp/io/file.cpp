@@ -11,9 +11,7 @@ namespace cmp {
 
 basic_file::basic_file ()
 noexcept
-    : transfer_resource{io_buffer::default_buffer_capacity}
-    , seekable_io_resource{io_buffer::default_buffer_capacity}
-    , m_file_path{}
+    : m_file_path{}
     , m_access_mode{read_only}
     , m_last_fill_amount{0}
 {
@@ -21,12 +19,9 @@ noexcept
 
 basic_file::basic_file (
     const std::filesystem::path& file_path,
-    access_mode mode,
-    std::size_t buffer_capacity
+    access_mode mode
 )
-    : transfer_resource{buffer_capacity}
-    , seekable_io_resource{buffer_capacity}
-    , m_file_path{file_path}
+    : m_file_path{file_path}
     , m_access_mode{mode}
     , m_last_fill_amount{0}
 {

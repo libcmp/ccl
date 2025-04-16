@@ -24,7 +24,7 @@ file::file (
     std::size_t buffer_capacity
 )
     : transfer_resource{buffer_capacity}
-    , basic_file{file_path, mode, buffer_capacity}
+    , basic_file{file_path, mode}
     , m_file_descriptor{-1}
 {
     open(m_file_path, m_access_mode, if_file_not_there);

@@ -46,9 +46,7 @@ public:
                 seekable input resource is completely unbuffered.
     */
     explicit
-    seekable_input_resource (
-        std::size_t buffer_capacity = io_buffer::default_buffer_capacity
-    );
+    seekable_input_resource ();
 
     ~seekable_input_resource ()
     override = default;

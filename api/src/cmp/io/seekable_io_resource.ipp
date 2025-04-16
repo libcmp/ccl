@@ -12,12 +12,7 @@ namespace cmp {
 template <
     typename Position
 >
-seekable_io_resource<Position>::seekable_io_resource (
-    std::size_t buffer_capacity
-)
-    : transfer_resource{buffer_capacity}
-    , seekable_input_resource<Position>{buffer_capacity}
-    , seekable_output_resource<Position>{buffer_capacity}
+seekable_io_resource<Position>::seekable_io_resource ()
 {
 } // function -----------------------------------------------------------------
 
