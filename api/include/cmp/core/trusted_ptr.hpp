@@ -29,12 +29,20 @@ public:
     // Types ------------------------------------------------------------------
 
     using pointer = T*;
+    using reference = std::add_lvalue_reference_t<T>;
+    using const_reference = std::add_lvalue_reference_t<const T>;
 
     using element_type = T;
 
     // Constructors and Destructor --------------------------------------------
 
     trusted_ptr ()
+    noexcept;
+
+    explicit(false)
+    trusted_ptr (
+        std::nullptr_t null_pointer
+    )
     noexcept;
 
     template <
@@ -109,6 +117,34 @@ public:
 
     // Operator Overloads -----------------------------------------------------
 
+    template <
+        typename U
+    >
+    requires (std::is_base_of_v<T, U>)
+    explicit(false)
+    operator trusted_ptr<U> ()
+    noexcept;
+
+    explicit
+    operator bool ()
+    const noexcept;
+
+    /**
+        Description:
+            Returns a non-constant reference to the pointed-to object.
+    */
+    reference
+    operator * ()
+    noexcept;
+
+    /**
+        Description:
+            Returns a constant reference to the pointed-to object.
+    */
+    const_reference
+    operator * ()
+    const noexcept;
+
     /**
         Description:
             Returns a pointer to the pointed-to object,
@@ -121,9 +157,67 @@ public:
     template <
         typename U
     >
-    requires (std::is_base_of_v<T, U>)
-    explicit(false)
-    operator trusted_ptr<U> ()
+    friend
+    bool
+    operator == (
+        const trusted_ptr<U>& left_operand,
+        const trusted_ptr<U>& right_operand
+    )
+    noexcept;
+
+    template <
+        typename U
+    >
+    friend
+    bool
+    operator != (
+        const trusted_ptr<U>& left_operand,
+        const trusted_ptr<U>& right_operand
+    )
+    noexcept;
+
+    template <
+        typename U
+    >
+    friend
+    bool
+    operator < (
+        const trusted_ptr<U>& left_operand,
+        const trusted_ptr<U>& right_operand
+    )
+    noexcept;
+
+    template <
+        typename U
+    >
+    friend
+    bool
+    operator > (
+        const trusted_ptr<U>& left_operand,
+        const trusted_ptr<U>& right_operand
+    )
+    noexcept;
+
+    template <
+        typename U
+    >
+    friend
+    bool
+    operator <= (
+        const trusted_ptr<U>& left_operand,
+        const trusted_ptr<U>& right_operand
+    )
+    noexcept;
+
+    template <
+        typename U
+    >
+    friend
+    bool
+    operator >= (
+        const trusted_ptr<U>& left_operand,
+        const trusted_ptr<U>& right_operand
+    )
     noexcept;
 
 private:
@@ -148,6 +242,16 @@ template <
 trusted_ptr<T>
 assure (
     T* raw_pointer
+)
+noexcept;
+
+template <
+    typename Target,
+    typename Source
+>
+trusted_ptr<Target>
+assure_as (
+    Source* raw_pointer
 )
 noexcept;
 
