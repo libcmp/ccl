@@ -395,9 +395,9 @@ public:
         if (
             utf8_content
                 != u8"coração\U0001F600¯\\_(ツ)_/¯\n"
-                   "coração\U0001F600¯\\_(ツ)_/¯\n"
-                   "coração\U0001F600¯\\_(ツ)_/¯\n"
-                   "coração\U0001F600¯\\_(ツ)_/¯"
+                   u8"coração\U0001F600¯\\_(ツ)_/¯\n"
+                   u8"coração\U0001F600¯\\_(ツ)_/¯\n"
+                   u8"coração\U0001F600¯\\_(ツ)_/¯"
         ) {
             std::cout << "The std::u8string read from the file "
                          "does not have the expected content."
@@ -421,9 +421,9 @@ public:
         if (
             utf16_content
                 != u"coração\U0001F600¯\\_(ツ)_/¯\n"
-                   "coração\U0001F600¯\\_(ツ)_/¯\n"
-                   "coração\U0001F600¯\\_(ツ)_/¯\n"
-                   "coração\U0001F600¯\\_(ツ)_/¯"
+                   u"coração\U0001F600¯\\_(ツ)_/¯\n"
+                   u"coração\U0001F600¯\\_(ツ)_/¯\n"
+                   u"coração\U0001F600¯\\_(ツ)_/¯"
         ) {
             std::cout << "The std::u16string read from the file "
                          "does not have the expected content."
@@ -447,9 +447,9 @@ public:
         if (
             utf32_content
                 != U"coração\U0001F600¯\\_(ツ)_/¯\n"
-                   "coração\U0001F600¯\\_(ツ)_/¯\n"
-                   "coração\U0001F600¯\\_(ツ)_/¯\n"
-                   "coração\U0001F600¯\\_(ツ)_/¯"
+                   U"coração\U0001F600¯\\_(ツ)_/¯\n"
+                   U"coração\U0001F600¯\\_(ツ)_/¯\n"
+                   U"coração\U0001F600¯\\_(ツ)_/¯"
         ) {
             std::cout << "The std::u32string read from the file "
                          "does not have the expected content."
@@ -473,9 +473,9 @@ public:
         if (
             wide_content
                 != L"coração\U0001F600¯\\_(ツ)_/¯\n"
-                   "coração\U0001F600¯\\_(ツ)_/¯\n"
-                   "coração\U0001F600¯\\_(ツ)_/¯\n"
-                   "coração\U0001F600¯\\_(ツ)_/¯"
+                   L"coração\U0001F600¯\\_(ツ)_/¯\n"
+                   L"coração\U0001F600¯\\_(ツ)_/¯\n"
+                   L"coração\U0001F600¯\\_(ツ)_/¯"
         ) {
             std::cout << "The std::wstring read from the file "
                          "does not have the expected content."
