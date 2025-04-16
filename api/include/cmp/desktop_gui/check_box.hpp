@@ -18,12 +18,24 @@ class CMP_CONDITIONAL_EXPORT_CLASS check_box
     : public widget
 {
 public:
+    // Constants --------------------------------------------------------------
+
+    static constexpr native_widget_kind g_kind{
+        native_widget_kind::check_box
+    };
+
     // Constructors and Destructor --------------------------------------------
 
     CMP_CONDITIONAL_EXPORT
     explicit
     check_box (
-        const window_native_handle& handle
+        layout& enclosing_layout
+    );
+
+    CMP_CONDITIONAL_EXPORT
+    check_box (
+        const widget_native_handle& parent_widget_handle,
+        layout& enclosing_layout
     );
 
     // Accessors --------------------------------------------------------------

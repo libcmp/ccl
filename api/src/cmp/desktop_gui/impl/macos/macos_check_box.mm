@@ -10,12 +10,29 @@ namespace cmp {
 // Constructors and Destructor ------------------------------------------------
 
 check_box::check_box (
-    const window_native_handle& handle
+    layout& enclosing_layout
 )
     : widget{
+          enclosing_layout,
           impl::create_widget(
-              handle,
-              impl::native_widget_kind::check_box
+              enclosing_layout.grab_enclosing_window_handle()
+                  .cmp_window_handle,
+              native_widget_kind::check_box
+          )
+      }
+{
+    m_toggle_event_handler = impl::noop<>;
+} // function -----------------------------------------------------------------
+
+check_box::check_box (
+    const widget_native_handle& parent_widget_handle,
+    layout& enclosing_layout
+)
+    : widget{
+          enclosing_layout,
+          impl::create_widget(
+              parent_widget_handle.widget_handle,
+              native_widget_kind::check_box
           )
       }
 {
@@ -28,14 +45,20 @@ pixval
 check_box::get_preferred_width ()
 const noexcept
 {
-    return 100;
+    pixval width;
+    pixval height;
+    get_preferred_size(width, height);
+    return width;
 } // function -----------------------------------------------------------------
 
 pixval
 check_box::get_preferred_height ()
 const noexcept
 {
-    return 25;
+    pixval width;
+    pixval height;
+    get_preferred_size(width, height);
+    return height;
 } // function -----------------------------------------------------------------
 
 void
@@ -45,8 +68,11 @@ check_box::get_preferred_size (
 )
 const noexcept
 {
-    width = 100;
-    height = 25;
+    get_preferred_size_generically(
+        grab_native_handle(),
+        width,
+        height
+    );
 } // function -----------------------------------------------------------------
 
 std::u8string
@@ -82,8 +108,9 @@ check_box::set_text (
 bool
 check_box::is_checked ()
 {
-    return [reinterpret_cast<NSButton*>(grab_native_handle().widget_handle) state]
-        == NSControlStateValueOn;
+    return [
+        reinterpret_cast<NSButton*>(grab_native_handle().widget_handle) state
+    ] == NSControlStateValueOn;
 } // function -----------------------------------------------------------------
 
 void

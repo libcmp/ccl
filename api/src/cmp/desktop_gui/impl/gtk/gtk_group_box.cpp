@@ -1,7 +1,7 @@
-// Copyright (C) 2024 Daniel T. McGinnis
+// Copyright (C) 2025 Daniel T. McGinnis
 // SPDX-License-Identifier: BSL-1.0
 
-#include <QGroupBox>
+#include <gtk/gtk.h>
 
 #include <cmp/desktop_gui/group_box.hpp>
 
@@ -17,8 +17,8 @@ group_box::group_box (
     : widget{
           enclosing_layout,
           impl::create_widget(
-              enclosing_layout.grab_enclosing_window_handle()
-                  .cmp_main_window_handle,
+              enclosing_layout.grab_native_handle()
+                  .gtk_layout,
               native_widget_kind::group_box
           )
       }
@@ -29,6 +29,10 @@ group_box::group_box (
           layout::direction::forward
       }
 {
+    gtk_frame_set_child(
+        GTK_FRAME(grab_native_handle().widget_handle),
+        m_content_layout.grab_native_handle().gtk_layout
+    );
     update_margins();
 } // function -----------------------------------------------------------------
 
@@ -52,18 +56,28 @@ std::u8string
 group_box::get_text ()
 const
 {
-    return to_u8string(
-        static_cast<QGroupBox*>(grab_native_handle().widget_handle)
-            ->title().toStdU16String()
-    );
+    std::u8string result;
+    for (
+        const char* current_character{
+            gtk_frame_get_label(
+                GTK_FRAME(grab_native_handle().widget_handle)
+            )
+        };
+        *current_character != '\0';
+        ++current_character
+    ) {
+        result.push_back(*current_character);
+    }
+    return result;
 } // function -----------------------------------------------------------------
 
 void
 group_box::set_text (
     std::u8string_view new_text
 ) {
-    static_cast<QGroupBox*>(grab_native_handle().widget_handle)->setTitle(
-        QString::fromUtf8(new_text.data())
+    gtk_frame_set_label(
+        GTK_FRAME(grab_native_handle().widget_handle),
+        reinterpret_cast<const char*>(new_text.data())
     );
 } // function -----------------------------------------------------------------
 
@@ -213,6 +227,5 @@ noexcept
     m_content_layout.set_left_margin(half_margin);
     m_content_layout.set_right_margin(half_margin);
 } // function -----------------------------------------------------------------
-
 
 } // namespace ----------------------------------------------------------------

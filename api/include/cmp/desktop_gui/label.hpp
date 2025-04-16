@@ -17,12 +17,24 @@ class CMP_CONDITIONAL_EXPORT_CLASS label
     : public widget
 {
 public:
+    // Constants --------------------------------------------------------------
+
+    static constexpr native_widget_kind g_kind{
+        native_widget_kind::label
+    };
+
     // Constructors and Destructor --------------------------------------------
 
     CMP_CONDITIONAL_EXPORT
     explicit
     label (
-        const window_native_handle& handle
+        layout& enclosing_layout
+    );
+
+    CMP_CONDITIONAL_EXPORT
+    label (
+        const widget_native_handle& parent_widget_handle,
+        layout& enclosing_layout
     );
 
     // Accessors --------------------------------------------------------------

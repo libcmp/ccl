@@ -12,7 +12,7 @@ template <
 >
 void
 noop (
-    Args... args
+    Args...
 )
 noexcept
 {

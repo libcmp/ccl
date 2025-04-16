@@ -18,11 +18,24 @@ class CMP_CONDITIONAL_EXPORT_CLASS push_button
     : public widget
 {
 public:
+    // Constants --------------------------------------------------------------
+
+    static constexpr native_widget_kind g_kind{
+        native_widget_kind::push_button
+    };
+
     // Constructors and Destructor --------------------------------------------
 
     CMP_CONDITIONAL_EXPORT
+    explicit
     push_button (
-        const window_native_handle& handle
+        layout& enclosing_layout
+    );
+
+    CMP_CONDITIONAL_EXPORT
+    push_button (
+        const widget_native_handle& parent_widget_handle,
+        layout& enclosing_layout
     );
 
     // Accessors --------------------------------------------------------------
@@ -72,6 +85,13 @@ private:
     // Private Data -----------------------------------------------------------
 
     std::function<void()> m_trigger_event_handler;
+
+    // Private Functions ------------------------------------------------------
+
+#if defined(CMP_OS_LINUX_BASED) || defined(CMP_OS_FREEBSD)
+    void
+    initialize();
+#endif
 }; // class -------------------------------------------------------------------
 
 using push_button_truptr = trusted_ptr<push_button>;

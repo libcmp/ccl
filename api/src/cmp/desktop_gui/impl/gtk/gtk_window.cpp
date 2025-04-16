@@ -410,9 +410,22 @@ const noexcept
         &current_width,
         &current_height
     );
-    //std::cout << current_width << 'x' << current_height << std::endl;
-    width.set_value(current_width - 20);
-    height.set_value(current_height - 20);
+    width.set_value(current_width);
+    height.set_value(current_height);
+} // function -----------------------------------------------------------------
+
+void
+window::set_size (
+    const pixval& width,
+    const pixval& height
+)
+noexcept
+{
+    gtk_window_set_default_size(
+        GTK_WINDOW(m_native_handle.gtk_application_window),
+        width.get_value(),
+        height.get_value()
+    );
 } // function -----------------------------------------------------------------
 
 // Core -----------------------------------------------------------------------
@@ -485,17 +498,23 @@ window::open (
         nullptr
     );
 
-    m_fixed = GTK_FIXED(gtk_fixed_new());
-    gtk_window_set_child(
-        GTK_WINDOW(m_native_handle.gtk_application_window),
-        GTK_WIDGET(m_fixed)
+    m_root_layout.m_parent = nullptr;
+    m_root_layout.grab_native_handle().gtk_layout = nullptr;
+    m_root_layout.grab_enclosing_window_handle() = grab_native_handle();
+    m_root_layout.initialize_gtk(
+        layout::kind::flow,
+        layout::axis::vertical,
+        layout::direction::forward,
+        0,
+        0,
+        0,
+        0
     );
 
-    m_root_layout.m_parent = nullptr;
-    m_root_layout.set_kind(layout::kind::flow);
-    m_root_layout.set_direction(layout::direction::forward);
-    m_root_layout.set_axis(layout::axis::vertical);
-    m_root_layout.grab_enclosing_window_handle() = grab_native_handle();
+    gtk_window_set_child(
+        GTK_WINDOW(m_native_handle.gtk_application_window),
+        GTK_WIDGET(m_root_layout.grab_native_handle().gtk_layout)
+    );
 
     m_start_time = std::chrono::steady_clock::now();
     m_last_time = m_start_time;

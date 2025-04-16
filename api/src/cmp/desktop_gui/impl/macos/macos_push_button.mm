@@ -10,12 +10,29 @@ namespace cmp {
 // Constructors and Destructor ------------------------------------------------
 
 push_button::push_button (
-    const window_native_handle& handle
+    layout& enclosing_layout
 )
     : widget{
+          enclosing_layout,
           impl::create_widget(
-              handle,
-              impl::native_widget_kind::push_button
+              enclosing_layout.grab_enclosing_window_handle()
+                  .cmp_window_handle,
+              native_widget_kind::push_button
+          )
+      }
+{
+    m_trigger_event_handler = impl::noop<>;
+} // function -----------------------------------------------------------------
+
+push_button::push_button (
+    const widget_native_handle& parent_widget_handle,
+    layout& enclosing_layout
+)
+    : widget{
+          enclosing_layout,
+          impl::create_widget(
+              parent_widget_handle.widget_handle,
+              native_widget_kind::push_button
           )
       }
 {
@@ -28,14 +45,20 @@ pixval
 push_button::get_preferred_width ()
 const noexcept
 {
-    return 100;
+    pixval width;
+    pixval height;
+    get_preferred_size(width, height);
+    return width;
 } // function -----------------------------------------------------------------
 
 pixval
 push_button::get_preferred_height ()
 const noexcept
 {
-    return 25;
+    pixval width;
+    pixval height;
+    get_preferred_size(width, height);
+    return height;
 } // function -----------------------------------------------------------------
 
 void
@@ -45,8 +68,11 @@ push_button::get_preferred_size (
 )
 const noexcept
 {
-    width = 100;
-    height = 25;
+    get_preferred_size_generically(
+        grab_native_handle(),
+        width,
+        height
+    );
 } // function -----------------------------------------------------------------
 
 std::u8string

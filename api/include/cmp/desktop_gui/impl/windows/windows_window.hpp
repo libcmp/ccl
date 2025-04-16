@@ -116,6 +116,14 @@ public:
     )
     const noexcept;
 
+    CMP_CONDITIONAL_EXPORT
+    void
+    set_size (
+        const pixval& new_width,
+        const pixval& new_height
+    )
+    noexcept;
+
     // Core -------------------------------------------------------------------
 
     CMP_CONDITIONAL_EXPORT
@@ -171,6 +179,14 @@ public:
     void
     handle_close_event (
         close_event& ev
+    );
+
+    CMP_CONDITIONAL_EXPORT
+    virtual
+    void
+    handle_dpi_update_event (
+        int old_dpi,
+        int new_dpi
     );
 
     // Friends ----------------------------------------------------------------

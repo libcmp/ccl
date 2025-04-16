@@ -10,12 +10,27 @@ namespace cmp {
 // Constructors and Destructor ------------------------------------------------
 
 label::label (
-    const window_native_handle& handle
+    layout& enclosing_layout
 )
     : widget{
+          enclosing_layout,
           impl::create_widget(
-              handle,
-              impl::native_widget_kind::label
+              enclosing_layout.grab_enclosing_window_handle().window_handle,
+              native_widget_kind::label
+          )
+      }
+{
+} // function -----------------------------------------------------------------
+
+label::label (
+    const widget_native_handle& parent_widget_handle,
+    layout& enclosing_layout
+)
+    : widget{
+          enclosing_layout,
+          impl::create_widget(
+              parent_widget_handle.widget_handle,
+              native_widget_kind::label
           )
       }
 {
@@ -118,6 +133,16 @@ label::set_text (
 ) {
     std::wstring title_wstring{to_wstring(new_text)};
     SetWindowTextW(grab_native_handle().widget_handle, title_wstring.data());
+    RedrawWindow(
+        grab_native_handle().widget_handle,
+        nullptr,
+        0,
+        RDW_INVALIDATE
+    );
+
+    if (is_dynamically_sized()) {
+        apply_preferred_size();
+    }
 } // function -----------------------------------------------------------------
 
 } // namespace ----------------------------------------------------------------

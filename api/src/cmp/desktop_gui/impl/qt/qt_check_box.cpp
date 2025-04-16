@@ -12,12 +12,29 @@ namespace cmp {
 // Constructors and Destructor ------------------------------------------------
 
 check_box::check_box (
-    const window_native_handle& handle
+    layout& enclosing_layout
 )
     : widget{
+          enclosing_layout,
           impl::create_widget(
-              handle,
-              impl::native_widget_kind::check_box
+              enclosing_layout.grab_enclosing_window_handle()
+                  .cmp_main_window_handle,
+              native_widget_kind::check_box
+          )
+      }
+{
+    m_toggle_event_handler = impl::noop<>;
+} // function -----------------------------------------------------------------
+
+check_box::check_box (
+    const widget_native_handle& parent_widget_handle,
+    layout& enclosing_layout
+)
+    : widget{
+          enclosing_layout,
+          impl::create_widget(
+              parent_widget_handle.widget_handle,
+              native_widget_kind::check_box
           )
       }
 {

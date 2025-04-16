@@ -12,23 +12,35 @@ namespace cmp {
 // Constructors and Destructor ------------------------------------------------
 
 push_button::push_button (
-    const window_native_handle& handle
+    layout& enclosing_layout
 )
     : widget{
+          enclosing_layout,
           impl::create_widget(
-              handle,
-              impl::native_widget_kind::push_button
+              enclosing_layout.grab_enclosing_window_handle()
+                  .cmp_main_window_handle,
+              native_widget_kind::push_button
           )
       }
 {
     m_trigger_event_handler = impl::noop<>;
-    QObject::connect(
-        static_cast<QPushButton*>(grab_native_handle().widget_handle),
-        &QPushButton::clicked,
-        [this] () {
-            m_trigger_event_handler();
-        }
-    );
+    initialize();
+} // function -----------------------------------------------------------------
+
+push_button::push_button (
+    const widget_native_handle& parent_widget_handle,
+    layout& enclosing_layout
+)
+    : widget{
+        enclosing_layout,
+        impl::create_widget(
+            parent_widget_handle.widget_handle,
+            native_widget_kind::push_button
+        )
+    }
+{
+    m_trigger_event_handler = impl::noop<>;
+    initialize();
 } // function -----------------------------------------------------------------
 
 // Accessors ------------------------------------------------------------------
@@ -97,6 +109,18 @@ void
 push_button::trigger ()
 {
     m_trigger_event_handler();
+} // function -----------------------------------------------------------------
+
+void
+push_button::initialize ()
+{
+    QObject::connect(
+        static_cast<QPushButton*>(grab_native_handle().widget_handle),
+        &QPushButton::clicked,
+        [this] () {
+            m_trigger_event_handler();
+        }
+    );
 } // function -----------------------------------------------------------------
 
 } // namespace ----------------------------------------------------------------

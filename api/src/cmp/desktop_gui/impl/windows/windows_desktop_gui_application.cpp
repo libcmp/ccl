@@ -15,7 +15,10 @@ desktop_gui_application::desktop_gui_application (
 )
     : application{argc, argv}
 {
-    SetProcessDpiAwarenessContext(DPI_AWARENESS_CONTEXT_PER_MONITOR_AWARE_V2);
+    INITCOMMONCONTROLSEX init_common_controls_ex;
+    init_common_controls_ex.dwSize = sizeof (INITCOMMONCONTROLSEX);
+    init_common_controls_ex.dwICC = ICC_STANDARD_CLASSES;
+    InitCommonControlsEx(&init_common_controls_ex);
 
     m_native_handle.application_instance_handle = GetModuleHandleW(nullptr);
     m_native_handle.command_line = GetCommandLineW();

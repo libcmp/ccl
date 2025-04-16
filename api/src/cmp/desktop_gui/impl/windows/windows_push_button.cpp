@@ -10,14 +10,30 @@ namespace cmp {
 // Constructors and Destructor ------------------------------------------------
 
 push_button::push_button (
-    const window_native_handle& handle
+    layout& enclosing_layout
 )
     : widget{
+          enclosing_layout,
           impl::create_widget(
-              handle,
-              impl::native_widget_kind::push_button
+              enclosing_layout.grab_enclosing_window_handle().window_handle,
+              native_widget_kind::push_button
           )
       }
+{
+    m_trigger_event_handler = impl::noop<>;
+} // function -----------------------------------------------------------------
+
+push_button::push_button (
+    const widget_native_handle& parent_widget_handle,
+    layout& enclosing_layout
+)
+    : widget{
+        enclosing_layout,
+        impl::create_widget(
+            parent_widget_handle.widget_handle,
+            native_widget_kind::push_button
+        )
+    }
 {
     m_trigger_event_handler = impl::noop<>;
 } // function -----------------------------------------------------------------
@@ -31,9 +47,9 @@ const noexcept
     SIZE ideal_size{0L, 0L};
     Button_GetIdealSize(grab_native_handle().widget_handle, &ideal_size);
     return to_pixval(
-        dotval{static_cast<int>(ideal_size.cx + 16)},
+        dotval{static_cast<int>(ideal_size.cx)},
         get_parent_dpi()
-    );
+    ) + 16;
 } // function -----------------------------------------------------------------
 
 pixval
@@ -43,9 +59,9 @@ const noexcept
     SIZE ideal_size{0L, 0L};
     Button_GetIdealSize(grab_native_handle().widget_handle, &ideal_size);
     return to_pixval(
-        dotval{static_cast<int>(ideal_size.cy + 8)},
+        dotval{static_cast<int>(ideal_size.cy)},
         get_parent_dpi()
-    );
+    ) + 8;
 } // function -----------------------------------------------------------------
 
 void
@@ -58,8 +74,8 @@ const noexcept
     SIZE ideal_size{0L, 0L};
     Button_GetIdealSize(grab_native_handle().widget_handle, &ideal_size);
     auto dpi{get_parent_dpi()};
-    width = to_pixval(dotval{static_cast<int>(ideal_size.cx + 16)}, dpi);
-    height = to_pixval(dotval{static_cast<int>(ideal_size.cy + 8)}, dpi);
+    width = to_pixval(dotval{static_cast<int>(ideal_size.cx)}, dpi) + 16;
+    height = to_pixval(dotval{static_cast<int>(ideal_size.cy)}, dpi) + 8;
 } // function -----------------------------------------------------------------
 
 std::u8string
@@ -84,6 +100,10 @@ push_button::set_text (
 ) {
     std::wstring title_wstring{to_wstring(new_text)};
     SetWindowTextW(grab_native_handle().widget_handle, title_wstring.data());
+
+    if (is_dynamically_sized()) {
+        apply_preferred_size();
+    }
 } // function -----------------------------------------------------------------
 
 void

@@ -24,7 +24,7 @@ applicationShouldTerminateAfterLastWindowClosed:
 @implementation cmp_application_delegate
 - (void)
 applicationWillFinishLaunching:
-(NSNotification*) notification
+    (NSNotification*) notification
 {
     [[notification object] setActivationPolicy:
         NSApplicationActivationPolicyRegular
@@ -33,14 +33,14 @@ applicationWillFinishLaunching:
 
 - (void)
 applicationDidFinishLaunching:
-(NSNotification*) notification
+    (NSNotification*) notification
 {
     [[notification object] activateIgnoringOtherApps: YES];
 } // function -----------------------------------------------------------------
 
 - (BOOL)
 applicationShouldTerminateAfterLastWindowClosed:
-(NSApplication*) sender
+    (NSApplication*) sender
 {
     return NO;
 } // function -----------------------------------------------------------------

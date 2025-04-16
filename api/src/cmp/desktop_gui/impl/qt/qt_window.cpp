@@ -227,7 +227,7 @@ forward_close_event_to_window (
             }
         }
     }
-} // function -----------------------------------------------------------------
+} // function -----------------------------------------------------------------Z
 
 } // namespace ----------------------------------------------------------------
 
@@ -337,6 +337,19 @@ const noexcept
     height = m_native_handle.cmp_main_window_handle->height();
 } // function -----------------------------------------------------------------
 
+void
+window::set_size (
+    const pixval& new_width,
+    const pixval& new_height
+)
+noexcept
+{
+    m_native_handle.cmp_main_window_handle->resize(
+        new_width.get_value(),
+        new_height.get_value()
+    );
+} // function -----------------------------------------------------------------
+
 // Core -----------------------------------------------------------------------
 
 bool
@@ -367,10 +380,14 @@ window::open (
     m_native_handle.cmp_main_window_handle->setAttribute(Qt::WA_DeleteOnClose);
 
     m_root_layout.m_parent = nullptr;
-    m_root_layout.set_kind(layout::kind::flow);
-    m_root_layout.set_direction(layout::direction::forward);
-    m_root_layout.set_axis(layout::axis::vertical);
     m_root_layout.grab_enclosing_window_handle() = grab_native_handle();
+    m_root_layout.set_kind(layout::kind::flow);
+    m_root_layout.set_axis(layout::axis::vertical);
+    m_root_layout.set_direction(layout::direction::forward);
+    m_root_layout.set_left_margin(0);
+    m_root_layout.set_top_margin(0);
+    m_root_layout.set_right_margin(0);
+    m_root_layout.set_bottom_margin(0);
 
     m_start_time = std::chrono::steady_clock::now();
     m_last_time = m_start_time;

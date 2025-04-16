@@ -1,12 +1,21 @@
-// Copyright (C) 2024 Daniel T. McGinnis
+// Copyright (C) 2025 Daniel T. McGinnis
 // SPDX-License-Identifier: BSL-1.0
-
-#include <QRadioButton>
-#include <QButtonGroup>
 
 #include <cmp/desktop_gui/radio_button.hpp>
 
 namespace cmp {
+
+namespace impl {
+
+void
+handle_radio_button_toggle_signal (
+    GtkCheckButton* radio_button,
+    gpointer user_data
+) {
+    static_cast<class radio_button*>(user_data)->toggle();
+} // function -----------------------------------------------------------------
+
+} // namespace ----------------------------------------------------------------
 
 // --------------------------------------------------------- cmp::radio_button
 
@@ -19,15 +28,13 @@ radio_button::radio_button (
     : widget{
           enclosing_layout,
           impl::create_widget(
-              enclosing_layout.grab_enclosing_window_handle()
-                  .cmp_main_window_handle,
+              enclosing_layout.grab_native_handle()
+                .gtk_layout,
               native_widget_kind::radio_button
           )
       }
     , m_group{group}
 {
-    m_toggle_event_handler = impl::noop<>;
-    group.add_element(assure(this));
     initialize();
 } // function -----------------------------------------------------------------
 
@@ -45,8 +52,6 @@ radio_button::radio_button (
       }
     , m_group{group}
 {
-    m_toggle_event_handler = impl::noop<>;
-    group.add_element(assure(this));
     initialize();
 } // function -----------------------------------------------------------------
 
@@ -56,16 +61,20 @@ pixval
 radio_button::get_preferred_width ()
 const noexcept
 {
-    return static_cast<QRadioButton*>(grab_native_handle().widget_handle)
-        ->sizeHint().width();
+    pixval width;
+    pixval height;
+    get_preferred_size(width, height);
+    return width;
 } // function -----------------------------------------------------------------
 
 pixval
 radio_button::get_preferred_height ()
 const noexcept
 {
-    return static_cast<QRadioButton*>(grab_native_handle().widget_handle)
-        ->sizeHint().height();
+    pixval width;
+    pixval height;
+    get_preferred_size(width, height);
+    return height;
 } // function -----------------------------------------------------------------
 
 void
@@ -75,51 +84,56 @@ radio_button::get_preferred_size (
 )
 const noexcept
 {
-    QSize size_hint{
-        static_cast<QRadioButton*>(
-            grab_native_handle().widget_handle
-        )->sizeHint()
-    };
-    width = size_hint.width();
-    height = size_hint.height();
+    get_preferred_size_generically(grab_native_handle(), width, height);
 } // function -----------------------------------------------------------------
 
 std::u8string
 radio_button::get_text ()
 const
 {
-    return to_u8string(
-        static_cast<QRadioButton*>(grab_native_handle().widget_handle)
-            ->text().toStdU16String()
-    );
+    std::u8string result;
+    for (
+        const char* current_character{
+            gtk_check_button_get_label(
+                GTK_CHECK_BUTTON(grab_native_handle().widget_handle)
+            )
+        };
+        *current_character != '\0';
+        ++current_character
+    ) {
+        result.push_back(*current_character);
+    }
+    return result;
 } // function -----------------------------------------------------------------
 
 void
 radio_button::set_text (
     std::u8string_view new_text
 ) {
-    static_cast<QRadioButton*>(grab_native_handle().widget_handle)->setText(
-        QString::fromUtf8(new_text.data())
+    gtk_check_button_set_label(
+        GTK_CHECK_BUTTON(grab_native_handle().widget_handle),
+        reinterpret_cast<const char*>(new_text.data())
     );
 } // function -----------------------------------------------------------------
 
 bool
 radio_button::is_checked ()
 {
-    return static_cast<QRadioButton*>(grab_native_handle().widget_handle)
-        ->isChecked();
+    return gtk_check_button_get_active(
+        GTK_CHECK_BUTTON(grab_native_handle().widget_handle)
+    );
 } // function -----------------------------------------------------------------
 
 void
 radio_button::set_checked (
     bool new_checked
 ) {
-    auto qradio_button{static_cast<QRadioButton*>(grab_native_handle().widget_handle)};
+    gtk_check_button_set_active(
+        GTK_CHECK_BUTTON(grab_native_handle().widget_handle),
+        new_checked
+    );
     if (new_checked) {
-        qradio_button->setChecked(true);
         m_group.uncheck_complement(assure(this));
-    } else {
-        qradio_button->setChecked(false);
     }
 } // function -----------------------------------------------------------------
 
@@ -152,46 +166,26 @@ radio_button::toggle ()
     m_toggle_event_handler();
 } // function -----------------------------------------------------------------
 
-QButtonGroup radio_button::g_button_group;
-
-// Private Functions ----------------------------------------------------------
-
 void
 radio_button::initialize ()
 {
-    QWidget* native_widget_handle{grab_native_handle().widget_handle};
-    auto qradio_button{static_cast<QRadioButton*>(native_widget_handle)};
-    g_button_group.setExclusive(false);
-    g_button_group.addButton(qradio_button);
-
-    QObject::connect(
-        static_cast<QRadioButton*>(native_widget_handle),
-        &QRadioButton::clicked,
-        [native_widget_handle] (bool new_checked) {
-            auto& window_associations{
-                dgui_app()->grab_native_handle().window_associations
-            };
-            widget* widget_ptr{nullptr};
-            for (const auto& current_association : window_associations) {
-                widget_ptr = impl::find_widget(
-                    native_widget_handle,
-                    current_association.second->grab_root_layout()
-                        .grab_children()
-                );
-                if (widget_ptr) {
-                    break;
-                }
-            }
-            auto radio_button_ptr{dynamic_cast<radio_button*>(widget_ptr)};
-            if (radio_button_ptr) {
-                radio_button_ptr->set_checked(new_checked);
-                radio_button_ptr->grab_group().uncheck_complement(
-                    assure(radio_button_ptr)
-                );
-                radio_button_ptr->toggle();
-            }
-        }
+    m_toggle_event_handler = impl::noop<>;
+    if (!m_group.grab_elements().empty()) {
+        gtk_check_button_set_group(
+            GTK_CHECK_BUTTON(grab_native_handle().widget_handle),
+            GTK_CHECK_BUTTON(
+                m_group.grab_elements().front()
+                    ->grab_native_handle().widget_handle
+            )
+        );
+    }
+    g_signal_connect(
+        grab_native_handle().widget_handle,
+        "toggled",
+        G_CALLBACK(impl::handle_radio_button_toggle_signal),
+        this
     );
+    m_group.add_element(assure(this));
 } // function -----------------------------------------------------------------
 
 } // namespace ----------------------------------------------------------------

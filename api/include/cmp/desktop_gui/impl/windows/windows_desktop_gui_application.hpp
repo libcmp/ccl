@@ -25,6 +25,16 @@ window_procedure (
     LPARAM l_param
 );
 
+LRESULT CALLBACK
+control_procedure (
+    HWND control_handle,
+    UINT message,
+    WPARAM w_param,
+    LPARAM l_param,
+    UINT_PTR id_subclass,
+    DWORD_PTR dw_ref_data
+);
+
 } // namespace ----------------------------------------------------------------
 
 class CMP_CONDITIONAL_EXPORT_CLASS desktop_gui_application

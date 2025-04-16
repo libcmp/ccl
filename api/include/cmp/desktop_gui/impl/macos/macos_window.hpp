@@ -101,6 +101,13 @@ public:
     )
     const noexcept;
 
+    void
+    set_size (
+        const pixval& new_width,
+        const pixval& new_height
+    )
+    noexcept;
+
     // Core -------------------------------------------------------------------
 
     bool
@@ -147,6 +154,13 @@ public:
     void
     handle_close_event (
         close_event& ev
+    );
+
+    virtual
+    void
+    handle_dpi_update_event (
+        int old_dpi,
+        int new_dpi
     );
 
     // Friends ----------------------------------------------------------------

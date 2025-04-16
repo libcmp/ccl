@@ -30,16 +30,28 @@
 #       include <cmp/desktop_gui/impl/macos/macos_widget.mm>
 #       include <cmp/desktop_gui/impl/macos/macos_window.mm>
 #   elif defined(CMP_OS_LINUX_BASED) || defined(CMP_OS_FREEBSD)
-#       include <cmp/desktop_gui/impl/qt/qt_check_box.cpp>
-#       include <cmp/desktop_gui/impl/qt/qt_desktop_gui_application.cpp>
-#       include <cmp/desktop_gui/impl/qt/qt_dialog.cpp>
-#       include <cmp/desktop_gui/impl/qt/qt_group_box.cpp>
-#       include <cmp/desktop_gui/impl/qt/qt_label.cpp>
-#       include <cmp/desktop_gui/impl/qt/qt_push_button.cpp>
-#       include <cmp/desktop_gui/impl/qt/qt_radio_button.cpp>
-#       include <cmp/desktop_gui/impl/qt/qt_widget.cpp>
-#       include <cmp/desktop_gui/impl/qt/qt_window.cpp>
-#       include <cmp/desktop_gui/impl/qt/qt_window_native_handle.cpp>
+#       if CMP_CONFIG_USE_QT == true
+#           include <cmp/desktop_gui/impl/qt/qt_check_box.cpp>
+#           include <cmp/desktop_gui/impl/qt/qt_desktop_gui_application.cpp>
+#           include <cmp/desktop_gui/impl/qt/qt_dialog.cpp>
+#           include <cmp/desktop_gui/impl/qt/qt_group_box.cpp>
+#           include <cmp/desktop_gui/impl/qt/qt_label.cpp>
+#           include <cmp/desktop_gui/impl/qt/qt_push_button.cpp>
+#           include <cmp/desktop_gui/impl/qt/qt_radio_button.cpp>
+#           include <cmp/desktop_gui/impl/qt/qt_widget.cpp>
+#           include <cmp/desktop_gui/impl/qt/qt_window.cpp>
+#           include <cmp/desktop_gui/impl/qt/qt_window_native_handle.cpp>
+#       else
+#           include <cmp/desktop_gui/impl/gtk/gtk_check_box.cpp>
+#           include <cmp/desktop_gui/impl/gtk/gtk_desktop_gui_application.cpp>
+#           include <cmp/desktop_gui/impl/gtk/gtk_dialog.cpp>
+#           include <cmp/desktop_gui/impl/gtk/gtk_group_box.cpp>
+#           include <cmp/desktop_gui/impl/gtk/gtk_label.cpp>
+#           include <cmp/desktop_gui/impl/gtk/gtk_push_button.cpp>
+#           include <cmp/desktop_gui/impl/gtk/gtk_radio_button.cpp>
+#           include <cmp/desktop_gui/impl/gtk/gtk_widget.cpp>
+#           include <cmp/desktop_gui/impl/gtk/gtk_window.cpp>
+#       endif
 #   endif
 #   include <cmp/desktop_gui/close_event.cpp>
 #   include <cmp/desktop_gui/dotval.cpp>
@@ -47,4 +59,5 @@
 #   include <cmp/desktop_gui/general.cpp>
 #   include <cmp/desktop_gui/key_event.cpp>
 #   include <cmp/desktop_gui/pixval.cpp>
+#   include <cmp/desktop_gui/window_element.cpp>
 #endif

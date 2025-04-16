@@ -2,6 +2,7 @@
 // SPDX-License-Identifier: BSL-1.0
 
 #include <cmp/desktop_gui/impl/windows/windows_window.hpp>
+#include <cmp/desktop_gui/group_box.hpp>
 
 namespace cmp {
 
@@ -270,14 +271,17 @@ forward_update_to_window (
 void
 forward_dpi_update_to_window (
     HWND window_handle,
-    int dpi
+    int new_dpi
 ) {
     auto& window_associations{
         dgui_app()->grab_native_handle().window_associations
     };
-    for (const auto& current_association : window_associations) {
+    for (auto& current_association : window_associations) {
         if (current_association.first == window_handle) {
-            current_association.second->grab_native_handle().dpi = dpi;
+            window* current_window{current_association.second};
+            int old_dpi{current_window->grab_native_handle().dpi};
+            current_window->grab_native_handle().dpi = new_dpi;
+            current_window->handle_dpi_update_event(old_dpi, new_dpi);
             break;
         }
     }
@@ -297,18 +301,33 @@ find_widget (
     HWND widget_handle,
     const std::vector<std::unique_ptr<window_element>>& window_elements
 ) {
+    widget* target{nullptr};
     for (const auto& current_window_element : window_elements) {
         auto layout_ptr{dynamic_cast<layout*>(current_window_element.get())};
         if (layout_ptr) {
-            return find_widget(widget_handle, layout_ptr->grab_children());
+            target = find_widget(widget_handle, layout_ptr->grab_children());
+            if (target) {
+                return target;
+            }
         } else {
-            auto widget_ptr{
-                static_cast<widget*>(current_window_element.get())
-            };
+            target = static_cast<widget*>(current_window_element.get());
             if (
-                widget_ptr->grab_native_handle().widget_handle == widget_handle
+                target->grab_native_handle().widget_handle == widget_handle
             ) {
-                return widget_ptr;
+                return target;
+            } else {
+                auto group_box_ptr{
+                    dynamic_cast<group_box*>(current_window_element.get())
+                };
+                if (group_box_ptr) {
+                    target = find_widget(
+                        widget_handle,
+                        group_box_ptr->grab_content_layout().grab_children()
+                    );
+                    if (target) {
+                        return target;
+                    }
+                }
             }
         }
     }
@@ -344,6 +363,9 @@ forward_command_event_to_widget (
     }
     auto radio_button_ptr{dynamic_cast<radio_button*>(widget_ptr)};
     if (radio_button_ptr) {
+        radio_button_ptr->grab_group().uncheck_complement(
+            assure(radio_button_ptr)
+        );
         radio_button_ptr->toggle();
         return;
     }
@@ -372,7 +394,6 @@ window_procedure (
         case WM_DPICHANGED:
             forward_dpi_update_to_window(window_handle, HIWORD(w_param));
             return 0;
-        case WM_CTLCOLORBTN:
         case WM_CTLCOLORSTATIC:
             WNDCLASSW window_class;
             GetClassInfoW(
@@ -386,6 +407,35 @@ window_procedure (
             return 0;
         default:
             return DefWindowProcW(window_handle, message, w_param, l_param);
+    }
+} // function -----------------------------------------------------------------
+
+LRESULT CALLBACK
+control_procedure (
+    HWND control_handle,
+    UINT message,
+    WPARAM w_param,
+    LPARAM l_param,
+    UINT_PTR id_subclass,
+    DWORD_PTR dw_ref_data
+) {
+    switch (message) {
+        case WM_CLOSE:
+        case WM_KEYDOWN:
+        case WM_KEYUP:
+        case WM_SIZE:
+        case WM_DPICHANGED:
+        case WM_CTLCOLORSTATIC:
+        case WM_COMMAND:
+            return CallWindowProc(
+                impl::window_procedure,
+                control_handle,
+                message,
+                w_param,
+                l_param
+            );
+        default:
+            return DefSubclassProc(control_handle, message, w_param, l_param);
     }
 } // function -----------------------------------------------------------------
 
@@ -499,16 +549,38 @@ window::get_size (
 )
 const noexcept
 {
+    auto dpi{GetDpiForWindow(m_native_handle.window_handle)};
     RECT rect;
     GetClientRect(m_native_handle.window_handle, &rect);
     width = to_pixval(
         dotval{static_cast<int>(rect.right)},
-        m_native_handle.dpi
-    ).get_value();
+        dpi
+    );
     height = to_pixval(
         dotval{static_cast<int>(rect.bottom)},
-        m_native_handle.dpi
-    ).get_value();
+        dpi
+    );
+} // function -----------------------------------------------------------------
+
+void
+window::set_size (
+    const pixval& new_width,
+    const pixval& new_height
+)
+noexcept
+{
+    auto dpi{GetDpiForWindow(m_native_handle.window_handle)};
+    RECT rect;
+    GetWindowRect(m_native_handle.window_handle, &rect);
+    SetWindowPos(
+        m_native_handle.window_handle,
+        HWND_TOP,
+        0,
+        0,
+        to_dotval(new_width, dpi).get_value(),
+        to_dotval(new_height, dpi).get_value(),
+        SWP_NOMOVE
+    );
 } // function -----------------------------------------------------------------
 
 // Core -----------------------------------------------------------------------
@@ -567,10 +639,14 @@ window::open (
     m_native_handle.dpi = GetDpiForWindow(m_native_handle.window_handle);
 
     m_root_layout.m_parent = nullptr;
-    m_root_layout.set_kind(layout::kind::flow);
-    m_root_layout.set_direction(layout::direction::forward);
-    m_root_layout.set_axis(layout::axis::vertical);
     m_root_layout.grab_enclosing_window_handle() = grab_native_handle();
+    m_root_layout.set_kind(layout::kind::flow);
+    m_root_layout.set_axis(layout::axis::vertical);
+    m_root_layout.set_direction(layout::direction::forward);
+    m_root_layout.set_left_margin(0);
+    m_root_layout.set_top_margin(0);
+    m_root_layout.set_right_margin(0);
+    m_root_layout.set_bottom_margin(0);
 
     m_start_time = std::chrono::steady_clock::now();
     m_last_time = m_start_time;
@@ -638,6 +714,14 @@ void
 window::handle_close_event (
     close_event& ev
 ) {
+} // function -----------------------------------------------------------------
+
+void
+window::handle_dpi_update_event (
+    int old_dpi,
+    int new_dpi
+) {
+    m_root_layout.handle_dpi_update_event(old_dpi, new_dpi);
 } // function -----------------------------------------------------------------
 
 // Private Functions ----------------------------------------------------------

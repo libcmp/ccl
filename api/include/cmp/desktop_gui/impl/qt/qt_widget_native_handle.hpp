@@ -6,6 +6,8 @@
 
 #include <QWidget>
 
+#include <cmp/desktop_gui/inclusion_assert.hpp>
+
 namespace cmp {
 
 class CMP_CONDITIONAL_EXPORT_CLASS widget_native_handle {

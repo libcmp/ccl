@@ -11,7 +11,7 @@ class demo_window
 {
 public:
     demo_window ()
-        : cmp::window{
+        : window{
               400,
               300,
               u8"Demo Window",

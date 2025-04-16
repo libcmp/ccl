@@ -4,29 +4,29 @@
 #include <AppKit/NSWindow.h>
 
 #include <cmp/desktop_gui/impl/macos/macos_window.hpp>
-#include <iostream>
+
 @interface cmp_window : NSWindow
 - (void)
 keyDown:
-(NSEvent*) event;
+    (NSEvent*) event;
 
 - (void)
 keyUp:
-(NSEvent*) event;
+    (NSEvent*) event;
 
 - (void)
 handleAction:
-(NSView*) sender;
+    (NSView*) sender;
 @end // interface -------------------------------------------------------------
 
 @interface cmp_window_delegate : NSObject<NSWindowDelegate>
 - (void)
 windowDidResize:
-(NSNotification*) notification;
+    (NSNotification*) notification;
 
 - (BOOL)
 windowShouldClose:
-(NSWindow*) sender;
+    (NSWindow*) sender;
 @end // interface -------------------------------------------------------------
 
 @interface cmp_view : NSView
@@ -277,18 +277,33 @@ find_widget (
     NSView* widget_handle,
     const std::vector<std::unique_ptr<window_element>>& window_elements
 ) {
+    widget* target{nullptr};
     for (const auto& current_window_element : window_elements) {
         auto layout_ptr{dynamic_cast<layout*>(current_window_element.get())};
         if (layout_ptr) {
-            return find_widget(widget_handle, layout_ptr->grab_children());
+            target = find_widget(widget_handle, layout_ptr->grab_children());
+            if (target) {
+                return target;
+            }
         } else {
-            auto widget_ptr{
-                static_cast<widget*>(current_window_element.get())
-            };
+            target = static_cast<widget*>(current_window_element.get());
             if (
-                widget_ptr->grab_native_handle().widget_handle == widget_handle
+                target->grab_native_handle().widget_handle == widget_handle
             ) {
-                return widget_ptr;
+                return target;
+            } else {
+                auto group_box_ptr{
+                    dynamic_cast<group_box*>(current_window_element.get())
+                };
+                if (group_box_ptr) {
+                    target = find_widget(
+                        widget_handle,
+                        group_box_ptr->grab_content_layout().grab_children()
+                    );
+                    if (target) {
+                        return target;
+                    }
+                }
             }
         }
     }
@@ -324,6 +339,7 @@ forward_action_to_widget (
     }
     auto radio_button_ptr{dynamic_cast<radio_button*>(widget_ptr)};
     if (radio_button_ptr) {
+        radio_button_ptr->grab_group().uncheck_complement(assure(radio_button_ptr));
         radio_button_ptr->toggle();
         return;
     }
@@ -453,6 +469,18 @@ const noexcept
     height = size.height;
 } // function -----------------------------------------------------------------
 
+void
+window::set_size (
+    const pixval& new_width,
+    const pixval& new_height
+)
+noexcept
+{
+    [impl::as_cmp_window(m_native_handle.cmp_window_handle) setContentSize:
+        NSSize(new_width.get_value(), new_height.get_value())
+    ];
+} // function -----------------------------------------------------------------
+
 // Core -----------------------------------------------------------------------
 
 bool
@@ -507,10 +535,14 @@ window::open (
     }
 
     m_root_layout.m_parent = nullptr;
-    m_root_layout.set_kind(layout::kind::flow);
-    m_root_layout.set_direction(layout::direction::forward);
-    m_root_layout.set_axis(layout::axis::vertical);
     m_root_layout.grab_enclosing_window_handle() = grab_native_handle();
+    m_root_layout.set_kind(layout::kind::flow);
+    m_root_layout.set_axis(layout::axis::vertical);
+    m_root_layout.set_direction(layout::direction::forward);
+    m_root_layout.set_left_margin(0);
+    m_root_layout.set_top_margin(0);
+    m_root_layout.set_right_margin(0);
+    m_root_layout.set_bottom_margin(0);
 
     m_has_been_shown = false;
 
@@ -591,6 +623,14 @@ window::handle_close_event (
 ) {
 } // function -----------------------------------------------------------------
 
+void
+window::handle_dpi_update_event (
+    int old_dpi,
+    int new_dpi
+) {
+    m_root_layout.handle_dpi_update_event(old_dpi, new_dpi);
+} // function -----------------------------------------------------------------
+
 // Private Functions ----------------------------------------------------------
 
 void
@@ -633,21 +673,21 @@ noexcept
 @implementation cmp_window
 - (void)
 keyDown:
-(NSEvent*) event
+    (NSEvent*) event
 {
     cmp::impl::forward_key_down_event_to_window(self, event);
 } // function -----------------------------------------------------------------
 
 - (void)
 keyUp:
-(NSEvent*) event
+    (NSEvent*) event
 {
     cmp::impl::forward_key_up_event_to_window(self, event);
 } // function -----------------------------------------------------------------
 
 - (void)
 handleAction:
-(NSView*) sender
+    (NSView*) sender
 {
     cmp::impl::forward_action_to_widget(sender);
 } // function -----------------------------------------------------------------
@@ -658,14 +698,14 @@ handleAction:
 @implementation cmp_window_delegate
 - (void)
 windowDidResize:
-(NSNotification*) notification
+    (NSNotification*) notification
 {
     cmp::impl::forward_resize_event_to_window([notification object]);
 } // function -----------------------------------------------------------------
 
 - (BOOL)
 windowShouldClose:
-(NSWindow*) sender
+    (NSWindow*) sender
 {
     return cmp::impl::forward_close_event_to_window(
         cmp::impl::as_cmp_window(sender)

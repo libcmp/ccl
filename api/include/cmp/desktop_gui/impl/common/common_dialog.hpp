@@ -4,16 +4,22 @@
 #ifndef CMP_DESKTOP_GUI_COMMON_DIALOG_HPP_INCLUDED
 #define CMP_DESKTOP_GUI_COMMON_DIALOG_HPP_INCLUDED
 
-#if defined(CMP_OS_LINUX_BASED) || defined(CMP_OS_FREEBSD)
-#   include <QMessageBox>
-#   include <functional>
-#endif
-
+#include <functional>
 #include <string_view>
 
 #include <cmp/core/platform.hpp>
 #include <cmp/desktop_gui/window.hpp>
 #include <cmp/unicode/algorithms.hpp>
+
+#if defined(CMP_OS_LINUX_BASED) || defined(CMP_OS_FREEBSD)
+
+#if CMP_CONFIG_USE_QT == true
+#   include <QMessageBox>
+#else
+#   include <gtk/gtk.h>
+#endif
+
+#endif
 
 namespace cmp {
 
@@ -99,6 +105,7 @@ private:
     // Private Types ----------------------------------------------------------
 
 #if defined(CMP_OS_LINUX_BASED) || defined(CMP_OS_FREEBSD)
+#   if CMP_CONFIG_USE_QT == true
     using message_box_function_t =
         QMessageBox::StandardButton
         (*) (
@@ -108,6 +115,7 @@ private:
             QMessageBox::StandardButtons,
             QMessageBox::StandardButton
         );
+#   endif
 #endif
 
     // Private Data -----------------------------------------------------------
@@ -146,6 +154,7 @@ private:
     )
     noexcept;
 #elif defined(CMP_OS_LINUX_BASED) || defined(CMP_OS_FREEBSD)
+#   if CMP_CONFIG_USE_QT == true
     static
     QMessageBox::StandardButtons
     get_native_buttons (
@@ -164,6 +173,27 @@ private:
         button_set buttons
     )
     noexcept;
+#   else
+    static
+    button
+    message_box (
+        window* parent,
+        std::u8string_view title,
+        std::u8string_view message,
+        button_set buttons,
+        GtkDialogFlags flags
+    )
+    noexcept;
+
+    static
+    void
+    on_choose (
+        GObject* source_object,
+        GAsyncResult* result,
+        gpointer user_data
+    )
+    noexcept;
+#   endif
 #endif
 }; // class -------------------------------------------------------------------
 

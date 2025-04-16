@@ -6,6 +6,9 @@ project(ccl CXX)
 
 enable_testing()
 
+set(CMP_BUILD_STATIC true)
+set(CMP_CONFIG_USE_QT true)
+
 add_subdirectory(api)
 add_subdirectory(tests)
 

@@ -49,12 +49,14 @@ noexcept
             [alert setAlertStyle: NSAlertStyleCritical];
             break;
     }
+    dialog::button result;
     switch (buttons) {
         case dialog::button_set::ok:
             [alert addButtonWithTitle: @"OK"];
             switch ([alert runModal]) {
                 case NSAlertFirstButtonReturn:
-                    return dialog::button::ok;
+                    result = dialog::button::ok;
+                    break;
             }
             break;
         case dialog::button_set::ok_cancel:
@@ -62,9 +64,11 @@ noexcept
             [alert addButtonWithTitle: @"Cancel"];
             switch ([alert runModal]) {
                 case NSAlertFirstButtonReturn:
-                    return dialog::button::ok;
+                    result = dialog::button::ok;
+                    break;
                 case NSAlertSecondButtonReturn:
-                    return dialog::button::cancel;
+                    result = dialog::button::cancel;
+                    break;
             }
             break;
         case dialog::button_set::yes_no:
@@ -72,9 +76,11 @@ noexcept
             [alert addButtonWithTitle: @"No"];
             switch ([alert runModal]) {
                 case NSAlertFirstButtonReturn:
-                    return dialog::button::yes;
+                    result = dialog::button::yes;
+                    break;
                 case NSAlertSecondButtonReturn:
-                    return dialog::button::no;
+                    result = dialog::button::no;
+                    break;
             }
             break;
         case dialog::button_set::yes_no_cancel:
@@ -83,19 +89,31 @@ noexcept
             [alert addButtonWithTitle: @"Cancel"];
             switch ([alert runModal]) {
                 case NSAlertFirstButtonReturn:
-                    return dialog::button::yes;
+                    result = dialog::button::yes;
+                    break;
                 case NSAlertSecondButtonReturn:
-                    return dialog::button::no;
+                    result = dialog::button::no;
+                    break;
                 case NSAlertThirdButtonReturn:
-                    return dialog::button::cancel;
+                    result = dialog::button::cancel;
+                    break;
             }
             break;
     }
+    auto parent_nswindow{
+        reinterpret_cast<NSWindow*>(
+            parent->grab_native_handle().cmp_window_handle
+        )
+    };
+    [parent_nswindow makeKeyAndOrderFront:parent_nswindow];
+    return result;
 } // function -----------------------------------------------------------------
 
 } // namespace ----------------------------------------------------------------
 
 // --------------------------------------------------------------- cmp::dialog
+
+// Core -----------------------------------------------------------------------
 
 dialog::button
 dialog::inform (

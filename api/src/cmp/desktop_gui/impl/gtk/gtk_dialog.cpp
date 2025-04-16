@@ -7,6 +7,16 @@
 
 namespace cmp {
 
+namespace impl {
+
+class dialog_context {
+public:
+    GMainLoop* loop;
+    int response;
+}; // class -------------------------------------------------------------------
+
+} // namespace ----------------------------------------------------------------
+
 // --------------------------------------------------------------- cmp::dialog
 
 // Core -----------------------------------------------------------------------
@@ -24,7 +34,6 @@ noexcept
         parent,
         title,
         message,
-        GTK_MESSAGE_INFO,
         buttons,
         GTK_DIALOG_MODAL
     );
@@ -43,7 +52,6 @@ noexcept
         parent,
         title,
         message,
-        GTK_MESSAGE_WARNING,
         buttons,
         GTK_DIALOG_MODAL
     );
@@ -62,7 +70,6 @@ noexcept
         parent,
         title,
         message,
-        GTK_MESSAGE_ERROR,
         buttons,
         GTK_DIALOG_MODAL
     );
@@ -78,22 +85,13 @@ dialog::on_choose (
 )
 noexcept
 {
+    auto dc{static_cast<impl::dialog_context*>(user_data)};
     GtkAlertDialog* dialog{GTK_ALERT_DIALOG(source_object)};
     GError* error{nullptr};
 
-    int button{gtk_alert_dialog_choose_finish(dialog, result, &error)};
+    dc->response = gtk_alert_dialog_choose_finish(dialog, result, &error);
 
-    if (error) {
-        std::cout << "An error occurred.\n"
-                  << "Error message: "
-                  << error->message
-                  << '\n';
-        g_main_loop_quit(static_cast<GMainLoop*>(user_data));
-        return;
-    }
-
-    std::cout << "Response: " << button << std::endl;
-    g_main_loop_quit(static_cast<GMainLoop*>(user_data));
+    g_main_loop_quit(dc->loop);
 } // function -----------------------------------------------------------------
 
 dialog::button
@@ -101,15 +99,13 @@ dialog::message_box (
     window* parent,
     std::u8string_view title,
     std::u8string_view message,
-    GtkMessageType type,
     button_set buttons,
     GtkDialogFlags flags
 )
 noexcept
 {
-    // /*
     GtkAlertDialog* dialog{
-        gtk_alert_dialog_new("Are you sure you wish to exit?")
+        gtk_alert_dialog_new(reinterpret_cast<const char*>(message.data()))
     };
     gtk_alert_dialog_set_modal(dialog, true);
     switch (buttons) {
@@ -135,36 +131,40 @@ noexcept
         }
     }
 
-    GMainLoop* dialog_gmainloop{g_main_loop_new(nullptr, false)};
+    impl::dialog_context dc;
+    dc.loop = g_main_loop_new(nullptr, false);
     gtk_alert_dialog_choose(
         dialog,
         GTK_WINDOW(parent->grab_native_handle().gtk_application_window),
         nullptr,
         dialog::on_choose,
-        static_cast<gpointer>(dialog_gmainloop)
+        static_cast<gpointer>(&dc)
     );
-    g_main_loop_run(dialog_gmainloop);
-    // */
-
-    /*
-    GtkNativeDialog* dialog{
-        GTK_NATIVE_DIALOG(
-            gtk_message_dialog_new(
-                GTK_WINDOW(parent->grab_native_handle().gtk_application_window),
-                flags,
-                type,
-                GTK_BUTTONS_OK,
-                reinterpret_cast<const char*>(message.data())
-            )
-        )
-    };
-    gtk_window_set_title(
-        GTK_WINDOW(dialog),
-        reinterpret_cast<const char*>(title.data())
-    );
-    gtk_native_dialog_show(GTK_NATIVE_DIALOG(dialog));
-    gtk_native_dialog_destroy(GTK_NATIVE_DIALOG(dialog));
-    // */
+    g_main_loop_run(dc.loop);
+    switch (buttons) {
+        case button_set::ok: {
+            return button::ok;
+        }
+        case button_set::ok_cancel: {
+            return dc.response == 0 ? button::ok : button::cancel;
+        }
+        case button_set::yes_no: {
+            return dc.response == 0 ? button::yes : button::no;
+        }
+        case button_set::yes_no_cancel: {
+            switch (dc.response) {
+                case 0: {
+                    return button::yes;
+                }
+                case 1: {
+                    return button::no;
+                }
+                case 2: {
+                    return button::cancel;
+                }
+            }
+        }
+    }
 } // function -----------------------------------------------------------------
 
 } // namespace ----------------------------------------------------------------

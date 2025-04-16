@@ -10,23 +10,30 @@ namespace cmp {
 // Core -----------------------------------------------------------------------
 
 template <
-    typename Widget
+    typename Widget,
+    typename... Arguments
 >
 requires (std::derived_from<Widget, widget>)
 trusted_ptr<Widget>
-layout::add_widget ()
-{
+layout::add_widget (
+    Arguments&&... arguments
+) {
     auto widget_pointer{
-        reinterpret_cast<Widget*>(
-            m_children.emplace_back(
-                std::make_unique<Widget>(
-                    m_enclosing_window_handle
-                )
-            ).get()
+        assure(
+            reinterpret_cast<Widget*>(
+                m_children.emplace_back(
+                    std::make_unique<Widget>(
+                        *this,
+                        std::forward<Arguments>(arguments)...
+                    )
+                ).get()
+            )
         )
     };
+#if (!defined(CMP_OS_LINUX_BASED) && !defined(CMP_OS_FREEBSD)) || CMP_CONFIG_USE_GTK == false
     update();
-    return assure(widget_pointer);
+#endif
+    return widget_pointer;
 } // function -----------------------------------------------------------------
 
 } // namespace ----------------------------------------------------------------

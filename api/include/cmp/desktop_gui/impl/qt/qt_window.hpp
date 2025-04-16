@@ -101,6 +101,13 @@ public:
     )
     const noexcept;
 
+    void
+    set_size (
+        const pixval& new_width,
+        const pixval& new_height
+    )
+    noexcept;
+
     // Core -------------------------------------------------------------------
 
     bool

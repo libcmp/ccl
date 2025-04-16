@@ -12,7 +12,11 @@
 #elif defined(CMP_OS_MACOS)
 #   include <cmp/desktop_gui/impl/macos/macos_window_native_handle.hpp>
 #elif defined(CMP_OS_LINUX_BASED) || defined(CMP_OS_FREEBSD)
-#   include <cmp/desktop_gui/impl/qt/qt_window_native_handle.hpp>
+#   if CMP_CONFIG_USE_QT == true
+#       include <cmp/desktop_gui/impl/qt/qt_window_native_handle.hpp>
+#   else
+#       include <cmp/desktop_gui/impl/gtk/gtk_window_native_handle.hpp>
+#   endif
 #endif
 
 #endif // CMP_DESKTOP_GUI_WINDOW_NATIVE_HANDLE_HPP_INCLUDED

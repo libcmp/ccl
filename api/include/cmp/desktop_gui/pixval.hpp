@@ -1,10 +1,10 @@
 // Copyright (C) 2024 Daniel T. McGinnis
 // SPDX-License-Identifier: BSL-1.0
 
-#include <cmp/desktop_gui/inclusion_assert.hpp>
-
 #ifndef CMP_DESKTOP_GUI_PIXVAL_HPP_INCLUDED
 #define CMP_DESKTOP_GUI_PIXVAL_HPP_INCLUDED
+
+#include <cmp/desktop_gui/inclusion_assert.hpp>
 
 namespace cmp {
 

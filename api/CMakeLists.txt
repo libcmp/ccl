@@ -22,6 +22,7 @@ set(
 set(
     CCL_DESKTOP_GUI_HEADERS
         include/cmp/desktop_gui/check_box.hpp
+        include/cmp/desktop_gui/check_group.hpp
         include/cmp/desktop_gui/close_event.hpp
         include/cmp/desktop_gui/desktop_gui_application.hpp
         include/cmp/desktop_gui/dialog.hpp
@@ -199,11 +200,29 @@ if (CMP_CONFIG_LTO_REQUESTED MATCHES true)
     endif ()
 endif ()
 
+# Establish a default value for CMP_CONFIG_USE_QT.
+if (NOT DEFINED CMP_CONFIG_USE_QT)
+    set(CMP_CONFIG_USE_QT false)
+endif ()
+
+# Establish a default value for CMP_CONFIG_USE_GTK.
+if (NOT DEFINED CMP_CONFIG_USE_GTK)
+    set(CMP_CONFIG_USE_GTK false)
+endif ()
+
 # Tell Visual C++ to use UTF-8.
 if (CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
     target_compile_options(
         cmp PUBLIC
             /utf-8
+    )
+endif ()
+
+# If on Windows, make sure we have access to Windows 10 APIs and newer.
+if (${CMAKE_SYSTEM_NAME} MATCHES "Windows")
+    target_compile_definitions(
+        cmp PUBLIC
+            WINVER=0x0A00
     )
 endif ()
 
@@ -287,18 +306,35 @@ target_compile_definitions(
         CMP_CONFIG_IO_PACKAGE_EXCLUDED=${CMP_CONFIG_IO_PACKAGE_EXCLUDED}
         CMP_CONFIG_LTO_REQUESTED=${CMP_CONFIG_LTO_REQUESTED}
         CMP_CONFIG_LTO_ENABLED=${CMP_CONFIG_LTO_ENABLED}
+        CMP_CONFIG_USE_QT=${CMP_CONFIG_USE_QT}
+        CMP_CONFIG_USE_GTK=${CMP_CONFIG_USE_GTK}
 )
 
 # DEPENDENCIES
 
 if (${CMAKE_SYSTEM_NAME} MATCHES "Windows")
+    # Link with the common controls library.
     target_link_libraries(
-        cmp
-            UxTheme
+        cmp PUBLIC
+            comctl32
     )
+    if (
+        CMAKE_CXX_COMPILER_ID STREQUAL "MSVC"
+            OR CMAKE_CXX_COMPILER_ID STREQUAL "Clang"
+    )
+        # Use the manifest file.
+        target_link_options(
+            cmp PUBLIC
+                "LINKER:/MANIFEST:EMBED"
+                "LINKER:/MANIFESTINPUT:${CMAKE_CURRENT_SOURCE_DIR}/manifest.manifest"
+        )
+    endif ()
 endif ()
 
-if (${CMAKE_SYSTEM_NAME} MATCHES "Darwin" AND CMP_CONFIG_DESKTOP_GUI_PACKAGE_EXCLUDED MATCHES false)
+if (
+    ${CMAKE_SYSTEM_NAME} MATCHES "Darwin"
+        AND CMP_CONFIG_DESKTOP_GUI_PACKAGE_EXCLUDED MATCHES false
+)
     # AppKit is always available on macOS, but we need to link to it.
     target_link_libraries(
         cmp
@@ -317,25 +353,24 @@ if (
         OR ${CMAKE_SYSTEM_NAME} MATCHES "FreeBSD")
             AND CMP_CONFIG_DESKTOP_GUI_PACKAGE_EXCLUDED MATCHES false
 )
-    #[[
-        GTK is often available on graphical Linux and FreeBSD
-        distributions, but we need to find it and link to it.
-    ]]
-    #[[
-    find_package(PkgConfig REQUIRED)
-    pkg_check_modules(GTK4 REQUIRED IMPORTED_TARGET gtk4)
-    target_link_libraries(
-        cmp
-            PkgConfig::GTK4
-    )
-    #]]
-    find_package(Qt6 REQUIRED COMPONENTS Core Gui Widgets)
-    target_link_libraries(
-        cmp
-            Qt6::Core
-            Qt6::Gui
-            Qt6::Widgets
-    )
+    if (${CMP_CONFIG_USE_QT} MATCHES true)
+        find_package(Qt6 REQUIRED COMPONENTS Core Gui Widgets)
+        target_link_libraries(
+            cmp
+                Qt6::Core
+                Qt6::Gui
+                Qt6::Widgets
+        )
+    elseif (${CMP_CONFIG_USE_GTK} MATCHES true)
+        find_package(PkgConfig REQUIRED)
+        pkg_check_modules(GTK4 REQUIRED IMPORTED_TARGET gtk4)
+        target_link_libraries(
+            cmp
+                PkgConfig::GTK4
+        )
+    else ()
+        message(SEND_ERROR "When building the desktop GUI package on Linux or FreeBSD, you must pick between Qt and GTK.")
+    endif ()
 endif ()
 
 #[[

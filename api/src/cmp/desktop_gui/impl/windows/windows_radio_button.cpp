@@ -12,16 +12,38 @@ namespace cmp {
 // Constructors and Destructor ------------------------------------------------
 
 radio_button::radio_button (
-    const window_native_handle& handle
+    layout& enclosing_layout,
+    check_group<radio_button>& group
 )
     : widget{
+          enclosing_layout,
           impl::create_widget(
-              handle,
-              impl::native_widget_kind::radio_button
+              enclosing_layout.grab_enclosing_window_handle().window_handle,
+              native_widget_kind::radio_button
           )
       }
+    , m_group{group}
 {
     m_toggle_event_handler = impl::noop<>;
+    group.add_element(assure(this));
+} // function -----------------------------------------------------------------
+
+radio_button::radio_button (
+    const widget_native_handle& parent_widget_handle,
+    layout& enclosing_layout,
+    check_group<radio_button>& group
+)
+    : widget{
+          enclosing_layout,
+          impl::create_widget(
+              parent_widget_handle.widget_handle,
+              native_widget_kind::radio_button
+          )
+      }
+    , m_group{group}
+{
+    m_toggle_event_handler = impl::noop<>;
+    group.add_element(assure(this));
 } // function -----------------------------------------------------------------
 
 // Accessors ------------------------------------------------------------------
@@ -35,7 +57,7 @@ const noexcept
     return to_pixval(
         dotval{static_cast<int>(ideal_size.cx)},
         get_parent_dpi()
-    );
+    ) + 2;
 } // function -----------------------------------------------------------------
 
 pixval
@@ -60,7 +82,7 @@ const noexcept
     SIZE ideal_size{0L, 0L};
     Button_GetIdealSize(grab_native_handle().widget_handle, &ideal_size);
     auto dpi{get_parent_dpi()};
-    width = to_pixval(dotval{static_cast<int>(ideal_size.cx)}, dpi);
+    width = to_pixval(dotval{static_cast<int>(ideal_size.cx)}, dpi) + 2;
     height = to_pixval(dotval{static_cast<int>(ideal_size.cy)}, dpi);
 } // function -----------------------------------------------------------------
 
@@ -86,6 +108,10 @@ radio_button::set_text (
 ) {
     std::wstring title_wstring{to_wstring(new_text)};
     SetWindowTextW(grab_native_handle().widget_handle, title_wstring.data());
+
+    if (is_dynamically_sized()) {
+        apply_preferred_size();
+    }
 } // function -----------------------------------------------------------------
 
 bool
@@ -102,6 +128,23 @@ radio_button::set_checked (
         grab_native_handle().widget_handle,
         new_checked ? BST_CHECKED : BST_UNCHECKED
     );
+    if (new_checked) {
+        m_group.uncheck_complement(assure(this));
+    }
+} // function -----------------------------------------------------------------
+
+const check_group<radio_button>&
+radio_button::grab_group ()
+const noexcept
+{
+    return m_group;
+} // function -----------------------------------------------------------------
+
+check_group<radio_button>&
+radio_button::grab_group ()
+noexcept
+{
+    return m_group;
 } // function -----------------------------------------------------------------
 
 void

@@ -11,7 +11,11 @@
 #elif defined(CMP_OS_MACOS)
 #   include <cmp/desktop_gui/impl/macos/macos_desktop_gui_application.hpp>
 #elif defined(CMP_OS_LINUX_BASED) || defined(CMP_OS_FREEBSD)
-#   include <cmp/desktop_gui/impl/qt/qt_desktop_gui_application.hpp>
+#   if CMP_CONFIG_USE_QT == true
+#       include <cmp/desktop_gui/impl/qt/qt_desktop_gui_application.hpp>
+#   else
+#      include <cmp/desktop_gui/impl/gtk/gtk_desktop_gui_application.hpp>
+#   endif
 #endif
 
 namespace cmp {

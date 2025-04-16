@@ -4,6 +4,8 @@
 #ifndef CMP_DESKTOP_GUI_WIDGET_HPP_INCLUDED
 #define CMP_DESKTOP_GUI_WIDGET_HPP_INCLUDED
 
+#include <limits>
+
 #include <cmp/desktop_gui/impl/common/common_widget.hpp>
 
 #endif // CMP_DESKTOP_GUI_WIDGET_HPP_INCLUDED

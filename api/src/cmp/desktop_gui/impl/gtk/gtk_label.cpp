@@ -1,9 +1,9 @@
-// Copyright (C) 2024 Daniel T. McGinnis
+// Copyright (C) 2025 Daniel T. McGinnis
 // SPDX-License-Identifier: BSL-1.0
 
-#include <QLabel>
-
 #include <cmp/desktop_gui/label.hpp>
+
+#include <gtk/gtk.h>
 
 namespace cmp {
 
@@ -17,8 +17,8 @@ label::label (
     : widget{
           enclosing_layout,
           impl::create_widget(
-              enclosing_layout.grab_enclosing_window_handle()
-                  .cmp_main_window_handle,
+              enclosing_layout.grab_native_handle()
+                  .gtk_layout,
               native_widget_kind::label
           )
       }
@@ -45,16 +45,20 @@ pixval
 label::get_preferred_width ()
 const noexcept
 {
-    return static_cast<QLabel*>(grab_native_handle().widget_handle)
-        ->sizeHint().width();
+    pixval width;
+    pixval height;
+    get_preferred_size(width, height);
+    return width;
 } // function -----------------------------------------------------------------
 
 pixval
 label::get_preferred_height ()
 const noexcept
 {
-    return static_cast<QLabel*>(grab_native_handle().widget_handle)
-        ->sizeHint().height();
+    pixval width;
+    pixval height;
+    get_preferred_size(width, height);
+    return height;
 } // function -----------------------------------------------------------------
 
 void
@@ -64,31 +68,35 @@ label::get_preferred_size (
 )
 const noexcept
 {
-    QSize size_hint{
-        static_cast<QLabel*>(
-            grab_native_handle().widget_handle
-        )->sizeHint()
-    };
-    width = size_hint.width();
-    height = size_hint.height();
+    get_preferred_size_generically(grab_native_handle(), width, height);
 } // function -----------------------------------------------------------------
 
 std::u8string
 label::get_text ()
 const
 {
-    return to_u8string(
-        static_cast<QLabel*>(grab_native_handle().widget_handle)
-            ->text().toStdU16String()
-    );
+    std::u8string result;
+    for (
+        const char* current_character{
+            gtk_label_get_text(
+                GTK_LABEL(grab_native_handle().widget_handle)
+            )
+        };
+        *current_character != '\0';
+        ++current_character
+    ) {
+        result.push_back(*current_character);
+    }
+    return result;
 } // function -----------------------------------------------------------------
 
 void
 label::set_text (
     std::u8string_view new_text
 ) {
-    static_cast<QLabel*>(grab_native_handle().widget_handle)->setText(
-        QString::fromUtf8(new_text.data())
+    gtk_label_set_text(
+        GTK_LABEL(grab_native_handle().widget_handle),
+        reinterpret_cast<const char*>(new_text.data())
     );
 } // function -----------------------------------------------------------------
 

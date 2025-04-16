@@ -10,7 +10,18 @@
 
 #include <cmp/desktop_gui/widget.hpp>
 #include <cmp/desktop_gui/desktop_gui_application.hpp>
+#include <cmp/desktop_gui/check_group.hpp>
 #include <cmp/unicode/algorithms.hpp>
+
+#if defined(CMP_OS_LINUX_BASED) || defined(CMP_OS_FREEBSD)
+
+#if CMP_CONFIG_USE_QT == true
+#include <QButtonGroup>
+#else
+#include <gtk/gtk.h>
+#endif
+
+#endif
 
 namespace cmp {
 
@@ -18,11 +29,25 @@ class CMP_CONDITIONAL_EXPORT_CLASS radio_button
     : public widget
 {
 public:
+    // Constants --------------------------------------------------------------
+
+    static constexpr native_widget_kind g_kind{
+        native_widget_kind::radio_button
+    };
+
     // Constructors and Destructor --------------------------------------------
 
     CMP_CONDITIONAL_EXPORT
     radio_button (
-        const window_native_handle& handle
+        layout& enclosing_layout,
+        check_group<radio_button>& group
+    );
+
+    CMP_CONDITIONAL_EXPORT
+    radio_button (
+        const widget_native_handle& parent_widget_handle,
+        layout& enclosing_layout,
+        check_group<radio_button>& group
     );
 
     // Accessors --------------------------------------------------------------
@@ -67,6 +92,16 @@ public:
     );
 
     CMP_CONDITIONAL_EXPORT
+    const check_group<radio_button>&
+    grab_group ()
+    const noexcept;
+
+    CMP_CONDITIONAL_EXPORT
+    check_group<radio_button>&
+    grab_group ()
+    noexcept;
+
+    CMP_CONDITIONAL_EXPORT
     void
     set_toggle_event_handler (
         const std::function<void()>& new_toggle_event_handler
@@ -81,7 +116,20 @@ public:
 private:
     // Private Data -----------------------------------------------------------
 
+    check_group<radio_button>& m_group;
     std::function<void()> m_toggle_event_handler;
+#if defined(CMP_OS_LINUX_BASED) || defined(CMP_OS_FREEBSD)
+#   if CMP_CONFIG_USE_QT == true
+    static QButtonGroup g_button_group;
+#   endif
+#endif
+
+    // Private Functions ------------------------------------------------------
+
+#if defined(CMP_OS_LINUX_BASED) || defined(CMP_OS_FREEBSD)
+    void
+    initialize();
+#endif
 }; // class -------------------------------------------------------------------
 
 using radio_button_truptr = trusted_ptr<radio_button>;

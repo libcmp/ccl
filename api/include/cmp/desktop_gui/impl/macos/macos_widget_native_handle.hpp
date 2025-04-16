@@ -6,11 +6,13 @@
 
 #include <AppKit/AppKit.h>
 
+#include <cmp/desktop_gui/inclusion_assert.hpp>
+
 namespace cmp {
 
 class CMP_CONDITIONAL_EXPORT_CLASS widget_native_handle {
 public:
-    void* parent_handle;
+    NSResponder* parent_handle;
     NSView* widget_handle;
 }; // class -------------------------------------------------------------------
 

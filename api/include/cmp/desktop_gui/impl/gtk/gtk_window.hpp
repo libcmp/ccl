@@ -102,6 +102,13 @@ public:
     )
     const noexcept;
 
+    void
+    set_size (
+        const pixval& width,
+        const pixval& height
+    )
+    noexcept;
+
     // Core -------------------------------------------------------------------
 
     bool
@@ -172,7 +179,6 @@ private:
     std::chrono::steady_clock::time_point m_last_time;
     layout m_root_layout;
     GtkEventController* m_controller;
-    GtkFixed* m_fixed;
 
     // Private Functions ------------------------------------------------------
 

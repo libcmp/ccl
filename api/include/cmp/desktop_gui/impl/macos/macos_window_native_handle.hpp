@@ -6,13 +6,15 @@
 
 #include <cmp/desktop_gui/inclusion_assert.hpp>
 
+#include <AppKit/AppKit.h>
+
 namespace cmp {
 
 class CMP_CONDITIONAL_EXPORT_CLASS window_native_handle {
 public:
     // Public Data ------------------------------------------------------------
 
-    void* cmp_window_handle;
+    NSResponder* cmp_window_handle;
 }; // class -------------------------------------------------------------------
 
 } // namespace ----------------------------------------------------------------
