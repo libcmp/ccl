@@ -175,7 +175,7 @@ to_dotval (
 )
 noexcept
 {
-    return dotval{source.grab_value() * dpi / 96};
+    return dotval{source.get_value() * dpi / 96};
 } // function -----------------------------------------------------------------
 
 pixval
@@ -185,7 +185,7 @@ to_pixval (
 )
 noexcept
 {
-    return pixval{source.grab_value() * 96 / dpi};
+    return pixval{source.get_value() * 96 / dpi};
 } // function -----------------------------------------------------------------
 
 } // namespace ----------------------------------------------------------------
