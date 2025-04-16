@@ -482,7 +482,6 @@ window::open (
         m_controller,
         "key-pressed",
         G_CALLBACK(impl::forward_key_down_event_to_window),
-        NULL
         nullptr
     );
 
