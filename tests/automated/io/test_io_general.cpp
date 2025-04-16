@@ -29,7 +29,7 @@ public:
     {
         start_test("test_invert_endianness");
 
-        std::uint16_t value1{0x0102};
+        std::uint16_t value1{0x0102u};
         invert_endianness(
             reinterpret_cast<std::byte*>(&value1),
             sizeof (value1)
@@ -44,12 +44,12 @@ public:
 
         end_stage();
 
-        std::uint32_t value2{0x01020304};
+        std::uint32_t value2{0x01020304u};
         invert_endianness(
             reinterpret_cast<std::byte*>(&value2),
             sizeof (value2)
         );
-        if (value2 != 0x04030201) {
+        if (value2 != 0x04030201u) {
             std::cout << "invert_endianness did not correctly "
                          "invert the endianness of the data."
                       << std::endl;
@@ -59,12 +59,12 @@ public:
 
         end_stage();
 
-        std::uint64_t value3{0x0102030405060708};
+        std::uint64_t value3{0x0102030405060708u};
         invert_endianness(
             reinterpret_cast<std::byte*>(&value3),
             sizeof (value3)
         );
-        if (value3 != 0x0807060504030201) {
+        if (value3 != 0x0807060504030201u) {
             std::cout << "invert_endianness did not correctly "
                          "invert the endianness of the data."
                       << std::endl;

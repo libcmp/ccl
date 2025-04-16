@@ -175,7 +175,7 @@ public:
 
         std::u8string utf8_string;
         append_code_point(utf8_string, 'c');
-        append_code_point(utf8_string, 0x1F600);
+        append_code_point(utf8_string, 0x1F600u);
         if (utf8_string != u8"c\U0001F600") {
             std::cout << "append_code_point failed to append the "
                          "correct code point to a UTF-8 string."
@@ -188,7 +188,7 @@ public:
 
         std::u16string utf16_string;
         append_code_point(utf16_string, 'c');
-        append_code_point(utf16_string, 0x1F600);
+        append_code_point(utf16_string, 0x1F600u);
         if (utf16_string != u"c\U0001F600") {
             std::cout << "append_code_point failed to append the "
                          "correct code point to a UTF-16 string."
@@ -201,7 +201,7 @@ public:
 
         std::u32string utf32_string;
         append_code_point(utf32_string, 'c');
-        append_code_point(utf32_string, 0x1F600);
+        append_code_point(utf32_string, 0x1F600u);
         if (utf32_string != U"c\U0001F600") {
             std::cout << "append_code_point failed to append the "
                          "correct code point to a UTF-32 string."
@@ -222,7 +222,7 @@ public:
         start_test("test_prepend_code_point");
 
         std::u8string utf8_string;
-        prepend_code_point(utf8_string, 0x1F600);
+        prepend_code_point(utf8_string, 0x1F600u);
         prepend_code_point(utf8_string, 'c');
         if (utf8_string != u8"c\U0001F600") {
             std::cout << "prepend_code_point failed to prepend the "
@@ -235,7 +235,7 @@ public:
         end_stage();
 
         std::u16string utf16_string;
-        prepend_code_point(utf16_string, 0x1F600);
+        prepend_code_point(utf16_string, 0x1F600u);
         prepend_code_point(utf16_string, 'c');
         if (utf16_string != u"c\U0001F600") {
             std::cout << "prepend_code_point failed to prepend the "
@@ -248,7 +248,7 @@ public:
         end_stage();
 
         std::u32string utf32_string;
-        prepend_code_point(utf32_string, 0x1F600);
+        prepend_code_point(utf32_string, 0x1F600u);
         prepend_code_point(utf32_string, 'c');
         if (utf32_string != U"c\U0001F600") {
             std::cout << "prepend_code_point failed to prepend the "
@@ -306,7 +306,7 @@ public:
         }
 
         std::u16string invalid_utf16_string{u"valid portion"};
-        invalid_utf16_string.push_back(0xD83D);
+        invalid_utf16_string.push_back(0xD83Du);
         by_code_point bcp4{invalid_utf16_string};
 
         if (validate_string(invalid_utf16_string) == bcp4.cend()) {
@@ -318,7 +318,7 @@ public:
         }
 
         std::u16string invalid_utf16_string2{u"valid portion"};
-        invalid_utf16_string2.push_back(0xDC69);
+        invalid_utf16_string2.push_back(0xDC69u);
         by_code_point bcp5{invalid_utf16_string2};
 
         if (validate_string(invalid_utf16_string2) == bcp5.cend()) {

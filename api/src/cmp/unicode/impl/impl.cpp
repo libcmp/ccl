@@ -18,13 +18,13 @@ initialize_utf8_sequence (
         initial_code_point_value = leading_code_unit;
         return 1;
     } else if ((leading_code_unit >> 5) == 0b110) {
-        initial_code_point_value = leading_code_unit & 0b0001'1111;
+        initial_code_point_value = leading_code_unit & 0b0001'1111u;
         return 2;
     } else if ((leading_code_unit >> 4) == 0b1110) {
-        initial_code_point_value = leading_code_unit & 0b0000'1111;
+        initial_code_point_value = leading_code_unit & 0b0000'1111u;
         return 3;
     } else if ((leading_code_unit >> 3) == 0b11110) {
-        initial_code_point_value = leading_code_unit & 0b0000'0111;
+        initial_code_point_value = leading_code_unit & 0b0000'0111u;
         return 4;
     } else {
         throw invalid_unicode_encoding{};
@@ -37,7 +37,7 @@ initialize_utf16_sequence (
     char32_t& initial_code_point_value
 ) {
     if (is_leading_surrogate(leading_code_unit)) {
-        initial_code_point_value = (leading_code_unit - 0xD800);
+        initial_code_point_value = (leading_code_unit - 0xD800u);
         initial_code_point_value <<= 10;
         return 2;
     } else if (is_trailing_surrogate(leading_code_unit)) {

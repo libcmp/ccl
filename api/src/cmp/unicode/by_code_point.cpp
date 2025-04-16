@@ -282,7 +282,7 @@ const
         }
         ++i;
         result <<= 6;
-        result |= code_unit & 0b0011'1111;
+        result |= code_unit & 0b0011'1111u;
     }
     return result;
 } // function -----------------------------------------------------------------
@@ -475,7 +475,7 @@ const
         }
         ++i;
         result <<= 6;
-        result |= code_unit & 0b0011'1111;
+        result |= code_unit & 0b0011'1111u;
     }
     return result;
 } // function -----------------------------------------------------------------
@@ -502,7 +502,7 @@ by_code_point<char8_t>::const_iterator::finish_sequence (
         }
         ++i;
         result <<= 6;
-        result |= code_unit & 0b0011'1111;
+        result |= code_unit & 0b0011'1111u;
     }
     ++i;
     return result;
