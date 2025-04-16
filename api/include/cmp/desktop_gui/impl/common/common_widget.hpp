@@ -175,26 +175,6 @@ public:
     )
     const noexcept override;
 
-    [[nodiscard]]
-    CMP_CONDITIONAL_EXPORT
-    pixval
-    get_preferred_width ()
-    const noexcept override;
-
-    [[nodiscard]]
-    CMP_CONDITIONAL_EXPORT
-    pixval
-    get_preferred_height ()
-    const noexcept override;
-
-    CMP_CONDITIONAL_EXPORT
-    void
-    get_preferred_size (
-        pixval& width,
-        pixval& height
-    )
-    const noexcept override;
-
     // Core -------------------------------------------------------------------
 
     CMP_CONDITIONAL_EXPORT
