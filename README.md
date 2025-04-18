@@ -16,13 +16,13 @@
     </picture>
 </p>
 
-# CCL 0.2 Beta
+# CCL 0.3 Beta
 
-C++ Complementary Library, or CCL for short, is a C++ library that aims to
+C++ Complementary Library (CCL) is a C++ library that aims to
 complement the standard library. Its main features are support for Unicode,
-a more modern I/O infrastructure and basic windowing capabilities. CCL is
-written from scratch in C++20 and can be used header-only or compiled as
-a static or dynamic library.
+a more modern I/O infrastructure and basic GUI capabilities. CCL is written
+from scratch in C++20 and can be used header-only or compiled as a static or
+dynamic library.
 
 # Disclaimer
 
@@ -47,4 +47,4 @@ Boost Software License 1.0
 
 # Author
 
-Copyright (C) 2022, 2023 Daniel T. McGinnis
+Copyright (C) 2022-2025 Daniel T. McGinnis
