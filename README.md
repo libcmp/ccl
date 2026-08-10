@@ -27,19 +27,7 @@ dynamic library.
 # Disclaimer
 
 CCL is currently still in Beta and is not recommended for use in production
-software. I am working hard to make CCL stable. If you like the value CCL
-provides today, consider becoming a sponsor. CCL **will** be ready for
-real-world use, it will just take longer to get there without funding.
-
-# Documentation
-
-CCL's documentation is available at CCL's website. There you can access the
-API reference and a free introductory book. The book goes over how to build
-CCL and use it in your own C++ projects.
-
-# Website
-
-https://libcmp.org
+software.
 
 # License
 
@@ -47,4 +35,4 @@ Boost Software License 1.0
 
 # Author
 
-Copyright (C) 2022-2025 Daniel T. McGinnis
+Copyright (C) 2022-2026 Daniel T. McGinnis
